@@ -1,0 +1,53 @@
+<div class="card">
+    <a><h5 [ngStyle]="{color:'var(--primary-color)'}" style="font-weight: bold">{{ module.name}}</h5></a>
+    <h6 style="font-weight: bolder">{{ module.code }}</h6>
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <i class="pi pi-info-circle"></i>
+                <span>Description</span>
+            </ng-template>
+            {{ module.description }}
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate="header">
+                <i class="pi pi-pencil"></i>
+                <span>Assessment</span>
+            </ng-template>
+            <div class="grid">
+                <div
+                    class="col-6"
+                    style="text-align: left; font-weight: bold; font-size: medium;">
+                    Coursework - {{ module.assessment.coursework }}%
+                </div>
+                <div
+                    class="col-6"
+                    style="text-align: right; font-weight: bold; font-size: medium;">
+                    Exam - {{ module.assessment.exam }} %
+                </div>
+            </div>
+            <p-progressBar [value]="module.assessment.coursework" [showValue] = false></p-progressBar>
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+            <ng-template pTemplate="header">
+                <i class="pi pi-history"></i>
+                <span>Requirements</span>
+            </ng-template>
+<!--            <p-splitter [style]="{'height': '200px'}" styleClass="mb-5">-->
+<!--                <ng-template pTemplate>-->
+<!--                    <div class="grid">-->
+<!--                        <h5>Prerequisites</h5>-->
+<!--                        <br>-->
+<!--                        <div *ngFor="let prerequisite of module.prerequisites"></div>-->
+<!--                        <i class="pi pi-check" style="font-size: 2rem"></i>{{module.prerequisites}}-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--                <ng-template pTemplate>-->
+<!--                    <div class="col flex align-items-center justify-content-center">-->
+<!--                        Panel 2-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--            </p-splitter>-->
+        </p-tabPanel>
+    </p-tabView>
+</div>

@@ -1,0 +1,34 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+<!--        <img src="assets/layout/images/{{appMain.config.dark ? 'logo-white' : 'logo-dark'}}.svg" alt="logo">-->
+        <span>ModPool</span>
+    </a>
+
+    <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="appMain.toggleMenu($event)">
+        <i class="pi pi-bars"></i>
+    </a>
+
+    <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.toggleTopMenu($event)">
+        <i class="pi pi-ellipsis-v"></i>
+    </a>
+
+    <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
+        <a href="#" class="p-link layout-topbar-button">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </a>
+        <a href="#" class="p-link layout-topbar-button" routerLink="/login">
+            <i class="pi pi-sign-in" ></i>
+            <span>Log In</span>
+        </a>
+        <p-confirmDialog [style]="{width: '30vw'}" icon="pi pi-question-circle" rejectButtonStyleClass="p-button-outlined" [baseZIndex]="10000">
+            <ng-template pTemplate="header">
+                <h3>Sign Out</h3>
+            </ng-template>
+        </p-confirmDialog>
+        <a href="#" class="p-link layout-topbar-button" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            <span>Log Out</span>
+        </a>
+    </div>
+</div>
