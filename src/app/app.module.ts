@@ -18,6 +18,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {MenuComponent} from "./menu/menu.component";
 import {AuthModule} from "./auth/auth.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PlannerModule} from "./planner/planner.module";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AppRoutingModule,
         ConfirmDialogModule,
         RippleModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        PlannerModule
     ],
     declarations: [
         AppComponent,
