@@ -6,12 +6,15 @@ const routes: Routes = [
     {
         path: '',
         component: AppMainComponent,
-        pathMatch: 'full',
         children: [
-            { path: '', loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)},
+            { path: 'modules', loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)},
+            { path: 'planner', loadChildren: () => import('./planner/planner.module').then(m => m.PlannerModule)}
         ],
     },
-    { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)}
+    {
+        path: 'login',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    }
 ];
 
 @NgModule({
