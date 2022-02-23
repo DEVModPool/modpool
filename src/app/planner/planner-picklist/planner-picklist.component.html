@@ -2,14 +2,16 @@
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name"
 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
     <ng-template let-plannerModule pTemplate="item">
-        <div class="module-code">
-            <h5 class="codename">{{plannerModule.code}}</h5>
-        </div>
-        <div class="module-name">
-            <i>{{ plannerModule.name }}</i>
-        </div>
-        <div class="module-semester">
-            <h5>{{ plannerModule.semester }}</h5>
+        <div class="module-item semester{{plannerModule.semester}}">
+            <div class="module-code">
+                <h5>{{plannerModule.code}}</h5>
+            </div>
+            <div class="module-name">
+                <p>{{ plannerModule.name }}</p>
+            </div>
+            <div class="module-semester ">
+                <h5>{{ plannerModule.semester }}</h5>
+            </div>
         </div>
     </ng-template>
 </p-pickList>
