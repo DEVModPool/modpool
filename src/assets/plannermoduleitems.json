@@ -1,0 +1,19 @@
+{
+    "data":[
+        {
+            "name": "Software Engineering I",
+            "code": "COMP 201",
+            "semester" : 2
+        },
+        {
+            "name": "Database Development",
+            "code": "COMP 207",
+            "semester": 2
+        },
+        {
+            "name": "Complexity of Algorithms",
+            "code": "COMP 202",
+            "semester": 2
+        }
+    ]
+}
