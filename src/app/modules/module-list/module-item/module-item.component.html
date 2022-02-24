@@ -33,21 +33,27 @@
                 <i class="pi pi-history"></i>
                 <span>Requirements</span>
             </ng-template>
-<!--            <p-splitter [style]="{'height': '200px'}" styleClass="mb-5">-->
-<!--                <ng-template pTemplate>-->
-<!--                    <div class="grid">-->
-<!--                        <h5>Prerequisites</h5>-->
-<!--                        <br>-->
-<!--                        <div *ngFor="let prerequisite of module.prerequisites"></div>-->
-<!--                        <i class="pi pi-check" style="font-size: 2rem"></i>{{module.prerequisites}}-->
-<!--                    </div>-->
-<!--                </ng-template>-->
-<!--                <ng-template pTemplate>-->
-<!--                    <div class="col flex align-items-center justify-content-center">-->
-<!--                        Panel 2-->
-<!--                    </div>-->
-<!--                </ng-template>-->
-<!--            </p-splitter>-->
+            <div class ="card">
+                <div class="flex flex-column md:flex-row card-container indigo-container">
+                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
+                        <dl>
+                            <dt><h5>Prerequisites:</h5></dt>
+                            <dd *ngFor="let prerequisite of module.prerequisites">
+                                {{ prerequisite }}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
+
+                        <dl>
+                            <dt><h5>Required for: </h5></dt>
+                            <dd *ngFor="let prerequisiteFor of module.prerequisiteFor">
+                                {{ prerequisiteFor }}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
         </p-tabPanel>
     </p-tabView>
 </div>
