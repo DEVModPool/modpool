@@ -13,7 +13,7 @@ export class ModuleListComponent implements OnInit {
             'The module is intended to develop an understanding of the problems associated with the development of significant computing systems (that is, systems that are too large to be designed and developed by a single person, and are designed to be used by many users) and to appreciate the techniques and tools necessary to develop such systems efficiently, in a cost-effective manner.',
             {coursework: '40', exam: '60'},
             ['COMP 122 - Object Oriented Programming'],
-            ['none']
+            ['COMP 282 - Advanced Object Oriented C Languages']
         ),
         new Module(
             'Database Development',
@@ -25,7 +25,7 @@ export class ModuleListComponent implements OnInit {
             '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.',
             {coursework: '30', exam: '70'},
             ['COMP 122 - Object Oriented Programming'],
-            ['none']
+            ['None']
         ),
         new Module(
             'Complexity of Algorithms',
@@ -33,7 +33,7 @@ export class ModuleListComponent implements OnInit {
             'To demonstrate how the study of algorithmics has been applied in a number of different domains. To introduce formal concepts of measures of complexity and algorithms analysis. To introduce fundamental methods in data structures and algorithms design. To make students aware of computationally hard problems and possible ways of coping with them.',
             {coursework: '30', exam: '70'},
             ['COMP 108 - Data Structures and Algorithms', 'COMP 116 - Analytic Techniques for Computer Science'],
-            ['none']
+            ['None']
         )
     ];
 
