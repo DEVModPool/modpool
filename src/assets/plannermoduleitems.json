@@ -2,18 +2,33 @@
     "data":[
         {
             "name": "Software Engineering I",
-            "code": "COMP 201",
-            "semester" : 2
+            "code": "COMP201",
+            "semester" : 2,
+            "concatenation" : "SoftwareEngineeringICOMP201semester2",
+            "description" : "The module is intended to develop an understanding of the problems associated with the development of significant computing systems (that is, systems that are too large to be designed and developed by a single person, and are designed to be used by many users) and to appreciate the techniques and tools necessary to develop such systems efficiently, in a cost-effective manner.",
+            "assessment" : {"coursework": "40", "exam": "60"},
+            "prerequisites" : ["COMP122"],
+            "prerequisiteFor" : [""]
         },
         {
             "name": "Database Development",
-            "code": "COMP 207",
-            "semester": 1
+            "code": "COMP207",
+            "semester": 1,
+            "concatenation" : "Database DevelopmentCOMP207semester1",
+            "description" : "To introduce students to\n- the problems arising from databases, including concurrency in databases, information security considerations and how they are solved;\n- the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\n- non-relational databases and the economic factors involved in their selection;\n- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
+            "assessment": {"coursework": "30", "exam": "70"},
+            "prerequisites" : ["COMP122"],
+            "prerequisiteFor" : []
         },
         {
             "name": "Complexity of Algorithms",
-            "code": "COMP 202",
-            "semester": 2
+            "code": "COMP202",
+            "semester": 2,
+            "concatenation" : "Complexity of AlgorithmsCOMP202semester2",
+            "description" : "To demonstrate how the study of algorithmics has been applied in a number of different domains. To introduce formal concepts of measures of complexity and algorithms analysis. To introduce fundamental methods in data structures and algorithms design. To make students aware of computationally hard problems and possible ways of coping with them.",
+            "assessment" :{"coursework": "30", "exam": "70"},
+            "prerequisites": ["COMP108", "COMP 116"],
+            "prerequisiteFor": []
         }
     ]
 }

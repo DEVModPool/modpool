@@ -1,16 +1,28 @@
-<p-pickList [source]="plannermodules" [target]="list2" sourceHeader="Available" targetHeader="Selected" [dragdrop]="true"
-[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name"
-sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+<p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available" targetHeader="Selected" [dragdrop]="true"
+[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
+sourceFilterPlaceholder="Search by name, code, semester1/semester2 etc." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
+[showSourceFilter]="true" filterMatchMode="contains" (onMoveToTarget)="toSelected()" (onSourceSelect)="toggleprequisites($event)">
     <ng-template let-plannerModule pTemplate="item">
-        <div class="module-item semester{{plannerModule.semester}}">
-            <div class="module-code">
-                <h5>{{plannerModule.code}}</h5>
+        <div class="module-item semester{{plannerModule.semester}}" id="{{plannerModule.code}}">
+            <div class="toprow gridrow">
+                <div class="module-code">
+                    <h5>{{plannerModule.code}}</h5>
+                </div>
+                <div class="module-name">
+                    <p>{{ plannerModule.name }}</p>
+                </div>
+                <div class="module-semester ">
+                    <h5>{{ plannerModule.semester }}</h5>
+                </div>
             </div>
-            <div class="module-name">
-                <p>{{ plannerModule.name }}</p>
+            <div class="middlerow gridrow">
+                <p style="color: transparent;">i</p>
+                <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
+                <p id="alpha" style="text-align: left; padding-left: 1%;" class="assessmentText">Coursework - {{ plannerModule.assessment.coursework }}%</p>
+                <p id="alpha" style="text-align: right; padding-right: 1%;" class="assessmentText">Exam - {{ plannerModule.assessment.exam }} %</p>
             </div>
-            <div class="module-semester ">
-                <h5>{{ plannerModule.semester }}</h5>
+            <div class="hiddenrow gridrow" style="display: none;">
+                <p>Prequisite modules: {{plannerModule.prerequisites}}</p>
             </div>
         </div>
     </ng-template>
