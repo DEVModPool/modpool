@@ -1,6 +1,6 @@
-<p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available" targetHeader="Selected" [dragdrop]="true"
+<p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
-sourceFilterPlaceholder="Search by name, code, semester1/semester2 etc." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
+sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
 [showSourceFilter]="true" filterMatchMode="contains" (onMoveToTarget)="toSelected()" (onSourceSelect)="toggleprequisites($event)">
     <ng-template let-plannerModule pTemplate="item">
         <div class="module-item semester{{plannerModule.semester}}" id="{{plannerModule.code}}">
