@@ -1,9 +1,9 @@
 <p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
-[showSourceFilter]="true" filterMatchMode="contains" (onMoveToTarget)="toSelected()" (onSourceSelect)="toggleprequisites($event)">
-    <ng-template let-plannerModule pTemplate="item">
-        <div class="module-item semester{{plannerModule.semester}}" id="{{plannerModule.code}}">
+[showSourceFilter]="true"  (onMoveToTarget)="toTarget()" (onSourceSelect)="toggleprequisites($event)" (onTargetReorder)="sortTarget()">
+<ng-template let-plannerModule pTemplate="item" >
+        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="toprow gridrow">
                 <div class="module-code">
                     <h5>{{plannerModule.code}}</h5>
@@ -23,6 +23,9 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
             </div>
             <div class="hiddenrow gridrow" style="display: none;">
                 <p>Prequisite modules: {{plannerModule.prerequisites}}</p>
+            </div>
+            <div class="prequisiterow gridrow" style="display: flex;">
+                <p class="preqlist"></p>
             </div>
         </div>
     </ng-template>

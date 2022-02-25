@@ -32,6 +32,7 @@ export class PlannerPicklistComponent implements OnInit {
 
     }
 
+
     comparesemesters(a, b) {
         if (a.semester<b.semester) {
           return -1;
@@ -43,9 +44,39 @@ export class PlannerPicklistComponent implements OnInit {
         return 0;
       }
 
-    toSelected(){
+    toTarget(){
+        let unpicked: string[];
+        this.sortTarget();
+
+        this.selectedmodules.forEach(mod => {
+            unpicked=[];
+            mod.prerequisites.forEach(preq => {
+                let found: boolean = false;
+                for(let mod2 of this.selectedmodules) {
+                    if(mod2.code==preq){
+                        found=true;
+                        break;
+                    }
+                }
+                if(!found){
+                    unpicked[unpicked.length] = preq;
+                }
+            })
+            if(unpicked.length!=0){
+                let inntertext: string = "Prequisites: " + unpicked;
+                console.log(document.getElementById(mod.code).getElementsByClassName("prequisiterow")[0]);
+                document.getElementById(mod.code).getElementsByClassName("preqlist")[0].innerHTML=inntertext;
+            }
+        });
+    }
+    revealPreqs(){
+
+    }
+
+    sortTarget(){
         this.selectedmodules.sort(this.comparesemesters);
     }
+
     toggleprequisites(item){
         if(document.getElementById(item.items[0].code).getElementsByClassName("hiddenrow")[0].getAttribute("style") == "display: none;"){
             document.getElementById(item.items[0].code).getElementsByClassName("hiddenrow")[0].setAttribute("style", "display: inline;");
