@@ -6,5 +6,7 @@ export interface PlannerModuleItem {
     description?: string,
     assessment?: {coursework: string, exam: string},
     prerequisites?: string[],
-    prerequisiteFor?: string[]
+}
+export interface RootObject {
+    data: PlannerModuleItem[];
 }

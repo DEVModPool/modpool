@@ -42,6 +42,8 @@
   --surface-hover:#f6f9fc;
   --focus-ring: 0 0 0 0.2rem #C7D2FE;
   --maskbg: rgba(0, 0, 0, 0.4);
+  --picklist-primary: #9495e98e;
+  --picklist-secondary: #e9bf948e;
 }
 
 @font-face {

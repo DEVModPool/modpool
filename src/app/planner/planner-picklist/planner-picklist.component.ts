@@ -3,6 +3,7 @@ import { PlannerModuleItem } from './plannermodule';
 import { PlannerModuleService } from './plannermoduleservice';
 import { PrimeNGConfig } from 'primeng/api';
 import { style } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-planner-picklist',
@@ -19,18 +20,14 @@ export class PlannerPicklistComponent implements OnInit {
 
     ngOnInit() {
         this.plannermodules = [];
-        this.plannermoduleservice.getProductsSmall().then(
-            todules => {
-                for (let i = 0; i < todules.length; i++) {
-                    this.plannermodules[i] = todules[i];
-            }}
-            );
-        console.log(this.plannermodules);
+        this.plannermoduleservice.getProductsSmall().subscribe(
+            result => this.plannermodules = result
+        );
         this.selectedmodules = [];
         this.primengConfig.ripple = true;
 
-
     }
+
 
 
     comparesemesters(a, b) {
@@ -47,7 +44,6 @@ export class PlannerPicklistComponent implements OnInit {
     toTarget(){
         let unpicked: string[];
         this.sortTarget();
-
         this.selectedmodules.forEach(mod => {
             unpicked=[];
             mod.prerequisites.forEach(preq => {
