@@ -1,7 +1,7 @@
 <p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
-[showSourceFilter]="true"  (onMoveToTarget)="toTarget()" (onSourceSelect)="toggleprequisites($event)" (onTargetReorder)="sortTarget()">
+[showSourceFilter]="true"  (onMoveToTarget)="toTarget($event)" (onTargetReorder)="sortTarget()">
 <ng-template let-plannerModule pTemplate="item" >
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="toprow gridrow">
@@ -9,19 +9,24 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                     <h5>{{plannerModule.code}}</h5>
                 </div>
                 <div class="module-name">
-                    <p>{{ plannerModule.name }}</p>
-                </div>
-                <div class="module-semester ">
-                    <h5>{{ plannerModule.semester }}</h5>
+                    <h6>{{ plannerModule.name }}</h6>
                 </div>
             </div>
             <div class="middlerow gridrow">
-                <p style="color: transparent;">i</p>
-                <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
-                <p id="alpha" style="text-align: left; padding-left: 1%;" class="assessmentText">Coursework - {{ plannerModule.assessment.coursework }}%</p>
-                <p id="alpha" style="text-align: right; padding-right: 1%;" class="assessmentText">Exam - {{ plannerModule.assessment.exam }} %</p>
+                <div class="module-semester ">
+                    <p>Semester: {{ plannerModule.semester }}</p>
+                </div>
+                <div class="infoButton">
+                    <button class="p-button" (click)="expand($event)">+</button>
+                </div>
             </div>
-            <div class="hiddenrow gridrow" style="display: none;">
+            <div class="hiddenrow gridrow" style="display: none;" (notify)="toggleprequisites($event)">
+                <div class="coursework gridrow">
+                    <p style="color: transparent;">i</p>
+                    <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
+                    <p id="alpha" style="text-align: left; padding-left: 1%;" class="assessmentText">Coursework - {{ plannerModule.assessment.coursework }}%</p>
+                    <p id="alpha" style="text-align: right; padding-right: 1%;" class="assessmentText">Exam - {{ plannerModule.assessment.exam }} %</p>
+                </div>
                 <p>Prequisite modules: {{plannerModule.prerequisites}}</p>
             </div>
             <div class="prequisiterow gridrow" style="display: flex;">

@@ -18,16 +18,33 @@
             text-align: left;
         }
         .module-name{
-            grid-column: 2/4;
-            text-align: left;
-            padding-left: 10%;
-        }
-        .module-semester{
-            grid-column: 4;
+            grid-column: 2/5;
             text-align: right;
+            padding-left: 10%;
         }
     }
     .middlerow{
+        height: fit-content;
+        position: relative;
+        grid-column: 1 / 5;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        .module-semester{
+            grid-column: 1;
+            text-align: left;
+        }
+        .infoButton{
+            grid-column: 2;
+            text-align: right;
+            padding-left: 10%;
+        }
+        .p-button{
+            z-index: 5;
+            padding: 0.25rem 0.75rem;
+        }
+    }
+    .coursework{
         height: fit-content;
         margin-top: 1%;
         margin-bottom: 1%;
@@ -50,7 +67,9 @@
     }
     .hiddenrow{
         display: none;
+        width: 100%;
         grid-row: 3;
+        grid-column: 1/5;
     }
     .hiddenrow2{
         display: none;

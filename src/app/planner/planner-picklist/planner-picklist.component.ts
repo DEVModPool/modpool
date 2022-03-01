@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PlannerModuleItem } from './plannermodule';
 import { PlannerModuleService } from './plannermoduleservice';
 import { PrimeNGConfig } from 'primeng/api';
 import { style } from '@angular/animations';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-planner-picklist',
@@ -13,6 +14,8 @@ import { Observable } from 'rxjs';
 
 
 export class PlannerPicklistComponent implements OnInit {
+
+
 
     plannermodules: PlannerModuleItem[];
     selectedmodules: PlannerModuleItem[];
@@ -41,10 +44,17 @@ export class PlannerPicklistComponent implements OnInit {
         return 0;
       }
 
-    toTarget(){
-        let unpicked: string[];
+    toTarget(item){
+
         this.sortTarget();
+        this.checkPrequisites(item.items[0]);
         this.selectedmodules.forEach(mod => {
+            this.checkPrequisites(mod);
+        });
+    }
+
+    checkPrequisites(mod){
+        let unpicked: string[];
             unpicked=[];
             mod.prerequisites.forEach(preq => {
                 let found: boolean = false;
@@ -63,8 +73,21 @@ export class PlannerPicklistComponent implements OnInit {
                 console.log(document.getElementById(mod.code).getElementsByClassName("prequisiterow")[0]);
                 document.getElementById(mod.code).getElementsByClassName("preqlist")[0].innerHTML=inntertext;
             }
-        });
+
     }
+
+    expand(rowid){
+        let hidden: HTMLElement;
+        hidden=rowid.srcElement.parentElement.parentElement.nextSibling;
+        if(hidden.getAttribute("style") == "display: none;"){
+            hidden.setAttribute("style", "display: inline;")
+            rowid.srcElement.innerHTML="-";
+        } else {
+            hidden.setAttribute("style", "display: none;");
+            rowid.srcElement.innerHTML="+";
+        }
+    }
+
     revealPreqs(){
 
     }
@@ -73,13 +96,5 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedmodules.sort(this.comparesemesters);
     }
 
-    toggleprequisites(item){
-        if(document.getElementById(item.items[0].code).getElementsByClassName("hiddenrow")[0].getAttribute("style") == "display: none;"){
-            document.getElementById(item.items[0].code).getElementsByClassName("hiddenrow")[0].setAttribute("style", "display: inline;");
-        } else {
-            document.getElementById(item.items[0].code).getElementsByClassName("hiddenrow")[0].setAttribute("style", "display: none;");
-        }
-
-    }
-
 }
+
