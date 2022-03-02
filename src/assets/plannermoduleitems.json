@@ -27,7 +27,7 @@
             "concatenation" : "Complexity of AlgorithmsCOMP202semester2",
             "description" : "To demonstrate how the study of algorithmics has been applied in a number of different domains. To introduce formal concepts of measures of complexity and algorithms analysis. To introduce fundamental methods in data structures and algorithms design. To make students aware of computationally hard problems and possible ways of coping with them.",
             "assessment" :{"coursework": "30", "exam": "70"},
-            "prerequisites": ["COMP108", "COMP116"],
+            "prerequisites": ["COMP108", "COMP116", "COMP201"],
             "prerequisiteFor": []
         }
     ]

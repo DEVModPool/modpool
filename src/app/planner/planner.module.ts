@@ -5,12 +5,11 @@ import {PickListModule} from 'primeng/picklist';
 import { PlannerPicklistComponent } from './planner-picklist/planner-picklist.component';
 import { PlannerModuleService } from './planner-picklist/plannermoduleservice';
 import {ProgressBarModule} from "primeng/progressbar";
-
-
+import {SplitterModule} from 'primeng/splitter';
 @NgModule({
     declarations: [
         PlannerComponent,
-        PlannerPicklistComponent,
+        PlannerPicklistComponent
     ],
     imports: [
         RouterModule.forChild(
@@ -19,11 +18,13 @@ import {ProgressBarModule} from "primeng/progressbar";
             ]
         ),
         PickListModule,
-        ProgressBarModule
+        ProgressBarModule,
+        SplitterModule
     ],
     exports: [
         PickListModule,
-        ProgressBarModule
+        ProgressBarModule,
+        SplitterModule
     ],
     providers: [PlannerModuleService]
 })

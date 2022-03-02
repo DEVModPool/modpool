@@ -1,7 +1,7 @@
 <p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
-[showSourceFilter]="true"  (onMoveToTarget)="toTarget($event)" (onTargetReorder)="sortTarget()">
+[showSourceFilter]="true" [showTargetFilter]="false"  (onMoveToTarget)="toTarget($event)" (onMoveToSource)="toSource($event)" (onTargetReorder)="sortTarget()">
 <ng-template let-plannerModule pTemplate="item" >
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="toprow gridrow">
@@ -20,7 +20,10 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                     <button class="p-button" (click)="expand($event)">+</button>
                 </div>
             </div>
-            <div class="hiddenrow gridrow" style="display: none;" (notify)="toggleprequisites($event)">
+            <div class="prequisiterow gridrow" style="display: flex;">
+                <p>{{plannerModule.missing}}</p>
+            </div>
+            <div class="hiddenrow gridrow shrink" >
                 <div class="coursework gridrow">
                     <p style="color: transparent;">i</p>
                     <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
@@ -29,9 +32,9 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                 </div>
                 <p>Prequisite modules: {{plannerModule.prerequisites}}</p>
             </div>
-            <div class="prequisiterow gridrow" style="display: flex;">
-                <p class="preqlist"></p>
-            </div>
         </div>
-    </ng-template>
+</ng-template>
+<ng-template let-selectedModule>
+
+</ng-template>
 </p-pickList>

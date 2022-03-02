@@ -1,3 +1,12 @@
+.p-picklist-target{
+        height: 50rem;
+}
+  .grow{
+    display: block;
+  }
+  .shrink{
+    display: none;
+  }
 .module-item {
     align-content: center;
     width: 100%;
@@ -6,6 +15,7 @@
     padding-left: 2%;
     padding-right: 2%;
     display: grid;
+
     .toprow{
         height: fit-content;
         grid-row: 1;
@@ -66,14 +76,12 @@
         }
     }
     .hiddenrow{
-        display: none;
         width: 100%;
-        grid-row: 3;
+        grid-row: 4;
         grid-column: 1/5;
-    }
-    .hiddenrow2{
-        display: none;
-        grid-row: 3;
+        .coursework {
+            margin-top: 3%;
+        }
     }
     h5{
         margin: auto;
@@ -87,6 +95,9 @@
 }
 .semester1{
     box-shadow: inset 0 0 100px 1000px var( --picklist-primary), 0 0 10000px 10000px var( --picklist-primary);
+}
+.prequisiterow p{
+    margin-left: 0;
 }
 
 @media screen and (max-width: 576px) {

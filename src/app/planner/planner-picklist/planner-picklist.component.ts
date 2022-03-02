@@ -1,26 +1,34 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { PlannerModuleItem } from './plannermodule';
 import { PlannerModuleService } from './plannermoduleservice';
 import { PrimeNGConfig } from 'primeng/api';
-import { style } from '@angular/animations';
-import { Observable } from 'rxjs';
 
+
+@Injectable()
+export class Greeter {
+  suffix = '!';
+}
+@Component({
+  selector: 'app-picklist-prerequisites',
+  template: '<p>Missing modules: </p><ng-content></ng-content>'
+})
+export class PicklistPrerequisitesComponent {
+    missing: String[];
+    constructor(public greeter: Greeter) {}
+}
 
 @Component({
   selector: 'app-planner-picklist',
   templateUrl: './planner-picklist.component.html',
-  styleUrls: ['./planner-picklist.component.scss']
+  styleUrls: ['./planner-picklist.component.scss'],
+
 })
-
-
 export class PlannerPicklistComponent implements OnInit {
-
-
 
     plannermodules: PlannerModuleItem[];
     selectedmodules: PlannerModuleItem[];
     constructor(private plannermoduleservice: PlannerModuleService, private primengConfig: PrimeNGConfig) { }
-
+    split: Element;
     ngOnInit() {
         this.plannermodules = [];
         this.plannermoduleservice.getProductsSmall().subscribe(
@@ -28,10 +36,7 @@ export class PlannerPicklistComponent implements OnInit {
         );
         this.selectedmodules = [];
         this.primengConfig.ripple = true;
-
     }
-
-
 
     comparesemesters(a, b) {
         if (a.semester<b.semester) {
@@ -44,46 +49,34 @@ export class PlannerPicklistComponent implements OnInit {
         return 0;
       }
 
+    toSource(item){
+        this.toTarget(item);
+    }
     toTarget(item){
-
         this.sortTarget();
-        this.checkPrequisites(item.items[0]);
+        this.plannermodules.forEach(mod => {
+            mod.missing = [];
+        });
         this.selectedmodules.forEach(mod => {
             this.checkPrequisites(mod);
         });
+
     }
 
     checkPrequisites(mod){
-        let unpicked: string[];
-            unpicked=[];
-            mod.prerequisites.forEach(preq => {
-                let found: boolean = false;
-                for(let mod2 of this.selectedmodules) {
-                    if(mod2.code==preq){
-                        found=true;
-                        break;
-                    }
-                }
-                if(!found){
-                    unpicked[unpicked.length] = preq;
-                }
-            })
-            if(unpicked.length!=0){
-                let inntertext: string = "Prequisites: " + unpicked;
-                console.log(document.getElementById(mod.code).getElementsByClassName("prequisiterow")[0]);
-                document.getElementById(mod.code).getElementsByClassName("preqlist")[0].innerHTML=inntertext;
-            }
-
+        let result = this.selectedmodules.map(a => a.code);
+        let missingMods = ["Missing Prerequisites:  "] + mod.prerequisites.filter(x => result.indexOf(x) < 0);
+        mod.missing=missingMods;
     }
 
     expand(rowid){
         let hidden: HTMLElement;
-        hidden=rowid.srcElement.parentElement.parentElement.nextSibling;
-        if(hidden.getAttribute("style") == "display: none;"){
-            hidden.setAttribute("style", "display: inline;")
+        hidden=rowid.srcElement.parentElement.parentElement.nextSibling.nextSibling;
+        if(hidden.className == "hiddenrow gridrow shrink"){
+            hidden.className = "hiddenrow gridrow grow";
             rowid.srcElement.innerHTML="-";
         } else {
-            hidden.setAttribute("style", "display: none;");
+            hidden.className = "hiddenrow gridrow shrink";
             rowid.srcElement.innerHTML="+";
         }
     }
