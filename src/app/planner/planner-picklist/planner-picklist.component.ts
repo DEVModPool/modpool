@@ -30,11 +30,20 @@ export class PlannerPicklistComponent implements OnInit {
     constructor(private plannermoduleservice: PlannerModuleService, private primengConfig: PrimeNGConfig) { }
     split: Element;
     ngOnInit() {
-        this.plannermodules = [];
+        let storedSelected = JSON.parse(localStorage.getItem('selectedmods'));
+
+        if (storedSelected==null){
+            this.selectedmodules = []
+        } else{
+            this.selectedmodules = storedSelected;
+            this.selectedmodules.forEach(element => {
+                this.checkPrequisites(element)
+            });
+        }
+        
         this.plannermoduleservice.getProductsSmall().subscribe(
-            result => this.plannermodules = result
-        );
-        this.selectedmodules = [];
+            result => this.plannermodules = result.filter(x =>
+                !this.selectedmodules.some(y => x.code==y.code)));
         this.primengConfig.ripple = true;
     }
 
@@ -50,9 +59,11 @@ export class PlannerPicklistComponent implements OnInit {
       }
 
     toSource(item){
+        localStorage.setItem('selectedmods', JSON.stringify(this.selectedmodules));
         this.toTarget(item);
     }
     toTarget(item){
+        localStorage.setItem('selectedmods', JSON.stringify(this.selectedmodules));
         this.sortTarget();
         this.plannermodules.forEach(mod => {
             mod.missing = [];
@@ -79,10 +90,6 @@ export class PlannerPicklistComponent implements OnInit {
             hidden.className = "hiddenrow gridrow shrink";
             rowid.srcElement.innerHTML="+";
         }
-    }
-
-    revealPreqs(){
-
     }
 
     sortTarget(){
