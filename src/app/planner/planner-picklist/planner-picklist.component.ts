@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
-import { PlannerModuleItem } from './plannermodule';
-import { PlannerModuleService } from './plannermoduleservice';
+import { PlannerModuleItem } from './planner-module.model';
+import { PlannerModuleService } from './planner-picklist.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 
@@ -40,11 +40,10 @@ export class PlannerPicklistComponent implements OnInit {
                 this.checkPrequisites(element)
             });
         }
-        
+
         this.plannermoduleservice.getProductsSmall().subscribe(
             result => this.plannermodules = result.filter(x =>
                 !this.selectedmodules.some(y => x.code==y.code)));
-        this.primengConfig.ripple = true;
     }
 
     comparesemesters(a, b) {

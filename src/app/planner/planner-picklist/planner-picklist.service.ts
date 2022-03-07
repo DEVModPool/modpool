@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, lastValueFrom, Observable } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
-
-import { PlannerModuleItem } from './plannermodule'
-import { RootObject } from './plannermodule';
+import { map } from 'rxjs/operators';
+import { PlannerModuleItem } from './planner-module.model'
+import { RootObject } from './planner-module.model';
 
 @Injectable()
 export class PlannerModuleService {
-    [x: string]: any;
 
     constructor(private http: HttpClient) { }
 
@@ -20,4 +17,3 @@ export class PlannerModuleService {
             raw => this.plannermodules = raw.data))
     }
 }
-
