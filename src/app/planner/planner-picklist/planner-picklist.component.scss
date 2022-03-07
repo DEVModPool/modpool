@@ -1,0 +1,117 @@
+.p-picklist-target{
+        height: 50rem;
+}
+  .grow{
+    display: block;
+  }
+  .shrink{
+    display: none;
+  }
+.module-item {
+    align-content: center;
+    width: 100%;
+    margin: auto;
+    height: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: grid;
+
+    .toprow{
+        height: fit-content;
+        grid-row: 1;
+        grid-column: 1/5;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 25% 25% 40% 10%;
+        .module-code{
+            grid-column: 1;
+            text-align: left;
+        }
+        .module-name{
+            grid-column: 2/5;
+            text-align: right;
+            padding-left: 10%;
+        }
+    }
+    .middlerow{
+        height: fit-content;
+        position: relative;
+        grid-column: 1 / 5;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        .module-semester{
+            grid-column: 1;
+            text-align: left;
+        }
+        .infoButton{
+            grid-column: 2;
+            text-align: right;
+            padding-left: 10%;
+        }
+        .p-button{
+            z-index: 5;
+            padding: 0.25rem 0.75rem;
+        }
+    }
+    .coursework{
+        height: fit-content;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        position: relative;
+        grid-column: 1 / 5;
+        grid-row: 2;
+        #alpha{
+            margin: auto;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .assessmentText{
+            color: grey;
+            filter: invert(100%);
+            mix-blend-mode:difference;
+        }
+    }
+    .hiddenrow{
+        width: 100%;
+        grid-row: 4;
+        grid-column: 1/5;
+        .coursework {
+            margin-top: 3%;
+        }
+    }
+    h5{
+        margin: auto;
+    }
+    p{
+        margin: auto;
+    }
+}
+.semester2{
+    box-shadow: inset 0 0 100px 1000px var( --picklist-secondary), 0 0 10000px 10000px var( --picklist-secondary);
+}
+.semester1{
+    box-shadow: inset 0 0 100px 1000px var( --picklist-primary), 0 0 10000px 10000px var( --picklist-primary);
+}
+.prequisiterow p{
+    margin-left: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .product-item {
+        flex-wrap: wrap;
+
+        .image-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        img {
+            margin: 0 0 1rem 0;
+            width: 100px;
+        }
+    }
+}

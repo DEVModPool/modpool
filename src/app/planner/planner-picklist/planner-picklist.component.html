@@ -1,0 +1,40 @@
+<p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
+[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
+sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
+[showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget($event)" (onMoveAllToTarget)="toTarget($event)" (onMoveToSource)="toSource($event)" (onMoveAllToSource)="toSource($event)"  (onTargetReorder)="sortTarget()">
+<ng-template let-plannerModule pTemplate="item" >
+        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
+            <div class="toprow gridrow">
+                <div class="module-code">
+                    <h5>{{plannerModule.code}}</h5>
+                </div>
+                <div class="module-name">
+                    <h6>{{ plannerModule.name }}</h6>
+                </div>
+            </div>
+            <div class="middlerow gridrow">
+                <div class="module-semester ">
+                    <p>Semester: {{ plannerModule.semester }}</p>
+                </div>
+                <div class="infoButton">
+                    <button class="p-button" (click)="expand($event)">+</button>
+                </div>
+            </div>
+            <div class="prequisiterow gridrow" style="display: flex;">
+                <p>{{plannerModule.missing}}</p>
+            </div>
+            <div class="hiddenrow gridrow shrink" >
+                <div class="coursework gridrow">
+                    <br>
+                    <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
+                    <p id="alpha" style="text-align: left; padding-left: 1%;" class="assessmentText">Coursework - {{ plannerModule.assessment.coursework }}%</p>
+                    <p id="alpha" style="text-align: right; padding-right: 1%;" class="assessmentText">Exam - {{ plannerModule.assessment.exam }} %</p>
+                </div>
+                <p>Prequisite modules: {{plannerModule.prerequisites}}</p>
+            </div>
+        </div>
+</ng-template>
+<ng-template let-selectedModule>
+
+</ng-template>
+</p-pickList>
