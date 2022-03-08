@@ -39,7 +39,7 @@
                         <dl>
                             <dt><h5>Prerequisites:</h5></dt>
                             <dd *ngFor="let prerequisite of module.prerequisites">
-                                {{ prerequisite }}
+                                {{ prerequisite.name }}
                             </dd>
                         </dl>
                     </div>
@@ -48,7 +48,7 @@
                         <dl>
                             <dt><h5>Required for: </h5></dt>
                             <dd *ngFor="let prerequisiteFor of module.prerequisiteFor">
-                                {{ prerequisiteFor }}
+                                {{ prerequisiteFor.name }}
                             </dd>
                         </dl>
                     </div>

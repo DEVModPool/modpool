@@ -10,10 +10,9 @@ export class PlannerModuleService {
     constructor(private http: HttpClient) { }
 
     plannermodules: PlannerModuleItem[];
-    heroesUrl: String;
 
     getProductsSmall() {
-        return this.http.get<RootObject>('assets/plannermoduleitems.json').pipe(map(
-            raw => this.plannermodules = raw.data))
+        return this.http.get<RootObject>('assets/plannermoduleitems.json').pipe(
+            map(raw => this.plannermodules = raw.data))
     }
 }

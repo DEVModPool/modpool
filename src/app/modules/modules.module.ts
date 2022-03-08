@@ -5,7 +5,6 @@ import {ModuleItemComponent} from "./module-list/module-item/module-item.compone
 import {ModulesComponent} from "./modules.component";
 import {ModuleListComponent} from "./module-list/module-list.component";
 import {ModuleFilterComponent} from "./module-filter/module-filter.component";
-import {ModuleSearchComponent} from "./module-search/module-search.component";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
@@ -15,6 +14,7 @@ import {ProgressBarModule} from "primeng/progressbar";
 import {CheckboxModule} from "primeng/checkbox";
 import {MultiSelectModule} from "primeng/multiselect";
 import {ModulesRoutingModule} from "./modules-routing.module";
+import {QueryParamModule} from "@ngqp/core";
 
 @NgModule({
     declarations: [
@@ -22,7 +22,6 @@ import {ModulesRoutingModule} from "./modules-routing.module";
         ModulesComponent,
         ModuleListComponent,
         ModuleFilterComponent,
-        ModuleSearchComponent
     ],
     imports: [
         RouterModule,
@@ -35,7 +34,8 @@ import {ModulesRoutingModule} from "./modules-routing.module";
         ProgressBarModule,
         CheckboxModule,
         MultiSelectModule,
-        ModulesRoutingModule
+        ModulesRoutingModule,
+        QueryParamModule
     ]
 })
 export class ModulesModule {

@@ -1,7 +1,24 @@
-<p-pickList [source]="plannermodules" [target]="selectedmodules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
-[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
-sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
-[showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget($event)" (onMoveAllToTarget)="toTarget($event)" (onMoveToSource)="toSource($event)" (onMoveAllToSource)="toSource($event)"  (onTargetReorder)="sortTarget()">
+<p-pickList
+    [source]="plannermodules"
+    [target]="selectedmodules"
+    sourceHeader="Available Courses"
+    targetHeader="Selected Courses"
+    [dragdrop]="true"
+    [responsive]="true"
+    [sourceStyle]="{'height':'30rem'}"
+    [targetStyle]="{'height':'30rem'}"
+    filterBy="concatenation"
+    sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.."
+    targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
+    [showSourceFilter]="true"
+    [showTargetFilter]="false"
+    ariaSourceFilterLabel="test"
+    (onMoveToTarget)="toTarget($event)"
+    (onMoveAllToTarget)="toTarget($event)"
+    (onMoveToSource)="toSource($event)"
+    (onMoveAllToSource)="toSource($event)"
+    (onTargetReorder)="sortTarget()">
+
 <ng-template let-plannerModule pTemplate="item" >
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="toprow gridrow">

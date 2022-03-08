@@ -41,9 +41,8 @@ export class PlannerPicklistComponent implements OnInit {
             });
         }
 
-        this.plannermoduleservice.getProductsSmall().subscribe(
-            result => this.plannermodules = result.filter(x =>
-                !this.selectedmodules.some(y => x.code==y.code)));
+        this.plannermoduleservice.getProductsSmall()
+            .subscribe(result => this.plannermodules = result.filter(x => !this.selectedmodules.some(y => x.code==y.code)));
     }
 
     comparesemesters(a, b) {
@@ -94,6 +93,5 @@ export class PlannerPicklistComponent implements OnInit {
     sortTarget(){
         this.selectedmodules.sort(this.comparesemesters);
     }
-
 }
 
