@@ -11,7 +11,8 @@ interface Department {
 
 @Component({
     selector: 'app-module-filter',
-    templateUrl: './module-filter.component.html'
+    templateUrl: './module-filter.component.html',
+    styleUrls: ['./module-filter.component.scss']
 })
 export class ModuleFilterComponent implements OnInit, OnDestroy {
     departments: Department[];
