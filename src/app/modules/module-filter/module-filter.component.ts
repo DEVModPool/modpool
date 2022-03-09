@@ -52,7 +52,7 @@ export class ModuleFilterComponent implements OnInit, OnDestroy {
             switchMap(() => this.moduleService.getModules(this.paramGroup.value)),
             takeUntil(this.componentDestroyed$),
         ).subscribe(response => {
-            this.moduleService.modules.next(response.result)
+            this.moduleService.modules.next(response.result);
         });
     }
     public ngOnDestroy(): void {

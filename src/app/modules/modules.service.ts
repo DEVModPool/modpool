@@ -3,7 +3,7 @@ import {Subject} from "rxjs";
 
 import {HttpClient} from "@angular/common/http";
 import {Module} from "../interaction/modules/module.model";
-import {Response} from "../interaction/ response";
+import {Response} from "../interaction/response";
 
 @Injectable({
     providedIn: 'root'

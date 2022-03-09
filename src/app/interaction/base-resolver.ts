@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {EMPTY, map, Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {Response} from "./ response";
+import {Response} from "./response";
 
 
 @Injectable({
@@ -14,7 +14,8 @@ export class BaseResolver<T> implements Resolve<T> {
     constructor(
         private http: HttpClient,
         private router: Router
-    ) {}
+    ) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<T> {
         let url = route.data['url'];
