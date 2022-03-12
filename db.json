@@ -18,7 +18,10 @@
                 ],
                 "prerequisiteFor": [
                     {"id": "3", "name": "Advanced AI"}
-                ]
+                ],
+                "semester": "1",
+                "concatenation": " ",
+                "missing":[""]
             },
             {
                 "id": "1234",
@@ -35,7 +38,10 @@
                 ],
                 "prerequisiteFor": [
                     {"id": "4", "name": "Robotics"}
-                ]
+                ],
+                "semester": "2",
+                "concatenation": " ",
+                "missing":[""]
             }
         ]
     },
