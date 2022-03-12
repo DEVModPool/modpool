@@ -1,21 +1,6 @@
 import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { PlannerModuleItem } from './planner-module.model';
 import { PlannerModuleService } from './planner-picklist.service';
-import { PrimeNGConfig } from 'primeng/api';
-
-
-@Injectable()
-export class Greeter {
-  suffix = '!';
-}
-@Component({
-  selector: 'app-picklist-prerequisites',
-  template: '<p>Missing modules: </p><ng-content></ng-content>'
-})
-export class PicklistPrerequisitesComponent {
-    missing: String[];
-    constructor(public greeter: Greeter) {}
-}
 
 @Component({
   selector: 'app-planner-picklist',
@@ -25,28 +10,28 @@ export class PicklistPrerequisitesComponent {
 })
 export class PlannerPicklistComponent implements OnInit {
 
-    plannermodules: PlannerModuleItem[];
-    selectedmodules: PlannerModuleItem[];
-    constructor(private plannermoduleservice: PlannerModuleService, private primengConfig: PrimeNGConfig) { }
-    split: Element;
+    plannerModules: PlannerModuleItem[];
+    selectedModules: PlannerModuleItem[];
+    constructor(private plannerModuleService: PlannerModuleService) { }
     ngOnInit() {
-        let storedSelected = JSON.parse(localStorage.getItem('selectedmods'));
+        let storedSelected = JSON.parse(localStorage.getItem('selectedModuleStorage'));
 
         if (storedSelected==null){
-            this.selectedmodules = []
+            this.selectedModules = []
         } else{
-            this.selectedmodules = storedSelected;
-            this.selectedmodules.forEach(element => {
-                this.checkPrequisites(element)
+            this.selectedModules = storedSelected;
+            this.selectedModules.forEach(element => {
+                this.checkPrerequisites(element)  
             });
+            this.sortTarget();
         }
 
-        this.plannermoduleservice.getProductsSmall().subscribe(
-            result => this.plannermodules = result.filter(x =>
-                !this.selectedmodules.some(y => x.code==y.code)));
+        this.plannerModuleService.getProductsSmall().subscribe(
+            result => this.plannerModules = result.filter(x =>
+                !this.selectedModules.some(y => x.code==y.code)));
     }
 
-    comparesemesters(a, b) {
+    compareSemesters(a, b) {
         if (a.semester<b.semester) {
           return -1;
         }
@@ -57,42 +42,42 @@ export class PlannerPicklistComponent implements OnInit {
         return 0;
       }
 
-    toSource(item){
-        localStorage.setItem('selectedmods', JSON.stringify(this.selectedmodules));
-        this.toTarget(item);
+    toSource(){
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
+        this.toTarget();
     }
-    toTarget(item){
-        localStorage.setItem('selectedmods', JSON.stringify(this.selectedmodules));
+    toTarget(){
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
         this.sortTarget();
-        this.plannermodules.forEach(mod => {
+        this.plannerModules.forEach(mod => {
             mod.missing = [];
         });
-        this.selectedmodules.forEach(mod => {
-            this.checkPrequisites(mod);
+        this.selectedModules.forEach(mod => {
+            this.checkPrerequisites(mod);
         });
 
     }
-
-    checkPrequisites(mod){
-        let result = this.selectedmodules.map(a => a.code);
-        let missingMods = ["Missing Prerequisites:  "] + mod.prerequisites.filter(x => result.indexOf(x) < 0);
-        mod.missing=missingMods;
+    missingMods: String[];
+    checkPrerequisites(mod){
+        let result = this.selectedModules.map(a => a.code);
+        this.missingMods = (mod.prerequisites.filter(x => result.indexOf(x) < 0).length==0) ? [] : ["Missing Prerequisites:  "] + mod.prerequisites.filter(x => result.indexOf(x) < 0);
+        mod.missing=this.missingMods;
     }
 
-    expand(rowid){
+    expand(rowID){
         let hidden: HTMLElement;
-        hidden=rowid.srcElement.parentElement.parentElement.nextSibling.nextSibling;
-        if(hidden.className == "hiddenrow gridrow shrink"){
-            hidden.className = "hiddenrow gridrow grow";
-            rowid.srcElement.innerHTML="-";
+        hidden=rowID.srcElement.parentElement.parentElement.nextSibling.nextSibling;
+        if(hidden.className == "hiddenRow gridRow shrink"){
+            hidden.className = "hiddenRow gridRow grow";
+            rowID.srcElement.innerHTML="-";
         } else {
-            hidden.className = "hiddenrow gridrow shrink";
-            rowid.srcElement.innerHTML="+";
+            hidden.className = "hiddenRow gridRow shrink";
+            rowID.srcElement.innerHTML="+";
         }
     }
 
     sortTarget(){
-        this.selectedmodules.sort(this.comparesemesters);
+        this.selectedModules.sort(this.compareSemesters);
     }
 
 }

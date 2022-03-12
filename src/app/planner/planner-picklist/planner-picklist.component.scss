@@ -16,7 +16,7 @@
     padding-right: 2%;
     display: grid;
 
-    .toprow{
+    .topRow{
         height: fit-content;
         grid-row: 1;
         grid-column: 1/5;
@@ -33,7 +33,7 @@
             padding-left: 10%;
         }
     }
-    .middlerow{
+    .middleRow{
         height: fit-content;
         position: relative;
         grid-column: 1 / 5;
@@ -75,7 +75,7 @@
             mix-blend-mode:difference;
         }
     }
-    .hiddenrow{
+    .hiddenRow{
         width: 100%;
         grid-row: 4;
         grid-column: 1/5;
@@ -96,7 +96,7 @@
 .semester1{
     box-shadow: inset 0 0 100px 1000px var( --picklist-primary), 0 0 10000px 10000px var( --picklist-primary);
 }
-.prequisiterow p{
+.prerequisiteRow p{
     margin-left: 0;
 }
 
