@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { PlannerModuleItem } from './planner-module.model'
-import { RootObject } from './planner-module.model';
+import {Subject} from "rxjs";
+import { PlannerModule } from 'src/app/interaction/modules/planner.model';
+import {Response} from "../interaction/response";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PlannerModuleService {
 
     constructor(private http: HttpClient) { }
 
-    plannerModules: PlannerModuleItem[];
+    plannermodules: PlannerModuleItem[];
 
     getProductsSmall() {
-        return this.http.get<RootObject>('assets/plannermoduleitems.json').pipe(map(
-            raw => this.plannerModules = raw.data))
+        return this.http.get<RootObject>('assets/plannermoduleitems.json').pipe(
+            map(raw => this.plannermodules = raw.data))
     }
 }
+
+
