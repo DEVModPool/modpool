@@ -5,6 +5,7 @@ import {PickListModule} from 'primeng/picklist';
 import { PlannerPicklistComponent } from './planner-picklist/planner-picklist.component';
 import { PlannerModuleService } from './planner-picklist/planner-picklist.service';
 import {ProgressBarModule} from "primeng/progressbar";
+import {PlannerRoutingModule} from "./planner-picklist/planner-routing.module"
 @NgModule({
     declarations: [
         PlannerComponent,
@@ -17,7 +18,8 @@ import {ProgressBarModule} from "primeng/progressbar";
             ]
         ),
         PickListModule,
-        ProgressBarModule
+        ProgressBarModule,
+        PlannerRoutingModule
     ],
     exports: [
         PickListModule,
