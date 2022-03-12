@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import {Subject} from "rxjs";
+import { Subject } from "rxjs";
+
+import { HttpClient } from '@angular/common/http';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
-import {Response} from "../../interaction/response";
+import { Response } from "../interaction/response";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlannerModuleService {
     plannerModules = new Subject<PlannerModule[]>();
+
     constructor(private http: HttpClient) { }
 
     getModules(moduleFilters?: any) {

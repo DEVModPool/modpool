@@ -1,0 +1,66 @@
+<!-- THIS IS ALL TIN'S CODE. JUST TEMPORARY TILL WE INCORPORATE IT INTO THE SEARCHBAR-->
+<div class="sticky-inner-wrapper" style="margin-right:1rem">
+    <div class="card col-12">
+        <div class="grid p-fluid" [queryParamGroup]="paramGroup">
+            <div class="col-12">
+                <div class="p-inputgroup">
+                    <input type="text" pInputText placeholder="Module name, code, description..." queryParamName="q">
+                </div>
+                <hr>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
+            </div>
+            <div *ngFor="let moduleLevel of moduleLevels" class="field-checkbox col-3">
+                <p-checkbox
+                    queryParamName="moduleLevel"
+                    name="group2"
+                    value="category"
+                    [value]="moduleLevel.id"
+                    [inputId]="moduleLevel.key"
+                ></p-checkbox>
+                <label [for]="moduleLevel.key">{{moduleLevel.name}}</label>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
+            </div>
+            <div *ngFor="let semester of semesters" class="field-checkbox col-6">
+                <p-checkbox
+                    queryParamName="semester"
+                    name="group2"
+                    value="category"
+                    [value]="semester.id"
+                    [inputId]="semester.id"
+                ></p-checkbox>
+                <label [for]="semester.key">{{semester.name}}</label>
+            </div>
+
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
+            </div>
+            <div *ngFor="let creditOption of creditOptions" class="field-checkbox col-3">
+                <p-checkbox
+                    queryParamName="credits"
+                    name="group2"
+                    value="category"
+                    [value]="creditOption.id"
+                    [inputId]="creditOption.key"
+                ></p-checkbox>
+                <label [for]="creditOption.key">{{creditOption.name}}</label>
+            </div>
+            <div class="col-12">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Departments:</h5>
+                <p-multiSelect
+                    queryParamName="department"
+                    [options]="departments"
+                    defaultLabel="Add department filter..."
+                    optionLabel="name"
+                    selectedItemsLabel="{0} items selected"
+                    optionValue="id"
+                    [style]="{'width':'100%'}">
+                </p-multiSelect>
+            </div>
+        </div>
+    </div>
+</div>
+

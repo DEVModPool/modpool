@@ -12,7 +12,6 @@ export class  PlannerModule{
         public prerequisites?: RequisiteModule[],
         public prerequisiteFor?: RequisiteModule[],
         public semester?: number,
-        public concatenation?: string,
         public missing?: string[],
     ) {}
 }

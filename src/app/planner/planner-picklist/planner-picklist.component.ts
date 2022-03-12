@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
-import { PlannerModuleService } from './planner-picklist.service';
+import { PlannerModuleService } from '../planner-picklist.service';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 @Component({
   selector: 'app-planner-picklist',
@@ -8,13 +8,14 @@ import { PlannerModule } from 'src/app/interaction/modules/planner-module.model'
 
 })
 export class PlannerPicklistComponent implements OnInit {
-
     plannerModules: PlannerModule[];
     selectedModules: PlannerModule[];
-    constructor(private plannerModuleService: PlannerModuleService) { }
-    ngOnInit() {
-        let storedSelected = JSON.parse(localStorage.getItem('selectedModuleStorage'));
 
+    constructor(private plannerModuleService: PlannerModuleService) { }
+
+    ngOnInit(): void {
+        let storedSelected = JSON.parse(localStorage.getItem('selectedModuleStorage'));
+        console.log(storedSelected==null);
         if (storedSelected==null){
             this.selectedModules = []
         } else{
@@ -24,11 +25,11 @@ export class PlannerPicklistComponent implements OnInit {
             });
             this.sortTarget();
         }
-
         this.plannerModuleService.plannerModules.subscribe(
-            result => this.plannerModules = result.filter(x =>
-                !this.selectedModules.some(y => x.code==y.code)));
+            result =>this.plannerModules = result.filter(x =>
+            !this.selectedModules.some(y => x.code==y.code)));
     }
+
 
     compareSemesters(a, b) {
         if (a.semester<b.semester) {
