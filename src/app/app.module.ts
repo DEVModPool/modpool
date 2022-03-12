@@ -19,6 +19,7 @@ import {MenuComponent} from "./menu/menu.component";
 import {AuthModule} from "./auth/auth.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PlannerModule} from "./planner/planner.module";
+import {QueryParamModule} from "@ngqp/core";
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {PlannerModule} from "./planner/planner.module";
         ConfirmDialogModule,
         RippleModule,
         BrowserAnimationsModule,
-        PlannerModule
+        PlannerModule,
+        QueryParamModule
     ],
     declarations: [
         AppComponent,

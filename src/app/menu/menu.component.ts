@@ -25,13 +25,12 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                // label: 'Home',
                 items:[
-                    {label: 'Module Finder',icon: 'pi pi-fw pi-book', routerLink: ['/modules']},
-                    {label: 'Course Planner',icon: 'pi pi-fw pi-calendar', routerLink: ['/planner']},
-                    {label: 'Lecturers & Staff',icon: 'pi pi-fw pi-users', routerLink: ['/login']},
-                    {label: 'Anonymopool',icon: 'pi pi-fw pi-question-circle', routerLink: ['/login']},
-                    {label: 'Events',icon: 'pi pi-fw pi-map-marker', routerLink: ['/login']},
+                    {label: 'Module Finder',icon: 'pi pi-fw pi-book', routerLink: ['/modules'], preventExact: true},
+                    {label: 'Course Planner',icon: 'pi pi-fw pi-calendar', routerLink: ['/planner'], preventExact: true},
+                    {label: 'Lecturers & Staff',icon: 'pi pi-fw pi-users', routerLink: ['/login'], preventExact: true},
+                    {label: 'Anonymopool',icon: 'pi pi-fw pi-question-circle', routerLink: ['/login'], preventExact: true},
+                    {label: 'Events',icon: 'pi pi-fw pi-map-marker', routerLink: ['/login'], preventExact: true},
                 ]
             }
         ];

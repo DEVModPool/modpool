@@ -1,50 +1,67 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import {Subject, switchMap, takeUntil} from "rxjs";
+import {ModulesService} from "../modules.service";
 
 interface Department {
+    id: string,
     name: string
 }
 
 @Component({
     selector: 'app-module-filter',
-    templateUrl: './module-filter.component.html'
+    templateUrl: './module-filter.component.html',
+    styleUrls: ['./module-filter.component.scss']
 })
-export class ModuleFilterComponent implements OnInit {
-    departments: Department[] = [
-        {name: 'Computer Science'},
-        {name: 'School of Biological Sciences'},
-        {name: 'Civil engineering and Industrial Design'},
-        {name: 'Mechanical, Materials and Aerospace Engineering'},
-        {name: 'Population, Community and Behavioural Sciences'}
-    ];
-    selectedDepartments: Department[];
-
-
-
-    semesters: any[] = [
-        {name:'Semester 1', key: '1'},
-        {name:'Semester 2', key: '2'}
-    ]
-    selectedSemesters: any[];
-    creditOptions: any[] = [
-        {name: '7.5', key: '7.5'},
-        {name: '15', key: '15'},
-        {name: '30', key: '30'},
-        {name: '60', key: '60'}
-    ]
+export class ModuleFilterComponent implements OnInit, OnDestroy {
+    departments: Department[];
+    semesters: any[];
+    creditOptions: any[];
     selectedCreditOptions: any[];
-
-    moduleLevels: any[] = [
-        {name: '100', key: '100'},
-        {name: '200', key: '200'},
-        {name: '300', key: '400'},
-        {name: '400', key: '400'},
-        {name: '500', key: '500'}
-    ]
+    moduleLevels: any[];
     selectedModuleLevels: any[];
 
-    constructor() {
+    public paramGroup: QueryParamGroup;
+    private componentDestroyed$ = new Subject<void>();
+
+    constructor(
+        private activatedRoute: ActivatedRoute,
+        private qpb: QueryParamBuilder,
+        private moduleService: ModulesService
+    ) {
+        this.paramGroup = qpb.group({
+            q: qpb.stringParam('q'),
+            moduleLevel: qpb.stringParam('moduleLevel',{multi:true}),
+            semester: qpb.stringParam('semester', {multi:true}),
+            credits: qpb.stringParam('credits', {multi:true}),
+            department: qpb.stringParam('department', {multi:true})
+        });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.activatedRoute.data.subscribe(
+            response => {
+                this.departments = response.filterData.viewmodel.departments;
+                this.semesters = response.filterData.viewmodel.semesters;
+                this.departments = response.filterData.viewmodel.departments;
+                this.creditOptions = response.filterData.viewmodel.creditOptions;
+                this.moduleLevels = response.filterData.viewmodel.moduleLevels;
+            }
+        )
+        this.paramGroup.valueChanges.pipe(
+            switchMap(() => this.moduleService.getModules(this.paramGroup.value)),
+            takeUntil(this.componentDestroyed$),
+        ).subscribe(response => {
+            this.moduleService.modules.next(response.result);
+        });
+    }
+    public ngOnDestroy(): void {
+        this.componentDestroyed$.next();
+        this.componentDestroyed$.complete();
+    }
 
+    getQueryParams() {
+
+    }
 }

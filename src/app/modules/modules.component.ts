@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './modules.component.html'
 })
 export class ModulesComponent implements OnInit {
-    value: any;
-
     constructor() {
     }
 

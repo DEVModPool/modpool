@@ -21,7 +21,7 @@ export class PlannerPicklistComponent implements OnInit {
         } else{
             this.selectedModules = storedSelected;
             this.selectedModules.forEach(element => {
-                this.checkPrerequisites(element)  
+                this.checkPrerequisites(element)
             });
             this.sortTarget();
         }
@@ -79,6 +79,5 @@ export class PlannerPicklistComponent implements OnInit {
     sortTarget(){
         this.selectedModules.sort(this.compareSemesters);
     }
-
 }
 
