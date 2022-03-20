@@ -1,5 +1,10 @@
-@media (min-width: 1200px) {
-    .sticky-inner-wrapper {
-        position: fixed;
-    }
+.collapse {
+    height: auto;
+    position: absolute;
+    width: 400px;
+    margin: none;
+    z-index: 50;
+    background-color: white;
+    border: 2px solid rgba(167, 167, 167, 0.507);
+    border-radius: 4px;
 }

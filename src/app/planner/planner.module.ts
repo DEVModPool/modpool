@@ -16,13 +16,15 @@ import {TabViewModule} from "primeng/tabview";
 import {CheckboxModule} from "primeng/checkbox";
 import {MultiSelectModule} from "primeng/multiselect";
 import {QueryParamModule} from "@ngqp/core";
-
+import { FilteredpicklistComponent } from './planner-picklist/filteredpicklist/filteredpicklist.component';
 
 @NgModule({
     declarations: [
         PlannerComponent,
         PlannerPicklistComponent,
-        PlannerFilterComponent
+        PlannerFilterComponent,
+        FilteredpicklistComponent
+
     ],
     imports: [
         RouterModule,
@@ -43,7 +45,8 @@ import {QueryParamModule} from "@ngqp/core";
     exports: [
         PickListModule,
         ProgressBarModule,
-        PlannerFilterComponent
+        PlannerFilterComponent,
+        FilteredpicklistComponent
     ],
     providers: [PlannerModuleService]
 })

@@ -1,5 +1,5 @@
-<p-pickList [source]="plannerModules" [target]="selectedModules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
-[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="concatenation"
+<app-filteredpicklist [source]="plannerModules" [target]="selectedModules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
+[responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name,code,semester"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
 [showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget()" (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"  (onTargetReorder)="sortTarget()">
 <ng-template let-plannerModule pTemplate="item" >
@@ -37,4 +37,4 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
 <ng-template let-selectedModule>
 
 </ng-template>
-</p-pickList>
+</app-filteredpicklist>
