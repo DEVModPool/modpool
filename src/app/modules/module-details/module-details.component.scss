@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    .sticky-inner-wrapper {
+        position: fixed;
+        overflow: hidden;
+    }
+}
+
+.button-active {
+    border: 2px solid var(--primary-color);
+}
+

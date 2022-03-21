@@ -3,6 +3,7 @@ import {ModulesComponent} from "./modules.component";
 import {NgModule} from "@angular/core";
 import {BaseResolver} from "../interaction/base-resolver";
 import {environment} from "../../environments/environment";
+import {ModuleDetailsComponent} from "./module-details/module-details.component";
 
 const routes: Routes = [
     {
@@ -10,6 +11,12 @@ const routes: Routes = [
         component: ModulesComponent,
         resolve: { filterData: BaseResolver },
         data: { url: environment.baseUrl + environment.modulesUrl }
+    },
+    {
+        path: ':id',
+        component: ModuleDetailsComponent,
+        resolve: { moduleDetails: BaseResolver },
+        data: { url: environment.baseUrl + environment.moduleDetails}
     }
 ]
 

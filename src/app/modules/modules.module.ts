@@ -16,6 +16,14 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ModulesRoutingModule} from "./modules-routing.module";
 import {QueryParamModule} from "@ngqp/core";
 import {DividerModule} from "primeng/divider";
+import { ModuleDetailsComponent } from './module-details/module-details.component';
+import {ChartModule} from "primeng/chart";
+import {AccordionModule} from "primeng/accordion";
+import { ReviewListComponent } from './module-details/review-list/review-list.component';
+import { ReviewItemComponent } from './module-details/review-list/review-item/review-item.component';
+import {RatingModule} from "primeng/rating";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -23,6 +31,9 @@ import {DividerModule} from "primeng/divider";
         ModulesComponent,
         ModuleListComponent,
         ModuleFilterComponent,
+        ModuleDetailsComponent,
+        ReviewListComponent,
+        ReviewItemComponent,
     ],
     imports: [
         RouterModule,
@@ -37,7 +48,12 @@ import {DividerModule} from "primeng/divider";
         MultiSelectModule,
         ModulesRoutingModule,
         QueryParamModule,
-        DividerModule
+        DividerModule,
+        ChartModule,
+        AccordionModule,
+        RatingModule,
+        ScrollPanelModule,
+        TooltipModule
     ]
 })
 export class ModulesModule {

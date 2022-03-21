@@ -69,5 +69,11 @@
                 ]
             }
         }
+    },
+    "moduleDetails": {
+        "hasErrors": false,
+        "errors": null,
+        "result": {
+        }
     }
 }
