@@ -20,6 +20,7 @@ import {AuthModule} from "./auth/auth.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PlannerModule} from "./planner/planner.module";
 import {QueryParamModule} from "@ngqp/core";
+// import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     imports: [

@@ -3,13 +3,16 @@ import {Module} from "../../../interaction/modules/module.model";
 
 
 @Component({
-  selector: 'app-module-item',
-  templateUrl: './module-item.component.html'
+    selector: 'app-module-item',
+    templateUrl: './module-item.component.html',
+    styleUrls: ['module-item.component.scss']
 })
 export class ModuleItemComponent implements OnInit {
-  @Input() module: Module;
+    @Input() module: Module;
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 }

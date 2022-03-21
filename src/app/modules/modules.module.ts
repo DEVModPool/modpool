@@ -15,6 +15,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {MultiSelectModule} from "primeng/multiselect";
 import {ModulesRoutingModule} from "./modules-routing.module";
 import {QueryParamModule} from "@ngqp/core";
+import {DividerModule} from "primeng/divider";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import {QueryParamModule} from "@ngqp/core";
         CheckboxModule,
         MultiSelectModule,
         ModulesRoutingModule,
-        QueryParamModule
+        QueryParamModule,
+        DividerModule
     ]
 })
 export class ModulesModule {
