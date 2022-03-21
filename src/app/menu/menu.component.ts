@@ -32,6 +32,7 @@ export class MenuComponent implements OnInit {
                     {label: 'Lecturers & Staff',icon: 'pi pi-fw pi-users', routerLink: ['/login']},
                     {label: 'Anonymopool',icon: 'pi pi-fw pi-question-circle', routerLink: ['/login']},
                     {label: 'Events',icon: 'pi pi-fw pi-map-marker', routerLink: ['/login']},
+                    {label: 'Help',icon: 'pi pi-fw pi-info-circle', routerLink: ['/info']},
                 ]
             }
         ];

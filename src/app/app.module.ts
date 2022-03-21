@@ -13,12 +13,15 @@ import {MenuItemComponent} from './menu/menu-item/menu-item.component';
 import {ConfigService} from './config/config.service';
 import {MenuService} from "./menu/menu.service";
 import {RippleModule} from "primeng/ripple";
+import {CardModule} from "primeng/card";
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {MenuComponent} from "./menu/menu.component";
 import {AuthModule} from "./auth/auth.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PlannerModule} from "./planner/planner.module";
+import {InfoComponent} from './info/info.component';
+
 
 @NgModule({
     imports: [
@@ -29,7 +32,8 @@ import {PlannerModule} from "./planner/planner.module";
         ConfirmDialogModule,
         RippleModule,
         BrowserAnimationsModule,
-        PlannerModule
+        PlannerModule,
+        CardModule
     ],
     declarations: [
         AppComponent,
@@ -38,7 +42,8 @@ import {PlannerModule} from "./planner/planner.module";
         FooterComponent,
         ConfigComponent,
         MenuComponent,
-        MenuItemComponent
+        MenuItemComponent,
+        InfoComponent
     ],
     providers: [
         // {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -51,3 +56,5 @@ import {PlannerModule} from "./planner/planner.module";
 })
 export class AppModule {
 }
+
+
