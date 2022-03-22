@@ -1,156 +1,147 @@
-<div class="grid flex flex-wrap">
-    <div class="col-12 md:col-9" [attr.id]="'Details'">
+<div class="grid flex flex-wrap" style="white-space: pre-line;">
+    <div class="col-12 md:col-9" [attr.id]="'details'">
         <div class="card">
             <div class="col-12" >
-                <h3 class="hover-underline-animation" [ngStyle]="{color:'var(--primary-color)'}"
-                    style="font-weight: bold">
-                    Intro to Data Science
+                <h3 class="font-bold" [ngStyle]="{color:'var(--primary-color)'}">
+                    {{ moduleDetails.name }}
                 </h3>
-                <h4 class="text-600">Comp 219</h4>
+                <h4 class="text-600">
+                    {{ moduleDetails.code }}
+                </h4>
                 <p-divider></p-divider>
             </div>
             <div class="col-10">
                 <p>
-                    <span style="font-weight: bold; font-size: small">
+                    <span class="font-semibold text-lg">
                         <i class="pi pi-angle-double-right"></i>&nbsp;Originating Department:
                     </span>
-                    {{ 'Computer Science' }}
+                    {{ moduleDetails.department.name }}
                 </p>
                 <p>
-                    <span style="font-weight: bold; font-size: small">
+                    <span class="font-semibold text-lg">
                         <i class="pi pi-angle-double-right"></i>&nbsp;Offered In:
                     </span>
-                    {{ 'Semester 1' }}
+                    {{ moduleDetails.semester }}
                 </p>
                 <p>
-                    <span style="font-weight: bold; font-size: small">
+                    <span class="font-semibold text-lg">
                         <i class="pi pi-angle-double-right"></i>&nbsp;Module Coordinator:
                     </span>
-                    {{ 'Matt Bright' }}
+                    {{ moduleDetails.coordinator.name }}
+                </p>
+                <p>
+                    <span class="font-semibold text-lg">
+                        <i class="pi pi-angle-double-right"></i>&nbsp;Credits:
+                    </span>
+                    {{ moduleDetails.credits }}
                 </p>
             </div>
 
             <div class="col-12">
-                <p>To introduce students to the problems arising from databases, including concurrency in databases,
-                    information security considerations and how they are solved-the problems arising from the
-                    integration of
-                    heterogeneous sources of information and the use of semi-structured data;\n' + '- non-relational
-                    databases and the economic factors involved in their selection;\n' + '- techniques for analysing
-                    large
-                    amounts of data, the security issues and commercial factors involved with them.</p>
+                <p>{{ moduleDetails.description }}</p>
                 <p-divider></p-divider>
             </div>
             <div class="col-12">
-                <h4 style="font-weight: bolder;">Aims</h4>
-                <p>
-                    • To equip students with the knowledge about basic algorithms that have been used to enable the AI
-                    agents to conduct the perception, inference, and planning tasks;
-                    • To equip students with the knowledge about machine learning algorithms;
-                    • To provide experience in applying basic AI algorithms to solve problems;
-                    • To provide experience in applying machine learning algorithms to practical problems.</p>
+                <h4 class="font-bold mt-0">Learning Outcomes</h4>
+                <p>{{ moduleDetails.learningOutcomes }}</p>
                 <p-divider></p-divider>
             </div>
             <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Learning Outcomes</h4>
-                <p>
-                    (LO1) Realise the problems in designing and building significant computer systems;
-                    (LO2) Understand the need to design systems that fully meet the requirements of the intended users
-                    including functional and non functional elements;
-                    (LO3) Appreciate the need to ensure that the implementation of a design is adequately tested to
-                    ensure
-                    that the completed system meets the specifications;
-                    (LO4) Be fully aware of the principles and practice of an O-O approach to the design and development
-                    of
-                    computer systems;
-                    (LO5) Be able to apply these principles in practice;
-                    (LO6) Produce O-O requirements and design documentation in UML which demonstrates the features of
-                    good
-                    design such as loose coupling and high cohesion;
-                    (LO7) Be able to demonstrate how to effectively implent an O-O design in an O-O languuge such as
-                    Java or
-                    Python;
-                    (S1) Information skills - Information accessing:[Locating relevant information] [Identifying and
-                    evaluating information sources]
-                    (S2) Skills in using technology - Using common applications (work processing, databases,
-                    spreadsheets
-                    etc.)
-                    (S3) Time and project management - Personal action planning
-                </p>
-                <p-divider></p-divider>
-            </div>
-            <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Prerequisites:</h4>
-                <div class=""></div>
-                <p-accordion>
+                <h4 class="font-bold">Prerequisites:</h4>
+                <p-accordion *ngFor="let prerequisite of moduleDetails.prerequisites">
                     <p-accordionTab>
-                        <ng-template pTemplate="header">Header Content</ng-template>
-                        <ng-template pTemplate="content">Body Content</ng-template>
+                        <ng-template pTemplate="header">{{prerequisite.name}}</ng-template>
+                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
                     </p-accordionTab>
                 </p-accordion>
+                <div *ngIf="!moduleDetails.prerequisites.length">
+                    <p-messages severity="success">
+                        <ng-template pTemplate>
+                            <div>This module has no prerequisites.</div>
+                        </ng-template>
+                    </p-messages>
+                </div>
             </div>
+
             <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Prerequisite for:</h4>
-                <div class=""></div>
-                <p-accordion>
+                <h4 class="font-bold">Prerequisite for:</h4>
+                <p-accordion *ngFor="let prerequisiteFor of moduleDetails.prerequisiteFor">
                     <p-accordionTab>
-                        <ng-template pTemplate="header">Header Content</ng-template>
-                        <ng-template pTemplate="content">Body Content</ng-template>
+                        <ng-template pTemplate="header">{{prerequisiteFor.name}}</ng-template>
+                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
                     </p-accordionTab>
                 </p-accordion>
+                <div *ngIf="!moduleDetails.prerequisiteFor.length">
+                    <p-messages severity="success">
+                        <ng-template pTemplate>
+                            <div>This module is not a prerequisite for any other module.</div>
+                        </ng-template>
+                    </p-messages>
+                </div>
             </div>
         </div>
 
-
-        <div class="card" [attr.id]="'Workload'">
-            <h4 style="font-weight: bolder; margin-top: 0">Study Hours</h4>
+        <div class="card" [attr.id]="'workload'">
+            <h4 class="font-bold mt-0">Study Hours</h4>
             <div class="grid">
                 <div class="col-5">
-                    <p-chart type="pie" [data]="data" [style]="{'width': '5%'}"></p-chart>
+                    <p-chart type="pie" [data]="studyHoursPieData"></p-chart>
                 </div>
                 <div class="col-7 flex justify-content-center flex-wrap">
                     <div class="col-12 text-center">
-                        <p class="text-lg" style="margin-bottom: 0">Total Teaching Hours:</p>
-                        <p style="padding-top: 0">40</p>
+                        <p class="text-lg mb-0">Total Teaching Hours:</p>
+                        <p>{{ moduleDetails.studyHours.totalStudyHours.totalTeaching }}</p>
                     </div>
                     <p-divider></p-divider>
                     <div class="col-12 text-center">
-                        <p class="text-lg" style="margin-bottom: 0">Private Study:</p>
-                        <p>110</p>
+                        <p class="text-lg mb-0">Private Study:</p>
+                        <p>{{ moduleDetails.studyHours.totalStudyHours.privateStudy }}</p>
                     </div>
                     <p-divider></p-divider>
                     <div class="col-12 text-center">
-                        <p style="margin-bottom: 0" class="font-bold text-xl">Total Hours:</p>
-                        <p class="text-lg">150</p>
+                        <p class="font-bold text-xl mb-0">Total Hours:</p>
+                        <p class="text-lg">{{ moduleDetails.studyHours.totalStudyHours.totalStudy }}</p>
                     </div>
                 </div>
             </div>
             <p-divider></p-divider>
             <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Assessment Methods</h4>
-                <p>To introduce students to the problems arising from databases, including concurrency in databases,
-                    information security considerations and how they are solved-the problems arising from the
-                    integration of
-                    heterogeneous sources of information and the use of semi-structured data;\n' + '- non-relational
-                    databases and the economic factors involved in their selection;\n' + '- techniques for analysing
-                    large
-                    amounts of data, the security issues and commercial factors involved with them.</p>
+                <h4 class="font-bold mt-0">Assessment Methods</h4>
+                <p-table [value]="moduleDetails.assessmentMethods" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Type</th>
+                            <th><i class="pi pi-percentage"></i>&nbsp;Weight</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-assessment>
+                        <tr>
+                            <td>{{assessment.type}}</td>
+                            <td>{{assessment.weight}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
-        <div class="card" [attr.id]="'Syllabus'">
+        <div class="card " [attr.id]="'syllabus'">
             <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Syllabus</h4>
-                <p>To introduce students to the problems arising from databases, including concurrency in databases,
-                    information security considerations and how they are solved-the problems arising from the
-                    integration of
-                    heterogeneous sources of information and the use of semi-structured data;\n' + '- non-relational
-                    databases and the economic factors involved in their selection;\n' + '- techniques for analysing
-                    large
-                    amounts of data, the security issues and commercial factors involved with them.</p>
+                <h4 class="font-bold mt-0">Syllabus</h4>
+                <p>{{ moduleDetails.syllabus }}</p>
             </div>
         </div>
-        <div class="card" [attr.id]="'Reviews'">
+        <div class="card" [attr.id]="'reviews'">
+            <div class="col-12 flex flex-row">
+                <h4 class="col-8 align-self-center font-bold mt-0">
+                    Reviews
+                </h4>
+                <div class="col-4" style="text-align: right">
+                    <h2 style="font-weight: bold; margin: 0;" class="text-900"><i class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span class="text-blue-300 text-base">/5</span></h2>
+                    <p class="text-blue-300">
+                        Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews
+                    </p>
+                </div>
+            </div>
             <div class="col-12">
-                <h4 style="font-weight: bolder; margin-top: 0">Reviews</h4>
                 <br>
                 <app-review-list></app-review-list>
             </div>
@@ -159,7 +150,7 @@
 
     <div class="col-12 md:col-3">
         <div class="card sticky-inner-wrapper w-2">
-            <div *ngFor="let section of sections" style="font-size: large; padding-top: 8px; padding-bottom: 8px;">
+            <div *ngFor="let section of pageSections" style="font-size: large; padding-top: 8px; padding-bottom: 8px;">
                 <button
                     [routerLinkActiveOptions]="linkActiveOptions"
                     routerLinkActive="button-active"
@@ -169,7 +160,7 @@
                     pRipple
                     type="button"
                     class="p-button-lg p-button-text">
-                    {{section}}
+                    {{section | titlecase}}
                 </button>
             </div>
         </div>

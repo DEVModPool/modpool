@@ -24,6 +24,8 @@ import { ReviewItemComponent } from './module-details/review-list/review-item/re
 import {RatingModule} from "primeng/rating";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {TooltipModule} from "primeng/tooltip";
+import {MessagesModule} from "primeng/messages";
+import {TableModule} from "primeng/table";
 
 @NgModule({
     declarations: [
@@ -53,7 +55,9 @@ import {TooltipModule} from "primeng/tooltip";
         AccordionModule,
         RatingModule,
         ScrollPanelModule,
-        TooltipModule
+        TooltipModule,
+        MessagesModule,
+        TableModule
     ]
 })
 export class ModulesModule {
