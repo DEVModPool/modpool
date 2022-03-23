@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AppMainComponent} from "./app.main.component";
+import {LoginGuard} from "./auth/login.guard";
 
 const routes: Routes = [
     {
@@ -12,7 +13,8 @@ const routes: Routes = [
         ],
     },
     {
-        path: 'login',
+        path: 'auth',
+        canActivate: [LoginGuard],
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
     }
 ];
@@ -22,7 +24,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes, {
             scrollPositionRestoration: 'enabled',
             anchorScrolling: 'enabled',
-            scrollOffset: [0, 25],
+            scrollOffset: [0, 100],
         })
     ],
     exports: [RouterModule]

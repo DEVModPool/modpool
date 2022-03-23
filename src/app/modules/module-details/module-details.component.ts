@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {IsActiveMatchOptions} from "@angular/router";
 import {ModuleDetails, StudyHours} from "../../interaction/modules/module-details.model";
 import {RequisiteModule} from "../../interaction/modules/module.model";
+import {ViewportScroller} from "@angular/common";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'app-module-details',
@@ -10,6 +12,11 @@ import {RequisiteModule} from "../../interaction/modules/module.model";
 })
 export class ModuleDetailsComponent implements OnInit {
 
+    showModal() {
+        this.authService.loginModalDisplayed.next(true);
+    }
+
+    displayModal = false;
     studyHoursPieData: StudyHoursPieData;
     randomColor = require('randomcolor');
 
@@ -47,10 +54,16 @@ export class ModuleDetailsComponent implements OnInit {
         "syllabus",
         "reviews"
     ]
-    constructor() {
+    constructor(private authService: AuthService) {
     }
 
+
     ngOnInit(): void {
+        this.authService.loginModalDisplayed.subscribe(
+            displayed => {
+                this.displayModal = displayed;
+            }
+        )
         this.processStudyHoursData(this.moduleDetails.studyHours);
     }
 
@@ -87,12 +100,12 @@ export class ModuleDetailsComponent implements OnInit {
             tutorials: 5,
             labPracticals: 5,
             fieldwork: null,
+            other: null,
             totalStudyHours: {
                 totalTeaching: 40,
                 privateStudy: 110,
                 totalStudy: 150
-            },
-            other: null
+            }
         },
         [
             {

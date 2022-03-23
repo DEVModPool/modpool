@@ -26,6 +26,7 @@ import {ScrollPanelModule} from "primeng/scrollpanel";
 import {TooltipModule} from "primeng/tooltip";
 import {MessagesModule} from "primeng/messages";
 import {TableModule} from "primeng/table";
+import {AuthModule} from "../auth/auth.module";
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import {TableModule} from "primeng/table";
         ScrollPanelModule,
         TooltipModule,
         MessagesModule,
-        TableModule
+        TableModule,
+        AuthModule
     ]
 })
 export class ModulesModule {

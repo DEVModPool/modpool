@@ -18,6 +18,7 @@ export class ModuleDetails {
         public averageReviewRating: number,
         public prerequisites?: RequisiteModule[],
         public prerequisiteFor?: RequisiteModule[],
+
     ) {
     }
 }
