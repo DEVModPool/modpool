@@ -1,7 +1,7 @@
-<div class="grid" style="white-space: pre-line; scroll-behavior: smooth;" >
+<div class="grid" style="white-space: pre-line; scroll-behavior: smooth;">
     <div class="col-12 md:col-9" id="details">
         <div class="card">
-            <div class="col-12" >
+            <div class="col-12">
                 <h3 class="font-bold" [ngStyle]="{color:'var(--primary-color)'}">
                     {{ moduleDetails.name }}
                 </h3>
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="card" >
+        <div class="card">
             <h4 class="font-bold mt-0" id="workload">Study Hours</h4>
             <div class="grid">
                 <div class="col-5">
@@ -135,7 +135,9 @@
                     Reviews
                 </h4>
                 <div class="col-4" style="text-align: right">
-                    <h2 style="font-weight: bold; margin: 0;" class="text-900"><i class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span class="text-blue-300 text-base">/5</span></h2>
+                    <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
+                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span class="text-blue-300 text-base">/5</span>
+                    </h2>
                     <p class="text-blue-300">
                         Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews
                     </p>
@@ -174,7 +176,7 @@
                         label="Leave a review"
                         icon="pi pi-pencil"
                         class="p-button-lg"
-                        (click)="leaveReview()"
+                        (click)="checkLogin(openReview)"
                     ></button>
                 </div>
             </div>

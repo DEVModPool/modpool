@@ -27,7 +27,8 @@
             <p>{{ details | slice:sliceOptions.start:sliceOptions.end }}</p>
         </div>
         <p-divider align="center">
-            <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()" *ngIf="details.length >= sliceOptions.default">
+            <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()"
+                      *ngIf="details.length >= sliceOptions.default">
                 <ng-template pTemplate="content">
                     <i class="pi pi-chevron-down" *ngIf="!expanded"></i>
                     <i class="pi pi-chevron-up" *ngIf="expanded"></i>
@@ -41,7 +42,7 @@
                 pTooltip="Upvote"
                 class="col-2 text-center hover:text-green-500 hover-underline-animation-green"
                 style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="upvote()">
+                <a style="color: unset; cursor: pointer" (click)="checkLogin(upvote)">
                     <i class="pi pi-thumbs-up" style="font-size: 1.5rem"></i> 6
                 </a>
             </span>
@@ -49,7 +50,7 @@
             pTooltip="Downvote"
             class="col-2 text-center hover:text-pink-500 hover-underline-animation-pink"
             style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="downvote()">
+                <a style="color: unset; cursor: pointer" (click)="checkLogin(downvote)">
                     <i class="pi pi-thumbs-down" style="font-size: 1.5rem"></i> 3
                 </a>
             </span>

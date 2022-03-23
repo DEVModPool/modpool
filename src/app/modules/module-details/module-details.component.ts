@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {IsActiveMatchOptions} from "@angular/router";
-import {ModuleDetails, StudyHours} from "../../interaction/modules/module-details.model";
-import {RequisiteModule} from "../../interaction/modules/module.model";
-import {ViewportScroller} from "@angular/common";
-import {AuthService} from "../../auth/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { IsActiveMatchOptions } from "@angular/router";
+import { ModuleDetails, StudyHours } from "../../interaction/modules/module-details.model";
+import { RequisiteModule } from "../../interaction/modules/module.model";
+import { AuthService } from "../../auth/auth.service";
+import { LoginModalInterface } from "./login-modal-interface";
 
 @Component({
     selector: 'app-module-details',
     templateUrl: './module-details.component.html',
     styleUrls: ['module-details.component.scss']
 })
-export class ModuleDetailsComponent implements OnInit {
+export class ModuleDetailsComponent extends LoginModalInterface implements OnInit {
 
-    showModal() {
-        this.authService.loginModalDisplayed.next(true);
+    openReview() {
+        console.log("review");
     }
 
     displayModal = false;
@@ -35,7 +35,7 @@ export class ModuleDetailsComponent implements OnInit {
 
     private processStudyHoursData(studyHours: StudyHours) {
         const newStudyHoursPieData: StudyHoursPieData = new StudyHoursPieData([], []);
-        newStudyHoursPieData.datasets.push(new PieChartDataset([],[],[]));
+        newStudyHoursPieData.datasets.push(new PieChartDataset([], [], []));
 
         for (const workloadType in studyHours) {
             if (studyHours[workloadType] && workloadType != "totalStudyHours") {
@@ -54,16 +54,13 @@ export class ModuleDetailsComponent implements OnInit {
         "syllabus",
         "reviews"
     ]
-    constructor(private authService: AuthService) {
+
+    constructor(private _authService: AuthService) {
+        super(_authService);
     }
 
 
     ngOnInit(): void {
-        this.authService.loginModalDisplayed.subscribe(
-            displayed => {
-                this.displayModal = displayed;
-            }
-        )
         this.processStudyHoursData(this.moduleDetails.studyHours);
     }
 
@@ -150,6 +147,7 @@ class PieChartDataset {
         public data?: number[],
         public backgroundColor?: string[],
         public hoverBackgroundColor?: string[]
-    ) {}
+    ) {
+    }
 }
 
