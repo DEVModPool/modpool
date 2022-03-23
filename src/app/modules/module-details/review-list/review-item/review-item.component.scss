@@ -79,7 +79,7 @@
 
 
 // Scroll of the pannel
-.p-scrollpanel {
+:host ::ng-deep .p-scrollpanel {
     p {
         padding: .5rem;
         line-height: 1.5;
@@ -101,6 +101,10 @@
             }
         }
     }
+}
+
+:host ::ng-deep .p-divider .p-divider-content {
+    background-color: inherit;
 }
 
 

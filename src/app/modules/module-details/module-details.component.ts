@@ -19,7 +19,6 @@ export class ModuleDetailsComponent implements OnInit {
 
     private generatePink() {
         return this.randomColor({hue: 'pink'});
-
     }
 
     private camelToString(text: string) {
@@ -30,10 +29,9 @@ export class ModuleDetailsComponent implements OnInit {
     private processStudyHoursData(studyHours: StudyHours) {
         const newStudyHoursPieData: StudyHoursPieData = new StudyHoursPieData([], []);
         newStudyHoursPieData.datasets.push(new PieChartDataset([],[],[]));
+
         for (const workloadType in studyHours) {
             if (studyHours[workloadType] && workloadType != "totalStudyHours") {
-                console.log(workloadType);
-                console.log(studyHours[workloadType]);
                 newStudyHoursPieData.labels.push(this.camelToString(workloadType));
                 newStudyHoursPieData.datasets[0].data.push(studyHours[workloadType]);
                 newStudyHoursPieData.datasets[0].backgroundColor.push(this.generatePurple());
@@ -42,8 +40,6 @@ export class ModuleDetailsComponent implements OnInit {
         }
         this.studyHoursPieData = newStudyHoursPieData;
     }
-
-
 
     pageSections = [
         "details",
@@ -113,7 +109,6 @@ export class ModuleDetailsComponent implements OnInit {
                 weight: 15
             }
         ],
-        "\t\n" +
         "Basic and advanced SQL topics (5 lectures): SELECT, INSERT, DELETE, indexes and materialised view;\n" +
         "Transactions/concurrency in databases (9 lectures): Transaction management, recoverability and security;\n" +
         "Query optimisation (5 lectures): Relational Algebra Transaction management;\n" +
