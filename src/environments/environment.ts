@@ -5,8 +5,9 @@
 export const environment = {
     production: false,
     baseUrl: 'http://localhost:3000/',
-    modulesUrl:'modulesViewModel/',
-    moduleDetails:'moduleDetails/'
+    modulesUrl: 'modulesViewModel/',
+    moduleDetails: 'moduleDetails/',
+    staffUrl: 'staff'
 };
 
 /*
