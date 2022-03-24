@@ -1,4 +1,4 @@
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../auth.service";
 import { Injectable, OnInit } from "@angular/core";
 
 @Injectable()

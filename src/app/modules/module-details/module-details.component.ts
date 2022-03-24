@@ -3,7 +3,8 @@ import { IsActiveMatchOptions } from "@angular/router";
 import { ModuleDetails, StudyHours } from "../../interaction/modules/module-details.model";
 import { RequisiteModule } from "../../interaction/modules/module.model";
 import { AuthService } from "../../auth/auth.service";
-import { LoginModalInterface } from "./login-modal-interface";
+import { LoginModalInterface } from "../../auth/login-modal/login-modal-interface";
+import {GeneralUtil} from "../../util/general.util";
 
 @Component({
     selector: 'app-module-details',
@@ -18,31 +19,16 @@ export class ModuleDetailsComponent extends LoginModalInterface implements OnIni
 
     displayModal = false;
     studyHoursPieData: StudyHoursPieData;
-    randomColor = require('randomcolor');
-
-    private generatePurple() {
-        return this.randomColor({hue: 'purple'});
-    }
-
-    private generatePink() {
-        return this.randomColor({hue: 'pink'});
-    }
-
-    private camelToString(text: string) {
-        const result = text.replace(/([A-Z])/g, " $1");
-        return result.charAt(0).toUpperCase() + result.slice(1);
-    }
 
     private processStudyHoursData(studyHours: StudyHours) {
         const newStudyHoursPieData: StudyHoursPieData = new StudyHoursPieData([], []);
         newStudyHoursPieData.datasets.push(new PieChartDataset([], [], []));
-
         for (const workloadType in studyHours) {
             if (studyHours[workloadType] && workloadType != "totalStudyHours") {
-                newStudyHoursPieData.labels.push(this.camelToString(workloadType));
+                newStudyHoursPieData.labels.push(GeneralUtil.camelToString(workloadType));
                 newStudyHoursPieData.datasets[0].data.push(studyHours[workloadType]);
-                newStudyHoursPieData.datasets[0].backgroundColor.push(this.generatePurple());
-                newStudyHoursPieData.datasets[0].hoverBackgroundColor.push(this.generatePink());
+                newStudyHoursPieData.datasets[0].backgroundColor.push(GeneralUtil.generatePurple());
+                newStudyHoursPieData.datasets[0].hoverBackgroundColor.push(GeneralUtil.generatePink());
             }
         }
         this.studyHoursPieData = newStudyHoursPieData;
@@ -55,10 +41,9 @@ export class ModuleDetailsComponent extends LoginModalInterface implements OnIni
         "reviews"
     ]
 
-    constructor(private _authService: AuthService) {
-        super(_authService);
+    constructor(authService: AuthService) {
+        super(authService);
     }
-
 
     ngOnInit(): void {
         this.processStudyHoursData(this.moduleDetails.studyHours);

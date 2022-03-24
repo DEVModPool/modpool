@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { animate, AUTO_STYLE, state, style, transition, trigger } from "@angular/animations";
-import { LoginModalInterface } from "../../login-modal-interface";
+import { LoginModalInterface} from "../../../../auth/login-modal/login-modal-interface";
 import { AuthService } from "../../../../auth/auth.service";
 
 @Component({

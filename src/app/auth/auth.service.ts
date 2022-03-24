@@ -27,6 +27,8 @@ export class AuthService implements OnInit {
     login(user: LoginRequest) {
         return this.http.post<any>('https://localhost:5001/api/login', user).pipe(
             tap(response => {
+                const token = (<any>response).token;
+                this.setJwtToken(token);
                 localStorage.setItem("user", response.email)
                 this.setAutoLogout(response.token);
             })
@@ -35,7 +37,6 @@ export class AuthService implements OnInit {
 
     logout() {
         this.removeJwtToken();
-        this.router.navigate(['/login']);
         if(this.autoLogoutTimer) {
             clearTimeout(this.autoLogoutTimer);
         }
@@ -68,7 +69,6 @@ export class AuthService implements OnInit {
     }
 
     isLoggedIn() {
-
         const token = AuthUtil.tokenGetter();
         return (token && !this.jwtHelper.isTokenExpired(token));
     }

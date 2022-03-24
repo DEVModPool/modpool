@@ -13,11 +13,11 @@
     </a>
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <a href="#" class="p-link layout-topbar-button">
+        <a href="#" class="p-link layout-topbar-button" *ngIf="this.authService.isLoggedIn()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </a>
-        <a href="#" class="p-link layout-topbar-button" routerLink="/login">
+        <a href="#" class="p-link layout-topbar-button" routerLink="/login" *ngIf="!this.authService.isLoggedIn()">
             <i class="pi pi-sign-in" ></i>
             <span>Log In</span>
         </a>
@@ -26,7 +26,7 @@
                 <h3>Sign Out</h3>
             </ng-template>
         </p-confirmDialog>
-        <a class="p-link layout-topbar-button" (click)="logout()">
+        <a class="p-link layout-topbar-button" (click)="logout()" *ngIf="this.authService.isLoggedIn()">
             <i class="pi pi-sign-out"></i>
             <span>Log Out</span>
         </a>

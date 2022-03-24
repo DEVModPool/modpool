@@ -21,7 +21,6 @@ export class LoginComponent {
     });
 
     constructor(
-        public configService: ConfigService,
         private authService: AuthService,
         private router: Router
     ) {
@@ -38,11 +37,7 @@ export class LoginComponent {
         }
 
         this.authService.login(user).subscribe({
-            next: value => {
-                const token = (<any>value).token;
-                this.authService.setJwtToken(token);
-                this.router.navigate(["/"]);
-            },
+            next: () => this.router.navigate(["/"]),
             error: () => {
                 this.invalidMessages = [{
                     severity: 'error',

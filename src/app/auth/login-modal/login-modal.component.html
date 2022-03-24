@@ -11,28 +11,30 @@
         <span class="text-600 font-medium line-height-3">Don't have an account?</span>
         <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Sign up!</a>
     </div>
-    <div>
-        <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-        <input id="email1" type="text" pInputText class="w-full mb-3">
+    <form [formGroup]="authForm" (ngSubmit)="login()">
+        <div>
+            <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+            <input id="email1" type="text" pInputText class="w-full mb-3" formControlName="email">
 
-        <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-        <input id="password1" type="password" pInputText class="w-full mb-3">
+            <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+            <input id="password1" type="password" pInputText class="w-full mb-3" formControlName="password">
 
-        <div class="flex align-items-center justify-content-between mb-6">
-            <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
+            <div class="flex align-items-center justify-content-between mb-6">
+                <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
+            </div>
+            <div class="mb-2">
+                <button pButton pRipple type="submit" label="Sign In" class="w-full"></button>
+            </div>
+            <div class="mt-2">
+                <button
+                    pButton
+                    pRipple
+                    type="button"
+                    label="Cancel"
+                    class="p-button-secondary w-full"
+                    (click)="closeModal()">
+                </button>
+            </div>
         </div>
-        <div class="mb-2">
-            <button pButton pRipple label="Sign In" class="w-full"></button>
-        </div>
-        <div class="mt-2">
-            <button
-                pButton
-                pRipple
-                type="button"
-                label="Cancel"
-                class="p-button-secondary w-full"
-                (click)="closeModal()">
-            </button>
-        </div>
-    </div>
+    </form>
 </p-dialog>
