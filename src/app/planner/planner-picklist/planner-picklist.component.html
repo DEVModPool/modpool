@@ -7,7 +7,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="topRow gridRow">
                 <div class="module-code">
-                    <h5><a href="/modules//{{plannerModule.code}}" target="_blank" class="moduleLink">{{plannerModule.code}} - {{ plannerModule.name }}</a></h5>
+                    <h5><a href="/modules/{{plannerModule.id}}" target="_blank" class="moduleLink">{{plannerModule.code}} - {{ plannerModule.name }}</a></h5>
                 </div>
             </div>
             <div class="middleRow gridRow">
@@ -23,7 +23,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                         <div class="hiddenRow" >
                             <ul *ngFor="let prerequisite of plannerModule.prerequisites">
                                 <li>
-                                    <a href="/modules//{{prerequisite.name}}" target="_blank"  class="moduleLink">{{prerequisite.name}}</a>
+                                    <a href="/modules/{{prerequisite.id}}" target="_blank"  class="moduleLink">{{prerequisite.code}} - {{prerequisite.name}}</a>
                                 </li>
                             </ul>
                             <ul *ngIf="plannerModule.prerequisites.length==0">

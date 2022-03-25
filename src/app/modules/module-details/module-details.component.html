@@ -1,0 +1,188 @@
+<div class="grid" style="white-space: pre-line; scroll-behavior: smooth;">
+    <div class="col-12 md:col-9" id="details">
+        <div class="card">
+            <div class="col-12">
+                <h3 class="font-bold" [ngStyle]="{color:'var(--primary-color)'}">
+                    {{ moduleDetails.name }}
+                </h3>
+                <h4 class="text-600">
+                    {{ moduleDetails.code }}
+                </h4>
+                <p-divider></p-divider>
+            </div>
+            <div class="col-10">
+                <p>
+                    <span class="font-semibold text-lg">
+                        <i class="pi pi-angle-double-right"></i>&nbsp;Originating Department:
+                    </span>
+                    {{ moduleDetails.department.name }}
+                </p>
+                <p>
+                    <span class="font-semibold text-lg">
+                        <i class="pi pi-angle-double-right"></i>&nbsp;Offered In:
+                    </span>
+                    {{ moduleDetails.semester }}
+                </p>
+                <p>
+                    <span class="font-semibold text-lg">
+                        <i class="pi pi-angle-double-right"></i>&nbsp;Module Coordinator:
+                    </span>
+                    {{ moduleDetails.coordinator.name }}
+                </p>
+                <p>
+                    <span class="font-semibold text-lg">
+                        <i class="pi pi-angle-double-right"></i>&nbsp;Credits:
+                    </span>
+                    {{ moduleDetails.credits }}
+                </p>
+            </div>
+
+            <div class="col-12">
+                <p>{{ moduleDetails.description }}</p>
+                <p-divider></p-divider>
+            </div>
+            <div class="col-12">
+                <h4 class="font-bold mt-0">Learning Outcomes</h4>
+                <p>{{ moduleDetails.learningOutcomes }}</p>
+                <p-divider></p-divider>
+            </div>
+            <div class="col-12">
+                <h4 class="font-bold">Prerequisites:</h4>
+                <p-accordion *ngFor="let prerequisite of moduleDetails.prerequisites">
+                    <p-accordionTab>
+                        <ng-template pTemplate="header">{{prerequisite.name}}</ng-template>
+                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
+                    </p-accordionTab>
+                </p-accordion>
+                <div *ngIf="!moduleDetails.prerequisites.length">
+                    <p-messages severity="success">
+                        <ng-template pTemplate>
+                            <div>This module has no prerequisites.</div>
+                        </ng-template>
+                    </p-messages>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <h4 class="font-bold">Prerequisite for:</h4>
+                <p-accordion *ngFor="let prerequisiteFor of moduleDetails.prerequisiteFor">
+                    <p-accordionTab>
+                        <ng-template pTemplate="header">{{prerequisiteFor.name}}</ng-template>
+                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
+                    </p-accordionTab>
+                </p-accordion>
+                <div *ngIf="!moduleDetails.prerequisiteFor.length">
+                    <p-messages severity="success">
+                        <ng-template pTemplate>
+                            <div>This module is not a prerequisite for any other module.</div>
+                        </ng-template>
+                    </p-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h4 class="font-bold mt-0" id="workload">Study Hours</h4>
+            <div class="grid">
+                <div class="col-5">
+                    <p-chart type="pie" [data]="studyHoursPieData"></p-chart>
+                </div>
+                <div class="col-7 flex justify-content-center flex-wrap">
+                    <div class="col-12 text-center">
+                        <p class="text-lg mb-0">Total Teaching Hours:</p>
+                        <p>{{ moduleDetails.studyHours.totalStudyHours.totalTeaching }}</p>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="col-12 text-center">
+                        <p class="text-lg mb-0">Private Study:</p>
+                        <p>{{ moduleDetails.studyHours.totalStudyHours.privateStudy }}</p>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="col-12 text-center">
+                        <p class="font-bold text-xl mb-0">Total Hours:</p>
+                        <p class="text-lg">{{ moduleDetails.studyHours.totalStudyHours.totalStudy }}</p>
+                    </div>
+                </div>
+            </div>
+            <p-divider></p-divider>
+            <div class="col-12">
+                <h4 class="font-bold mt-0">Assessment Methods</h4>
+                <p-table [value]="moduleDetails.assessmentMethods" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Type</th>
+                            <th><i class="pi pi-percentage"></i>&nbsp;Weight</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-assessment>
+                        <tr>
+                            <td>{{assessment.type}}</td>
+                            <td>{{assessment.weight}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card " id="syllabus">
+            <div class="col-12">
+                <h4 class="font-bold mt-0">Syllabus</h4>
+                <p>{{ moduleDetails.syllabus }}</p>
+            </div>
+        </div>
+        <div class="card" id="reviews">
+            <div class="col-12 flex flex-row">
+                <h4 class="col-8 align-self-center font-bold mt-0">
+                    Reviews
+                </h4>
+                <div class="col-4" style="text-align: right">
+                    <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
+                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span class="text-blue-300 text-base">/5</span>
+                    </h2>
+                    <p class="text-blue-300">
+                        Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews
+                    </p>
+                </div>
+            </div>
+            <div class="col-12">
+                <br>
+                <app-review-list></app-review-list>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 md:col-3">
+        <div class="sticky-inner-wrapper w-2">
+            <div class="card">
+                <div class="pt-2 pb-2 text-lg" *ngFor="let section of pageSections">
+                    <button
+                        [routerLinkActiveOptions]="linkActiveOptions"
+                        routerLinkActive="button-active"
+                        [routerLink]='"."'
+                        [fragment]="section"
+                        pButton
+                        pRipple
+                        type="button"
+                        class="p-button-lg p-button-text">
+                        {{section | titlecase}}
+                    </button>
+                </div>
+            </div>
+            <p-divider></p-divider>
+            <div class="card">
+                <div class="flex justify-content-center">
+                    <button
+                        pButton
+                        type="button"
+                        label="Leave a review"
+                        icon="pi pi-pencil"
+                        class="p-button-lg"
+                        (click)="checkLogin(openReview)"
+                    ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-login-modal></app-login-modal>
+
+

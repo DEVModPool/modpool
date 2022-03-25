@@ -22,11 +22,11 @@ export class PlannerPicklistComponent implements OnInit {
                 this.selectedModules.map(mod => this.checkPrerequisites(mod));
             });
 
-        this.plannerModuleService.plannerModules.subscribe(
-            result =>this.plannerModules = result.filter(x =>
-            !this.selectedModules.some(y => x.code==y.code)));
+        this.plannerModuleService.plannerModules
+            .subscribe(result => this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.code==y.code)));
     }
     toSource(){
+        console.log(this.plannerModules);
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
         this.toTarget();
     }
@@ -44,10 +44,5 @@ export class PlannerPicklistComponent implements OnInit {
         let selectedCodes = this.selectedModules.map(a => a.code);
         let prerequisiteCodes = mod.prerequisites.map(x => x.name);
         mod.missing = prerequisiteCodes.filter(x => !selectedCodes.includes(x));
-        console.log(mod.missing);
-        console.log("-----");
-    }
-    openlink(){
-        console.log("clickme");
     }
 }

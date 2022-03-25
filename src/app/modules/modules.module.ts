@@ -15,6 +15,18 @@ import {CheckboxModule} from "primeng/checkbox";
 import {MultiSelectModule} from "primeng/multiselect";
 import {ModulesRoutingModule} from "./modules-routing.module";
 import {QueryParamModule} from "@ngqp/core";
+import {DividerModule} from "primeng/divider";
+import { ModuleDetailsComponent } from './module-details/module-details.component';
+import {ChartModule} from "primeng/chart";
+import {AccordionModule} from "primeng/accordion";
+import { ReviewListComponent } from './module-details/review-list/review-list.component';
+import { ReviewItemComponent } from './module-details/review-list/review-item/review-item.component';
+import {RatingModule} from "primeng/rating";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {TooltipModule} from "primeng/tooltip";
+import {MessagesModule} from "primeng/messages";
+import {TableModule} from "primeng/table";
+import {AuthModule} from "../auth/auth.module";
 
 @NgModule({
     declarations: [
@@ -22,6 +34,9 @@ import {QueryParamModule} from "@ngqp/core";
         ModulesComponent,
         ModuleListComponent,
         ModuleFilterComponent,
+        ModuleDetailsComponent,
+        ReviewListComponent,
+        ReviewItemComponent,
     ],
     imports: [
         RouterModule,
@@ -35,7 +50,16 @@ import {QueryParamModule} from "@ngqp/core";
         CheckboxModule,
         MultiSelectModule,
         ModulesRoutingModule,
-        QueryParamModule
+        QueryParamModule,
+        DividerModule,
+        ChartModule,
+        AccordionModule,
+        RatingModule,
+        ScrollPanelModule,
+        TooltipModule,
+        MessagesModule,
+        TableModule,
+        AuthModule
     ]
 })
 export class ModulesModule {

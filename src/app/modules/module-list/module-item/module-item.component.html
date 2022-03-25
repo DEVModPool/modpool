@@ -1,59 +1,75 @@
 <div class="card">
-    <a><h5 [ngStyle]="{color:'var(--primary-color)'}" style="font-weight: bold">{{ module.name}}</h5></a>
-    <h6 style="font-weight: bolder">{{ module.code }}</h6>
-    <p-tabView styleClass="tabview-custom">
-        <p-tabPanel>
-            <ng-template pTemplate="header">
-                <i class="pi pi-info-circle"></i>
-                <span style="padding-left: 4px">Description</span>
-            </ng-template>
-            {{ module.description }}
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-            <ng-template pTemplate="header">
-                <i class="pi pi-pencil"></i>
-                <span style="padding-left: 4px">Assessment</span>
-            </ng-template>
-            <div class="grid">
-                <div
-                    class="col-6"
-                    style="text-align: left; font-weight: bold; font-size: medium;">
-                    Coursework - {{ module.assessment.coursework }}%
-                </div>
-                <div
-                    class="col-6"
-                    style="text-align: right; font-weight: bold; font-size: medium;">
-                    Exam - {{ module.assessment.exam }} %
-                </div>
-            </div>
-            <p-progressBar [value]="module.assessment.coursework" [showValue] = false></p-progressBar>
-        </p-tabPanel>
-        <p-tabPanel header="Header III">
-            <ng-template pTemplate="header">
-                <i class="pi pi-history"></i>
-                <span style="padding-left: 4px">Requirements</span>
-            </ng-template>
-            <div class ="card">
-                <div class="flex flex-column md:flex-row card-container indigo-container">
-                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
-                        <dl>
-                            <dt><h5>Prerequisites:</h5></dt>
-                            <dd *ngFor="let prerequisite of module.prerequisites">
-                                {{ prerequisite.name }}
-                            </dd>
-                        </dl>
+    <div>
+        <a [routerLink]="[module.id]">
+            <h5
+                class="hover-underline-animation"
+                [ngStyle]="{color:'var(--primary-color)'}"
+                style="font-weight: bold">
+                {{ module.name }}
+            </h5>
+        </a>
+        <h6 style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
+    </div>
+    <div>
+        <p-tabView styleClass="tabview-custom">
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <i class="pi pi-info-circle"></i>
+                    <span style="padding-left: 4px">Description</span>
+                </ng-template>
+                {{ module.description }}
+            </p-tabPanel>
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <i class="pi pi-pencil"></i>
+                    <span style="padding-left: 4px">Assessment</span>
+                </ng-template>
+                <div class="grid">
+                    <div
+                        class="col-6"
+                        style="text-align: left; font-weight: bold; font-size: medium;">
+                        Coursework - {{ module.assessment.coursework }}%
                     </div>
-                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
-
-                        <dl>
-                            <dt><h5>Required for: </h5></dt>
-                            <dd *ngFor="let prerequisiteFor of module.prerequisiteFor">
-                                {{ prerequisiteFor.name }}
-                            </dd>
-                        </dl>
+                    <div
+                        class="col-6"
+                        style="text-align: right; font-weight: bold; font-size: medium;">
+                        Exam - {{ module.assessment.exam }} %
                     </div>
                 </div>
-            </div>
-        </p-tabPanel>
-    </p-tabView>
+                <p-progressBar [value]="module.assessment.coursework" [showValue]=false></p-progressBar>
+            </p-tabPanel>
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <i class="pi pi-history"></i>
+                    <span style="padding-left: 4px">Requirements</span>
+                </ng-template>
+                <div class="grid flex justify-content-center">
+                    <div class="col-12 md:col-6 justify-content-center align-items-center">
+                        <h5 style="font-weight: bolder">Prerequisites:</h5>
+                        <div class="icon">
+                            <div *ngFor="let prerequisite of module.prerequisites">
+                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
+                                <a [routerLink]="[prerequisite.id]">
+                                    <span class="hover-underline-animation"
+                                          style="font-weight: bold; font-size: small;padding: 0.2rem">{{prerequisite.name}}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 justify-content-center align-items-center">
+                        <h5 style="font-weight: bolder">Prerequisite for:</h5>
+                        <div class="icon">
+                            <div *ngFor="let prerequisiteFor of module.prerequisiteFor">
+                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
+                                <a [routerLink]="[prerequisiteFor.id]">
+                                    <span class="hover-underline-animation"
+                                          style="font-weight: bold; font-size: small;padding: 0.2rem">{{prerequisiteFor.name}}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
 </div>
