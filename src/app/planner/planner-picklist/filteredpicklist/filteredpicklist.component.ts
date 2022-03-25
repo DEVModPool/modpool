@@ -1,11 +1,5 @@
 import { NgModule, Component, ElementRef, AfterContentInit, AfterViewChecked, Input, Output, ContentChildren, QueryList, TemplateRef, EventEmitter, ViewChild, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ButtonModule} from 'primeng/button';
-import {SharedModule,PrimeTemplate,FilterService} from 'primeng/api';
-import {DomHandler} from 'primeng/dom';
-import {RippleModule} from 'primeng/ripple';
-import {CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {ObjectUtils, UniqueComponentId} from 'primeng/utils';
+import {FilterService} from 'primeng/api';
 import { PickList } from 'primeng/picklist';
 
 @Component({
@@ -23,7 +17,6 @@ import { PickList } from 'primeng/picklist';
                     <div class="p-picklist-title" *ngIf="!sourceHeaderTemplate">{{sourceHeader}}</div>
                     <ng-container *ngTemplateOutlet="sourceHeaderTemplate"></ng-container>
                 </div>
-
 
                 <div class="p-picklist-filter-container" *ngIf="filterBy && showSourceFilter !== false">
                     <app-planner-filter>
@@ -67,24 +60,46 @@ import { PickList } from 'primeng/picklist';
                         <span class="p-picklist-filter-icon pi pi-search"></span>
                     </div>
                 </div>
-                <ul #targetlist class="p-picklist-list p-picklist-target" cdkDropList [cdkDropListData]="target" (cdkDropListDropped)="onDrop($event, TARGET_LIST)"
-                    [ngStyle]="targetStyle" role="listbox" aria-multiselectable="multiple">
-                    <ng-template ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
-                        <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
-                            (click)="onItemClick($event,item,selectedItemsTarget,onTargetSelect)" (dblclick)="onTargetItemDblClick()" (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
-                            *ngIf="isItemVisible(item, TARGET_LIST)" tabindex="0" role="option" [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
-                            <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}"></ng-container>
-                        </li>
-                    </ng-template>
-                    <ng-container *ngIf="isEmpty(TARGET_LIST) && (emptyMessageTargetTemplate || emptyFilterMessageTargetTemplate)">
-                        <li class="p-picklist-empty-message" *ngIf="!filterValueTarget || !emptyFilterMessageTargetTemplate">
-                            <ng-container *ngTemplateOutlet="emptyMessageTargetTemplate"></ng-container>
-                        </li>
-                        <li class="p-picklist-empty-message" *ngIf="filterValueTarget">
-                            <ng-container *ngTemplateOutlet="emptyFilterMessageTargetTemplate"></ng-container>
-                        </li>
-                    </ng-container>
-                </ul>
+                <ul #targetlist class="p-picklist-list p-picklist-target" cdkDropList [cdkDropListData]="target" (cdkDropListDropped)="onDrop($event, TARGET_LIST)" [ngStyle]="targetStyle" role="listbox" aria-multiselectable="multiple">
+                <p-splitter layout="vertical">
+                            <ng-template pTemplate>
+                            <div class="test">
+                                <p-listbox class="test">
+                                <ng-template  ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
+                                    <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
+                                    cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
+                                    (click)="onItemClick($event,item,selectedItemsTarget,onTargetSelect)" (dblclick)="onTargetItemDblClick()"
+                                    (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
+                                    *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='1'" tabindex="0" role="option"
+                                    [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
+                                    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
+                                        </ng-container>
+                                    </li>
+                                </ng-template>
+                                </p-listbox>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate>
+                        <p-listbox>
+                                <ng-template  ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
+                                    <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
+                                    cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
+                                    (click)="onItemClick($event,item,selectedItemsTarget,onTargetSelect)" (dblclick)="onTargetItemDblClick()"
+                                    (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
+                                    *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='2'" tabindex="0" role="option"
+                                    [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
+                                    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
+                                    </ng-container>
+                                    </li>
+                                </ng-template>
+                                </p-listbox>
+                            </ng-template>
+                        </p-splitter>
+                    </ul>
+
+
+
+
             </div>
             <div class="p-picklist-buttons p-picklist-target-controls" *ngIf="showTargetControls">
                 <button type="button" [attr.aria-label]="upButtonAriaLabel" pButton pRipple icon="pi pi-angle-up"  (click)="moveUp(targetlist,target,selectedItemsTarget,onTargetReorder,TARGET_LIST)"></button>

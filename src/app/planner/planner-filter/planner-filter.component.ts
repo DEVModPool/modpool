@@ -3,13 +3,6 @@ import { ActivatedRoute} from "@angular/router";
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import {Subject, switchMap, takeUntil} from "rxjs";
 import { PlannerModuleService } from '../planner-picklist.service';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
 
 interface Department {
     id: string,
@@ -19,27 +12,7 @@ interface Department {
 @Component({
   selector: 'app-planner-filter',
   templateUrl: './planner-filter.component.html',
-  styleUrls: ['./planner-filter.component.scss'],
-  animations: [
-    trigger('extendFilter',[
-        state('open', style({
-            maxHeight: '500px',
-            overflow: 'auto',
-            'border-width': '2px'
-        })),
-        state('closed', style({
-            maxHeight: '0px',
-            overflow: 'hidden',
-            'border-width': '0px'
-        })),
-        transition('open => closed', [
-            animate('0.5s')
-        ]),
-        transition('closed => open', [
-            animate('0.5s')
-        ]),
-    ]),
-  ]
+  styleUrls: ['./planner-filter.component.scss']
 })
 export class PlannerFilterComponent implements OnInit, OnDestroy{
     departments: Department[];
@@ -48,9 +21,16 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
     selectedCreditOptions: any[];
     moduleLevels: any[];
     selectedModuleLevels: any[];
+    code: any[];
     filterOpen: Boolean;
     public paramGroup: QueryParamGroup;
+    public paramGroupSelected: QueryParamGroup;
     private componentDestroyed$ = new Subject<void>();
+    display: boolean = false;
+
+    showDialog() {
+        this.display = true;
+    }
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -64,18 +44,28 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
             credits: qpb.stringParam('credits', {multi:true}),
             department: qpb.stringParam('department', {multi:true})
         });
+        this.paramGroupSelected = qpb.group({
+            code: qpb.stringParam('code', {multi:true})
+        })
     }
 
     ngOnInit(): void {
+        this.paramGroupSelected.setValue({'code':JSON.parse(localStorage.getItem('selectedModuleStorage')).map(r => r.code)})
+        console.log(JSON.parse(localStorage.getItem('selectedModuleStorage')).map(r => r.code));
         this.activatedRoute.data.subscribe(
             response => {
-                this.departments = response.filterData.viewmodel.departments;
                 this.semesters = response.filterData.viewmodel.semesters;
                 this.departments = response.filterData.viewmodel.departments;
                 this.creditOptions = response.filterData.viewmodel.creditOptions;
                 this.moduleLevels = response.filterData.viewmodel.moduleLevels;
+                this.code = response.filterData.viewmodel.codes;
             }
         )
+        this.plannerModuleService.getModules(this.paramGroupSelected.value)
+        .subscribe(response => {
+            this.plannerModuleService.selectedModules.next(response.result);
+        });
+
         this.paramGroup.valueChanges.pipe(
             switchMap(() => this.plannerModuleService.getModules(this.paramGroup.value)),
             takeUntil(this.componentDestroyed$),
@@ -84,20 +74,10 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
         });
         this.filterOpen = false;
     }
+
     public ngOnDestroy(): void {
         this.componentDestroyed$.next();
         this.componentDestroyed$.complete();
-    }
-
-    openfilter() {
-        console.log("hello");
-        let elem = document.getElementById("filterButton");
-        if (this.filterOpen){
-            elem.setAttribute("class", "pi pi-filter");
-        } else {
-            elem.setAttribute("class", "pi pi-filter-slash");
-        }
-        this.filterOpen=(!this.filterOpen);
     }
     getQueryParams() {
 

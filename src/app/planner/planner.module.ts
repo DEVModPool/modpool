@@ -17,6 +17,10 @@ import {CheckboxModule} from "primeng/checkbox";
 import {MultiSelectModule} from "primeng/multiselect";
 import {QueryParamModule} from "@ngqp/core";
 import { FilteredpicklistComponent } from './planner-picklist/filteredpicklist/filteredpicklist.component';
+import {DialogModule} from 'primeng/dialog';
+import {AccordionModule} from 'primeng/accordion';
+import {TooltipModule} from 'primeng/tooltip';
+import {SplitterModule} from 'primeng/splitter';
 
 @NgModule({
     declarations: [
@@ -40,7 +44,11 @@ import { FilteredpicklistComponent } from './planner-picklist/filteredpicklist/f
         ProgressBarModule,
         CheckboxModule,
         MultiSelectModule,
-        QueryParamModule
+        QueryParamModule,
+        DialogModule,
+        AccordionModule,
+        TooltipModule,
+        SplitterModule
     ],
     exports: [
         PickListModule,

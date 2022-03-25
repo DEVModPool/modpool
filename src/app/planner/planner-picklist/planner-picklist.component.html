@@ -1,36 +1,40 @@
 <app-filteredpicklist [source]="plannerModules" [target]="selectedModules" sourceHeader="Available Courses" targetHeader="Selected Courses" [dragdrop]="true"
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name,code,semester"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
-[showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget()" (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"  (onTargetReorder)="sortTarget()">
-<ng-template let-plannerModule pTemplate="item" >
+[showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget()" (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"
+>
+<ng-template let-plannerModule pTemplate="item">
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="topRow gridRow">
                 <div class="module-code">
-                    <h5>{{plannerModule.code}}</h5>
-                </div>
-                <div class="module-name">
-                    <h6>{{ plannerModule.name }}</h6>
+                    <h5><a href="/modules//{{plannerModule.code}}" target="_blank" class="moduleLink">{{plannerModule.code}} - {{ plannerModule.name }}</a></h5>
                 </div>
             </div>
             <div class="middleRow gridRow">
-                <div class="module-semester ">
-                    <p>Semester: {{ plannerModule.semester }}</p>
+                <div class="prerequisiteRow" style="display: flex;">
+                    <span *ngFor="let missing of plannerModule.missing let isLast=last let isFirst=first">
+                        <label class="missingModulesLabel">{{isFirst? 'Missing modules: ' : ''}}</label>
+                        <label (click)="find(missing)" class="moduleLink" pTooltip="Click to find in Available Courses"> {{missing}} {{isLast ? '' : ',  '}}</label>
+                    </span>
                 </div>
-                <div class="infoButton">
-                    <button class="p-button" (click)="expand($event)">+</button>
-                </div>
-            </div>
-            <div class="prerequisiteRow gridRow" style="display: flex;">
-                <p>{{plannerModule.missing}}</p>
-            </div>
-            <div class="hiddenRow gridRow shrink" >
-                <div class="coursework gridRow">
-                    <br>
-                    <p-progressBar id="alpha" [value]="plannerModule.assessment.coursework" [showValue] = false></p-progressBar>
-                    <p id="alpha" style="text-align: left; padding-left: 1%;" class="assessmentText">Coursework - {{ plannerModule.assessment.coursework }}%</p>
-                    <p id="alpha" style="text-align: right; padding-right: 1%;" class="assessmentText">Exam - {{ plannerModule.assessment.exam }} %</p>
-                </div>
-                <p>prerequisite modules: {{plannerModule.prerequisites}}</p>
+                <div>Semester: {{ plannerModule.semester }}</div>
+                <p-accordion styleClass="customAcc --text-500" expandIcon="pi pi-fw pi-chevron-left">
+                    <p-accordionTab header="Prerequisite modules: " >
+                        <div class="hiddenRow" >
+                            <ul *ngFor="let prerequisite of plannerModule.prerequisites">
+                                <li>
+                                    <a href="/modules//{{prerequisite.name}}" target="_blank"  class="moduleLink">{{prerequisite.name}}</a>
+                                </li>
+                            </ul>
+                            <ul *ngIf="plannerModule.prerequisites.length==0">
+                                <li>
+                                    None
+                                </li>
+                            </ul>
+                        </div>
+
+                    </p-accordionTab>
+                </p-accordion>
             </div>
         </div>
 </ng-template>

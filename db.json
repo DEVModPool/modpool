@@ -13,8 +13,7 @@
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Object Oriented Programming"},
-                    {"id": "2", "name": "Algorithms and Data Structures"}
+                    {"id": "1", "name": "COMP 118"}
                 ],
                 "prerequisiteFor": [
                     {"id": "3", "name": "Advanced AI"}
@@ -24,7 +23,7 @@
             },
             {
                 "id": "1234",
-                "name": "Advanced AI",
+                "name": "Principles of computer game design and implementation",
                 "code": "COMP 229",
                 "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
                 "assessment" : {
@@ -32,11 +31,46 @@
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Object Oriented Programming"},
-                    {"id": "2", "name": "Algorithms and Data Structures"}
+                    {"id": "1", "name": "COMP 219"}
                 ],
                 "prerequisiteFor": [
                     {"id": "4", "name": "Robotics"}
+                ],
+                "semester": "2",
+                "missing":[""]
+            },
+            {
+                "id": "142",
+                "name": "Dummy data 1",
+                "code": "COMP 244",
+                "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
+                "assessment" : {
+                    "coursework": "30",
+                    "exam": "70"
+                },
+                "prerequisites": [
+                    {"id": "1", "name": "COMP 288"}
+                ],
+                "prerequisiteFor": [
+                    {"id": "3", "name": "Advanced AI"}
+                ],
+                "semester": "1",
+                "missing":[""]
+            },
+            {
+                "id": "542",
+                "name": "Inro to dummy data",
+                "code": "COMP 288",
+                "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
+                "assessment" : {
+                    "coursework": "30",
+                    "exam": "70"
+                },
+                "prerequisites": [
+                    {"id": "1", "name": "COMP 244"}
+                ],
+                "prerequisiteFor": [
+                    {"id": "3", "name": "Advanced AI"}
                 ],
                 "semester": "2",
                 "missing":[""]
@@ -70,6 +104,10 @@
                     {"id":"3","name": "300"},
                     {"id":"4","name": "400"},
                     {"id":"5","name": "500"}
+                ],
+                "codes": [
+                    {"id":"1","name":"COMP 229"},
+                    {"id":"2","name":"COMP 219"}
                 ]
             }
         }
