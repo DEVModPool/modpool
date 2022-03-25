@@ -31,6 +31,8 @@ import {NewReviewComponent} from "./module-details/new-review/new-review.compone
 import {DialogModule} from "primeng/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {SpeedDialModule} from "primeng/speeddial";
 
 @NgModule({
     declarations: [
@@ -70,7 +72,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
         AuthModule,
         DialogModule,
         ReactiveFormsModule,
-        InputTextareaModule
+        InputTextareaModule,
+        SplitButtonModule,
+        SpeedDialModule
     ]
 })
 export class ModulesModule {
