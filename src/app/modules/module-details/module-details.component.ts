@@ -3,22 +3,22 @@ import { IsActiveMatchOptions } from "@angular/router";
 import { ModuleDetails, StudyHours } from "./module-details.model";
 import { RequisiteModule } from "../module-list/module-item/module-item.model";
 import { AuthService } from "../../auth/auth.service";
-import { LoginModalInterface } from "../../auth/login-modal/login-modal-interface";
 import {GeneralUtil} from "../../util/general.util";
+import {ModulesService} from "../modules.service";
 
 @Component({
     selector: 'app-module-details',
     templateUrl: './module-details.component.html',
     styleUrls: ['module-details.component.scss']
 })
-export class ModuleDetailsComponent extends LoginModalInterface implements OnInit {
-
-    openReview() {
-        console.log("review");
-    }
-
-    displayModal = false;
+export class ModuleDetailsComponent implements OnInit {
     studyHoursPieData: StudyHoursPieData;
+
+    onLeaveReview() {
+        this.authService.isLoggedIn() ?
+            this.moduleService.reviewModalDisplayed.next(true):
+            this.authService.loginModalDisplayed.next(true);
+    }
 
     private processStudyHoursData(studyHours: StudyHours) {
         const newStudyHoursPieData: StudyHoursPieData = new StudyHoursPieData([], []);
@@ -41,8 +41,7 @@ export class ModuleDetailsComponent extends LoginModalInterface implements OnIni
         "reviews"
     ]
 
-    constructor(authService: AuthService) {
-        super(authService);
+    constructor(private authService: AuthService, private moduleService: ModulesService) {
     }
 
     ngOnInit(): void {

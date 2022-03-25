@@ -27,6 +27,10 @@ import {TooltipModule} from "primeng/tooltip";
 import {MessagesModule} from "primeng/messages";
 import {TableModule} from "primeng/table";
 import {AuthModule} from "../auth/auth.module";
+import {NewReviewComponent} from "./module-details/new-review/new-review.component";
+import {DialogModule} from "primeng/dialog";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
     declarations: [
@@ -37,6 +41,10 @@ import {AuthModule} from "../auth/auth.module";
         ModuleDetailsComponent,
         ReviewListComponent,
         ReviewItemComponent,
+        NewReviewComponent
+    ],
+    exports: [
+        NewReviewComponent
     ],
     imports: [
         RouterModule,
@@ -59,7 +67,10 @@ import {AuthModule} from "../auth/auth.module";
         TooltipModule,
         MessagesModule,
         TableModule,
-        AuthModule
+        AuthModule,
+        DialogModule,
+        ReactiveFormsModule,
+        InputTextareaModule
     ]
 })
 export class ModulesModule {

@@ -1,0 +1,87 @@
+<p-dialog
+    [(visible)]="displayModal"
+    [modal]="true"
+    [style]="{width: '50vw'}"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+    [closeOnEscape]="true">
+    <form [formGroup]="newReviewForm" (ngSubmit)="submitReview()">
+        <div class="grid">
+            <div class="col-6 text-center font-semibold">
+                <p class="text-2xl mb-3">Quality</p>
+                <p>
+                    <p-rating [cancel]="false"></p-rating>
+                </p>
+            </div>
+            <div class="col-6 text-center font-semibold">
+                <p class="text-2xl mb-3">Difficulty</p>
+                <p>
+                    <p-rating [cancel]="false"></p-rating>
+                </p>
+            </div>
+            <div class="col-12">
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="p-fluid grid">
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-dropdown
+                        id="coordinator"
+                        optionLabel="name"
+                        [filter]="true"
+                        filterBy="name"
+                        [showClear]="true">
+                        <ng-template pTemplate="selectedItem">
+                            <div class="country-item country-item-value">
+                                <div>String</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-country pTemplate="item">
+                            <div class="country-item">
+                                <div>String</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="coordinator">Coordinator</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-dropdown id="dropdown2"  optionLabel="name" [filter]="true" filterBy="name"
+                                [showClear]="true">
+                        <ng-template pTemplate="selectedItem">
+                            <div class="country-item country-item-value">
+                                <div>String</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-country pTemplate="item">
+                            <div class="country-item">
+                                <div>String</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="dropdown2">Year Taken</label>
+                </span>
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <textarea id="float-input" rows="5" cols="30" pInputTextarea></textarea>
+                    <label for="float-input">Review</label>
+                </span>
+            </div>
+
+        </div>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <div class="mb-2">
+            <button pButton pRipple type="submit" label="Submit" class="w-full" [loading]=loading></button>
+        </div>
+        <div class="mb-2">
+            <button (click)="displayModal = false" pButton pRipple type="submit" label="Cancel" class="w-full p-button-secondary" [loading]=loading></button>
+        </div>
+    </ng-template>
+</p-dialog>

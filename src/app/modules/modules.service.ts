@@ -10,12 +10,16 @@ import {Response} from "../interaction/response";
 })
 export class ModulesService {
     modules = new Subject<ModuleItem[]>();
+    reviewModalDisplayed = new Subject<boolean>();
 
     constructor(private http: HttpClient) {
     }
+
     getModules(moduleFilters?: any) {
         console.log(moduleFilters);
         return this.http.get<Response<ModuleItem[]>>('http://localhost:3000/moduleList',{params: moduleFilters})
     }
+
+
 }
 
