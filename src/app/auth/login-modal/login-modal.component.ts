@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {Message} from "primeng/api";
-import {Subscription} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -11,7 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class LoginModalComponent implements OnInit {
     displayModal = false;
     invalidMessages: Message[];
-    subscription: Subscription;
+    loading = false;
 
     authForm = new FormGroup({
         email: new FormControl(''),
@@ -31,11 +30,11 @@ export class LoginModalComponent implements OnInit {
     }
 
     login(): any {
+        this.loading = true;
         const user = {
             email: this.authForm.controls.email.value,
             password: this.authForm.controls.password.value
         }
-
         this.authService.login(user).subscribe({
             next: () => this.closeModal(),
             error: () => {
@@ -45,16 +44,11 @@ export class LoginModalComponent implements OnInit {
                     detail: 'Wrong username or password.'
                 }]
             }
-        });
+        }).add(() => this.loading = false);
     }
 
     closeModal() {
         this.authService.loginModalDisplayed.next(false);
-    }
-
-    ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.invalidMessages = []
     }
 }

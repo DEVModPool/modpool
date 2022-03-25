@@ -1,4 +1,4 @@
-import {RequisiteModule} from "./module.model";
+import {RequisiteModule} from "../module-list/module-item/module-item.model";
 
 export class ModuleDetails {
     constructor(

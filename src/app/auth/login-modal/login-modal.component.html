@@ -22,8 +22,9 @@
             <div class="flex align-items-center justify-content-between mb-6">
                 <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
             </div>
+            <p-messages [(value)]="invalidMessages" [enableService]="false"></p-messages>
             <div class="mb-2">
-                <button pButton pRipple type="submit" label="Sign In" class="w-full"></button>
+                <button pButton pRipple type="submit" label="Sign In" class="w-full" [loading] = loading></button>
             </div>
             <div class="mt-2">
                 <button
@@ -37,4 +38,6 @@
             </div>
         </div>
     </form>
+    <ng-template pTemplate="footer">
+    </ng-template>
 </p-dialog>

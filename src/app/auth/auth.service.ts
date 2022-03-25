@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Subject, tap} from "rxjs";
 import {Router} from "@angular/router";
@@ -9,7 +9,7 @@ import {AuthUtil} from "../util/auth.util";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
     private autoLogoutTimer;
     autoLogoutMessage: Message[] = [];
 
@@ -20,9 +20,6 @@ export class AuthService implements OnInit {
         private router: Router,
         private jwtHelper: JwtHelperService
     ) {}
-
-    ngOnInit() {
-    }
 
     login(user: LoginRequest) {
         return this.http.post<any>('https://localhost:5001/api/login', user).pipe(
@@ -64,7 +61,6 @@ export class AuthService implements OnInit {
     timeUntilJwtExpiration(token: string) {
         const tokenExpirationTimestamp = this.jwtHelper.getTokenExpirationDate(token).getTime();
         const currentTimeTimestamp = new Date().getTime();
-        console.log(tokenExpirationTimestamp - currentTimeTimestamp);
         return tokenExpirationTimestamp - currentTimeTimestamp;
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IsActiveMatchOptions } from "@angular/router";
-import { ModuleDetails, StudyHours } from "../../interaction/modules/module-details.model";
-import { RequisiteModule } from "../../interaction/modules/module.model";
+import { ModuleDetails, StudyHours } from "./module-details.model";
+import { RequisiteModule } from "../module-list/module-item/module-item.model";
 import { AuthService } from "../../auth/auth.service";
 import { LoginModalInterface } from "../../auth/login-modal/login-modal-interface";
 import {GeneralUtil} from "../../util/general.util";

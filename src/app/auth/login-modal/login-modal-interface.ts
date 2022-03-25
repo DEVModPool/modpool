@@ -3,7 +3,6 @@ import { Injectable, OnInit } from "@angular/core";
 
 @Injectable()
 export class LoginModalInterface implements OnInit {
-
     displayModal: boolean;
 
     constructor(protected authService: AuthService) {
@@ -17,15 +16,16 @@ export class LoginModalInterface implements OnInit {
         )
     }
 
-    showModal() {
+    showLoginModal() {
         this.authService.loginModalDisplayed.next(true);
     }
+
 
     checkLogin(actionCallback) {
         if (this.authService.isLoggedIn()) {
             actionCallback();
         } else {
-            this.showModal();
+            this.showLoginModal();
         }
     }
 }
