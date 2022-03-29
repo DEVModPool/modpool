@@ -169,14 +169,25 @@
             </div>
             <p-divider></p-divider>
             <div class="card">
-                <div class="flex justify-content-center">
+                <div class="flex justify-content-center ">
                     <button
                         pButton
                         type="button"
                         label="Leave a review"
                         icon="pi pi-pencil"
-                        class="p-button-lg"
+                        class="p-button-lg p-button-rounded"
                         (click)="onLeaveReview()"
+                    ></button>
+                </div>
+                <p-divider type="dashed">
+                </p-divider>
+                <div class="flex justify-content-center">
+                    <button
+                        pButton
+                        type="button"
+                        label="Add to planner"
+                        icon="pi pi-calendar-plus"
+                        class="p-button-lg p-button-rounded"
                     ></button>
                 </div>
             </div>
