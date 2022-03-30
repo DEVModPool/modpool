@@ -23,6 +23,7 @@ import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
+import { StaffFilterComponent } from './staff/staff-filter/staff-filter.component';
 
 @NgModule({
     imports: [
@@ -51,7 +52,7 @@ import { StaffModule } from "./staff/staff.module";
         FooterComponent,
         ConfigComponent,
         MenuComponent,
-        MenuItemComponent
+        MenuItemComponent,
     ],
     providers: [
         ConfigService,

@@ -143,6 +143,30 @@
         "hasErrors": false,
         "errors": null,
         "result": {
+            "viewmodel": {
+                "departments": [
+                    {
+                        "id": "1",
+                        "name": "Computer Science"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Biological Sciences"
+                    },
+                    {
+                        "id": "3",
+                        "name": "Biostatistics"
+                    },
+                    {
+                        "id": "4",
+                        "name": "Dentistry"
+                    },
+                    {
+                        "id": "5",
+                        "name": "Physics"
+                    }
+                ]
+            },
             "staffList": [
                 {
                     "name": "Phil Morrison",

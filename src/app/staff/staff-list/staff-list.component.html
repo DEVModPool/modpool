@@ -1,88 +1,67 @@
-<p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
-         [rowHover]="true"
-         [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
-         responsiveLayout="scroll"
-         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-         [filterDelay]="0" [globalFilterFields]="['name','country.name','representative.name','status']">
-    <ng-template pTemplate="caption">
-        <div class="table-header">
-            Search Staff
-            <span style="margin-left:5px" class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                       placeholder="Staff Name"/>
-            </span>
-            <!--            HOLY SHIT I WASTED 1 HOUR ON THIS AND I CANT FUCKING ALIGN IT-->
-            <span style="margin-left: 5px; padding-top:10px;">
-                <p-multiSelect
-                    [options]="departments"
-                    defaultLabel="Add department filter..."
-                    optionLabel="name"
-                    selectedItemsLabel="{0} items selected"
-                    optionValue="id"
-                >
-                </p-multiSelect>
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th></th>
-            <th>
-                <div
-                    class="flex justify-content-between align-items-center"
-                    style="max-width: 100px;"
-                >
-                    Name
-                </div>
-            </th>
-            <th>
-                <div class="flex justify-content-between align-items-center">
-                    Department
-                </div>
-            </th>
-            <th pSortableColumn="balance">
-                <div
-                    class="flex justify-content-between align-items-center"
-                    style="max-width:100px"
-                    (click)="sort()">
-                    Rating
-                    <p-sortIcon field="balance"></p-sortIcon>
-                </div>
-            </th>
-            <th style="width: 20rem"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-staff>
-        <tr class="p-selectable-row">
-            <td></td>
-            <td>
-                <span class="p-column-title">Name</span>
-                {{staff.name}}
-            </td>
-            <td>
-                <span class="p-column-title">Department</span>
-                {{staff.department}}
-            </td>
-            <td>
-                <span class="p-column-title">Rating</span>
-                <h5 style="font-weight: bold; margin: 0;" class="text-900">
-                    <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
-                    {{staff.rating}}
-                    <span
-                        class="text-blue-300 text-base">
+<div class="card">
+    <p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
+             [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+             responsiveLayout="scroll"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['name','country.name','representative.name','status']">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="col-1"></th>
+                <th class="col-3">
+                    <div
+                        class="flex justify-content-between align-items-center"
+                        style="max-width: 100px;">
+                        Name
+                    </div>
+                </th>
+                <th class="col-3">
+                    <div class="flex justify-content-between align-items-center">
+                        Department
+                    </div>
+                </th>
+                <th pSortableColumn="balance" class="col-2">
+                    <div
+                        class="flex justify-content-between align-items-center"
+                        style="text-align:center"
+                        (click)="sort()">
+                        Rating
+                        <p-sortIcon field="balance"></p-sortIcon>
+                    </div>
+                </th>
+                <th class="col-2"></th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-staff>
+            <tr class="p-selectable-row">
+                <td></td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{staff.name}}
+                </td>
+                <td>
+                    <span class="p-column-title">Department</span>
+                    {{staff.department}}
+                </td>
+                <td>
+                    <span class="p-column-title">Rating</span>
+                    <h5 style="font-weight: bold; margin: 0; text-align: center" class="text-900">
+                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
+                        {{staff.rating}}
+                        <span
+                            class="text-blue-300 text-base">
                         /5
                     </span>
-                </h5>
-            </td>
+                    </h5>
+                </td>
 
-            <td>
-                <button
-                    pButton
-                    type="button"
-                    label="Details"
-                    class="p-button"
-                ></button>
-            </td>
-    </ng-template>
-</p-table>
+                <td style=" text-align:center; width: 20%; min-width: 10rem;">
+                    <button routerLink="" pButton pRipple label="Details"
+                            class="p-button-primary mr-2"></button>
+                </td>
+
+        </ng-template>
+    </p-table>
+</div>

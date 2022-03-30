@@ -5,16 +5,21 @@ import { TableModule } from "primeng/table";
 import { InputTextModule } from "primeng/inputtext";
 import { MultiSelectModule } from "primeng/multiselect";
 import { QueryParamModule } from "@ngqp/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DropdownModule } from "primeng/dropdown";
 import { SliderModule } from "primeng/slider";
 import { ProgressBarModule } from "primeng/progressbar";
 import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
+import { RippleModule } from "primeng/ripple";
+import { StaffFilterComponent } from "./staff-filter/staff-filter.component";
+import { StaffComponent } from "./staff.component";
 
 @NgModule({
     declarations: [
-        StaffListComponent
+        StaffListComponent,
+        StaffFilterComponent,
+        StaffComponent
     ],
     imports: [
         StaffRoutingModule,
@@ -27,7 +32,9 @@ import { CommonModule } from "@angular/common";
         ProgressBarModule,
         ButtonModule,
         CommonModule,
-        QueryParamModule
+        QueryParamModule,
+        RippleModule,
+        ReactiveFormsModule,
     ],
 })
 export class StaffModule {

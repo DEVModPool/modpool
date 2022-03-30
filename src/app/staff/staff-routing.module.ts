@@ -1,14 +1,13 @@
 import { environment } from "../../environments/environment";
 import { NgModule } from "@angular/core";
-import { ModulesComponent } from "../modules/modules.component";
 import { RouterModule, Routes } from "@angular/router";
 import { BaseResolver } from "../interaction/base-resolver";
-import { StaffListComponent } from "./staff-list/staff-list.component";
+import { StaffComponent } from "./staff.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: StaffListComponent,
+        component: StaffComponent,
         resolve: {data: BaseResolver},
         data: {url: environment.baseUrl + environment.staffList}
     }
