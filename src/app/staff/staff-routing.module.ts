@@ -9,8 +9,8 @@ const routes: Routes = [
     {
         path: '',
         component: StaffListComponent,
-        // resolve: { filterData: BaseResolver },
-        // data: {url: environment.baseUrl + environment.staffUrl}
+        resolve: {data: BaseResolver},
+        data: {url: environment.baseUrl + environment.staffList}
     }
 ]
 

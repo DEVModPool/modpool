@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-staff-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StaffListComponent implements OnInit {
 
+    sortRating: string = 'N';
 
     departments = [
         {id: 1, name: 'Computer Science'},
@@ -13,17 +15,22 @@ export class StaffListComponent implements OnInit {
         {id: 3, name: 'Chemistry'},
         {id: 4, name: 'Life Sciences'},
     ]
-    staff: any[];
 
-    constructor() {
+    staffList: any[];
+
+    constructor(private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.staff = [
-            {name: "Amy Elsner", department: 'Computer Science', isTeaching: true, rating: 4.1},
-            {name: "Amy Elsner", department: 'Computer Science', isTeaching: true, rating: 3.1},
-            {name: "Amy Elsner", department: 'Computer Science', isTeaching: true, rating: 5},
-            {name: "Amy Elsner", department: 'Computer Science', isTeaching: true, rating: 2.1},
-        ];
+
+        this.activatedRoute.data.subscribe(
+            response => {
+                this.staffList = response.data.staffList;
+            }
+        )
+    }
+
+    sort() {
+        this.sortRating = "D";
     }
 }

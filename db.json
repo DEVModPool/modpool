@@ -8,16 +8,25 @@
                 "name": "Intro to data science",
                 "code": "COMP 219",
                 "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
-                "assessment" : {
+                "assessment": {
                     "coursework": "30",
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Object Oriented Programming"},
-                    {"id": "2", "name": "Algorithms and Data Structures"}
+                    {
+                        "id": "1",
+                        "name": "Object Oriented Programming"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Algorithms and Data Structures"
+                    }
                 ],
                 "prerequisiteFor": [
-                    {"id": "3", "name": "Advanced AI"}
+                    {
+                        "id": "3",
+                        "name": "Advanced AI"
+                    }
                 ]
             },
             {
@@ -25,16 +34,25 @@
                 "name": "Advanced AI",
                 "code": "COMP 229",
                 "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
-                "assessment" : {
+                "assessment": {
                     "coursework": "30",
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Object Oriented Programming"},
-                    {"id": "2", "name": "Algorithms and Data Structures"}
+                    {
+                        "id": "1",
+                        "name": "Object Oriented Programming"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Algorithms and Data Structures"
+                    }
                 ],
                 "prerequisiteFor": [
-                    {"id": "4", "name": "Robotics"}
+                    {
+                        "id": "4",
+                        "name": "Robotics"
+                    }
                 ]
             }
         ]
@@ -45,27 +63,72 @@
         "result": {
             "viewmodel": {
                 "departments": [
-                    {"id": "1", "name": "Computer Science"},
-                    {"id": "2", "name": "School of Biological Sciences"},
-                    {"id": "3", "name": "Population, Community and Behavioural Sciences"},
-                    {"id": "4", "name": "Mechanical, Materials and Aerospace Engineering"}
+                    {
+                        "id": "1",
+                        "name": "Computer Science"
+                    },
+                    {
+                        "id": "2",
+                        "name": "School of Biological Sciences"
+                    },
+                    {
+                        "id": "3",
+                        "name": "Population, Community and Behavioural Sciences"
+                    },
+                    {
+                        "id": "4",
+                        "name": "Mechanical, Materials and Aerospace Engineering"
+                    }
                 ],
                 "semesters": [
-                    {"id":"1", "name":"Semester 1"},
-                    {"id": "2","name":"Semester 2"}
+                    {
+                        "id": "1",
+                        "name": "Semester 1"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Semester 2"
+                    }
                 ],
                 "creditOptions": [
-                    {"id":"1","name": "7.5"},
-                    {"id":"2","name": "15"},
-                    {"id":"3","name": "30"},
-                    {"id":"4","name": "60"}
+                    {
+                        "id": "1",
+                        "name": "7.5"
+                    },
+                    {
+                        "id": "2",
+                        "name": "15"
+                    },
+                    {
+                        "id": "3",
+                        "name": "30"
+                    },
+                    {
+                        "id": "4",
+                        "name": "60"
+                    }
                 ],
                 "moduleLevels": [
-                    {"id":"1","name": "100"},
-                    {"id":"2","name": "200"},
-                    {"id":"3","name": "300"},
-                    {"id":"4","name": "400"},
-                    {"id":"5","name": "500"}
+                    {
+                        "id": "1",
+                        "name": "100"
+                    },
+                    {
+                        "id": "2",
+                        "name": "200"
+                    },
+                    {
+                        "id": "3",
+                        "name": "300"
+                    },
+                    {
+                        "id": "4",
+                        "name": "400"
+                    },
+                    {
+                        "id": "5",
+                        "name": "500"
+                    }
                 ]
             }
         }
@@ -76,11 +139,32 @@
         "result": {
         }
     },
-    "staff": {
+    "staffList": {
         "hasErrors": false,
         "errors": null,
         "result": {
-
+            "staffList": [
+                {
+                    "name": "Phil Morrison",
+                    "department": "Computer Science",
+                    "rating": 4
+                },
+                {
+                    "name": "John Farnley",
+                    "department": "Computer Science",
+                    "rating": 5
+                },
+                {
+                    "name": "Floriana Grasso",
+                    "department": "Computer Science",
+                    "rating": 3.8
+                },
+                {
+                    "name": "Sebastian Coope",
+                    "department": "Computer Science",
+                    "rating": 1.1
+                }
+            ]
         }
     }
 }

@@ -1,4 +1,4 @@
-<p-table #dt [value]="staff" dataKey="id" styleClass="p-datatable-customers"
+<p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
          [rowHover]="true"
          [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
          responsiveLayout="scroll"
@@ -41,20 +41,13 @@
                     Department
                 </div>
             </th>
-            <th>
-                <div class="flex justify-content-between align-items-center">
-                    Is teaching
-                </div>
-            </th>
             <th pSortableColumn="balance">
                 <div
                     class="flex justify-content-between align-items-center"
                     style="max-width:100px"
-                >
+                    (click)="sort()">
                     Rating
                     <p-sortIcon field="balance"></p-sortIcon>
-                    <!--                    <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"-->
-                    <!--                                    class="ml-auto"></p-columnFilter>-->
                 </div>
             </th>
             <th style="width: 20rem"></th>
@@ -70,10 +63,6 @@
             <td>
                 <span class="p-column-title">Department</span>
                 {{staff.department}}
-            </td>
-            <td>
-                <span class="p-column-title">Is teaching</span>
-                {{staff.isTeaching}}
             </td>
             <td>
                 <span class="p-column-title">Rating</span>
