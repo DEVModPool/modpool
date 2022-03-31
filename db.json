@@ -169,26 +169,38 @@
             },
             "staffList": [
                 {
+                    "id": 1,
                     "name": "Phil Morrison",
                     "department": "Computer Science",
                     "rating": 4
                 },
                 {
+                    "id": 2,
                     "name": "John Farnley",
                     "department": "Computer Science",
                     "rating": 5
                 },
                 {
+                    "id": 3,
                     "name": "Floriana Grasso",
                     "department": "Computer Science",
                     "rating": 3.8
                 },
                 {
+                    "id": 4,
                     "name": "Sebastian Coope",
                     "department": "Computer Science",
                     "rating": 1.1
                 }
             ]
+        }
+    },
+    "staffDetails": {
+        "hasErrors": false,
+        "errors": null,
+        "result": {
+            "id": 1,
+            "name": "Phil Morrison"
         }
     }
 }

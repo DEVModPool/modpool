@@ -24,6 +24,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
 import { StaffFilterComponent } from './staff/staff-filter/staff-filter.component';
+import { StaffDetailsComponent } from './staff/staff-details/staff-details.component';
 
 @NgModule({
     imports: [

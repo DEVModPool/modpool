@@ -7,7 +7,8 @@ export const environment = {
     baseUrl: 'http://localhost:3000/',
     modulesUrl: 'modulesViewModel/',
     moduleDetails: 'moduleDetails/',
-    staffList: 'staffList/'
+    staffList: 'staffList/',
+    staffDetails: 'staffDetails/'
 };
 
 /*

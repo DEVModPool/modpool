@@ -14,12 +14,15 @@ import { CommonModule } from "@angular/common";
 import { RippleModule } from "primeng/ripple";
 import { StaffFilterComponent } from "./staff-filter/staff-filter.component";
 import { StaffComponent } from "./staff.component";
+import { StaffDetailsComponent } from "./staff-details/staff-details.component";
+import { DividerModule } from "primeng/divider";
 
 @NgModule({
     declarations: [
         StaffListComponent,
         StaffFilterComponent,
-        StaffComponent
+        StaffComponent,
+        StaffDetailsComponent,
     ],
     imports: [
         StaffRoutingModule,
@@ -35,6 +38,7 @@ import { StaffComponent } from "./staff.component";
         QueryParamModule,
         RippleModule,
         ReactiveFormsModule,
+        DividerModule,
     ],
 })
 export class StaffModule {
