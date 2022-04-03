@@ -31,8 +31,13 @@
                         </div>
 
                         <p-messages [(value)]="invalidMessages" [enableService]="false"></p-messages>
+                        <div class="mb-3">
+                            <button type="submit" pButton pRipple label="Sign In" class="w-full p-3 text-xl" [loading] = loading></button>
+                        </div>
+                        <div>
+                            <button [routerLink]="['../modules']" type="button" pButton pRipple label="Continue without sign in" class="w-full p-3 text-xl p-button-secondary"></button>
+                        </div>
 
-                        <button type="submit" pButton pRipple label="Sign In" class="w-full p-3 text-xl"></button>
                         <div class="text-center mt-5">
                         <span class="text-600 font-medium">
                             You don't have an account yet?

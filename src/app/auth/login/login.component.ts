@@ -13,8 +13,7 @@ import {Message} from "primeng/api";
 })
 export class LoginComponent {
     invalidMessages: Message[];
-    subscription: Subscription;
-
+    loading = false;
     authForm = new FormGroup({
         email: new FormControl(''),
         password: new FormControl('')
@@ -31,6 +30,7 @@ export class LoginComponent {
     }
 
     login(): any {
+        this.loading = true;
         const user = {
             email: this.authForm.controls.email.value,
             password: this.authForm.controls.password.value
@@ -45,12 +45,6 @@ export class LoginComponent {
                     detail: 'Wrong username or password.'
                 }]
             }
-        });
-    }
-
-    ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        }).add(() => this.loading = false);
     }
 }

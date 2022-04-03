@@ -2,7 +2,7 @@ export class RequisiteModule {
     constructor(public id: string, public name: string) {}
 }
 
-export class Module {
+export class ModuleItem {
     constructor(
         public id: string,
         public name: string,

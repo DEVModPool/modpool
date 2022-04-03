@@ -21,12 +21,19 @@ import { ChartModule } from "primeng/chart";
 import { AccordionModule } from "primeng/accordion";
 import { ReviewListComponent } from './module-details/review-list/review-list.component';
 import { ReviewItemComponent } from './module-details/review-list/review-item/review-item.component';
-import { RatingModule } from "primeng/rating";
-import { ScrollPanelModule } from "primeng/scrollpanel";
-import { TooltipModule } from "primeng/tooltip";
-import { MessagesModule } from "primeng/messages";
-import { TableModule } from "primeng/table";
-import { AuthModule } from "../auth/auth.module";
+
+import {RatingModule} from "primeng/rating";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {TooltipModule} from "primeng/tooltip";
+import {MessagesModule} from "primeng/messages";
+import {TableModule} from "primeng/table";
+import {AuthModule} from "../auth/auth.module";
+import {NewReviewComponent} from "./module-details/new-review/new-review.component";
+import {DialogModule} from "primeng/dialog";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {SpeedDialModule} from "primeng/speeddial";
 
 @NgModule({
     declarations: [
@@ -37,6 +44,10 @@ import { AuthModule } from "../auth/auth.module";
         ModuleDetailsComponent,
         ReviewListComponent,
         ReviewItemComponent,
+        NewReviewComponent
+    ],
+    exports: [
+        NewReviewComponent
     ],
     exports: [
         ReviewListComponent
@@ -62,7 +73,12 @@ import { AuthModule } from "../auth/auth.module";
         TooltipModule,
         MessagesModule,
         TableModule,
-        AuthModule
+        AuthModule,
+        DialogModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        SplitButtonModule,
+        SpeedDialModule
     ]
 })
 export class ModulesModule {

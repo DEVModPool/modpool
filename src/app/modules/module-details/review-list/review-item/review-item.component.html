@@ -42,7 +42,7 @@
                 pTooltip="Upvote"
                 class="col-2 text-center hover:text-green-500 hover-underline-animation-green"
                 style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="checkLogin(upvote)">
+                <a style="color: unset; cursor: pointer" (click)="onDownvote()">
                     <i class="pi pi-thumbs-up" style="font-size: 1.5rem"></i> 6
                 </a>
             </span>
@@ -50,7 +50,7 @@
             pTooltip="Downvote"
             class="col-2 text-center hover:text-pink-500 hover-underline-animation-pink"
             style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="checkLogin(downvote)">
+                <a style="color: unset; cursor: pointer" (click)="onUpvote()">
                     <i class="pi pi-thumbs-down" style="font-size: 1.5rem"></i> 3
                 </a>
             </span>

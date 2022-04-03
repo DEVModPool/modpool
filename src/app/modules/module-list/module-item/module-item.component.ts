@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Module} from "../../../interaction/modules/module.model";
+import {ModuleItem} from "./module-item.model";
 
 
 @Component({
@@ -8,7 +8,13 @@ import {Module} from "../../../interaction/modules/module.model";
     styleUrls: ['module-item.component.scss']
 })
 export class ModuleItemComponent implements OnInit {
-    @Input() module: Module;
+    @Input() module: ModuleItem;
+
+    items = [
+        {label: 'Add to plan 1', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+        {label: 'Add to plan 2', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+        {label: 'Add to plan 3', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+    ];
 
     constructor() {
     }
