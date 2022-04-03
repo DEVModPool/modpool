@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
     selector: 'app-staff-details',
@@ -9,7 +9,7 @@ export class StaffDetailsComponent implements OnInit {
 
     public lecturer: any;
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -18,6 +18,10 @@ export class StaffDetailsComponent implements OnInit {
                 this.lecturer = response.staffDetails;
             }
         )
+    }
+
+    reroute(url): void {
+        this.router.navigate([url]);
     }
 
 }

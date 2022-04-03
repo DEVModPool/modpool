@@ -38,6 +38,9 @@ import { AuthModule } from "../auth/auth.module";
         ReviewListComponent,
         ReviewItemComponent,
     ],
+    exports: [
+        ReviewListComponent
+    ],
     imports: [
         RouterModule,
         CommonModule,

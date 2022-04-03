@@ -200,7 +200,30 @@
         "errors": null,
         "result": {
             "id": 1,
-            "name": "Phil Morrison"
+            "name": "Ekaterina Balabanova",
+            "description": "Dr Ekaterina (Katia) Balabanova is Professor of Politics and Media whose work focuses on human rights and the media. Research interests include public and policy debates on migration and refugees, human rights campaigning and communication of human rights issues by business, government and non-government organisations. Her work connects ethics and framing in the media with policy and practice through a variety of methods with a focus on mainstream and social media.\n\nKatia is Co-investigator on the UKRI AHRC-funded COVID-19 project COVID-19 CARE: Culture and the Arts, from Restriction to Enhancement: Protecting Mental Health in the Liverpool City Region. The project assesses the impact on mental health of restricted access to arts and culture, and explores communication strategies in the arts and cultural sector relating to the COVID-19 pandemic, as well as the success of these in making the arts accessible during lockdown.\n\nOther projects include a cross-country comparative analysis of press and social media coverage of migration in Europe which aims to test assumptions about media’s role in the rise of populism and threats to liberal norms (non-discrimination, anti-racism, legal obligations towards refugees). This will form a book-length study to be published in the Routledge Studies in Media, Communication and Politics series in 2022. Another project examines the backlash on social media over working conditions and environmental costs in fashion industry, looking at conversations between businesses and consumers on Twitter.",
+            "rating": 3.1,
+            "reviewCount": 54,
+            "modules": {
+                "rating": 3.8,
+                "currentlyTeaching": {
+                    "name": "MED123 - Media",
+                    "rating": 4.2,
+                    "url": "/modules/123"
+                },
+                "previousModules": [
+                    {
+                        "name": "MED233 - Communication",
+                        "rating": 3.2,
+                        "url": "/modules/123"
+                    },
+                    {
+                        "name": "MED235 - Advanced Communication",
+                        "rating": 4.0,
+                        "url": "/modules/123"
+                    }
+                ]
+            }
         }
     }
 }
