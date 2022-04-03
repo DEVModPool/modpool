@@ -1,0 +1,67 @@
+<div class="card">
+    <p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
+             [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+             responsiveLayout="scroll"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['name','country.name','representative.name','status']">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="col-1"></th>
+                <th class="col-3">
+                    <div
+                        class="flex justify-content-between align-items-center"
+                        style="max-width: 100px;">
+                        Name
+                    </div>
+                </th>
+                <th class="col-3">
+                    <div class="flex justify-content-between align-items-center">
+                        Department
+                    </div>
+                </th>
+                <th pSortableColumn="balance" class="col-2">
+                    <div
+                        class="flex justify-content-between align-items-center"
+                        style="text-align:center"
+                        (click)="sort()">
+                        Rating
+                        <p-sortIcon field="balance"></p-sortIcon>
+                    </div>
+                </th>
+                <th class="col-2"></th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-staff>
+            <tr class="p-selectable-row">
+                <td></td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{staff.name}}
+                </td>
+                <td>
+                    <span class="p-column-title">Department</span>
+                    {{staff.department}}
+                </td>
+                <td>
+                    <span class="p-column-title">Rating</span>
+                    <h5 style="font-weight: bold; margin: 0; text-align: center" class="text-900">
+                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
+                        {{staff.rating}}
+                        <span
+                            class="text-blue-300 text-base">
+                        /5
+                    </span>
+                    </h5>
+                </td>
+
+                <td style=" text-align:center; width: 20%; min-width: 10rem;">
+                    <button [routerLink]="staff.id" pButton pRipple label="Details"
+                            class="p-button-primary mr-2"></button>
+                </td>
+
+        </ng-template>
+    </p-table>
+</div>
