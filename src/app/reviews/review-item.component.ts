@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../auth/auth.service";
+import { Injectable, OnInit } from '@angular/core';
+import { AuthService } from "../auth/auth.service";
 
-@Component({
-    selector: 'app-review-item',
-    templateUrl: './review-item.component.html',
-    styleUrls: ['./review-item.component.scss']
-})
+@Injectable()
 export class ReviewItemComponent implements OnInit {
     quality = 3;
     difficulty = 4;

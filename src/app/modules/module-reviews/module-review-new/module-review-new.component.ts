@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
-import { ReviewNewComponent } from "../../../reviews/review-new/review-new.component";
+import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { ModuleReviewsService } from "../module-reviews.service";
 
 @Component({

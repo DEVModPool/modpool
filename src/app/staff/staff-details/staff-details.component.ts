@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { StaffReviewsService } from "../reviews/staff-reviews.service";
+import { StaffReviewsService } from "../staff-reviews/staff-reviews.service";
 
 @Component({
     selector: 'app-staff-details',

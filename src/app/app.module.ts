@@ -23,10 +23,6 @@ import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
-import { StaffFilterComponent } from './staff/staff-filter/staff-filter.component';
-import { StaffDetailsComponent } from './staff/staff-details/staff-details.component';
-import { ReviewItemComponent } from './reviews/review-item/review-item.component';
-import { ReviewsModule } from "./reviews/reviews.module";
 
 @NgModule({
     imports: [
@@ -40,7 +36,6 @@ import { ReviewsModule } from "./reviews/reviews.module";
         PlannerModule,
         StaffModule,
         QueryParamModule,
-        ReviewsModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter: AuthUtil.tokenGetter,

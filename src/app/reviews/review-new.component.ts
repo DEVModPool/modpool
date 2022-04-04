@@ -1,6 +1,6 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
-import { ReviewsService } from "../reviews.service";
+import { Injectable, OnInit } from '@angular/core';
+import { FormGroup } from "@angular/forms";
+import { ReviewsService } from "./reviews.service";
 
 @Injectable()
 export abstract class ReviewNewComponent implements OnInit {

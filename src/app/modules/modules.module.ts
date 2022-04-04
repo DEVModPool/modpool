@@ -31,8 +31,9 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { SpeedDialModule } from "primeng/speeddial";
-import { ModuleReviewNewComponent } from "./reviews/module-review-new/module-review-new.component";
-import { ReviewsModule } from "../reviews/reviews.module";
+import { ModuleReviewNewComponent } from "./module-reviews/module-review-new/module-review-new.component";
+import { ModuleReviewListComponent } from "./module-reviews/module-review-list/module-review-list.component";
+import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/module-review-item.component";
 
 @NgModule({
     declarations: [
@@ -41,7 +42,9 @@ import { ReviewsModule } from "../reviews/reviews.module";
         ModuleListComponent,
         ModuleFilterComponent,
         ModuleDetailsComponent,
-        ModuleReviewNewComponent
+        ModuleReviewNewComponent,
+        ModuleReviewListComponent,
+        ModuleReviewItemComponent
     ],
     imports: [
         RouterModule,
@@ -70,7 +73,6 @@ import { ReviewsModule } from "../reviews/reviews.module";
         InputTextareaModule,
         SplitButtonModule,
         SpeedDialModule,
-        ReviewsModule,
     ]
 })
 export class ModulesModule {
