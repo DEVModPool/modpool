@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ModulesService } from "../../modules/modules.service";
+import { ReviewsService } from "../../reviews/reviews.service";
 
 @Component({
     selector: 'app-staff-details',
@@ -12,7 +13,7 @@ export class StaffDetailsComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
-                private modulesService: ModulesService) {
+                private reviewsService: ReviewsService) {
     }
 
     ngOnInit(): void {
@@ -28,6 +29,6 @@ export class StaffDetailsComponent implements OnInit {
     }
 
     onLeaveReview() {
-        this.modulesService.reviewModalDisplayed.next(true);
+        this.reviewsService.displayReviewModal();
     }
 }

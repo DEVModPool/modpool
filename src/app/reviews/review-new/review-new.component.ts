@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { ModulesService } from "../../modules/modules.service";
+import { ReviewsService } from "../reviews.service";
 
 @Component({
     selector: 'app-review-new',
@@ -13,11 +14,11 @@ export class ReviewNewComponent implements OnInit {
 
     loading = false;
 
-    constructor(private moduleService: ModulesService) {
+    constructor(private reviewsService: ReviewsService) {
     }
 
     ngOnInit(): void {
-        this.moduleService.reviewModalDisplayed.subscribe(value => {
+        this.reviewsService.getReviewModalSubject().subscribe(value => {
             this.displayModal = value;
         })
     }

@@ -5,6 +5,7 @@ import { RequisiteModule } from "../module-list/module-item/module-item.model";
 import { AuthService } from "../../auth/auth.service";
 import { GeneralUtil } from "../../util/general.util";
 import { ModulesService } from "../modules.service";
+import { ReviewsService } from "../../reviews/reviews.service";
 
 @Component({
     selector: 'app-module-details',
@@ -15,9 +16,7 @@ export class ModuleDetailsComponent implements OnInit {
     studyHoursPieData: StudyHoursPieData;
 
     onLeaveReview() {
-        this.authService.isLoggedIn() ?
-            this.moduleService.reviewModalDisplayed.next(true) :
-            this.authService.loginModalDisplayed.next(true);
+        this.reviewsService.displayReviewModal();
     }
 
     private processStudyHoursData(studyHours: StudyHours) {
@@ -41,7 +40,9 @@ export class ModuleDetailsComponent implements OnInit {
         "reviews"
     ]
 
-    constructor(private authService: AuthService, private moduleService: ModulesService) {
+    constructor(
+        private authService: AuthService,
+        private reviewsService: ReviewsService) {
     }
 
     ngOnInit(): void {
