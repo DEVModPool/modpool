@@ -1,23 +1,17 @@
 <div class="card grid">
     <div class="col-6">
         <p class="flex text-xl font-medium">
-            Quality: &nbsp;
+            Overall Teaching Quality: &nbsp;
             <p-rating [ngModel]="quality" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
-    <div class="col-6">
-        <p class="flex text-xl font-medium">
-            Difficulty: &nbsp;
-            <p-rating [ngModel]="difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
-        </p>
-    </div>
+
     <div class="col-12 text-900">
-        <p>Coordinator:
+        <p>Module:
             <a [routerLink]="[]">
-                <span class="hover:text-primary hover-underline-animation font-bold">Rasmus Ibsen Jensen Coope</span>
+                <span class="hover:text-primary hover-underline-animation font-bold">MED123 - Media</span>
             </a>
         </p>
-        <p>Taken: <span class="font-bold">21/22</span></p>
     </div>
     <div class="col-12">
         <p-divider></p-divider>
