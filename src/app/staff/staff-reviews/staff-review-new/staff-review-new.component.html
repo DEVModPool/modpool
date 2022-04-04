@@ -50,8 +50,12 @@
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <p-dropdown id="dropdown2" optionLabel="name" [filter]="true" filterBy="name"
-                                [showClear]="true">
+                    <p-dropdown
+                        id="dropdown2"
+                        optionLabel="name"
+                        [filter]="true"
+                        filterBy="name"
+                        [showClear]="true">
                         <ng-template pTemplate="selectedItem">
                             <div class="country-item country-item-value">
                                 <div>String</div>
@@ -73,7 +77,6 @@
                     <label for="float-input">Review</label>
                 </span>
             </div>
-
         </div>
 
     </form>
