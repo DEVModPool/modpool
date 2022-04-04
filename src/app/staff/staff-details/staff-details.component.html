@@ -118,7 +118,21 @@
         </div>
     </div>
     <div class="col-12">
+        <button
+            pButton
+            pRipple
+            style="float:left"
+            (click)="onLeaveReview()">
+            Leave a Review
+        </button>
+        <br>
+        <br>
+    </div>
+    <div class="col-12">
         <br>
         <app-review-list></app-review-list>
     </div>
 </div>
+
+<app-login-modal></app-login-modal>
+<app-new-review></app-new-review>

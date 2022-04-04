@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { ModulesService } from "../../modules/modules.service";
 
 @Component({
     selector: 'app-staff-details',
@@ -9,7 +10,9 @@ export class StaffDetailsComponent implements OnInit {
 
     public lecturer: any;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+    constructor(private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private modulesService: ModulesService) {
     }
 
     ngOnInit(): void {
@@ -24,4 +27,7 @@ export class StaffDetailsComponent implements OnInit {
         this.router.navigate([url]);
     }
 
+    onLeaveReview() {
+        this.modulesService.reviewModalDisplayed.next(true);
+    }
 }

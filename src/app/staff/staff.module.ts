@@ -17,6 +17,7 @@ import { StaffComponent } from "./staff.component";
 import { StaffDetailsComponent } from "./staff-details/staff-details.component";
 import { DividerModule } from "primeng/divider";
 import { ModulesModule } from "../modules/modules.module";
+import { AuthModule } from "../auth/auth.module";
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { ModulesModule } from "../modules/modules.module";
         ReactiveFormsModule,
         DividerModule,
         ModulesModule,
+        AuthModule,
     ],
 })
 export class StaffModule {
