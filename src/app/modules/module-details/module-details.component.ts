@@ -6,6 +6,7 @@ import { AuthService } from "../../auth/auth.service";
 import { GeneralUtil } from "../../util/general.util";
 import { ModulesService } from "../modules.service";
 import { ReviewsService } from "../../reviews/reviews.service";
+import { ModuleReviewsService } from "../reviews/module-reviews.service";
 
 @Component({
     selector: 'app-module-details',
@@ -42,7 +43,7 @@ export class ModuleDetailsComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private reviewsService: ReviewsService) {
+        private reviewsService: ModuleReviewsService) {
     }
 
     ngOnInit(): void {

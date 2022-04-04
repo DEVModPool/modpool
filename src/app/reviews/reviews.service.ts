@@ -8,7 +8,7 @@ import { AuthService } from "../auth/auth.service";
 export class ReviewsService {
     private reviewModalDisplayed = new Subject<boolean>();
 
-    constructor(private authService: AuthService) {
+    protected constructor(private authService: AuthService) {
     }
 
     public displayReviewModal() {

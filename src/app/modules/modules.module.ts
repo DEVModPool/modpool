@@ -31,6 +31,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { SpeedDialModule } from "primeng/speeddial";
+import { ModuleReviewNewComponent } from "./reviews/module-review-new/module-review-new.component";
 import { ReviewsModule } from "../reviews/reviews.module";
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ReviewsModule } from "../reviews/reviews.module";
         ModulesComponent,
         ModuleListComponent,
         ModuleFilterComponent,
-        ModuleDetailsComponent
+        ModuleDetailsComponent,
+        ModuleReviewNewComponent
     ],
     imports: [
         RouterModule,
@@ -68,7 +70,7 @@ import { ReviewsModule } from "../reviews/reviews.module";
         InputTextareaModule,
         SplitButtonModule,
         SpeedDialModule,
-        ReviewsModule
+        ReviewsModule,
     ]
 })
 export class ModulesModule {

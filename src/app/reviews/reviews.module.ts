@@ -9,7 +9,6 @@ import { ButtonModule } from "primeng/button";
 import { SharedModule } from "primeng/api";
 import { TooltipModule } from "primeng/tooltip";
 import { ReviewListComponent } from "./review-list/review-list.component";
-import { ReviewNewComponent } from "./review-new/review-new.component";
 import { RippleModule } from "primeng/ripple";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { DropdownModule } from "primeng/dropdown";
@@ -19,10 +18,8 @@ import { DialogModule } from "primeng/dialog";
     declarations: [
         ReviewItemComponent,
         ReviewListComponent,
-        ReviewNewComponent
     ],
     exports: [
-        ReviewNewComponent,
         ReviewListComponent
     ],
     imports: [

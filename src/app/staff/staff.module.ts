@@ -19,13 +19,17 @@ import { DividerModule } from "primeng/divider";
 import { ModulesModule } from "../modules/modules.module";
 import { AuthModule } from "../auth/auth.module";
 import { ReviewsModule } from "../reviews/reviews.module";
+import { StaffReviewNewComponent } from "./reviews/staff-review-new/staff-review-new.component";
+import { DialogModule } from "primeng/dialog";
+import { RatingModule } from "primeng/rating";
 
 @NgModule({
     declarations: [
         StaffListComponent,
         StaffFilterComponent,
         StaffComponent,
-        StaffDetailsComponent
+        StaffDetailsComponent,
+        StaffReviewNewComponent
     ],
     imports: [
         StaffRoutingModule,
@@ -44,8 +48,10 @@ import { ReviewsModule } from "../reviews/reviews.module";
         DividerModule,
         ModulesModule,
         AuthModule,
-        ReviewsModule
-    ],
+        ReviewsModule,
+        DialogModule,
+        RatingModule
+    ]
 })
 export class StaffModule {
 }
