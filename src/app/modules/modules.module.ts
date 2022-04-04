@@ -19,8 +19,6 @@ import { DividerModule } from "primeng/divider";
 import { ModuleDetailsComponent } from './module-details/module-details.component';
 import { ChartModule } from "primeng/chart";
 import { AccordionModule } from "primeng/accordion";
-import { ReviewListComponent } from './module-details/review-list/review-list.component';
-import { ReviewItemComponent } from './module-details/review-list/review-item/review-item.component';
 
 import { RatingModule } from "primeng/rating";
 import { ScrollPanelModule } from "primeng/scrollpanel";
@@ -28,12 +26,12 @@ import { TooltipModule } from "primeng/tooltip";
 import { MessagesModule } from "primeng/messages";
 import { TableModule } from "primeng/table";
 import { AuthModule } from "../auth/auth.module";
-import { NewReviewComponent } from "./module-details/new-review/new-review.component";
 import { DialogModule } from "primeng/dialog";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { SpeedDialModule } from "primeng/speeddial";
+import { ReviewsModule } from "../reviews/reviews.module";
 
 @NgModule({
     declarations: [
@@ -41,14 +39,7 @@ import { SpeedDialModule } from "primeng/speeddial";
         ModulesComponent,
         ModuleListComponent,
         ModuleFilterComponent,
-        ModuleDetailsComponent,
-        ReviewListComponent,
-        ReviewItemComponent,
-        NewReviewComponent
-    ],
-    exports: [
-        NewReviewComponent,
-        ReviewListComponent
+        ModuleDetailsComponent
     ],
     imports: [
         RouterModule,
@@ -76,7 +67,8 @@ import { SpeedDialModule } from "primeng/speeddial";
         ReactiveFormsModule,
         InputTextareaModule,
         SplitButtonModule,
-        SpeedDialModule
+        SpeedDialModule,
+        ReviewsModule
     ]
 })
 export class ModulesModule {

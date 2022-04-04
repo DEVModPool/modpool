@@ -3,8 +3,8 @@ import { IsActiveMatchOptions } from "@angular/router";
 import { ModuleDetails, StudyHours } from "./module-details.model";
 import { RequisiteModule } from "../module-list/module-item/module-item.model";
 import { AuthService } from "../../auth/auth.service";
-import {GeneralUtil} from "../../util/general.util";
-import {ModulesService} from "../modules.service";
+import { GeneralUtil } from "../../util/general.util";
+import { ModulesService } from "../modules.service";
 
 @Component({
     selector: 'app-module-details',
@@ -16,7 +16,7 @@ export class ModuleDetailsComponent implements OnInit {
 
     onLeaveReview() {
         this.authService.isLoggedIn() ?
-            this.moduleService.reviewModalDisplayed.next(true):
+            this.moduleService.reviewModalDisplayed.next(true) :
             this.authService.loginModalDisplayed.next(true);
     }
 

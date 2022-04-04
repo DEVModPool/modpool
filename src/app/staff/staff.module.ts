@@ -18,6 +18,7 @@ import { StaffDetailsComponent } from "./staff-details/staff-details.component";
 import { DividerModule } from "primeng/divider";
 import { ModulesModule } from "../modules/modules.module";
 import { AuthModule } from "../auth/auth.module";
+import { ReviewsModule } from "../reviews/reviews.module";
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { AuthModule } from "../auth/auth.module";
         DividerModule,
         ModulesModule,
         AuthModule,
+        ReviewsModule
     ],
 })
 export class StaffModule {
