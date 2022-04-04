@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffReviewsService } from "../staff-reviews.service";
 import { ReviewNewComponent } from "../../../reviews/review-new.component";
+import { FormControl } from "@angular/forms";
 
 @Component({
     selector: 'app-staff-review-new',
@@ -10,10 +11,15 @@ import { ReviewNewComponent } from "../../../reviews/review-new.component";
 export class StaffReviewNewComponent extends ReviewNewComponent implements OnInit {
 
     constructor(reviewsService: StaffReviewsService) {
-        super(reviewsService)
+        super(reviewsService);
+        this.initFormGroup({
+            quality: new FormControl(),
+            module: new FormControl(),
+            review: new FormControl()
+        })
     }
 
     submitReview() {
-        console.log("Form submitted.");
+        console.log(this.newReviewForm.value);
     }
 }

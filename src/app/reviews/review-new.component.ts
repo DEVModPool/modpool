@@ -5,10 +5,14 @@ import { ReviewsService } from "./reviews.service";
 @Injectable()
 export abstract class ReviewNewComponent implements OnInit {
     displayModal = false;
-    newReviewForm = new FormGroup({});
     loading = false;
+    newReviewForm;
 
     protected constructor(private reviewsService: ReviewsService) {
+    }
+
+    initFormGroup(controls) {
+        this.newReviewForm = new FormGroup(controls);
     }
 
     ngOnInit(): void {

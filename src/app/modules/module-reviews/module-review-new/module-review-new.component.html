@@ -12,13 +12,19 @@
             <div class="col-6 text-center font-semibold">
                 <p class="text-2xl mb-3">Quality</p>
                 <p>
-                    <p-rating [cancel]="false"></p-rating>
+                    <p-rating
+                        [cancel]="false"
+                        formControlName="quality">
+                    </p-rating>
                 </p>
             </div>
             <div class="col-6 text-center font-semibold">
                 <p class="text-2xl mb-3">Difficulty</p>
                 <p>
-                    <p-rating [cancel]="false"></p-rating>
+                    <p-rating
+                        [cancel]="false"
+                        formControlName="difficulty">
+                    </p-rating>
                 </p>
             </div>
             <div class="col-12">
@@ -33,7 +39,8 @@
                         optionLabel="name"
                         [filter]="true"
                         filterBy="name"
-                        [showClear]="true">
+                        [showClear]="true"
+                        formControlName="coordinator">
                         <ng-template pTemplate="selectedItem">
                             <div class="country-item country-item-value">
                                 <div>String</div>
@@ -50,8 +57,13 @@
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <p-dropdown id="dropdown2" optionLabel="name" [filter]="true" filterBy="name"
-                                [showClear]="true">
+                    <p-dropdown
+                        id="dropdown2"
+                        optionLabel="name"
+                        [filter]="true"
+                        filterBy="name"
+                        [showClear]="true"
+                        formControlName="year">
                         <ng-template pTemplate="selectedItem">
                             <div class="country-item country-item-value">
                                 <div>String</div>
@@ -69,15 +81,18 @@
 
             <div class="field col-12 md:col-12">
                 <span class="p-float-label">
-                    <textarea id="float-input" rows="5" cols="30" pInputTextarea></textarea>
+                    <textarea
+                        id="float-input"
+                        rows="5"
+                        cols="30"
+                        pInputTextarea
+                        formControlName="review"></textarea>
                     <label for="float-input">Review</label>
                 </span>
             </div>
 
         </div>
 
-    </form>
-    <ng-template pTemplate="footer">
         <div class="mb-2">
             <button pButton pRipple type="submit" label="Submit" class="w-full" [loading]=loading></button>
         </div>
@@ -85,5 +100,5 @@
             <button (click)="displayModal = false" pButton pRipple type="submit" label="Cancel"
                     class="w-full p-button-secondary" [loading]=loading></button>
         </div>
-    </ng-template>
+    </form>
 </p-dialog>

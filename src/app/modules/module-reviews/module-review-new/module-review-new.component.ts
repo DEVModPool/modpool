@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl } from "@angular/forms";
 import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { ModuleReviewsService } from "../module-reviews.service";
 
@@ -11,10 +11,17 @@ import { ModuleReviewsService } from "../module-reviews.service";
 export class ModuleReviewNewComponent extends ReviewNewComponent implements OnInit {
 
     constructor(reviewsService: ModuleReviewsService) {
-        super(reviewsService)
+        super(reviewsService);
+        this.initFormGroup({
+            quality: new FormControl(),
+            difficulty: new FormControl(),
+            coordinator: new FormControl(),
+            year: new FormControl(),
+            review: new FormControl()
+        });
     }
 
     submitReview() {
-        console.log("Form submitted.");
+        console.log(this.newReviewForm.value);
     }
 }
