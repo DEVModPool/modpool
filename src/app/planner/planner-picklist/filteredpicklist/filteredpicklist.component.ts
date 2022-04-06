@@ -63,6 +63,7 @@ import { PickList } from 'primeng/picklist';
                                     (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
                                     *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='1'" tabindex="0" role="option"
                                     [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
+                                    <h4 class="h4">Semester 1</h4>
                                     <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
                                         </ng-container>
                                     </li>
@@ -79,6 +80,7 @@ import { PickList } from 'primeng/picklist';
                                     (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
                                     *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='2'" tabindex="0" role="option"
                                     [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
+                                    <h4 class="h4">Semester 2</h4>
                                     <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
                                     </ng-container>
                                     </li>
