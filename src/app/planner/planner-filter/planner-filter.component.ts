@@ -50,8 +50,9 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(): void {
-        this.paramGroupSelected.setValue({'code':JSON.parse(localStorage.getItem('selectedModuleStorage')).map(r => r.code)})
-        console.log(JSON.parse(localStorage.getItem('selectedModuleStorage')).map(r => r.code));
+        const myname = JSON.parse(localStorage.getItem('selectedModuleStorage'));
+        if (myname.every(x => x.hasOwnProperty('code'))){
+        this.paramGroupSelected.setValue({'code':myname.map(r => r.code)})
         this.activatedRoute.data.subscribe(
             response => {
                 this.semesters = response.filterData.viewmodel.semesters;
@@ -65,6 +66,7 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
         .subscribe(response => {
             this.plannerModuleService.selectedModules.next(response.result);
         });
+    }
 
         this.paramGroup.valueChanges.pipe(
             switchMap(() => this.plannerModuleService.getModules(this.paramGroup.value)),

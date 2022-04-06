@@ -9,7 +9,9 @@
 @import "assets/sass/layout/_variables";
 @import "assets/sass/layout/_layout";
 @import "assets/sass/overrides/_overrides";
-
+:root {
+    --warnColour: #c77f13;
+}
 .customAcc{
     .p-accordion-content {
         background: none !important;
@@ -33,6 +35,14 @@
         grid-column: 1;
         grid-row: 1;
     }
+    .p-toggleable-content {
+        align-items: flex-start;
+    }
+}
+.warn {
+    .p-accordion-toggle-icon{
+        color: var(--warnColour);
+    }
 }
 .p-ink {
     pointer-events: none !important;
@@ -40,3 +50,37 @@
 .p-splitter-panel-nested {
     display: block !important;
 }
+.customMsg.p-inline-message-warn{
+    background: none !important;
+    color: var(--warnColour) !important;
+    .p-inline-message-icon{
+        color: var(--warnColour) !important;
+    }
+}
+.customMsg{
+    padding-left: 0px !important;
+}
+.exclude{
+    .pi-info-circle{
+        display: none !important;
+    }
+}
+.include{
+    padding: 2px 2px !important;
+    margin: none;
+}
+.menuStyle {
+    top: -100% !important;
+    left: -90% !important;
+}
+.p-button {
+    width: min-content;
+    background-color: var(--blue-600);
+}
+.p-button::not(disabled):hover {
+    background-color: var(--blue-300);
+}
+.p-checkbox-box {
+    box-shadow: none !important;
+}
+

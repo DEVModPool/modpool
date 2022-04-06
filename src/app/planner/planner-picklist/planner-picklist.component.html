@@ -2,7 +2,7 @@
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name,code,semester"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
 [showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget()" (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"
->
+[initialTemplate]="save">
 <ng-template let-plannerModule pTemplate="item">
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="topRow gridRow">
@@ -11,19 +11,28 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                 </div>
             </div>
             <div class="middleRow gridRow">
-                <div class="prerequisiteRow" style="display: flex;">
-                    <span *ngFor="let missing of plannerModule.missing let isLast=last let isFirst=first">
-                        <label class="missingModulesLabel">{{isFirst? 'Missing modules: ' : ''}}</label>
-                        <label (click)="find(missing)" class="moduleLink" pTooltip="Click to find in Available Courses"> {{missing}} {{isLast ? '' : ',  '}}</label>
-                    </span>
-                </div>
                 <div>Semester: {{ plannerModule.semester }}</div>
-                <p-accordion styleClass="customAcc --text-500" expandIcon="pi pi-fw pi-chevron-left">
-                    <p-accordionTab header="Prerequisite modules: " >
+                <p-accordion styleClass= 'customAcc {{highlightAccordionMessage(plannerModule.missing)==0 ? "" : "warn"}}' expandIcon="pi pi-fw pi-chevron-left">
+                    <p-accordionTab>
+                        <p-header tooltipPosition="bottom" pTooltip='{{highlightAccordionMessage(plannerModule.missing)==0 ? null : "Some prerequisites are missing. Click for more info"}}'>
+                            <p-message severity= '{{highlightAccordionMessage(plannerModule.missing)==0 ? "custom" : "warn"}}' text=" Prerequisite Modules: " styleClass="customMsg exclude"></p-message>
+                        </p-header>
                         <div class="hiddenRow" >
-                            <ul *ngFor="let prerequisite of plannerModule.prerequisites">
-                                <li>
-                                    <a href="/modules/{{prerequisite.id}}" target="_blank"  class="moduleLink">{{prerequisite.code}} - {{prerequisite.name}}</a>
+                            <ul class="prereqList">
+                                <li *ngFor="let prerequisite of plannerModule.prerequisites" style="height: min-content;">
+                                        <span style="display: flex; align-items: center; justify-content:space-between;">
+                                            <a href="/modules/{{prerequisite.id}}" target="_blank"  class='moduleLink' style="grid-column: 1;"
+                                            pTooltip='{{highlightPrerequisite(prerequisite.code) ? null : "This module is a prerequisite but is missing from your plan. Add it to to your plan/prerequisite list"}}' tooltipPosition="top">
+                                                <p-message severity= '{{highlightPrerequisite(prerequisite.code) ? "custom" : "warn"}}' text="{{prerequisite.code}} - {{prerequisite.name}}" styleClass="customMsg include"></p-message>
+
+                                            </a>
+                                            <span class="p-buttonset" style="z-index: 15; display: flex;">
+                                                <button pButton pRipple icon="pi pi-calendar-plus" (click)="addModule(prerequisite.code)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.code) ? true : false"
+                                                pTooltip="Add to planner" tooltipPosition="top"></button>
+                                                <button pButton pRipple icon="{{!this.takenPrerequisites.includes(prerequisite.code) ? 'pi pi-plus' : 'pi pi-minus'}}" (click)="addPrequisite(prerequisite.code)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.code) ? true : false"
+                                                pTooltip="Add to taken modules" tooltipPosition="top"></button>
+                                            </span>
+                                        </span>
                                 </li>
                             </ul>
                             <ul *ngIf="plannerModule.prerequisites.length==0">
@@ -32,13 +41,22 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                                 </li>
                             </ul>
                         </div>
-
                     </p-accordionTab>
                 </p-accordion>
             </div>
         </div>
 </ng-template>
-<ng-template let-selectedModule>
-
-</ng-template>
 </app-filteredpicklist>
+
+<ng-template #save >
+    <div class="containerLarge">
+        <div class="modulesTitle">
+            <h6 style="padding-left: 1.25rem; font-weight: bold; margin: 0%;">Taken Modules</h6>
+            <i class="pi pi-question-circle" pTooltip="Check off modules you have already taken or don't need in your plan"></i>
+        </div>
+        <div class="container">
+            <p-checkbox *ngFor="let pre of allPrerequisites" name="groupname" value="pre" [value]="pre" label="{{pre}}" [(ngModel)]="takenPrerequisites" (ngModelChange)="onChange($event)" >
+            </p-checkbox>
+        </div>
+    </div>
+</ng-template>

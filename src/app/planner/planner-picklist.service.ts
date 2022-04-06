@@ -11,11 +11,17 @@ import { Response } from "../interaction/response";
 export class PlannerModuleService {
     plannerModules = new Subject<PlannerModule[]>();
     selectedModules = new Subject<PlannerModule[]>();
-
+    requestedModule = new Subject<PlannerModule>();
     constructor(private http: HttpClient) { }
 
     getModules(moduleFilters?: any) {
         let out = this.http.get<Response<PlannerModule[]>>('http://localhost:3000/moduleList',{params: moduleFilters})
+        return out;
+    }
+    getModule(moduleFilters?: any) {
+        console.log(moduleFilters);
+        console.log(this.requestedModule);
+        let out = this.http.get<Response<PlannerModule>>('http://localhost:3000/moduleList',{params: moduleFilters})
         return out;
     }
 }

@@ -1,5 +1,6 @@
 export class RequisiteModule {
-    constructor(id: string, name: string) {}
+    code: any;
+    constructor(id: string, name: string, code: string) {}
 }
 
 export class  PlannerModule{

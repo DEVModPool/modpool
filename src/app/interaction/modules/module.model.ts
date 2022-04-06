@@ -1,5 +1,5 @@
 export class RequisiteModule {
-    constructor(id: string, name: string) {}
+    constructor(id: string, name: string, code: string) {}
 }
 
 export class Module {

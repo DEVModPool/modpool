@@ -3,42 +3,7 @@
         "hasErrors": false,
         "errors": null,
         "result": [
-            {
-                "id": "123",
-                "name": "Intro to data science",
-                "code": "COMP 219",
-                "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
-                "assessment" : {
-                    "coursework": "30",
-                    "exam": "70"
-                },
-                "prerequisites": [
-                    {"id": "1", "name": "Data Structures and Algorithms", "code" : "COMP 108"}
-                ],
-                "prerequisiteFor": [
-                    {"id": "3", "name": "Advanced AI", "code" : "COMP 229"}
-                ],
-                "semester": "1",
-                "missing":[""]
-            },
-            {
-                "id": "1234",
-                "name": "Advanced AI",
-                "code": "COMP 229",
-                "description": "To introduce students to the problems arising from databases, including concurrency in databases, information security considerations and how they are solved-the problems arising from the integration of heterogeneous sources of information and the use of semi-structured data;\\n' +\n            '- non-relational databases and the economic factors involved in their selection;\\n' +\n            '- techniques for analysing large amounts of data, the security issues and commercial factors involved with them.",
-                "assessment" : {
-                    "coursework": "30",
-                    "exam": "70"
-                },
-                "prerequisites": [
-                    {"id": "1", "name": "Intro to Data science", "code": "COMP 219"}
-                ],
-                "prerequisiteFor": [
-                    {"id": "4", "name": "Robotics", "code": "COMP 304"}
-                ],
-                "semester": "2",
-                "missing":[""]
-            },
+
             {
                 "id": "142",
                 "name": "Dummy data 1",
@@ -49,7 +14,8 @@
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Intro to Dummy Data", "code": "COMP 288"}
+                    {"id": "1", "name": "Intro to Dummy Data", "code": "COMP 288"},
+                    {"id": "2", "name": "Data Structures and Algorithms", "code" : "COMP 108"}
                 ],
                 "prerequisiteFor": [
                     {"id": "3", "name": "Advanced AI", "code":"COMP 229"}
@@ -67,7 +33,16 @@
                     "exam": "70"
                 },
                 "prerequisites": [
-                    {"id": "1", "name": "Dummy data 1", "code" : "COMP 244"}
+                    {"id": "1", "name": "Dummy data 1", "code" : "COMP 244"},
+                    {"id": "2", "name": "Data Structures and Algorithms", "code" : "COMP 108"},
+                    {"id": "3", "name": "Data Structures and Algorithms", "code" : "COMP 109"},
+                    {"id": "4", "name": "Data Structures and Algorithms", "code" : "COMP 110"},
+                    {"id": "5", "name": "Data Structures and Algorithms", "code" : "COMP 111"},
+                    {"id": "6", "name": "Data Structures and Algorithms", "code" : "COMP 112"},
+                    {"id": "7", "name": "Data Structures and Algorithms", "code" : "COMP 113"},
+                    {"id": "8", "name": "Data Structures and Algorithms", "code" : "COMP 114"},
+                    {"id": "9", "name": "Data Structures and Algorithms", "code" : "COMP 115"},
+                    {"id": "10", "name": "Data Structures and Algorithms", "code" : "COMP 116"}
                 ],
                 "prerequisiteFor": [
                     {"id": "3", "name": "Advanced AI", "code": "COMP 229"}

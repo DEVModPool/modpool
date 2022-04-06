@@ -6,12 +6,6 @@ import { PickList } from 'primeng/picklist';
   selector: 'app-filteredpicklist',
   template: `
         <div [class]="styleClass" [ngStyle]="style" class='p-picklist p-component' cdkDropListGroup>
-            <div class="p-picklist-buttons p-picklist-source-controls" *ngIf="showSourceControls">
-                <button type="button" [attr.aria-label]="upButtonAriaLabel" pButton pRipple icon="pi pi-angle-up" (click)="moveUp(sourcelist,source,selectedItemsSource,onSourceReorder,SOURCE_LIST)"></button>
-                <button type="button" [attr.aria-label]="topButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-up" (click)="moveTop(sourcelist,source,selectedItemsSource,onSourceReorder,SOURCE_LIST)"></button>
-                <button type="button" [attr.aria-label]="downButtonAriaLabel" pButton pRipple icon="pi pi-angle-down" (click)="moveDown(sourcelist,source,selectedItemsSource,onSourceReorder,SOURCE_LIST)"></button>
-                <button type="button" [attr.aria-label]="bottomButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-down" (click)="moveBottom(sourcelist,source,selectedItemsSource,onSourceReorder,SOURCE_LIST)"></button>
-            </div>
             <div class="p-picklist-list-wrapper p-picklist-source-wrapper">
                 <div class="p-picklist-header" *ngIf="sourceHeader || sourceHeaderTemplate">
                     <div class="p-picklist-title" *ngIf="!sourceHeaderTemplate">{{sourceHeader}}</div>
@@ -22,7 +16,6 @@ import { PickList } from 'primeng/picklist';
                     <app-planner-filter>
                     </app-planner-filter>
                 </div>
-
 
                 <ul #sourcelist class="p-picklist-list p-picklist-source" cdkDropList [cdkDropListData]="source" (cdkDropListDropped)="onDrop($event, SOURCE_LIST)"
                     [ngStyle]="sourceStyle" role="listbox" aria-multiselectable="multiple">
@@ -45,9 +38,7 @@ import { PickList } from 'primeng/picklist';
             </div>
             <div class="p-picklist-buttons p-picklist-transfer-buttons">
                 <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()"></button>
-                <button type="button" [attr.aria-label]="allRightButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-right" (click)="moveAllRight()"></button>
                 <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()"></button>
-                <button type="button" [attr.aria-label]="allLeftButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-left" (click)="moveAllLeft()"></button>
             </div>
             <div class="p-picklist-list-wrapper p-picklist-target-wrapper">
                 <div class="p-picklist-header" *ngIf="targetHeader || targetHeaderTemplate">
@@ -61,7 +52,7 @@ import { PickList } from 'primeng/picklist';
                     </div>
                 </div>
                 <ul #targetlist class="p-picklist-list p-picklist-target" cdkDropList [cdkDropListData]="target" (cdkDropListDropped)="onDrop($event, TARGET_LIST)" [ngStyle]="targetStyle" role="listbox" aria-multiselectable="multiple">
-                <p-splitter layout="vertical">
+                    <p-splitter layout="vertical">
                             <ng-template pTemplate>
                             <div class="test">
                                 <p-listbox class="test">
@@ -81,7 +72,7 @@ import { PickList } from 'primeng/picklist';
                         </ng-template>
                         <ng-template pTemplate>
                         <p-listbox>
-                                <ng-template  ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
+                                <ng-template ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
                                     <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
                                     cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
                                     (click)="onItemClick($event,item,selectedItemsTarget,onTargetSelect)" (dblclick)="onTargetItemDblClick()"
@@ -95,17 +86,11 @@ import { PickList } from 'primeng/picklist';
                                 </p-listbox>
                             </ng-template>
                         </p-splitter>
-                    </ul>
+                </ul>
+                <ng-container *ngTemplateOutlet="currentTemplate" >
 
+                </ng-container>
 
-
-
-            </div>
-            <div class="p-picklist-buttons p-picklist-target-controls" *ngIf="showTargetControls">
-                <button type="button" [attr.aria-label]="upButtonAriaLabel" pButton pRipple icon="pi pi-angle-up"  (click)="moveUp(targetlist,target,selectedItemsTarget,onTargetReorder,TARGET_LIST)"></button>
-                <button type="button" [attr.aria-label]="topButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-up"  (click)="moveTop(targetlist,target,selectedItemsTarget,onTargetReorder,TARGET_LIST)"></button>
-                <button type="button" [attr.aria-label]="downButtonAriaLabel" pButton pRipple icon="pi pi-angle-down"  (click)="moveDown(targetlist,target,selectedItemsTarget,onTargetReorder,TARGET_LIST)"></button>
-                <button type="button" [attr.aria-label]="bottomButtonAriaLabel" pButton pRipple icon="pi pi-angle-double-down"  (click)="moveBottom(targetlist,target,selectedItemsTarget,onTargetReorder,TARGET_LIST)"></button>
             </div>
         </div>
     `,
@@ -116,4 +101,11 @@ export class FilteredpicklistComponent extends PickList {
     constructor(public el: ElementRef, public cd: ChangeDetectorRef, public filterService: FilterService) {
       super(el, cd, filterService);
   }
+  @Input()
+    initialTemplate: TemplateRef<any>;
+    currentTemplate: TemplateRef<any>;
+    ngOnInit() {
+      this.currentTemplate = this.initialTemplate;
+   }
 }
+

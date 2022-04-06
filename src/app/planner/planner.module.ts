@@ -21,6 +21,10 @@ import {DialogModule} from 'primeng/dialog';
 import {AccordionModule} from 'primeng/accordion';
 import {TooltipModule} from 'primeng/tooltip';
 import {SplitterModule} from 'primeng/splitter';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
     declarations: [
@@ -48,7 +52,11 @@ import {SplitterModule} from 'primeng/splitter';
         DialogModule,
         AccordionModule,
         TooltipModule,
-        SplitterModule
+        SplitterModule,
+        MessageModule,
+        MessagesModule,
+        SplitButtonModule,
+        ToggleButtonModule
     ],
     exports: [
         PickListModule,

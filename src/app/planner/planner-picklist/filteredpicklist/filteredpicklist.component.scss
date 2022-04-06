@@ -62,3 +62,9 @@
 .test {
     display: block !important;
 }
+.p-picklist-target-wrapper{
+    .p-picklist-list{
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+}

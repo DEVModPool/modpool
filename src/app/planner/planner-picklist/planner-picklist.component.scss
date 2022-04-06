@@ -17,6 +17,9 @@
 .moduleLink:hover {
     text-decoration: underline;
 }
+.moduleLinkMissing {
+    color: var(--warnColour);
+}
 .module-item {
     align-content: center;
     width: 100%;
@@ -26,59 +29,6 @@
     padding-right: 2%;
     display: grid;
     color: var(--text-color);
-    .topRow{
-        height: fit-content;
-        grid-row: 1;
-        grid-column: 1/5;
-        display: grid;
-        grid-template-rows: auto;
-        grid-template-columns: 25% 25% 40% 10%;
-        .module-code{
-            grid-column: 1/5;
-            text-align: left;
-        }
-        .module-name{
-            grid-column: 3/5;
-            text-align: right;
-            padding-left: 10%;
-        }
-    }
-    .middleRow{
-        height: fit-content;
-        position: relative;
-        grid-column: 1 / 5;
-        grid-row: 2;
-        .coursework{
-            height: fit-content;
-            margin-top: 1%;
-            margin-bottom: 1%;
-            position: relative;
-            grid-column: 1 / 5;
-            grid-row: 2;
-            #alpha{
-                margin: auto;
-                width: 100%;
-                height: auto;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            .assessmentText{
-                color: grey;
-                filter: invert(100%);
-                mix-blend-mode:difference;
-            }
-        }
-        .hiddenRow{
-            width: 100%;
-            grid-row: 4;
-            grid-column: 1/5;
-            .coursework {
-                margin-top: 3%;
-            }
-        }
-    }
-
 }
 .semester2{
     box-shadow: inset 0 0 100px 1000px var( --bluegray-200), 0 0 10000px 10000px var( --bluegray-200);
@@ -91,6 +41,119 @@
 }
 h5, h6 {
     margin: 0 0 0.5rem 0;
+}
+.alignWithIcon{
+    position: absolute;
+    margin-top: 3px;
+}
+.prereqList{
+    justify-self: left;
+    list-style: none;
+    padding-inline-start: 10px;
+    li::before {
+        content: "";
+        display: inline-block; /* Needed to add space between the bullet and the text */
+        width: 1em; /* Also needed for space (tweak if needed) */
+        margin-left: -2.5em; /* Also needed for space (tweak if needed) */
+      }
+}
+
+.p-picklist-source{
+    .p-button {
+        display: none !important;
+    }
+}
+:root {
+    --warnColour: #c77f13;
+}
+.customAcc{
+    .p-accordion-content {
+        background: none !important;
+        border: none !important;
+        padding: 0px !important;
+    }
+    .p-accordion-header-link {
+        background: none !important;
+        border: none !important;
+        padding: 0px !important;
+        box-shadow: none !important;
+        display: grid;
+        color: inherit !important;
+    }
+    .p-accordion-toggle-icon{
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: right;
+    }
+    .p-accordion-header-text{
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .p-toggleable-content {
+        align-items: flex-start;
+    }
+}
+.warn {
+    .p-accordion-toggle-icon{
+        color: var(--warnColour);
+    }
+}
+.p-ink {
+    pointer-events: none !important;
+  }
+.p-splitter-panel-nested {
+    display: block !important;
+}
+.customMsg.p-inline-message-warn{
+    background: none !important;
+    color: var(--warnColour) !important;
+    .p-inline-message-icon{
+        color: var(--warnColour) !important;
+    }
+}
+.customMsg{
+    padding-left: 0px !important;
+}
+.exclude{
+    .pi-info-circle{
+        display: none !important;
+    }
+}
+.include{
+    padding: 2px 2px !important;
+    margin: none;
+}
+.menuStyle {
+    top: -100% !important;
+    left: -90% !important;
+}
+.container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-flow: row;
+    min-height: 4rem;
+}
+.containerLarge {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.modulesTitle {
+    border: 1px solid #dee2e6;
+    height: min-content;
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+}
+.pi-question-circle {
+    color: var(--gray-500);
+    padding-left: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.pi-question-circle:hover {
+    color: var(--gray-900);
 }
 @media screen and (max-width: 576px) {
     .product-item {
