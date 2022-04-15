@@ -2,7 +2,7 @@
 [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name,code,semester"
 sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targetFilterPlaceholder="Search by name, code, semester1/semester2 etc."
 [showSourceFilter]="true" [showTargetFilter]="false" ariaSourceFilterLabel="test" (onMoveToTarget)="toTarget()" (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"
-[initialTemplate]="save">
+[initialTemplate]="save" [selectedPrereqs]="takenPrerequisites" [semester1Selected]="selectedSemester1" [semester2Selected]="selectedSemester2">
 <ng-template let-plannerModule pTemplate="item">
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="topRow gridRow">
@@ -11,7 +11,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                 </div>
             </div>
             <div class="middleRow gridRow">
-                <div>Semester: {{ plannerModule.semester }}</div>
+                <div>{{ showSemester(plannerModule.code) ? "Semester: " + plannerModule.semester : ''}} </div>
                 <p-accordion styleClass= 'customAcc {{highlightAccordionMessage(plannerModule.missing)==0 ? "" : "warn"}}' expandIcon="pi pi-fw pi-chevron-left">
                     <p-accordionTab>
                         <p-header tooltipPosition="bottom" pTooltip='{{highlightAccordionMessage(plannerModule.missing)==0 ? null : "Some prerequisites are missing. Click for more info"}}'>
@@ -60,3 +60,5 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         </div>
     </div>
 </ng-template>
+
+

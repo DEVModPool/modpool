@@ -37,6 +37,8 @@ import { PickList } from 'primeng/picklist';
                 </ul>
             </div>
             <div class="p-picklist-buttons p-picklist-transfer-buttons">
+                <button type="button" pButton pRipple icon="pi pi-save" (click)="savePlan()" pTooltip="Save plan"></button>
+                <button type="button" pButton pRipple icon="pi pi-download" (click)="loadPlan()" pTooltip="Load plan"></button>
                 <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()"></button>
                 <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()"></button>
             </div>
@@ -53,8 +55,9 @@ import { PickList } from 'primeng/picklist';
                 </div>
                 <ul #targetlist class="p-picklist-list p-picklist-target" cdkDropList [cdkDropListData]="target" (cdkDropListDropped)="onDrop($event, TARGET_LIST)" [ngStyle]="targetStyle" role="listbox" aria-multiselectable="multiple">
                     <p-splitter layout="vertical">
-                            <ng-template pTemplate>
+                        <ng-template pTemplate>
                             <div class="test">
+                            <h4 class="h4" *ngIf="semester1Selected">Semester 1</h4>
                                 <p-listbox class="test">
                                 <ng-template  ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
                                     <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
@@ -63,7 +66,7 @@ import { PickList } from 'primeng/picklist';
                                     (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
                                     *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='1'" tabindex="0" role="option"
                                     [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
-                                    <h4 class="h4">Semester 1</h4>
+
                                     <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
                                         </ng-container>
                                     </li>
@@ -72,7 +75,8 @@ import { PickList } from 'primeng/picklist';
                             </div>
                         </ng-template>
                         <ng-template pTemplate>
-                        <p-listbox>
+                            <h4 class="h4" *ngIf="semester2Selected">Semester 2</h4>
+                            <p-listbox>
                                 <ng-template ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
                                     <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
                                     cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
@@ -80,14 +84,13 @@ import { PickList } from 'primeng/picklist';
                                     (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
                                     *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='2'" tabindex="0" role="option"
                                     [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
-                                    <h4 class="h4">Semester 2</h4>
                                     <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
                                     </ng-container>
                                     </li>
                                 </ng-template>
-                                </p-listbox>
-                            </ng-template>
-                        </p-splitter>
+                            </p-listbox>
+                        </ng-template>
+                    </p-splitter>
                 </ul>
                 <ng-container *ngTemplateOutlet="currentTemplate" >
 
@@ -109,5 +112,34 @@ export class FilteredpicklistComponent extends PickList {
     ngOnInit() {
       this.currentTemplate = this.initialTemplate;
    }
+
+
+   @Input() semester1Selected: boolean;
+   @Input() semester2Selected: boolean;
+
+   @Input() selectedPrereqs = [];
+
+   output: JSON;
+   obj: any;
+
+   displaySaveForm: boolean = false;
+   displayLoadForm: boolean = false;
+
+   savePlan() {
+    this.displaySaveForm = true;
+    this.obj =
+    {
+    "modules":this.target.map(x => x['code']),
+    "prerequisites":this.selectedPrereqs
+    };
+
+    this.output = <JSON>this.obj;
+    console.log(this.output)
+   }
+
+   loadPlan() {
+    this.displayLoadForm = true;
+   }
+
 }
 

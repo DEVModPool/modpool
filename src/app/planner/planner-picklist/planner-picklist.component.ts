@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { PlannerModuleService } from '../planner-picklist.service';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
-import {MenuItem} from 'primeng/api';
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
-import { resourceUsage } from 'process';
 
 @Component({
   selector: 'app-planner-picklist',
@@ -14,6 +12,8 @@ import { resourceUsage } from 'process';
 export class PlannerPicklistComponent implements OnInit {
     plannerModules: PlannerModule[];
     selectedModules: PlannerModule[];
+    selectedSemester1: boolean;
+    selectedSemester2: boolean;
     takenPrerequisites: string[];
     allPrerequisites: any[];
     public paramModuleCode: QueryParamGroup;
@@ -42,18 +42,29 @@ export class PlannerPicklistComponent implements OnInit {
                     });
                 });
                 this.allPrerequisites = this.allPrerequisites.sort();
+                this.filterSemesters();
             });
         this.plannerModuleService.plannerModules
-            .subscribe(result => this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.code==y.code)));
+            .subscribe(result => this.plannerModules = result.filter(x => {
+                !this.selectedModules.some(y => x.code==y.code);
+                this.filterSemesters();
+            }));
+    }
 
+    filterSemesters(){
+        this.selectedSemester1=(this.selectedModules.filter(x => x.semester==1).length>0)
+        this.selectedSemester2=(this.selectedModules.filter(x => x.semester==2).length>0)
     }
 
     toSource(){
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
+        this.filterSemesters();
         this.toTarget();
     }
+
     toTarget(){
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
+        this.filterSemesters();
         this.plannerModules.forEach(mod => {
             mod.missing = [];
         });
@@ -64,6 +75,7 @@ export class PlannerPicklistComponent implements OnInit {
         this.allPrerequisites = this.allPrerequisites.sort();
         this.selectedModules = this.selectedModules.slice();
     }
+
     missingMods: String[];
 
     checkPrerequisites(mod){
@@ -74,7 +86,9 @@ export class PlannerPicklistComponent implements OnInit {
             if (!this.allPrerequisites.includes(preReq)){this.allPrerequisites.push(preReq)}
         });
     }
-
+    showSemester(module){
+        return !(this.selectedModules.map(a => a.code).includes(module))
+    }
     highlightPrerequisite(prereq){
         return (this.selectedModules.map(a => a.code).includes(prereq) || this.takenPrerequisites.includes(prereq));
     }
@@ -115,6 +129,7 @@ export class PlannerPicklistComponent implements OnInit {
             this.takenPrerequisites.push(code)
         }
         this.takenPrerequisites = this.takenPrerequisites.slice();
+        localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
     onChange($event){
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
