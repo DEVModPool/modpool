@@ -2,6 +2,7 @@ import { Component, EventEmitter, Injectable, OnInit, Output } from '@angular/co
 import { PlannerModuleService } from '../planner-picklist.service';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import { PlanData } from 'src/app/interaction/modules/planData.model';
 
 @Component({
   selector: 'app-planner-picklist',
@@ -25,7 +26,6 @@ export class PlannerPicklistComponent implements OnInit {
      }
 
     ngOnInit(): void {
-        console.log(JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.plannerModules = [];
         this.selectedModules = [];
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
@@ -105,6 +105,7 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     addModule(inputCode){
+        console.log(inputCode)
         this.paramModuleCode.setValue({'code':inputCode});
         this.plannerModuleService.getModule(this.paramModuleCode.value)
         .subscribe(response => {
@@ -133,6 +134,43 @@ export class PlannerPicklistComponent implements OnInit {
     }
     onChange($event){
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
-        console.log(JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
-}
+    }
+
+    displaySaveForm: boolean = false;
+    displayLoadForm: boolean = false;
+    output: JSON;
+    obj: any;
+
+    savePlan() {
+        this.displaySaveForm = true;
+        this.obj =
+        {
+        "modules":this.selectedModules.map(x => x['code']),
+        "prerequisites":this.takenPrerequisites
+        };
+        this.output = <JSON>this.obj;
+    }
+
+    returnData: PlanData;
+
+
+    public paramGroupSelected: QueryParamGroup;
+
+    loadPlan() {
+        this.displayLoadForm = true;
+        this.plannerModuleService.getPlan().subscribe(response => {
+            this.plannerModuleService.returnPlan.next(response.result);
+        });
+        this.plannerModules = this.plannerModules.concat(this.selectedModules);
+        this.selectedModules = [];
+        this.filterSemesters();
+        this.plannerModuleService.returnPlan
+            .subscribe(result => {
+                this.returnData = result;
+                result.modules.forEach(code => {
+                    this.addModule(code)
+                });
+                this.takenPrerequisites=result.prerequisites;
+            });
+    }
 }

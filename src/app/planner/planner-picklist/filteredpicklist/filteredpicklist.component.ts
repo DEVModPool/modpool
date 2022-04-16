@@ -1,7 +1,8 @@
 import { NgModule, Component, ElementRef, AfterContentInit, AfterViewChecked, Input, Output, ContentChildren, QueryList, TemplateRef, EventEmitter, ViewChild, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef} from '@angular/core';
 import {FilterService} from 'primeng/api';
 import { PickList } from 'primeng/picklist';
-
+import { PlanData } from 'src/app/interaction/modules/planData.model';
+import { PlannerModuleService } from '../../planner-picklist.service';
 @Component({
   selector: 'app-filteredpicklist',
   template: `
@@ -37,8 +38,6 @@ import { PickList } from 'primeng/picklist';
                 </ul>
             </div>
             <div class="p-picklist-buttons p-picklist-transfer-buttons">
-                <button type="button" pButton pRipple icon="pi pi-save" (click)="savePlan()" pTooltip="Save plan"></button>
-                <button type="button" pButton pRipple icon="pi pi-download" (click)="loadPlan()" pTooltip="Load plan"></button>
                 <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()"></button>
                 <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()"></button>
             </div>
@@ -103,7 +102,7 @@ import { PickList } from 'primeng/picklist';
 })
 export class FilteredpicklistComponent extends PickList {
 
-    constructor(public el: ElementRef, public cd: ChangeDetectorRef, public filterService: FilterService) {
+    constructor(public el: ElementRef, public cd: ChangeDetectorRef, public filterService: FilterService, private plannerModuleService: PlannerModuleService) {
       super(el, cd, filterService);
   }
   @Input()
@@ -119,27 +118,10 @@ export class FilteredpicklistComponent extends PickList {
 
    @Input() selectedPrereqs = [];
 
-   output: JSON;
-   obj: any;
 
-   displaySaveForm: boolean = false;
-   displayLoadForm: boolean = false;
 
-   savePlan() {
-    this.displaySaveForm = true;
-    this.obj =
-    {
-    "modules":this.target.map(x => x['code']),
-    "prerequisites":this.selectedPrereqs
-    };
 
-    this.output = <JSON>this.obj;
-    console.log(this.output)
-   }
 
-   loadPlan() {
-    this.displayLoadForm = true;
-   }
 
 }
 

@@ -45,3 +45,5 @@ testem.log
 .DS_Store
 Thumbs.db
 runJSON.txt
+.vscode/launch.json
+.vscode/tasks.json
