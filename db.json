@@ -95,19 +95,47 @@
     "plannerData": {
         "hasErrors": false,
         "errors": null,
-        "result": {
-            "modules": [
-                "COMP 244",
-                "COMP 288"
-            ],
-            "prerequisites": [
-                "COMP 108",
-                "COMP 113",
-                "COMP 110",
-                "COMP 111",
-                "COMP 244"
-            ]
-        }
+        "result": [
+            {
+                "id": "1",
+                "name": "test one",
+                "data": {
+                    "modules": [
+                        "COMP 244",
+                        "COMP 288"
+                    ],
+                    "prerequisites": [
+                        "COMP 108",
+                        "COMP 113",
+                        "COMP 110",
+                        "COMP 111",
+                        "COMP 244"
+                    ]
+                }
+            },{
+                "id": "2",
+                "name": "test two",
+                "data": {
+                    "modules": [
+                        "COMP 244"
+                    ],
+                    "prerequisites": [
+                        "COMP 108"
+                    ]
+                }
+            },{
+                "id": "3",
+                "name": "test three",
+                "data": {
+                    "modules": [
+                        "COMP 244"
+                    ],
+                    "prerequisites": [
+                        "COMP 108"
+                    ]
+                }
+            }
+        ]
 
     }
 }

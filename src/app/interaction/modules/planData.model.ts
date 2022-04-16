@@ -6,3 +6,9 @@ export class  PlanData{
         public name?: string,
     ) {}
 }
+export class  PlanNames{
+    constructor(
+        public id: string,
+        public name: string,
+    ) {}
+}

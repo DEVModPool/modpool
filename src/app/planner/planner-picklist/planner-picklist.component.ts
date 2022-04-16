@@ -3,7 +3,7 @@ import { PlannerModuleService } from '../planner-picklist.service';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import { PlanData } from 'src/app/interaction/modules/planData.model';
-
+import { PlanNames } from 'src/app/interaction/modules/planData.model';
 @Component({
   selector: 'app-planner-picklist',
   templateUrl: './planner-picklist.component.html',
@@ -17,11 +17,17 @@ export class PlannerPicklistComponent implements OnInit {
     selectedSemester2: boolean;
     takenPrerequisites: string[];
     allPrerequisites: any[];
+    plans: PlanNames[];
+    selectedPlan: PlanNames;
     public paramModuleCode: QueryParamGroup;
-    checked1: boolean = true;
-    constructor(private plannerModuleService: PlannerModuleService, qpb: QueryParamBuilder) {
-        this.paramModuleCode = qpb.group({
-            code: qpb.stringParam('code', {multi:true})
+    public paramPlanCode: QueryParamGroup;
+
+    constructor(private plannerModuleService: PlannerModuleService, qpbModules: QueryParamBuilder, qpbPlans: QueryParamBuilder) {
+        this.paramPlanCode = qpbPlans.group({
+            plan: qpbPlans.stringParam('plan', {multi:true})
+        })
+        this.paramModuleCode = qpbModules.group({
+            code: qpbModules.stringParam('code', {multi:true})
         })
      }
 
@@ -105,7 +111,6 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     addModule(inputCode){
-        console.log(inputCode)
         this.paramModuleCode.setValue({'code':inputCode});
         this.plannerModuleService.getModule(this.paramModuleCode.value)
         .subscribe(response => {
@@ -149,16 +154,27 @@ export class PlannerPicklistComponent implements OnInit {
         "prerequisites":this.takenPrerequisites
         };
         this.output = <JSON>this.obj;
+        //TODO
+        // -Send data to server
     }
 
-    returnData: PlanData;
+    deletePlan(id) {
+        this.openPlanDialog
+    }
 
-
-    public paramGroupSelected: QueryParamGroup;
-
-    loadPlan() {
+    openPlanDialog() {
+        this.plannerModuleService.getNames().subscribe(response => {
+            this.plannerModuleService.returnNames.next(response.result);
+        });
+        this.plannerModuleService.returnNames.subscribe(result => {
+            this.plans = result;
+        })
         this.displayLoadForm = true;
-        this.plannerModuleService.getPlan().subscribe(response => {
+    }
+
+    loadPlan(inputCode) {
+        this.paramPlanCode.setValue({'plan':inputCode});
+        this.plannerModuleService.getPlan(this.paramPlanCode.value).subscribe(response => {
             this.plannerModuleService.returnPlan.next(response.result);
         });
         this.plannerModules = this.plannerModules.concat(this.selectedModules);
@@ -166,11 +182,14 @@ export class PlannerPicklistComponent implements OnInit {
         this.filterSemesters();
         this.plannerModuleService.returnPlan
             .subscribe(result => {
-                this.returnData = result;
-                result.modules.forEach(code => {
+                //Remove [0] when backend works
+                result[0].data.modules.forEach(code => {
                     this.addModule(code)
                 });
-                this.takenPrerequisites=result.prerequisites;
+                //Remove [0] when backend works
+                this.takenPrerequisites=result[0].data.prerequisites;
             });
+        localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
     }
 }

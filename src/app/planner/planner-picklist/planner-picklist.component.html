@@ -46,6 +46,10 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
             </div>
         </div>
 </ng-template>
+<div buttons>
+    <button type="button" pButton pRipple icon="pi pi-save" (click)="savePlan()" pTooltip="Save plan"></button>
+    <button type="button" pButton pRipple icon="pi pi-download" (click)="openPlanDialog()" pTooltip="Load plan"></button>
+</div>
 </app-filteredpicklist>
 
 <ng-template #save >
@@ -61,7 +65,21 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
     </div>
 </ng-template>
 
-<button type="button" pButton pRipple icon="pi pi-save" (click)="savePlan()" pTooltip="Save plan"></button>
-<button type="button" pButton pRipple icon="pi pi-download" (click)="loadPlan()" pTooltip="Load plan"></button>
 
 
+<p-dialog [(visible)]="displayLoadForm" [style]="{width: '15vw'}" [modal]="true">
+    <ng-template pTemplate="header">
+        Load Plan
+    </ng-template>
+    <li *ngFor="let plan of plans" style="list-style-type: none; display: flex;">
+        <div class="nameList">
+        {{plan.name}}
+        <div>
+            <p-button icon="pi pi-download" (click)="loadPlan(plan.id)" styleClass="p-button-sm"></p-button>
+            <p-button icon="pi pi-times" (click)="deletePlan(plan.id)" styleClass="p-button-sm"></p-button>
+        </div>
+        </div>
+    </li>
+    <ng-template pTemplate="footer">
+    </ng-template>
+</p-dialog>

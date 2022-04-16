@@ -40,6 +40,7 @@ import { PlannerModuleService } from '../../planner-picklist.service';
             <div class="p-picklist-buttons p-picklist-transfer-buttons">
                 <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()"></button>
                 <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()"></button>
+                <ng-content select="[buttons]"></ng-content>
             </div>
             <div class="p-picklist-list-wrapper p-picklist-target-wrapper">
                 <div class="p-picklist-header" *ngIf="targetHeader || targetHeaderTemplate">

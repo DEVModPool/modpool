@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 import { Response } from "../interaction/response";
-import { PlanData } from '../interaction/modules/planData.model';
+import { PlanData, PlanNames } from '../interaction/modules/planData.model';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +14,7 @@ export class PlannerModuleService {
     selectedModules = new Subject<PlannerModule[]>();
     requestedModule = new Subject<PlannerModule>();
     returnPlan = new Subject<PlanData>();
+    returnNames = new Subject<PlanNames[]>();
     constructor(private http: HttpClient) { }
 
     getModules(moduleFilters?: any) {
@@ -24,8 +25,13 @@ export class PlannerModuleService {
         let out = this.http.get<Response<PlannerModule>>('http://localhost:3000/moduleList',{params: moduleFilters})
         return out;
     }
-    getPlan(moduleFilters?: any) {
-        let out = this.http.get<Response<PlanData>>('http://localhost:3000/plannerData',{params: null})
+    getPlan(nameFilters?: any) {
+        console.log(nameFilters)
+        let out = this.http.get<Response<PlanData>>('http://localhost:3000/plannerData',{params: nameFilters})
+        return out;
+    }
+    getNames(nameFilters?: any) {
+        let out = this.http.get<Response<PlanNames[]>>('http://localhost:3000/plannerData',{params: nameFilters})
         return out;
     }
 }
