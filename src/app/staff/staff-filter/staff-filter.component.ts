@@ -26,7 +26,7 @@ export class StaffFilterComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(
             response => {
-                this.departments = response.data.viewmodel.departments;
+                this.departments = response.staffData.viewmodel;
             }
         )
     }

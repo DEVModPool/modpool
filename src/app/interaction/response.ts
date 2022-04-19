@@ -8,3 +8,7 @@ export class Error {
     message: string;
     code: string;
 }
+
+
+
+

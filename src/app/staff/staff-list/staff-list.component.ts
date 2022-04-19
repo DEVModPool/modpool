@@ -25,7 +25,8 @@ export class StaffListComponent implements OnInit {
 
         this.activatedRoute.data.subscribe(
             response => {
-                this.staffList = response.data.staffList;
+                console.log(response);
+                this.staffList = response.staffData.coordinators.items;
             }
         )
     }

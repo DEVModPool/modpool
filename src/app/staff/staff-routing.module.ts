@@ -9,13 +9,13 @@ const routes: Routes = [
     {
         path: '',
         component: StaffComponent,
-        resolve: {data: BaseResolver},
+        resolve: {staffData: BaseResolver},
         data: {url: environment.baseUrl + environment.staffList}
     },
     {
         path: ':id',
         component: StaffDetailsComponent,
-        resolve: {staffDetails: BaseResolver},
+        resolve: {staffData: BaseResolver},
         data: {url: environment.baseUrl + environment.staffDetails}
     }
 ]

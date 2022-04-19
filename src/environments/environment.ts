@@ -4,10 +4,15 @@
 
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: 'http://dev.modpool.uk/api/',
+    resolverUrl: 'resolve-route',
+
+    coordinatorsUrl: 'coordinators/',
+
+
     modulesUrl: 'modulesViewModel/',
     moduleDetails: 'moduleDetails/',
-    staffList: 'staffList/',
+    staffList: 'coordinators/',
     staffDetails: 'staffDetails/'
 };
 
