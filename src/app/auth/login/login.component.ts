@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {ConfigService} from '../../config/config.service';
-import {Subscription} from 'rxjs';
-import {FormControl, FormGroup} from "@angular/forms";
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {Message} from "primeng/api";
+import { Component } from '@angular/core';
+import { ConfigService } from '../../config/config.service';
+import { Subscription } from 'rxjs';
+import { FormControl, FormGroup } from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+import { Message } from "primeng/api";
 
 @Component({
     selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent {
     invalidMessages: Message[];
     loading = false;
     authForm = new FormGroup({
-        email: new FormControl(''),
+        emailAddress: new FormControl(''),
         password: new FormControl('')
     });
 
@@ -31,10 +31,7 @@ export class LoginComponent {
 
     login(): any {
         this.loading = true;
-        const user = {
-            email: this.authForm.controls.email.value,
-            password: this.authForm.controls.password.value
-        }
+        const user = this.authForm.value;
 
         this.authService.login(user).subscribe({
             next: () => this.router.navigate(["/"]),

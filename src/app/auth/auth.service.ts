@@ -1,10 +1,12 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Subject, tap} from "rxjs";
-import {Router} from "@angular/router";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {Message} from "primeng/api";
-import {AuthUtil} from "../util/auth.util";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Subject, tap, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { Message } from "primeng/api";
+import { AuthUtil } from "../util/auth.util";
+import { environment } from "../../environments/environment";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -19,22 +21,30 @@ export class AuthService {
         private http: HttpClient,
         private router: Router,
         private jwtHelper: JwtHelperService
-    ) {}
+    ) {
+    }
 
     login(user: LoginRequest) {
-        return this.http.post<any>('https://localhost:5001/api/login', user).pipe(
-            tap(response => {
-                const token = (<any>response).token;
-                this.setJwtToken(token);
-                localStorage.setItem("user", response.email)
-                this.setAutoLogout(response.token);
-            })
-        )
+        return this.http.post<any>(environment.baseUrl + 'login/', user)
+            .pipe(
+                tap(response => {
+                    console.log(this.jwtHelper.decodeToken(response.result.token));
+                    const token = response.result.token;
+                    this.setJwtToken(token);
+                    localStorage.setItem("user", response.email)
+                    this.setAutoLogout(response.token);
+                })
+            ).pipe(
+                catchError(error => {
+                    console.log(error);
+                    return throwError(error);
+                })
+            )
     }
 
     logout() {
         this.removeJwtToken();
-        if(this.autoLogoutTimer) {
+        if (this.autoLogoutTimer) {
             clearTimeout(this.autoLogoutTimer);
         }
     }
