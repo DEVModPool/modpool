@@ -4,6 +4,10 @@
 
 export const environment = {
     production: false,
+    'jwt-key': 'jwt',
+    'user-key': 'user',
+    'userId-key': 'userId',
+
     baseUrl: 'http://dev.modpool.uk/api/',
     resolverUrl: 'resolve-route',
 

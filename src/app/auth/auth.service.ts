@@ -24,15 +24,32 @@ export class AuthService {
     ) {
     }
 
+    getUserId(decodedObj): string {
+        const regex = /\/name$/;
+        for (let key of Object.keys(decodedObj)) {
+            if (regex.test(key)) {
+                return decodedObj[key];
+            }
+        }
+        return null;
+    }
+
+    authenticateUser(response) {
+        const token = response.result.token;
+        const decoded = this.jwtHelper.decodeToken(token);
+        const userId = this.getUserId(decoded);
+
+        localStorage.setItem(environment["jwt-key"], token)
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("user", response.result.user.emailAddress);
+        this.setAutoLogout(response.result.token);
+    }
+
     login(user: LoginRequest) {
         return this.http.post<any>(environment.baseUrl + 'login/', user)
             .pipe(
                 tap(response => {
-                    console.log(this.jwtHelper.decodeToken(response.result.token));
-                    const token = response.result.token;
-                    this.setJwtToken(token);
-                    localStorage.setItem("user", response.email)
-                    this.setAutoLogout(response.token);
+                    this.authenticateUser(response);
                 })
             ).pipe(
                 catchError(error => {
@@ -42,19 +59,33 @@ export class AuthService {
             )
     }
 
+    register(user: LoginRequest) {
+        return this.http.post<any>(environment.baseUrl + 'register/', user)
+            .pipe(
+                catchError(error => {
+                    console.log(error);
+                    return throwError(error);
+                })
+            ).subscribe(
+                _ => {
+                    this.router.navigate(['/confirmEmail'])
+                }
+            );
+    }
+
+
+
     logout() {
-        this.removeJwtToken();
+        this.clearLocalStorage();
         if (this.autoLogoutTimer) {
             clearTimeout(this.autoLogoutTimer);
         }
     }
 
-    removeJwtToken() {
-        localStorage.removeItem("jwt");
-    }
-
-    setJwtToken(token) {
-        localStorage.setItem("jwt", token);
+    clearLocalStorage() {
+        localStorage.removeItem(environment["jwt-key"]);
+        localStorage.removeItem(environment["userId-key"]);
+        localStorage.removeItem(environment["user-key"]);
     }
 
     setAutoLogout(token: string) {

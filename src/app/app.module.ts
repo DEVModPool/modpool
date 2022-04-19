@@ -23,6 +23,7 @@ import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
     imports: [
