@@ -35,7 +35,12 @@ export class MenuComponent implements OnInit {
                         routerLink: ['/planner'],
                         preventExact: true
                     },
-                    {label: 'Lecturers & Staff', icon: 'pi pi-fw pi-users', routerLink: ['/staff'], preventExact: true},
+                    {
+                        label: 'Lecturers & Staff',
+                        icon: 'pi pi-fw pi-users',
+                        routerLink: ['/coordinators'],
+                        preventExact: true
+                    },
                     {
                         label: 'Anonymopool',
                         icon: 'pi pi-fw pi-question-circle',

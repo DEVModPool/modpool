@@ -46,6 +46,9 @@ import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/m
         ModuleReviewListComponent,
         ModuleReviewItemComponent
     ],
+    exports: [
+        ModuleReviewListComponent
+    ],
     imports: [
         RouterModule,
         CommonModule,

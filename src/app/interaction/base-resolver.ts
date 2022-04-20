@@ -26,7 +26,9 @@ export class BaseResolver<T> implements Resolve<T> {
             url += `${id}/`
         }
 
-        url += environment.resolverUrl;
+        if (!route.data.fullPath) {
+            url += environment.resolverUrl;
+        }
 
         return this.http.get<Response<T>>(url).pipe(
             map(response => {

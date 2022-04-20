@@ -6,9 +6,6 @@ import { ActivatedRoute } from "@angular/router";
     templateUrl: './staff-list.component.html'
 })
 export class StaffListComponent implements OnInit {
-
-    sortRating: string = 'N';
-
     departments = [
         {id: 1, name: 'Computer Science'},
         {id: 2, name: 'Engineering'},
@@ -29,9 +26,5 @@ export class StaffListComponent implements OnInit {
                 this.staffList = response.staffData.coordinators.items;
             }
         )
-    }
-
-    sort() {
-        this.sortRating = "D";
     }
 }

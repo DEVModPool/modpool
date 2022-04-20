@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../auth.service";
-import {Message} from "primeng/api";
-import {FormControl, FormGroup} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../auth.service";
+import { Message } from "primeng/api";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-login-modal',
@@ -13,7 +13,7 @@ export class LoginModalComponent implements OnInit {
     loading = false;
 
     authForm = new FormGroup({
-        email: new FormControl(''),
+        emailAddress: new FormControl(''),
         password: new FormControl('')
     });
 
@@ -31,10 +31,8 @@ export class LoginModalComponent implements OnInit {
 
     login(): any {
         this.loading = true;
-        const user = {
-            email: this.authForm.controls.email.value,
-            password: this.authForm.controls.password.value
-        }
+        const user = this.authForm.value;
+        console.log(user);
         this.authService.login(user).subscribe({
             next: () => this.closeModal(),
             error: () => {

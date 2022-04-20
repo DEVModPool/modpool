@@ -13,11 +13,8 @@ export const environment = {
 
     coordinatorsUrl: 'coordinators/',
 
-
     modulesUrl: 'modulesViewModel/',
     moduleDetails: 'moduleDetails/',
-    staffList: 'coordinators/',
-    staffDetails: 'staffDetails/'
 };
 
 /*

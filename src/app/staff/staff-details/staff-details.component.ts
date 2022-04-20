@@ -18,7 +18,8 @@ export class StaffDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(
             response => {
-                this.lecturer = response.staffDetails;
+                console.log(response);
+                this.lecturer = response.staffData.coordinator;
             }
         )
     }
