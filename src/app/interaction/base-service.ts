@@ -27,8 +27,9 @@ export abstract class BaseService<T> {
                 const pageConfiguration = this.paginationService.parseConfiguration(response.result)
                 this.paginationService.paginationConfiguration.next(pageConfiguration);
                 this.getObservable.next(response.result.items);
-            }));
+            }))
     }
+
     //
     // addNew(object) {
     //     return this.http

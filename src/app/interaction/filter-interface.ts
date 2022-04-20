@@ -1,9 +1,7 @@
-import { AfterViewInit, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 import { BaseService } from "./base-service";
-// import { PaginationModel } from "../pagination/pagination.model";
-// import { PaginationService } from "../pagination/pagination.service";
 import { SubscriptionHandler } from "./subscription-handler";
 import { PaginationService } from "../pagination/pagination.service";
 import { PaginationModel } from "../pagination/pagination.model";
@@ -35,10 +33,10 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
         private paginationService: PaginationService
     ) {
         super();
+        this.getFields();
     }
 
     ngOnInit(): void {
-        this.getFields();
         this.storeSubscription(
             this.activatedRoute.queryParams.subscribe(
                 (params: QueryParamsT) => {
@@ -64,13 +62,13 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     getItems() {
-        // console.log(this.searchFilters);
-
-        this.itemService.getAll(this.searchFilters).subscribe(
-            response => {
-                // console.log(response);
-            }
-        );
+        this.storeSubscription(
+            this.itemService.getAll(this.searchFilters).subscribe(
+                response => {
+                    // console.log(response);
+                }
+            )
+        )
 
     }
 
@@ -104,9 +102,6 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
 
     getQueryParams(): any {
         let qp: QueryParamsT = {} as QueryParamsT;
-
-        // console.log(this.filterForm.controls.name.value);
-
         for (let key of this.filterFields) {
             let formValue = this.filterForm.controls[key].value;
             if (formValue) {
@@ -118,14 +113,11 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
             return qp;
         }
 
-        console.log(this.paginationData);
+        // console.log(this.paginationData);
 
         for (let key of Object.keys(this.paginationData)) {
-            console.log(`${key} - ${this.paginationData[key]}`);
             qp[key] = this.paginationData[key];
         }
-
-        // console.log(qp);
 
         return qp;
     }
