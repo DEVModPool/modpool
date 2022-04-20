@@ -66,14 +66,30 @@ export class AuthService {
                     console.log(error);
                     return throwError(error);
                 })
-            ).subscribe(
+            )
+            .subscribe(
                 _ => {
                     this.router.navigate(['/confirmEmail'])
                 }
             );
     }
 
-
+    submitToken(token) {
+        return this.http.post<any>(environment.baseUrl + 'activate-user', {token})
+            .pipe(
+                catchError(error => {
+                    console.log(error);
+                    return throwError(error);
+                })
+            )
+            .subscribe(
+                response => {
+                    console.log(response);
+                    this.authenticateUser(response);
+                    // this.router.navigate(['/']);
+                }
+            )
+    }
 
     logout() {
         this.clearLocalStorage();

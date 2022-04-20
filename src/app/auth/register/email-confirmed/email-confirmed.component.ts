@@ -16,9 +16,7 @@ export class EmailConfirmedComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe(
             params => {
-
-
-                console.log(params);
+                this.authService.submitToken(params.token);
             }
         )
     }
