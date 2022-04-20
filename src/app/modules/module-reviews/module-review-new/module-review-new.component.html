@@ -6,7 +6,6 @@
     [resizable]="false"
     [closable]="false"
     [closeOnEscape]="true">
-    THIS IS MODULE MODAL
     <form [formGroup]="newReviewForm" (ngSubmit)="submitReview()">
         <div class="grid">
             <div class="col-6 text-center font-semibold">
@@ -32,50 +31,24 @@
             </div>
         </div>
         <div class="p-fluid grid">
-            <div class="field col-12 md:col-6">
+            <div class="field col-12 md:col-12">
                 <span class="p-float-label">
                     <p-dropdown
                         id="coordinator"
-                        optionLabel="name"
-                        [filter]="true"
-                        filterBy="name"
-                        [showClear]="true"
-                        formControlName="coordinator">
-                        <ng-template pTemplate="selectedItem">
-                            <div class="country-item country-item-value">
-                                <div>String</div>
-                            </div>
-                        </ng-template>
-                        <ng-template let-country pTemplate="item">
-                            <div class="country-item">
-                                <div>String</div>
-                            </div>
-                        </ng-template>
+                        [options]="academicYears"
+                        formControlName="moduleAcademicYear">
+<!--                        <ng-template pTemplate="selectedItem">-->
+                        <!--                            <div class="country-item country-item-value">-->
+                        <!--                                <div>Year taken</div>-->
+                        <!--                            </div>-->
+                        <!--                        </ng-template>-->
+                        <!--                        <ng-template let-country pTemplate="item">-->
+                        <!--                            <div class="country-item">-->
+                        <!--                                <div>String</div>-->
+                        <!--                            </div>-->
+                        <!--                        </ng-template>-->
                     </p-dropdown>
-                    <label for="coordinator">Coordinator</label>
-                </span>
-            </div>
-            <div class="field col-12 md:col-6">
-                <span class="p-float-label">
-                    <p-dropdown
-                        id="dropdown2"
-                        optionLabel="name"
-                        [filter]="true"
-                        filterBy="name"
-                        [showClear]="true"
-                        formControlName="year">
-                        <ng-template pTemplate="selectedItem">
-                            <div class="country-item country-item-value">
-                                <div>String</div>
-                            </div>
-                        </ng-template>
-                        <ng-template let-country pTemplate="item">
-                            <div class="country-item">
-                                <div>String</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
-                    <label for="dropdown2">Year Taken</label>
+                    <label for="coordinator">Year taken</label>
                 </span>
             </div>
 
@@ -86,7 +59,7 @@
                         rows="5"
                         cols="30"
                         pInputTextarea
-                        formControlName="review"></textarea>
+                        formControlName="content"></textarea>
                     <label for="float-input">Review</label>
                 </span>
             </div>

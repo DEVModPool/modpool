@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StaffReviewsService } from "../staff-reviews.service";
 import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { FormControl } from "@angular/forms";
+import { ModuleReviewsService } from "../../../modules/module-reviews/module-reviews.service";
 
 @Component({
     selector: 'app-staff-review-new',
@@ -10,7 +10,7 @@ import { FormControl } from "@angular/forms";
 })
 export class StaffReviewNewComponent extends ReviewNewComponent implements OnInit {
 
-    constructor(reviewsService: StaffReviewsService) {
+    constructor(reviewsService: ModuleReviewsService) {
         super(reviewsService);
         this.initFormGroup({
             quality: new FormControl(),

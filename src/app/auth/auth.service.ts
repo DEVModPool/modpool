@@ -74,6 +74,13 @@ export class AuthService {
             );
     }
 
+    logout() {
+        this.clearLocalStorage();
+        if (this.autoLogoutTimer) {
+            clearTimeout(this.autoLogoutTimer);
+        }
+    }
+
     submitToken(token) {
         return this.http.post<any>(environment.baseUrl + 'activate-user', {token})
             .pipe(
@@ -89,13 +96,6 @@ export class AuthService {
                     // this.router.navigate(['/']);
                 }
             )
-    }
-
-    logout() {
-        this.clearLocalStorage();
-        if (this.autoLogoutTimer) {
-            clearTimeout(this.autoLogoutTimer);
-        }
     }
 
     clearLocalStorage() {
@@ -119,6 +119,14 @@ export class AuthService {
         const tokenExpirationTimestamp = this.jwtHelper.getTokenExpirationDate(token).getTime();
         const currentTimeTimestamp = new Date().getTime();
         return tokenExpirationTimestamp - currentTimeTimestamp;
+    }
+
+    requireLogIn(callback) {
+        if (!this.isLoggedIn()) {
+            this.loginModalDisplayed.next(true);
+            return;
+        }
+        callback();
     }
 
     isLoggedIn() {

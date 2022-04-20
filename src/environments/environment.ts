@@ -13,6 +13,8 @@ export const environment = {
 
     coordinatorsUrl: 'coordinators/',
 
+    reviewsUrl: 'reviews/',
+
     modulesUrl: 'modulesViewModel/',
     moduleDetails: 'moduleDetails/',
 };

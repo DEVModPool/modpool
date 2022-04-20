@@ -29,10 +29,10 @@ export class ReviewItemComponent implements OnInit {
     }
 
     onUpvote() {
-        this.authService.isLoggedIn() ? console.log("Like") : this.authService.loginModalDisplayed.next(true);
+        this.authService.requireLogIn(() => console.log('like'));
     }
 
     onDownvote() {
-        this.authService.isLoggedIn() ? console.log("Dislike") : this.authService.loginModalDisplayed.next(true);
+        this.authService.requireLogIn(() => console.log('dislike'));
     }
 }

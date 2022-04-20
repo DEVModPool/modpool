@@ -47,7 +47,8 @@ import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/m
         ModuleReviewItemComponent
     ],
     exports: [
-        ModuleReviewListComponent
+        ModuleReviewListComponent,
+        ModuleReviewNewComponent
     ],
     imports: [
         RouterModule,

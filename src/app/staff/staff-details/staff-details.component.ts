@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { StaffReviewsService } from "../staff-reviews/staff-reviews.service";
+import { ModuleReviewsService } from "../../modules/module-reviews/module-reviews.service";
 
 @Component({
     selector: 'app-staff-details',
@@ -12,7 +12,7 @@ export class StaffDetailsComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
-                private reviewsService: StaffReviewsService) {
+                private reviewsService: ModuleReviewsService) {
     }
 
     ngOnInit(): void {

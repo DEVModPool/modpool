@@ -3,9 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Response } from "./response"
 import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
-import { Injectable } from "@angular/core";
 import { catchError } from "rxjs/operators";
-import { PaginationService } from "../pagination/pagination.service";
+
+// import { PaginationService } from "../pagination/pagination.service";
 
 
 export abstract class BaseService<T> {
@@ -14,21 +14,21 @@ export abstract class BaseService<T> {
     protected constructor(
         private http: HttpClient,
         private router: Router,
-        private paginationService: PaginationService
+        // private paginationService: PaginationService
     ) {
     }
 
     abstract initialUrl(): string;
 
-    getAll(filters: any) {
-        return this.http
-            .get<Response<any>>(environment.baseUrl + this.initialUrl(), {params: filters})
-            .pipe(tap(response => {
-                const pageConfiguration = this.paginationService.parseConfiguration(response.result)
-                this.paginationService.paginationConfiguration.next(pageConfiguration);
-                this.getObservable.next(response.result.items);
-            }));
-    }
+    // getAll(filters: any) {
+    //     return this.http
+    //         .get<Response<any>>(environment.baseUrl + this.initialUrl(), {params: filters})
+    //         .pipe(tap(response => {
+    //             const pageConfiguration = this.paginationService.parseConfiguration(response.result)
+    //             this.paginationService.paginationConfiguration.next(pageConfiguration);
+    //             this.getObservable.next(response.result.items);
+    //         }));
+    // }
 
     addNew(object) {
         return this.http

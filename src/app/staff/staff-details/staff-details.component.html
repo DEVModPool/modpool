@@ -123,20 +123,21 @@
 
     </div>
 
-    <!--    <div class="col-12">-->
-    <!--        <button-->
-    <!--            pButton-->
-    <!--            pRipple-->
-    <!--            style="float:left"-->
-    <!--            (click)="onLeaveReview()">-->
-    <!--            Leave a Review-->
-    <!--        </button>-->
-    <!--        <br>-->
-    <!--        <br>-->
-    <!--    </div>-->
+    <div class="col-12">
+        <button
+            pButton
+            pRipple
+            style="float:left"
+            (click)="onLeaveReview()">
+            Leave a Review
+        </button>
+        <br>
+        <br>
+    </div>
     <div class="col-12">
         <br>
-        <app-module-review-list *ngIf="lecturer.numberOfReviews != 0"></app-module-review-list>
+        <!--        <app-module-review-list *ngIf="lecturer.numberOfReviews != 0"></app-module-review-list>-->
+        <app-module-review-list></app-module-review-list>
         <div *ngIf="lecturer.numberOfReviews == 0" class="col-12">
             <p-messages severity="info">
                 <ng-template pTemplate="">
@@ -148,4 +149,4 @@
 </div>
 
 <app-login-modal></app-login-modal>
-<app-staff-review-new></app-staff-review-new>
+<app-module-review-new></app-module-review-new>
