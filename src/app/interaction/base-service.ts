@@ -29,41 +29,41 @@ export abstract class BaseService<T> {
                 this.getObservable.next(response.result.items);
             }));
     }
-
-    addNew(object) {
-        return this.http
-            .post<Response<any>>(environment.baseUrl + this.initialUrl(), object)
-            .pipe(
-                tap(
-                    response => {
-                        this.router.navigate([this.initialUrl() + response.result.id])
-                    }
-                ),
-                catchError(error => {
-                    console.log(error.errors);
-                    return throwError(error);
-                })
-            ).subscribe();
-    }
-
-    edit(id, data) {
-        return this.http
-            .put<Response<any>>(environment.baseUrl + this.initialUrl() + id, data)
-            .pipe(
-                tap(
-                    response => {
-                        this.router.navigate([this.initialUrl()])
-                            .then(() => {
-                                return this.router.navigate([this.initialUrl() + response.result.id]);
-                            })
-                    },
-                ),
-                catchError(error => {
-                    console.log(error);
-                    return throwError(error);
-                })
-            ).subscribe();
-    }
+    //
+    // addNew(object) {
+    //     return this.http
+    //         .post<Response<any>>(environment.baseUrl + this.initialUrl(), object)
+    //         .pipe(
+    //             tap(
+    //                 response => {
+    //                     this.router.navigate([this.initialUrl() + response.result.id])
+    //                 }
+    //             ),
+    //             catchError(error => {
+    //                 console.log(error.errors);
+    //                 return throwError(error);
+    //             })
+    //         ).subscribe();
+    // }
+    //
+    // edit(id, data) {
+    //     return this.http
+    //         .put<Response<any>>(environment.baseUrl + this.initialUrl() + id, data)
+    //         .pipe(
+    //             tap(
+    //                 response => {
+    //                     this.router.navigate([this.initialUrl()])
+    //                         .then(() => {
+    //                             return this.router.navigate([this.initialUrl() + response.result.id]);
+    //                         })
+    //                 },
+    //             ),
+    //             catchError(error => {
+    //                 console.log(error);
+    //                 return throwError(error);
+    //             })
+    //         ).subscribe();
+    // }
 }
 
 

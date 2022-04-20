@@ -8,6 +8,7 @@ export const environment = {
     'user-key': 'user',
     'userId-key': 'userId',
 
+    jwtAllowedDomain: 'dev.modpool.uk',
     baseUrl: 'http://dev.modpool.uk/api/',
     resolverUrl: 'resolve-route',
 

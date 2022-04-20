@@ -16,10 +16,7 @@ const routes: Routes = [
         path: ':id',
         component: StaffDetailsComponent,
         resolve: {staffData: BaseResolver},
-        data: {
-            fullPath: true,
-            url: environment.baseUrl + environment.coordinatorsUrl
-        }
+        data: {url: environment.baseUrl + environment.coordinatorsUrl}
     }
 ]
 

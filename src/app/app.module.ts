@@ -24,6 +24,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
 import { RegisterComponent } from './auth/register/register.component';
+import { environment } from "../environments/environment";
 
 @NgModule({
     imports: [
@@ -40,7 +41,7 @@ import { RegisterComponent } from './auth/register/register.component';
         JwtModule.forRoot({
             config: {
                 tokenGetter: AuthUtil.tokenGetter,
-                allowedDomains: ["localhost:5001"],
+                allowedDomains: [environment.jwtAllowedDomain],
                 disallowedRoutes: []
             }
         })

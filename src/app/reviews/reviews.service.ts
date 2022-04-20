@@ -36,7 +36,5 @@ export class ReviewsService extends BaseService<any> {
     initialUrl(): string {
         return environment.reviewsUrl;
     }
-
-
 }
 

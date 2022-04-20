@@ -40,8 +40,9 @@ export class ModuleReviewNewComponent extends ReviewNewComponent implements OnIn
             moduleCode: 'asdasd'
         }
 
-        this._reviewsService.addNew(body);
-
         console.log(body);
+
+        this._reviewsService.addReview(body);
+
     }
 }
