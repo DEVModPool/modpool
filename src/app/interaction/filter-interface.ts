@@ -1,7 +1,7 @@
 import { AfterViewInit, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup } from "@angular/forms";
-import { BaseService } from "./base-service";
+import { ServiceInterface } from "./service-interface";
 import { SubscriptionHandler } from "./subscription-handler";
 import { PaginationService } from "../pagination/pagination.service";
 import { PaginationModel } from "../pagination/pagination.model";
@@ -27,7 +27,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     protected constructor(
-        private itemService: BaseService<ResolveT>,
+        private itemService: ServiceInterface<ResolveT>,
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private paginationService: PaginationService
@@ -41,6 +41,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
             this.activatedRoute.queryParams.subscribe(
                 (params: QueryParamsT) => {
                     this.searchFilters = params;
+                    console.log(params);
                     this.filterForm.patchValue(params);
 
                     if (params.page) {
@@ -89,6 +90,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     onSearch() {
+        console.log(this.activatedRoute);
         this.router.navigate(
             ['./'],
             {

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { AuthService } from "../auth/auth.service";
-import { BaseService } from "../interaction/base-service";
+import { ServiceInterface } from "../interaction/service-interface";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
@@ -10,7 +10,7 @@ import { PaginationService } from "../pagination/pagination.service";
 @Injectable({
     providedIn: 'root'
 })
-export class ReviewsService extends BaseService<any> {
+export class ReviewsService extends ServiceInterface<any> {
     private reviewModalDisplayed = new Subject<boolean>();
 
     protected constructor(

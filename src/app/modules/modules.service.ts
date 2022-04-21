@@ -5,14 +5,14 @@ import { HttpClient } from "@angular/common/http";
 import { ModuleItem } from "./module-list/module-item/module-item.model";
 import { Response } from "../interaction/response";
 import { environment } from "../../environments/environment";
-import { BaseService } from "../interaction/base-service";
+import { ServiceInterface } from "../interaction/service-interface";
 import { Router } from "@angular/router";
 import { PaginationService } from "../pagination/pagination.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ModulesService extends BaseService<ModuleItem> {
+export class ModulesService extends ServiceInterface<ModuleItem> {
 
     constructor(
         http: HttpClient,

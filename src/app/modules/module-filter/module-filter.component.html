@@ -13,7 +13,8 @@
             <div class="col-12">
                 <p-multiSelect
                     formControlName="levels"
-                    [options]="moduleLevels">
+                    [options]="moduleLevels"
+                    defaultLabel="Filter by level...">
                 </p-multiSelect>
             </div>
             <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
@@ -25,6 +26,7 @@
                     optionLabel="name"
                     optionValue="value"
                     [options]="semesters"
+                    defaultLabel="Filter by semesters..."
                 ></p-multiSelect>
             </div>
 
@@ -37,6 +39,7 @@
                     formControlName="credits"
                     [options]="creditOptions"
                     id="credits"
+                    defaultLabel="Filter by credits..."
                 ></p-multiSelect>
             </div>
             <div class="col-12">
@@ -44,7 +47,7 @@
                 <p-multiSelect
                     formControlName="departmentIds"
                     [options]="departments"
-                    defaultLabel="Add department filter..."
+                    defaultLabel="Filter by department..."
                     optionLabel="name"
                     selectedItemsLabel="{0} items selected"
                     optionValue="id"

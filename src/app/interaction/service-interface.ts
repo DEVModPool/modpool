@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
 import { PaginationService } from "../pagination/pagination.service";
 
 
-export abstract class BaseService<T> {
+export abstract class ServiceInterface<T> {
     getObservable = new Subject<T[]>();
 
     protected constructor(
@@ -26,7 +26,7 @@ export abstract class BaseService<T> {
             .get<Response<any>>(environment.baseUrl + this.initialUrl(), {params: filters})
             .pipe(
                 tap(response => {
-                    console.log(response);
+                    // console.log(response);
                     const pageConfiguration = this.paginationService.parseConfiguration(response.result)
                     this.paginationService.paginationConfiguration.next(pageConfiguration);
                     this.getObservable.next(response.result.items);
