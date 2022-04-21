@@ -7,6 +7,7 @@ import { PaginationModel } from "../../pagination/pagination.model";
 import { StaffService } from "../staff.service";
 import { PaginationService } from "../../pagination/pagination.service";
 import { debounceTime } from "rxjs";
+import { MessageService } from "primeng/api";
 
 @Component({
     selector: 'app-staff-filter',
@@ -22,8 +23,13 @@ export class StaffFilterComponent
         staffService: StaffService,
         private _activatedRoute: ActivatedRoute,
         router: Router,
-        paginationService: PaginationService) {
+        paginationService: PaginationService,
+        private messageService: MessageService) {
         super(staffService, _activatedRoute, router, paginationService);
+    }
+
+    showMessage() {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Message Content'});
     }
 
     ngOnInit(): void {

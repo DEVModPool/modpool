@@ -25,6 +25,8 @@ import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
 import { RegisterComponent } from './auth/register/register.component';
 import { environment } from "../environments/environment";
+import { ToastModule } from "primeng/toast";
+import { ModulesModule } from "./modules/modules.module";
 
 @NgModule({
     imports: [
@@ -44,7 +46,9 @@ import { environment } from "../environments/environment";
                 allowedDomains: [environment.jwtAllowedDomain],
                 disallowedRoutes: []
             }
-        })
+        }),
+        ToastModule,
+        ModulesModule
     ],
     declarations: [
         AppComponent,

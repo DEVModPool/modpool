@@ -21,13 +21,21 @@ export abstract class BaseService<T> {
     abstract initialUrl(): string;
 
     getAll(filters: any) {
+        console.log(environment.baseUrl + this.initialUrl());
         return this.http
             .get<Response<any>>(environment.baseUrl + this.initialUrl(), {params: filters})
-            .pipe(tap(response => {
-                const pageConfiguration = this.paginationService.parseConfiguration(response.result)
-                this.paginationService.paginationConfiguration.next(pageConfiguration);
-                this.getObservable.next(response.result.items);
-            }))
+            .pipe(
+                tap(response => {
+                    console.log(response);
+                    const pageConfiguration = this.paginationService.parseConfiguration(response.result)
+                    this.paginationService.paginationConfiguration.next(pageConfiguration);
+                    this.getObservable.next(response.result.items);
+                }),
+                catchError(error => {
+                    console.log(error);
+                    return throwError(error);
+                })
+            )
     }
 
     //

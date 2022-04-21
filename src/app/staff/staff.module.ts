@@ -4,7 +4,6 @@ import { StaffRoutingModule } from "./staff-routing.module";
 import { TableModule } from "primeng/table";
 import { InputTextModule } from "primeng/inputtext";
 import { MultiSelectModule } from "primeng/multiselect";
-import { QueryParamModule } from "@ngqp/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DropdownModule } from "primeng/dropdown";
 import { SliderModule } from "primeng/slider";
@@ -47,7 +46,6 @@ import { MessagesModule } from "primeng/messages";
         ProgressBarModule,
         ButtonModule,
         CommonModule,
-        QueryParamModule,
         RippleModule,
         ReactiveFormsModule,
         DividerModule,
