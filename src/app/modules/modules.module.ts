@@ -34,6 +34,7 @@ import { SpeedDialModule } from "primeng/speeddial";
 import { ModuleReviewNewComponent } from "./module-reviews/module-review-new/module-review-new.component";
 import { ModuleReviewListComponent } from "./module-reviews/module-review-list/module-review-list.component";
 import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/module-review-item.component";
+import { PaginationModule } from "../pagination/pagination.module";
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/m
         InputTextareaModule,
         SplitButtonModule,
         SpeedDialModule,
+        PaginationModule,
     ]
 })
 export class ModulesModule {

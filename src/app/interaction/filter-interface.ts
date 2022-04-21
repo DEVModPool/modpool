@@ -64,13 +64,8 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
 
     getItems() {
         this.storeSubscription(
-            this.itemService.getAll(this.searchFilters).subscribe(
-                response => {
-                    // console.log(response);
-                }
-            )
-        )
-
+            this.itemService.getAll(this.searchFilters)
+        );
     }
 
     ngAfterViewInit(): void {

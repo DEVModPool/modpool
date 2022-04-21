@@ -24,6 +24,7 @@ import { StaffReviewListComponent } from "./staff-reviews/staff-review-list/staf
 import { StaffReviewItemComponent } from "./staff-reviews/staff-review-item/staff-review-item.component";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { MessagesModule } from "primeng/messages";
+import { PaginationModule } from "../pagination/pagination.module";
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { MessagesModule } from "primeng/messages";
         DialogModule,
         RatingModule,
         InputTextareaModule,
-        MessagesModule
+        MessagesModule,
+        PaginationModule
     ]
 })
 export class StaffModule {

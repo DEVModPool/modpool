@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { StaffService } from "../staff.service";
+import { PaginationService } from "../../pagination/pagination.service";
+import { tap } from "rxjs";
+import { SubscriptionHandler } from "../../interaction/subscription-handler";
 
 @Component({
     selector: 'app-staff-list',
     templateUrl: './staff-list.component.html'
 })
-export class StaffListComponent implements OnInit {
+export class StaffListComponent extends SubscriptionHandler implements OnInit {
     departments = [
         {id: 1, name: 'Computer Science'},
         {id: 2, name: 'Engineering'},
@@ -18,22 +21,34 @@ export class StaffListComponent implements OnInit {
 
     constructor(
         private staffService: StaffService,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute,
+        private paginationService: PaginationService) {
+        super();
     }
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(
-            response => {
-                console.log(response);
-                this.staffList = response.staffData.coordinators.items;
-                this.departments = response.staffData.viewmodel.departments;
-            }
-        )
 
-        this.staffService.getObservable.subscribe(
-            response => {
-                this.staffList = response;
-            }
+        this.storeSubscription(
+            this.staffService.getObservable.subscribe(
+                response => {
+                    this.staffList = response;
+                }
+            )
+        );
+        this.storeSubscription(
+            this.activatedRoute.data
+                .subscribe(
+                    response => {
+                        console.log(response);
+                        // this.staffList = response.staffData.coordinators.items;
+                        this.departments = response.staffData.viewmodel.departments;
+
+                        this.storeSubscription(
+                            this.staffService.getAll()
+                        );
+
+                    }
+                )
         )
     }
 }

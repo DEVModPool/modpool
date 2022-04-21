@@ -21,11 +21,17 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
 
     ngOnInit(): void {
 
-        this.activatedRoute.data.subscribe(
-            response => {
-                this.modules = response.moduleData.modules.items;
-            }
-        )
+        this.storeSubscription(
+            this.activatedRoute.data.subscribe(
+                _ => {
+                    this.storeSubscription(
+                        this.moduleService.getAll()
+                    );
+                    // console.log(response);
+                    // this.modules = response.moduleData.modules.items;
+                }
+            )
+        );
 
         this.storeSubscription(
             this.moduleService.getObservable.subscribe(

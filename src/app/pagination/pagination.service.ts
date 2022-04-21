@@ -20,4 +20,9 @@ export class PaginationService {
             totalPages: object.totalPages
         }
     }
+
+    broadcastNewData(data) {
+        const pageConfiguration = this.parseConfiguration(data);
+        this.paginationConfiguration.next(pageConfiguration);
+    }
 }

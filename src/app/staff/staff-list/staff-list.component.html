@@ -1,10 +1,7 @@
 <div class="card">
     <p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
              [rowHover]="true"
-             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
-             responsiveLayout="scroll"
-             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-             [filterDelay]="0" [globalFilterFields]="['name','country.name','representative.name','status']">
+             responsiveLayout="scroll">
 
         <ng-template pTemplate="header">
             <tr>
@@ -66,4 +63,5 @@
 
         </ng-template>
     </p-table>
+    <app-pagination></app-pagination>
 </div>
