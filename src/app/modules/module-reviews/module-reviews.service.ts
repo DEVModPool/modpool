@@ -25,12 +25,6 @@ export class ModuleReviewsService extends ReviewsService {
         return this._http
             .post<Response<any>>(environment.baseUrl + environment.reviewsUrl, review)
             .pipe(
-                tap(
-                    response => {
-                        // TODO: redirect back to the modules page
-                        // this._router.navigate([this.initialUrl() + response.result.id])
-                    }
-                ),
                 catchError(error => {
                     console.log(error.errors);
                     return throwError(error);

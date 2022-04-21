@@ -17,11 +17,8 @@ import { StaffDetailsComponent } from "./staff-details/staff-details.component";
 import { DividerModule } from "primeng/divider";
 import { ModulesModule } from "../modules/modules.module";
 import { AuthModule } from "../auth/auth.module";
-import { StaffReviewNewComponent } from "./staff-reviews/staff-review-new/staff-review-new.component";
 import { DialogModule } from "primeng/dialog";
 import { RatingModule } from "primeng/rating";
-import { StaffReviewListComponent } from "./staff-reviews/staff-review-list/staff-review-list.component";
-import { StaffReviewItemComponent } from "./staff-reviews/staff-review-item/staff-review-item.component";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { MessagesModule } from "primeng/messages";
 import { PaginationModule } from "../pagination/pagination.module";
@@ -32,9 +29,6 @@ import { PaginationModule } from "../pagination/pagination.module";
         StaffFilterComponent,
         StaffComponent,
         StaffDetailsComponent,
-        StaffReviewNewComponent,
-        StaffReviewListComponent,
-        StaffReviewItemComponent
     ],
     imports: [
         StaffRoutingModule,

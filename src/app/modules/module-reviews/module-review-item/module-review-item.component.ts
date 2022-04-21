@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ReviewItemComponent } from "../../../reviews/review-item.component";
 import { AuthService } from "../../../auth/auth.service";
 
@@ -8,6 +8,9 @@ import { AuthService } from "../../../auth/auth.service";
     styleUrls: ['./module-review-item.component.scss']
 })
 export class ModuleReviewItemComponent extends ReviewItemComponent {
+
+    @Input() review;
+
     constructor(authService: AuthService) {
         super(authService);
     }

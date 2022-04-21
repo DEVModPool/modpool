@@ -2,13 +2,13 @@
     <div class="col-6">
         <p class="flex text-xl font-medium">
             Quality: &nbsp;
-            <p-rating [ngModel]="quality" readonly="true" stars="5" [cancel]="false"></p-rating>
+            <p-rating [ngModel]="review.quality" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
     <div class="col-6">
         <p class="flex text-xl font-medium">
             Difficulty: &nbsp;
-            <p-rating [ngModel]="difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
+            <p-rating [ngModel]="review.difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
     <div class="col-12 text-900">
@@ -24,11 +24,11 @@
     </div>
     <div class="col-12 md:col-12">
         <div>
-            <p>{{ details | slice:sliceOptions.start:sliceOptions.end }}</p>
+            <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
         </div>
         <p-divider align="center">
             <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()"
-                      *ngIf="details.length >= sliceOptions.default">
+                      *ngIf="review.content.length >= sliceOptions.default">
                 <ng-template pTemplate="content">
                     <i class="pi pi-chevron-down" *ngIf="!expanded"></i>
                     <i class="pi pi-chevron-up" *ngIf="expanded"></i>
