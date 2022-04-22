@@ -2,6 +2,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AppMainComponent } from "./app.main.component";
 import { LoginGuard } from "./auth/login.guard";
+import {ServerErrorComponent} from "./error-pages/server-error/server-error.component";
+import {NotFoundComponent} from "./error-pages/not-found/not-found.component";
 
 const routes: Routes = [
     {
@@ -17,7 +19,9 @@ const routes: Routes = [
         path: 'auth',
         canActivate: [LoginGuard],
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-    }
+    },
+    { path: 'error', component: ServerErrorComponent },
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
@@ -30,5 +34,4 @@ const routes: Routes = [
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

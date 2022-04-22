@@ -29,6 +29,8 @@ import { ToastModule } from "primeng/toast";
 import { ModulesModule } from "./modules/modules.module";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {SpinnerInterceptor} from "./interaction/spinner.interceptor";
+import {ServerErrorComponent} from "./error-pages/server-error/server-error.component";
+import {NotFoundComponent} from "./error-pages/not-found/not-found.component";
 
 @NgModule({
     imports: [
@@ -62,6 +64,8 @@ import {SpinnerInterceptor} from "./interaction/spinner.interceptor";
         ConfigComponent,
         MenuComponent,
         MenuItemComponent,
+        ServerErrorComponent,
+        NotFoundComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
