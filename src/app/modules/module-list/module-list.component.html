@@ -1,4 +1,5 @@
 <div style="margin-right:1rem">
+    <ngx-spinner name="moduleListSpinner" bdColor = "rgba(208,225,253,0.25)" size = "medium" color = "#3b82f6" type = "ball-triangle-path" [fullScreen] = "false"></ngx-spinner>
     <app-module-item *ngFor="let module of modules;" [module]=module></app-module-item>
     <app-pagination></app-pagination>
 </div>

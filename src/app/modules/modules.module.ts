@@ -35,6 +35,7 @@ import { ModuleReviewNewComponent } from "./module-reviews/module-review-new/mod
 import { ModuleReviewListComponent } from "./module-reviews/module-review-list/module-review-list.component";
 import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/module-review-item.component";
 import { PaginationModule } from "../pagination/pagination.module";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
     declarations: [
@@ -79,6 +80,7 @@ import { PaginationModule } from "../pagination/pagination.module";
         SplitButtonModule,
         SpeedDialModule,
         PaginationModule,
+        NgxSpinnerModule,
     ]
 })
 export class ModulesModule {

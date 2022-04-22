@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,6 +27,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { environment } from "../environments/environment";
 import { ToastModule } from "primeng/toast";
 import { ModulesModule } from "./modules/modules.module";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {SpinnerInterceptor} from "./interaction/spinner.interceptor";
 
 @NgModule({
     imports: [
@@ -48,8 +50,10 @@ import { ModulesModule } from "./modules/modules.module";
             }
         }),
         ToastModule,
-        ModulesModule
+        ModulesModule,
+        NgxSpinnerModule
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
         AppComponent,
         AppMainComponent,
@@ -60,6 +64,7 @@ import { ModulesModule } from "./modules/modules.module";
         MenuItemComponent,
     ],
     providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
         ConfigService,
         MenuService,
         ConfirmationService,
