@@ -1,0 +1,34 @@
+.include{
+    padding: 2px 2px !important;
+    margin: none;
+}
+.menuStyle {
+    top: -100% !important;
+    left: -90% !important;
+}
+.p-button {
+    width: min-content;
+    background-color: var(--blue-600);
+}
+.p-button::not(disabled):hover {
+    background-color: var(--blue-300);
+}
+.p-checkbox-box {
+    box-shadow: none !important;
+}
+.customMsg{
+    padding-left: 0px !important;
+}
+.exclude{
+    .pi-info-circle{
+        display: none !important;
+    }
+}
+.warn {
+    .p-accordion-toggle-icon{
+        color: var(--warnColour);
+    }
+}
+.p-ink {
+    pointer-events: none !important;
+}

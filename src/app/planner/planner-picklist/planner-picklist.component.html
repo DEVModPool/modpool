@@ -11,7 +11,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                 </div>
             </div>
             <div class="middleRow gridRow">
-                <div>{{ showSemester(plannerModule.code) ? "Semester: " + plannerModule.semester : ''}} </div>
+                <div>{{ showSemester(plannerModule.id) ? "Semester: " + plannerModule.semester : ''}} </div>
                 <p-accordion styleClass= 'customAcc {{highlightAccordionMessage(plannerModule.missing)==0 ? "" : "warn"}}' expandIcon="pi pi-fw pi-chevron-left">
                     <p-accordionTab>
                         <p-header tooltipPosition="bottom" pTooltip='{{highlightAccordionMessage(plannerModule.missing)==0 ? null : "Some prerequisites are missing. Click for more info"}}'>

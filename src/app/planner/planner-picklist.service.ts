@@ -4,7 +4,7 @@ import { catchError, Subject, throwError } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 import { Response } from "../interaction/response";
-import { PlanData, PlanList, PlanNames } from '../interaction/modules/planData.model';
+import { PlanData, PlanList, PlanNames, PlanReturn } from '../interaction/modules/planData.model';
 import { environment } from "../../environments/environment";
 import { env } from 'process';
 
@@ -15,7 +15,7 @@ export class PlannerModuleService {
     plannerModules = new Subject<PlannerModule[]>();
     selectedModules = new Subject<PlannerModule[]>();
     requestedModule = new Subject<PlannerModule>();
-    returnPlan = new Subject<PlanData>();
+    returnPlan = new Subject<PlanReturn>();
     returnNames = new Subject<PlanNames[]>();
     constructor(private http: HttpClient) { }
 
@@ -31,7 +31,7 @@ export class PlannerModuleService {
     }
 
     getPlan(nameFilters?: any) {
-        let out = this.http.get<Response<PlanData>>(environment.baseUrl + environment.modulePlanners + nameFilters)
+        let out = this.http.get<Response<PlanReturn>>(environment.baseUrl + environment.modulePlanners + nameFilters)
         return out;
     }
 

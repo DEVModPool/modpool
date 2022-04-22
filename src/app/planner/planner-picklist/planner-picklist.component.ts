@@ -110,14 +110,12 @@ export class PlannerPicklistComponent implements OnInit {
 
     addModule(inputCode){
         this.paramModuleID.setValue({'id':inputCode});
-        console.log(inputCode)
         this.plannerModuleService.getModule(inputCode)
         .subscribe(response => {
             this.plannerModuleService.requestedModule.next(response.result);
         });
         this.plannerModuleService.requestedModule
         .subscribe(result => {
-            console.log(result)
             if(!this.selectedModules.map(x => x.id).includes(result.id)){
             this.selectedModules.push(result);
             }
@@ -151,11 +149,12 @@ export class PlannerPicklistComponent implements OnInit {
 
 
     openSaveDialog() {
-        this.authService.requireLogIn(() =>
-        {
+        if(this.authService.isLoggedIn()){
             this.displaySaveForm = true;
+        } else {
+            //Display Modal
         }
-        )
+
     }
 
     savePlan() {
@@ -179,18 +178,17 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     openPlanDialog() {
-        this.authService.requireLogIn(() =>
-            {
-                this.plannerModuleService.getNames().subscribe(response => {
-                    this.plannerModuleService.returnNames.next(response.result.modulePlanners);
-                });
-                this.plannerModuleService.returnNames.subscribe(result => {
-                    console.log(result)
-                    this.plans = result;
-                })
-                this.displayLoadForm = true;
-            }
-        )
+        if(this.authService.isLoggedIn()){
+            this.plannerModuleService.getNames().subscribe(response => {
+                this.plannerModuleService.returnNames.next(response.result.modulePlanners);
+            });
+            this.plannerModuleService.returnNames.subscribe(result => {
+                this.plans = result;
+            })
+            this.displayLoadForm = true;
+        } else {
+            //Display Modal
+        }
     }
 
     loadPlan(inputCode) {
@@ -201,11 +199,9 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedModules = [];
         this.plannerModuleService.returnPlan
             .subscribe(result => {
-                console.log(result)
-                result.modules.forEach(id => {
-                    this.addModule(id)
-                });
-                this.takenPrerequisites=result.prerequisites;
+                 result.modules.forEach(module => {
+                     this.addModule(module.id)
+                 });
             });
 
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
