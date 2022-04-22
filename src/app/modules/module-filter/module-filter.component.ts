@@ -41,13 +41,13 @@ export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
 
         this._activatedRoute.data.subscribe(
             response => {
-                this.departments = response.moduleData.viewModel.departments;
+                this.departments = response.moduleData.viewmodel.departments;
             }
         )
 
         this.storeSubscription(
             this.filterForm.valueChanges
-                .pipe(debounceTime(200))
+                .pipe(debounceTime(500))
                 .subscribe(() => this.onSearch())
         );
     }
@@ -61,12 +61,51 @@ export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
             departmentIds: new FormControl('')
         });
     }
+
+    override patchValueFromParams(params) {
+        let data = {}
+
+        if (params.q) {
+            data['q'] = params.q;
+        }
+
+        if (params.levels) {
+            data['levels'] =
+                typeof params.levels == 'string'
+                    ? [+params.levels]
+                    : params.levels.map(value => +value);
+        }
+
+        if (params.semesters) {
+            data['semesters'] =
+                typeof params.semesters == 'string'
+                    ? [+params.semesters]
+                    : params.semesters.map(value => +value);
+        }
+
+        if (params.credits) {
+            data['credits'] =
+                typeof params.credits == 'string'
+                    ? [+params.credits]
+                    : params.credits.map(value => +value);
+        }
+
+        if (params.departmentIds) {
+            data['departmentIds'] =
+                typeof params.departmentIds == 'string'
+                    ? [params.departmentIds]
+                    : params.departmentIds;
+        }
+
+        console.log(data);
+        this.filterForm.patchValue(data);
+    }
 }
 
 interface qp extends PaginationModel {
     q: string,
-    levels: string,
-    semesters: string,
-    credits: string,
-    departmentIds: string,
+    levels: string[],
+    semesters: string[],
+    credits: string[],
+    departmentIds: string[],
 }

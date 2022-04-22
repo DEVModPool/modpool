@@ -36,13 +36,16 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
         this.getFields();
     }
 
+    patchValueFromParams(params) {
+        this.filterForm.patchValue(params);
+    }
+
     ngOnInit(): void {
         this.storeSubscription(
             this.activatedRoute.queryParams.subscribe(
                 (params: QueryParamsT) => {
                     this.searchFilters = params;
-                    console.log(params);
-                    this.filterForm.patchValue(params);
+                    this.patchValueFromParams(params);
 
                     if (params.page) {
                         this.paginationData = params as PaginationModel;
@@ -85,7 +88,6 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     onSearch() {
-        console.log(this.activatedRoute);
         this.router.navigate(
             ['./'],
             {
@@ -107,6 +109,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
         }
 
         if (!this.paginationData) {
+            console.log(qp);
             return qp;
         }
 

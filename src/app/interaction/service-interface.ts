@@ -21,7 +21,6 @@ export abstract class ServiceInterface<T> {
     abstract initialUrl(): string;
 
     getAll(filters: any = {}) {
-        console.log(environment.baseUrl + this.initialUrl());
         return this.http
             .get<Response<any>>(environment.baseUrl + this.initialUrl(), {params: filters})
             .pipe(
