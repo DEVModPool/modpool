@@ -5,10 +5,15 @@ import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import { PlanData } from 'src/app/interaction/modules/planData.model';
 import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { LoginModalInterface } from 'src/app/auth/login-modal/login-modal-interface';
+import { nextTick } from 'process';
+import { ConfirmationService } from 'primeng/api';
+
 @Component({
   selector: 'app-planner-picklist',
   templateUrl: './planner-picklist.component.html',
   styleUrls: ['./planner-picklist.component.scss'],
+  providers: [ConfirmationService]
 })
 
 export class PlannerPicklistComponent implements OnInit {
@@ -29,6 +34,7 @@ export class PlannerPicklistComponent implements OnInit {
         qpbModules: QueryParamBuilder,
         qpbPlans: QueryParamBuilder,
         private authService: AuthService,
+        private confirmationService: ConfirmationService
         ) {
         this.paramPlanCode = qpbPlans.group({
             plan: qpbPlans.stringParam('plan', {multi:true})
@@ -39,6 +45,7 @@ export class PlannerPicklistComponent implements OnInit {
      }
 
     ngOnInit(): void {
+        this.plans = []
         this.plannerModules = [];
         this.selectedModules = [];
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
@@ -55,6 +62,8 @@ export class PlannerPicklistComponent implements OnInit {
             });
         this.saveText = "";
     }
+
+
 
     filterSemesters(){
         this.selectedSemester1=(this.selectedModules.filter(x => x.semester==1).length>0)
@@ -149,13 +158,27 @@ export class PlannerPicklistComponent implements OnInit {
 
 
     openSaveDialog() {
-        if(this.authService.isLoggedIn()){
+        this.authService.requireLogIn(() => {
             this.displaySaveForm = true;
-        } else {
-            //Display Modal
-        }
+        })
 
     }
+    openPlanDialog() {
+        this.authService.requireLogIn( () => {
+            this.plannerModuleService.getNames().subscribe(response => {
+                this.plannerModuleService.returnNames.next(response.result.modulePlanners);
+            });
+            this.plannerModuleService.returnNames.subscribe(result => {
+                this.plans = result;
+            })
+            this.displayLoadForm = true;
+        })
+    }
+
+    saveError = false;
+    serverError = false;
+    saveErrorMsg = "";
+    serverErrorMsg = "";
 
     savePlan() {
         this.obj =
@@ -165,31 +188,51 @@ export class PlannerPicklistComponent implements OnInit {
                 "studentID": localStorage.getItem('userId')
             };
         this.output = <JSON>this.obj;
-        this.plannerModuleService.savePlan(this.output)
+        if (this.saveText.length==0) {
+            this.saveError = true;
+            this.saveErrorMsg = "Enter a Name for your plan"
+        } else{
+            this.plannerModuleService.savePlan(this.output).subscribe( x => {
+                this.plannerModuleService.saveReturn.next(x.errors)
+            })
+            let errorReturn = []
+            this.plannerModuleService.saveReturn.subscribe(x => errorReturn = x)
+            if (errorReturn.length!=0){
+                this.serverError = true;
+                this.serverErrorMsg = "Problem saving"
+            } else {
+                this.saveText = ""
+                this.displaySaveForm = false
+            }
+        }
+
+    }
+
+    confirm1(id) {
+        return this.confirmationService.confirm({
+            message: 'You are about to delete this plan, are you sure that you want to proceed?',
+            header: 'Delete plan?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.deletePlan(id)
+            },
+            reject: () => {
+            }
+        });
     }
 
     deletePlan(inputCode) {
         this.obj =
-            {
+            {   "studentId": localStorage.getItem('userId'),
                 "modulePlannerId": inputCode
             };
         this.output = <JSON>this.obj;
-        //this.plannerModuleService.deletePlan(this.output)
+        console.log(this.output)
+        this.plannerModuleService.deletePlan(this.output).pipe().subscribe(x=>this.openPlanDialog())
+
     }
 
-    openPlanDialog() {
-        if(this.authService.isLoggedIn()){
-            this.plannerModuleService.getNames().subscribe(response => {
-                this.plannerModuleService.returnNames.next(response.result.modulePlanners);
-            });
-            this.plannerModuleService.returnNames.subscribe(result => {
-                this.plans = result;
-            })
-            this.displayLoadForm = true;
-        } else {
-            //Display Modal
-        }
-    }
+
 
     loadPlan(inputCode) {
         this.plannerModuleService.getPlan(inputCode).subscribe(response => {

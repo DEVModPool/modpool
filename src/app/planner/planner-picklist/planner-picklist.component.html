@@ -70,8 +70,10 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         Save Plan
     </ng-template>
     <div class="p-inputgroup">
-        <input id="textinput" type="text" pInputText placeholder="Plan name" [(ngModel)]="saveText" [maxlength]="10">
-        <small id="textinput-help" class="p-error block"></small>
+        <span class="p-float-label">
+            <input id="textinput" type="text" pInputText placeholder="{{saveError ? '' : 'Plan name'}}" [(ngModel)]="saveText" [maxlength]="10" class="{{saveError ? 'ng-invalid ng-dirty' : ''}}">
+            <label for="textinput" [hidden]=!saveError>{{saveErrorMsg}}</label>
+        </span>
         <button type="button" pButton pRipple icon="pi pi-save" styleClass="p-button-warn" (click)="savePlan()" pTooltip="Save plan"></button>
     </div>
     <ng-template pTemplate="footer">
@@ -87,10 +89,17 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         {{plan.name}}
         <div>
             <p-button icon="pi pi-download" (click)="loadPlan(plan.id)" styleClass="p-button-sm"></p-button>
-            <p-button icon="pi pi-times" (click)="deletePlan(plan.id)" styleClass="p-button-sm"></p-button>
+            <p-button (click)="confirm1(plan.id)" icon="pi pi-times"  styleClass="p-button-sm"></p-button>
         </div>
         </div>
     </li>
+    <div [hidden]="plans.length!=0">
+        No plans found
+    </div>
     <ng-template pTemplate="footer">
     </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<p-dialog [(visible)]="serverError" [modal]="true">
+    {{serverErrorMsg}}
 </p-dialog>

@@ -25,7 +25,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
     declarations: [
         PlannerComponent,
@@ -56,7 +56,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
         MessageModule,
         MessagesModule,
         SplitButtonModule,
-        ToggleButtonModule
+        ToggleButtonModule,
+        ConfirmDialogModule
     ],
     exports: [
         PickListModule,

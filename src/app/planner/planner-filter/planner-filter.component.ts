@@ -56,7 +56,6 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
                 this.departments = response.filterData.viewmodel.departments;
             }
         )
-        console.log(this.paramGroup.value)
         this.paramGroup.valueChanges.pipe(
             switchMap(() => this.plannerModuleService.getModules(this.paramGroup.value)),
             takeUntil(this.componentDestroyed$),
@@ -87,7 +86,6 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
             }
         )
     }
-
     public ngOnDestroy(): void {
         this.componentDestroyed$.next();
         this.componentDestroyed$.complete();

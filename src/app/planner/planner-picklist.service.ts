@@ -4,7 +4,7 @@ import { catchError, Subject, throwError } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { PlannerModule } from 'src/app/interaction/modules/planner-module.model';
 import { Response } from "../interaction/response";
-import { PlanData, PlanList, PlanNames, PlanReturn } from '../interaction/modules/planData.model';
+import { PlanData, PlanList, PlanNames, PlanReturn, SaveReturn } from '../interaction/modules/planData.model';
 import { environment } from "../../environments/environment";
 import { env } from 'process';
 
@@ -18,10 +18,10 @@ export class PlannerModuleService {
     returnPlan = new Subject<PlanReturn>();
     returnNames = new Subject<PlanNames[]>();
     constructor(private http: HttpClient) { }
+    saveReturn = new Subject<any[]>();
 
     getModules(moduleFilters?: any) {
         let out = this.http.get<Response<any>>(environment.baseUrl + environment.modulePlanners + environment.modulesUrl ,{params: moduleFilters})
-        console.log("called")
         return out;
     }
 
@@ -41,23 +41,11 @@ export class PlannerModuleService {
     }
 
     savePlan(plan: any){
-        return this.http.post<Response<any>>(environment.baseUrl + environment.modulePlanners, plan)
-                .pipe(
-                    catchError(error => {
-                        console.log(error.errors);
-                        return throwError(error.errors);
-                    })
-                ).subscribe();
-
+        let out = this.http.post<Response<SaveReturn>>(environment.baseUrl+ environment.modulePlanners, plan, {params: null})
+        return out
     }
     deletePlan(plan: any){
-        return this.http.post<Response<any>>(environment.baseUrl + environment.modulePlanners, plan)
-                .pipe(
-                    catchError(error => {
-                        console.log(error.errors);
-                        return throwError(error.errors);
-                    })
-                ).subscribe();
+        return this.http.delete<Response<any>>(environment.baseUrl + environment.modulePlanners, {body: plan});
 
     }
 }

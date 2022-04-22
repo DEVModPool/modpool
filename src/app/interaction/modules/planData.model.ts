@@ -1,3 +1,12 @@
+export class SaveReturn{
+    constructor(
+
+            public result: string,
+            public errors: any[],
+            public hasErrors: boolean
+
+    ) {}
+}
 export class  PlanData{
     constructor(
         public modules: string[],
