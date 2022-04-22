@@ -41,7 +41,6 @@ export class PlannerPicklistComponent implements OnInit {
     ngOnInit(): void {
         this.plannerModules = [];
         this.selectedModules = [];
-        localStorage.clear()
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
         this.selectedModules = (JSON.parse(localStorage.getItem('selectedModuleStorage')));
@@ -85,7 +84,6 @@ export class PlannerPicklistComponent implements OnInit {
     missingMods: String[];
 
     checkPrerequisites(mod){
-        //console.log(this.allPrerequisites)
         let selectedCodes = this.selectedModules.map(a => a.id);
         mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
         mod.prerequisiteModules.forEach(preReq => {
