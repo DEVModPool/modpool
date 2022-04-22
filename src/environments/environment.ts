@@ -4,9 +4,21 @@
 
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:3000/',
-    modulesUrl:'modulesViewModel/',
-    moduleDetails:'moduleDetails/'
+    'jwt-key': 'jwt',
+    'user-key': 'user',
+    'userId-key': 'userId',
+
+    jwtAllowedDomain: 'dev.modpool.uk',
+    baseUrl: 'http://dev.modpool.uk/api/',
+    resolverUrl: 'resolve-route',
+    loginUrl: 'login',
+    coordinatorsUrl: 'coordinators/',
+
+    reviewsUrl: 'reviews/',
+
+    modulesUrl: 'modules/',
+    moduleDetails: 'moduleDetails/',
+    modulePlanners: 'module-planners/'
 };
 
 /*

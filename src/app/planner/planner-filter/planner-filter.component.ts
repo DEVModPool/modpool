@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, HostBinding} from '@angular/core';
 import { ActivatedRoute} from "@angular/router";
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
-import {Subject, switchMap, takeUntil} from "rxjs";
+import {merge, Subject, switchMap, takeUntil, tap} from "rxjs";
 import { PlannerModuleService } from '../planner-picklist.service';
 
 interface Department {
@@ -16,15 +16,16 @@ interface Department {
 })
 export class PlannerFilterComponent implements OnInit, OnDestroy{
     departments: Department[];
-    semesters: any[];
-    creditOptions: any[];
+    semesters: any[] = [{name: 'Semester 1', value: 1}, {name: 'Semester 2', value: 2}];
+    selectedSemesters: any[] = [];
+    creditOptions: any[] = [30, 60];
     selectedCreditOptions: any[];
-    moduleLevels: any[];
+    moduleLevels: any[] = [100, 200, 300, 400, 500];
     selectedModuleLevels: any[];
     code: any[];
     filterOpen: Boolean;
     public paramGroup: QueryParamGroup;
-    public paramGroupSelected: QueryParamGroup;
+    public paramGroupId: QueryParamGroup;
     private componentDestroyed$ = new Subject<void>();
     display: boolean = false;
 
@@ -39,35 +40,23 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
     ) {
         this.paramGroup = qpb.group({
             q: qpb.stringParam('q'),
-            moduleLevel: qpb.stringParam('moduleLevel',{multi:true}),
-            semester: qpb.stringParam('semester', {multi:true}),
+            Levels: qpb.stringParam('Levels',{multi:true}),
+            semesters: qpb.stringParam('semesters', {multi:true}),
             credits: qpb.stringParam('credits', {multi:true}),
             department: qpb.stringParam('department', {multi:true})
         });
-        this.paramGroupSelected = qpb.group({
-            code: qpb.stringParam('code', {multi:true})
+        this.paramGroupId = qpb.group({
+            id: qpb.stringParam('id', {multi:true})
         })
     }
 
     ngOnInit(): void {
-        const myname = JSON.parse(localStorage.getItem('selectedModuleStorage'));
-        if (myname.every(x => x.hasOwnProperty('code'))){
-        this.paramGroupSelected.setValue({'code':myname.map(r => r.code)})
         this.activatedRoute.data.subscribe(
             response => {
-                this.semesters = response.filterData.viewmodel.semesters;
                 this.departments = response.filterData.viewmodel.departments;
-                this.creditOptions = response.filterData.viewmodel.creditOptions;
-                this.moduleLevels = response.filterData.viewmodel.moduleLevels;
-                this.code = response.filterData.viewmodel.codes;
             }
         )
-        this.plannerModuleService.getModules(this.paramGroupSelected.value)
-        .subscribe(response => {
-            this.plannerModuleService.selectedModules.next(response.result);
-        });
-    }
-
+        console.log(this.paramGroup.value)
         this.paramGroup.valueChanges.pipe(
             switchMap(() => this.plannerModuleService.getModules(this.paramGroup.value)),
             takeUntil(this.componentDestroyed$),
@@ -75,6 +64,28 @@ export class PlannerFilterComponent implements OnInit, OnDestroy{
             this.plannerModuleService.plannerModules.next(response.result);
         });
         this.filterOpen = false;
+    }
+
+    levelChange() {
+        this.paramGroup.patchValue(
+            {
+                Levels: this.selectedModuleLevels,
+            }
+        )
+    }
+    semesterChange() {
+        this.paramGroup.patchValue(
+            {
+                semesters: this.selectedSemesters,
+            }
+        )
+    }
+    creditChange() {
+        this.paramGroup.patchValue(
+            {
+                credits: this.selectedCreditOptions,
+            }
+        )
     }
 
     public ngOnDestroy(): void {

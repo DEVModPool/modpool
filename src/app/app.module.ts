@@ -22,6 +22,7 @@ import {PlannerModule} from "./planner/planner.module";
 import {QueryParamModule} from "@ngqp/core";
 import {JwtModule} from "@auth0/angular-jwt";
 import {AuthUtil} from "./util/auth.util";
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     imports: [
@@ -37,7 +38,7 @@ import {AuthUtil} from "./util/auth.util";
         JwtModule.forRoot({
             config: {
                 tokenGetter: AuthUtil.tokenGetter,
-                allowedDomains: ["localhost:5001"],
+                allowedDomains: [environment.jwtAllowedDomain],
                 disallowedRoutes: []
             }
         })

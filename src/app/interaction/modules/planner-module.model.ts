@@ -6,13 +6,9 @@ export class RequisiteModule {
 export class  PlannerModule{
     constructor(
         public id: string,
-        public name: string,
-        public code: string,
-        public description: string,
-        public assessment: {coursework: string, exam: string},
-        public prerequisites?: RequisiteModule[],
-        public prerequisiteFor?: RequisiteModule[],
-        public semester?: number,
-        public missing?: string[],
+        public fullName: string,
+        public semester: number,
+        public missing: string[],
+        public prerequisiteModules: RequisiteModule[],
     ) {}
 }

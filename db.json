@@ -35,13 +35,7 @@
                     {"id": "1", "name": "Dummy data 1", "code" : "COMP 244"},
                     {"id": "2", "name": "Data Structures and Algorithms", "code" : "COMP 108"},
                     {"id": "3", "name": "Data Structures and Algorithms", "code" : "COMP 109"},
-                    {"id": "4", "name": "Data Structures and Algorithms", "code" : "COMP 110"},
-                    {"id": "5", "name": "Data Structures and Algorithms", "code" : "COMP 111"},
-                    {"id": "6", "name": "Data Structures and Algorithms", "code" : "COMP 112"},
-                    {"id": "7", "name": "Data Structures and Algorithms", "code" : "COMP 113"},
-                    {"id": "8", "name": "Data Structures and Algorithms", "code" : "COMP 114"},
-                    {"id": "9", "name": "Data Structures and Algorithms", "code" : "COMP 115"},
-                    {"id": "10", "name": "Data Structures and Algorithms", "code" : "COMP 116"}
+                    {"id": "4", "name": "Data Structures and Algorithms", "code" : "COMP 110"}
                 ],
                 "prerequisiteFor": [
                     {"id": "3", "name": "Advanced AI", "code": "COMP 229"}

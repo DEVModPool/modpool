@@ -6,6 +6,12 @@ export class  PlanData{
         public name?: string,
     ) {}
 }
+export class  PlanList{
+    constructor(
+        public modulePlanners: PlanNames[],
+        public viewModel: any
+    ) {}
+}
 export class  PlanNames{
     constructor(
         public id: string,

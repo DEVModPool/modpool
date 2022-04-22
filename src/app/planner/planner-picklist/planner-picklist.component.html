@@ -7,7 +7,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
             <div class="topRow gridRow">
                 <div class="module-code">
-                    <h5><a href="/modules/{{plannerModule.id}}" target="_blank" class="moduleLink">{{plannerModule.code}} - {{ plannerModule.name }}</a></h5>
+                    <h5><a href="/modules/{{plannerModule.id}}" target="_blank" class="moduleLink">{{plannerModule.fullName}}</a></h5>
                 </div>
             </div>
             <div class="middleRow gridRow">
@@ -19,23 +19,23 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
                         </p-header>
                         <div class="hiddenRow" >
                             <ul class="prereqList">
-                                <li *ngFor="let prerequisite of plannerModule.prerequisites" style="height: min-content;">
+                                <li *ngFor="let prerequisite of plannerModule.prerequisiteModules" style="height: min-content;">
                                         <span style="display: flex; align-items: center; justify-content:space-between;">
                                             <a href="/modules/{{prerequisite.id}}" target="_blank"  class='moduleLink' style="grid-column: 1;"
-                                            pTooltip='{{highlightPrerequisite(prerequisite.code) ? null : "This module is a prerequisite but is missing from your plan. Add it to to your plan/prerequisite list"}}' tooltipPosition="top">
-                                                <p-message severity= '{{highlightPrerequisite(prerequisite.code) ? "custom" : "warn"}}' text="{{prerequisite.code}} - {{prerequisite.name}}" styleClass="customMsg include"></p-message>
+                                            pTooltip='{{highlightPrerequisite(prerequisite.id) ? null : "This module is a prerequisite but is missing from your plan. Add it to to your plan/prerequisite list"}}' tooltipPosition="top">
+                                                <p-message severity= '{{highlightPrerequisite(prerequisite.id) ? "custom" : "warn"}}' text="{{prerequisite.fullName}}" styleClass="customMsg include"></p-message>
 
                                             </a>
                                             <span class="p-buttonset" style="z-index: 15; display: flex;">
-                                                <button pButton pRipple icon="pi pi-calendar-plus" (click)="addModule(prerequisite.code)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.code) ? true : false"
+                                                <button pButton pRipple icon="pi pi-calendar-plus" (click)="addModule(prerequisite.id)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.id) ? true : false"
                                                 pTooltip="Add to planner" tooltipPosition="top"></button>
-                                                <button pButton pRipple icon="{{!this.takenPrerequisites.includes(prerequisite.code) ? 'pi pi-plus' : 'pi pi-minus'}}" (click)="addPrequisite(prerequisite.code)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.code) ? true : false"
+                                                <button pButton pRipple icon="{{!this.takenPrerequisites.includes(prerequisite.id) ? 'pi pi-plus' : 'pi pi-minus'}}" (click)="addPrequisite(prerequisite.id)" styleClass="p-button-sm" [disabled]="disableAddtoPrereq(prerequisite.id) ? true : false"
                                                 pTooltip="Add to taken modules" tooltipPosition="top"></button>
                                             </span>
                                         </span>
                                 </li>
                             </ul>
-                            <ul *ngIf="plannerModule.prerequisites.length==0">
+                            <ul *ngIf="plannerModule.prerequisiteModules.length==0">
                                 <li>
                                     None
                                 </li>
@@ -47,7 +47,7 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
         </div>
 </ng-template>
 <div buttons>
-    <button type="button" pButton pRipple icon="pi pi-save" (click)="savePlan()" pTooltip="Save plan"></button>
+    <button type="button" pButton pRipple icon="pi pi-save" (click)="openSaveDialog()" pTooltip="Save plan"></button>
     <button type="button" pButton pRipple icon="pi pi-download" (click)="openPlanDialog()" pTooltip="Load plan"></button>
 </div>
 </app-filteredpicklist>
@@ -59,15 +59,26 @@ sourceFilterPlaceholder="Search by name, code, semester 1/semester 2 etc.." targ
             <i class="pi pi-question-circle" pTooltip="Check off modules you have already taken or don't need in your plan"></i>
         </div>
         <div class="container">
-            <p-checkbox *ngFor="let pre of allPrerequisites" name="groupname" value="pre" [value]="pre" label="{{pre}}" [(ngModel)]="takenPrerequisites" (ngModelChange)="onChange($event)" >
+            <p-checkbox *ngFor="let pre of allPrerequisites" name="groupname" value="pre" [value]="pre.id" label="{{pre.fullName}}" [(ngModel)]="takenPrerequisites" (ngModelChange)="onChange($event)" >
             </p-checkbox>
         </div>
     </div>
 </ng-template>
 
+<p-dialog [(visible)]="displaySaveForm" [style]="{width: '30vw'}" [modal]="true">
+    <ng-template pTemplate="header">
+        Save Plan
+    </ng-template>
+    <div class="p-inputgroup">
+        <input id="textinput" type="text" pInputText placeholder="Plan name" [(ngModel)]="saveText" [maxlength]="10">
+        <small id="textinput-help" class="p-error block"></small>
+        <button type="button" pButton pRipple icon="pi pi-save" styleClass="p-button-warn" (click)="savePlan()" pTooltip="Save plan"></button>
+    </div>
+    <ng-template pTemplate="footer">
+    </ng-template>
+</p-dialog>
 
-
-<p-dialog [(visible)]="displayLoadForm" [style]="{width: '15vw'}" [modal]="true">
+<p-dialog [(visible)]="displayLoadForm" [style]="{width: '30vw'}" [modal]="true">
     <ng-template pTemplate="header">
         Load Plan
     </ng-template>

@@ -4,6 +4,7 @@ import { PlannerModule } from 'src/app/interaction/modules/planner-module.model'
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import { PlanData } from 'src/app/interaction/modules/planData.model';
 import { PlanNames } from 'src/app/interaction/modules/planData.model';
+import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-planner-picklist',
   templateUrl: './planner-picklist.component.html',
@@ -19,42 +20,41 @@ export class PlannerPicklistComponent implements OnInit {
     allPrerequisites: any[];
     plans: PlanNames[];
     selectedPlan: PlanNames;
-    public paramModuleCode: QueryParamGroup;
+    saveText: String;
+    public paramModuleID: QueryParamGroup;
     public paramPlanCode: QueryParamGroup;
 
-    constructor(private plannerModuleService: PlannerModuleService, qpbModules: QueryParamBuilder, qpbPlans: QueryParamBuilder) {
+    constructor(
+        private plannerModuleService: PlannerModuleService,
+        qpbModules: QueryParamBuilder,
+        qpbPlans: QueryParamBuilder,
+        private authService: AuthService,
+        ) {
         this.paramPlanCode = qpbPlans.group({
             plan: qpbPlans.stringParam('plan', {multi:true})
         })
-        this.paramModuleCode = qpbModules.group({
-            code: qpbModules.stringParam('code', {multi:true})
+        this.paramModuleID = qpbModules.group({
+            id: qpbModules.stringParam('id', {multi:true})
         })
      }
 
     ngOnInit(): void {
         this.plannerModules = [];
         this.selectedModules = [];
+        localStorage.clear()
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
-
-        this.plannerModuleService.selectedModules.subscribe(
-            result => {
-                this.selectedModules = result;
-                this.selectedModules.map(mod => this.checkPrerequisites(mod));
-                result.map(x => x.prerequisites).forEach(element => {
-                    element.forEach(
-                        x => {
-                            if (!this.allPrerequisites.includes(x["code"])){this.allPrerequisites.push(x["code"])}
-                    });
-                });
-                this.allPrerequisites = this.allPrerequisites.sort();
-                this.filterSemesters();
-            });
+        this.selectedModules = (JSON.parse(localStorage.getItem('selectedModuleStorage')));
+        this.selectedModules = (this.selectedModules==null) ? [] : this.selectedModules;
+        this.selectedModules.forEach(x => this.checkPrerequisites(x))
+        this.filterSemesters()
         this.plannerModuleService.plannerModules
-            .subscribe(result => this.plannerModules = result.filter(x => {
-                !this.selectedModules.some(y => x.code==y.code);
-                this.filterSemesters();
-            }));
+            .subscribe(result => {
+                this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id==y.id))
+                this.plannerModules.forEach(x=> x['missing'] = [])
+
+            });
+        this.saveText = "";
     }
 
     filterSemesters(){
@@ -63,13 +63,13 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     toSource(){
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
         this.filterSemesters();
         this.toTarget();
     }
 
     toTarget(){
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
         this.filterSemesters();
         this.plannerModules.forEach(mod => {
             mod.missing = [];
@@ -85,24 +85,24 @@ export class PlannerPicklistComponent implements OnInit {
     missingMods: String[];
 
     checkPrerequisites(mod){
-        let selectedCodes = this.selectedModules.map(a => a.code);
-        let prerequisiteCodes = mod.prerequisites.map(a => a.code);
-        mod.missing = prerequisiteCodes.filter(x => !selectedCodes.includes(x));
-        prerequisiteCodes.forEach(preReq => {
+        //console.log(this.allPrerequisites)
+        let selectedCodes = this.selectedModules.map(a => a.id);
+        mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
+        mod.prerequisiteModules.forEach(preReq => {
             if (!this.allPrerequisites.includes(preReq)){this.allPrerequisites.push(preReq)}
         });
     }
     showSemester(module){
-        return !(this.selectedModules.map(a => a.code).includes(module))
+        return !(this.selectedModules.map(a => a.id).includes(module))
     }
     highlightPrerequisite(prereq){
-        return (this.selectedModules.map(a => a.code).includes(prereq) || this.takenPrerequisites.includes(prereq));
+        return (this.selectedModules.map(a => a.id).includes(prereq) || this.takenPrerequisites.includes(prereq));
     }
-    showButton(code){
-        return this.selectedModules.map(a => a.code).includes(code);
+    showButton(id){
+        return this.selectedModules.map(a => a.id).includes(id);
     }
     highlightAccordionMessage(missingList){
-        let selectedCodes = this.selectedModules.map(y => y.code);
+        let selectedCodes = this.selectedModules.map(y => y.id);
         let selectedPrereqs = this.takenPrerequisites;
         missingList = missingList.filter(x => !selectedCodes.includes(x));
         missingList = missingList.filter(x => !selectedPrereqs.includes(x));
@@ -111,32 +111,37 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     addModule(inputCode){
-        this.paramModuleCode.setValue({'code':inputCode});
-        this.plannerModuleService.getModule(this.paramModuleCode.value)
+        this.paramModuleID.setValue({'id':inputCode});
+        console.log(inputCode)
+        this.plannerModuleService.getModule(inputCode)
         .subscribe(response => {
             this.plannerModuleService.requestedModule.next(response.result);
         });
         this.plannerModuleService.requestedModule
         .subscribe(result => {
-            if(!this.selectedModules.map(x => x.code).includes(result[0].code)){
-            this.selectedModules.push(result[0]);
+            console.log(result)
+            if(!this.selectedModules.map(x => x.id).includes(result.id)){
+            this.selectedModules.push(result);
             }
-            this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.code==y.code));
+            this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.id==y.id));
             this.toTarget();
         });
     }
-    disableAddtoPrereq(code){
-        return this.selectedModules.map(x => x.code).includes(code) || this.selectedModules.includes(code);
+
+    disableAddtoPrereq(id){
+        return this.selectedModules.map(x => x.id).includes(id) || this.selectedModules.includes(id);
     }
-    addPrequisite(code){
-        if (this.takenPrerequisites.includes(code)){
-            this.takenPrerequisites = this.takenPrerequisites.filter(x => x!=code);
+
+    addPrequisite(id){
+        if (this.takenPrerequisites.includes(id)){
+            this.takenPrerequisites = this.takenPrerequisites.filter(x => x!=id);
         } else {
-            this.takenPrerequisites.push(code)
+            this.takenPrerequisites.push(id)
         }
         this.takenPrerequisites = this.takenPrerequisites.slice();
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
+
     onChange($event){
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
@@ -146,50 +151,67 @@ export class PlannerPicklistComponent implements OnInit {
     output: JSON;
     obj: any;
 
-    savePlan() {
-        this.displaySaveForm = true;
-        this.obj =
+
+    openSaveDialog() {
+        this.authService.requireLogIn(() =>
         {
-        "modules":this.selectedModules.map(x => x['code']),
-        "prerequisites":this.takenPrerequisites
-        };
-        this.output = <JSON>this.obj;
-        //TODO
-        // -Send data to server
+            this.displaySaveForm = true;
+        }
+        )
     }
 
-    deletePlan(id) {
-        this.openPlanDialog
+    savePlan() {
+        this.obj =
+            {
+                "name": this.saveText ,
+                "moduleIDs":this.selectedModules.map(x => x['id']),
+                "studentID": localStorage.getItem('userId')
+            };
+        this.output = <JSON>this.obj;
+        this.plannerModuleService.savePlan(this.output)
+    }
+
+    deletePlan(inputCode) {
+        this.obj =
+            {
+                "modulePlannerId": inputCode
+            };
+        this.output = <JSON>this.obj;
+        //this.plannerModuleService.deletePlan(this.output)
     }
 
     openPlanDialog() {
-        this.plannerModuleService.getNames().subscribe(response => {
-            this.plannerModuleService.returnNames.next(response.result);
-        });
-        this.plannerModuleService.returnNames.subscribe(result => {
-            this.plans = result;
-        })
-        this.displayLoadForm = true;
+        this.authService.requireLogIn(() =>
+            {
+                this.plannerModuleService.getNames().subscribe(response => {
+                    this.plannerModuleService.returnNames.next(response.result.modulePlanners);
+                });
+                this.plannerModuleService.returnNames.subscribe(result => {
+                    console.log(result)
+                    this.plans = result;
+                })
+                this.displayLoadForm = true;
+            }
+        )
     }
 
     loadPlan(inputCode) {
-        this.paramPlanCode.setValue({'plan':inputCode});
-        this.plannerModuleService.getPlan(this.paramPlanCode.value).subscribe(response => {
+        this.plannerModuleService.getPlan(inputCode).subscribe(response => {
             this.plannerModuleService.returnPlan.next(response.result);
         });
         this.plannerModules = this.plannerModules.concat(this.selectedModules);
         this.selectedModules = [];
-        this.filterSemesters();
         this.plannerModuleService.returnPlan
             .subscribe(result => {
-                //Remove [0] when backend works
-                result[0].data.modules.forEach(code => {
-                    this.addModule(code)
+                console.log(result)
+                result.modules.forEach(id => {
+                    this.addModule(id)
                 });
-                //Remove [0] when backend works
-                this.takenPrerequisites=result[0].data.prerequisites;
+                this.takenPrerequisites=result.prerequisites;
             });
+
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules, ["code"]));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
+        this.filterSemesters();
     }
 }

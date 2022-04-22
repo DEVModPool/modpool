@@ -9,45 +9,6 @@
 
     <p-dialog header="Select Filters" [(visible)]="display" [style]="{width: '50vw'}" [modal]="true">
         <div class="grid p-fluid">
-            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-                <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
-            </div>
-            <div *ngFor="let moduleLevel of moduleLevels" class="field-checkbox col-3">
-                <p-checkbox
-                    queryParamName="moduleLevel"
-                    name="group2"
-                    value="category"
-                    [value]="moduleLevel.id"
-                    [inputId]="moduleLevel.key"
-                ></p-checkbox>
-                <label [for]="moduleLevel.key">{{moduleLevel.name}}</label>
-            </div>
-            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-                <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
-            </div>
-            <div *ngFor="let semester of semesters" class="field-checkbox col-6">
-                <p-checkbox
-                    queryParamName="semester"
-                    name="group2"
-                    value="category"
-                    [value]="semester.id"
-                    [inputId]="semester.id"
-                ></p-checkbox>
-                <label [for]="semester.key">{{semester.name}}</label>
-            </div>
-            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-                <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
-            </div>
-            <div *ngFor="let creditOption of creditOptions" class="field-checkbox col-3">
-                <p-checkbox
-                    queryParamName="credits"
-                    name="group2"
-                    value="category"
-                    [value]="creditOption.id"
-                    [inputId]="creditOption.key"
-                ></p-checkbox>
-                <label [for]="creditOption.key">{{creditOption.name}}</label>
-            </div>
             <div class="col-12">
                 <h5 [ngStyle]="{color:'var(--primary-color)'}">Departments:</h5>
                 <p-multiSelect
@@ -60,6 +21,43 @@
                     [style]="{'width':'100%'}">
                 </p-multiSelect>
             </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
+            </div>
+            <div *ngFor="let moduleLevel of moduleLevels" class="field-checkbox col-3">
+                <p-checkbox
+                    [value]="moduleLevel"
+                    [inputId]="moduleLevel"
+                    [(ngModel)]="selectedModuleLevels"
+                    (onChange)="levelChange()"
+                ></p-checkbox>
+                <label [for]="moduleLevel">{{moduleLevel}}</label>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
+            </div>
+            <div *ngFor="let semester of semesters" class="field-checkbox col-6">
+                <p-checkbox
+                    [value]="semester.value"
+                    [inputId]="semester.name"
+                    [(ngModel)]="selectedSemesters"
+                    (onChange)="semesterChange()"
+                ></p-checkbox>
+                <label [for]="semester.name">{{semester.name}}</label>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
+            </div>
+            <div *ngFor="let creditOption of creditOptions" class="field-checkbox col-3">
+                <p-checkbox
+                    [value]="creditOption"
+                    [inputId]="creditOption"
+                    [(ngModel)]="selectedCreditOptions"
+                    (onChange)="creditChange()"
+                ></p-checkbox>
+                <label [for]="creditOption">{{creditOption}}</label>
+            </div>
+
         </div>
     </p-dialog>
 </div>
