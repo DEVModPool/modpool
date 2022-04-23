@@ -10,6 +10,3 @@ export interface ModuleCoordinator {
     fullName: string,
     id: string
 }
-
-
-

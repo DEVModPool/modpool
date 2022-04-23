@@ -1,0 +1,63 @@
+<div [queryParamGroup]="paramGroup">
+    <div class="grid p-fluid">
+        <div class="p-inputgroup col 12">
+            <input type="text" pInputText placeholder="Module name, code, description..." queryParamName="q" id="inputBox">
+        </div>
+        <button type="button" (click)="showDialog()" label="Show" class="p-button pi pi-filter" style="width: min-content; margin: auto;" ></button>
+
+    </div>
+
+    <p-dialog header="Select Filters" [(visible)]="display" [style]="{width: '50vw'}" [modal]="true">
+        <div class="grid p-fluid">
+            <div class="col-12">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Departments:</h5>
+                <p-multiSelect
+                    queryParamName="department"
+                    [options]="departments"
+                    defaultLabel="Add department filter..."
+                    optionLabel="name"
+                    selectedItemsLabel="{0} items selected"
+                    optionValue="id"
+                    [style]="{'width':'100%'}">
+                </p-multiSelect>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
+            </div>
+            <div *ngFor="let moduleLevel of moduleLevels" class="field-checkbox col-3">
+                <p-checkbox
+                    [value]="moduleLevel"
+                    [inputId]="moduleLevel"
+                    [(ngModel)]="selectedModuleLevels"
+                    (onChange)="levelChange()"
+                ></p-checkbox>
+                <label [for]="moduleLevel">{{moduleLevel}}</label>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
+            </div>
+            <div *ngFor="let semester of semesters" class="field-checkbox col-6">
+                <p-checkbox
+                    [value]="semester.value"
+                    [inputId]="semester.name"
+                    [(ngModel)]="selectedSemesters"
+                    (onChange)="semesterChange()"
+                ></p-checkbox>
+                <label [for]="semester.name">{{semester.name}}</label>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
+            </div>
+            <div *ngFor="let creditOption of creditOptions" class="field-checkbox col-3">
+                <p-checkbox
+                    [value]="creditOption"
+                    [inputId]="creditOption"
+                    [(ngModel)]="selectedCreditOptions"
+                    (onChange)="creditChange()"
+                ></p-checkbox>
+                <label [for]="creditOption">{{creditOption}}</label>
+            </div>
+
+        </div>
+    </p-dialog>
+</div>
