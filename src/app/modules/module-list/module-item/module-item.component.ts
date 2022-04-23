@@ -26,6 +26,7 @@ export class ModuleItemComponent implements OnInit {
 
     ngOnInit(): void {
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
+        console.log(selectedModules)
         if (selectedModules.includes(this.module.id)){
             this.icon='pi pi-check'
             this.buttontext = "Added to planner"
@@ -34,6 +35,7 @@ export class ModuleItemComponent implements OnInit {
     }
 
     addToPlanner(moduleId){
+        console.log(moduleId)
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
         if (selectedModules == null){
             selectedModules = [moduleId]
@@ -43,12 +45,14 @@ export class ModuleItemComponent implements OnInit {
             selectedModules.push(moduleId)
             this.setStyling(true)
         } else {
+            console.log(selectedModules)
             let n = []
             selectedModules.forEach(x => {
                 if(x!=moduleId){
-                    n.push(moduleId)
+                    n.push(x)
                 }
             });
+            console.log(n)
             selectedModules = n
             this.setStyling(false)
         }
