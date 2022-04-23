@@ -30,6 +30,7 @@ import { ServerErrorComponent } from "./error-pages/server-error/server-error.co
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
 import { UserModule } from "./user/user.module";
 
+
 @NgModule({
     imports: [
         BrowserModule,

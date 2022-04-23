@@ -13,6 +13,21 @@
                     "exam": "70"
                 },
                 "prerequisites": [
+                    {"id": "1", "name": "Intro to Dummy Data", "code": "COMP 288"},
+                    {"id": "2", "name": "Data Structures and Algorithms", "code" : "COMP 108"}
+                ],
+                "prerequisiteFor": [
+                    {"id": "3", "name": "Advanced AI", "code":"COMP 229"}
+                ],
+                "semester": "1",
+                "missing":[""]
+            },
+            {
+                "id": "542",
+                "name": "Intro to dummy data",
+                "code": "COMP 288",
+                "description": " Pellentesque eu consectetur lectus, quis maximus lorem. Donec mi ipsum, dictum sed ultricies pulvinar, gravida sed quam. Aliquam eu sem purus. Mauris mattis arcu vel pharetra gravida. Aliquam mollis et erat sit amet luctus. Ut ornare luctus sapien eu maximus. Nunc in arcu consectetur, vestibulum ligula sit amet, tristique sem. Duis a elit massa. Donec et nunc pharetra, bibendum dui tincidunt, efficitur eros. Donec in massa vitae metus venenatis pulvinar et ac risus.",
+                "assessment" : {
                     {
                         "id": "1",
                         "name": "Object Oriented Programming"
@@ -39,6 +54,16 @@
                     "exam": "70"
                 },
                 "prerequisites": [
+                    {"id": "1", "name": "Dummy data 1", "code" : "COMP 244"},
+                    {"id": "2", "name": "Data Structures and Algorithms", "code" : "COMP 108"},
+                    {"id": "3", "name": "Data Structures and Algorithms", "code" : "COMP 109"},
+                    {"id": "4", "name": "Data Structures and Algorithms", "code" : "COMP 110"}
+                ],
+                "prerequisiteFor": [
+                    {"id": "3", "name": "Advanced AI", "code": "COMP 229"}
+                ],
+                "semester": "2",
+                "missing":[""]
                     {
                         "id": "1",
                         "name": "Object Oriented Programming"
@@ -109,6 +134,13 @@
                     }
                 ],
                 "moduleLevels": [
+                    {"id":"1","name": "100"},
+                    {"id":"2","name": "200"},
+                    {"id":"3","name": "300"},
+                    {"id":"4","name": "400"},
+                    {"id":"5","name": "500"}
+                ],
+                "codes": [
                     {
                         "id": "1",
                         "name": "100"
@@ -139,6 +171,52 @@
         "result": {
         }
     },
+
+    "plannerData": {
+        "hasErrors": false,
+        "errors": null,
+        "result": [
+            {
+                "id": "1",
+                "name": "test one",
+                "data": {
+                    "modules": [
+                        "COMP 244",
+                        "COMP 288"
+                    ],
+                    "prerequisites": [
+                        "COMP 108",
+                        "COMP 113",
+                        "COMP 110",
+                        "COMP 111",
+                        "COMP 244"
+                    ]
+                }
+            },{
+                "id": "2",
+                "name": "test two",
+                "data": {
+                    "modules": [
+                        "COMP 244"
+                    ],
+                    "prerequisites": [
+                        "COMP 108"
+                    ]
+                }
+            },{
+                "id": "3",
+                "name": "test three",
+                "data": {
+                    "modules": [
+                        "COMP 244"
+                    ],
+                    "prerequisites": [
+                        "COMP 108"
+                    ]
+                }
+            }
+        ]
+
     "staffList": {
         "hasErrors": false,
         "errors": null,

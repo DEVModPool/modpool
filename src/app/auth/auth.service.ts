@@ -12,6 +12,7 @@ import { catchError } from "rxjs/operators";
     providedIn: 'root'
 })
 export class AuthService {
+
     private autoLogoutTimer;
     autoLogoutMessage: Message[] = [];
 
