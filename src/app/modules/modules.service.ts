@@ -25,5 +25,7 @@ export class ModulesService extends ServiceInterface<ModuleItem> {
     initialUrl(): string {
         return environment.modulesUrl;
     }
+
+
 }
 

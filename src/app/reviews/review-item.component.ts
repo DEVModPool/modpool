@@ -21,17 +21,19 @@ export class ReviewItemComponent implements OnInit {
         this.sliceOptions.end = this.sliceOptions.end ? undefined : this.sliceOptions.default;
     }
 
+    parseReactionData(reviewObj) {
+        return {
+            reviewId: 'E1E45644-7734-4623-82FB-EE227C3E8C6E',
+            upvoteCount: reviewObj.upvoteCount,
+            downvoteCount: reviewObj.downvoteCount,
+            reactions: reviewObj.reactions
+        }
+    }
+
     constructor(private authService: AuthService) {
     }
 
+
     ngOnInit(): void {
-    }
-
-    onUpvote() {
-        this.authService.requireLogIn(() => console.log('like'));
-    }
-
-    onDownvote() {
-        this.authService.requireLogIn(() => console.log('dislike'));
     }
 }

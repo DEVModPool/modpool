@@ -10,12 +10,13 @@ import { AuthService } from "../../../auth/auth.service";
 export class StaffReviewItemComponent extends ReviewItemComponent {
 
     @Input() review;
+    reactionData;
 
     constructor(authService: AuthService) {
         super(authService);
     }
 
-    ngAfterViewInit() {
-        console.log(this.review);
+    ngOnInit() {
+        this.reactionData = this.parseReactionData(this.review);
     }
 }

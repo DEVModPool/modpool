@@ -26,7 +26,7 @@ export class ReviewsService extends ServiceInterface<any> {
         this.authService.requireLogIn(
             () => {
                 this.reviewModalDisplayed.next(true);
-                this.http.get(environment.baseUrl + 'reviews/' + code + '/academic-years')
+                this.http.get(environment.baseUrl + environment.reviewsUrl + code + '/academic-years')
                     .subscribe(
                         response => {
                             this.academicYearObservable.next(response);
@@ -34,6 +34,12 @@ export class ReviewsService extends ServiceInterface<any> {
                     );
             }
         )
+    }
+
+    sendReaction(body) {
+        return this.http.post(environment.baseUrl + environment.reviewsUrl + 'reactions', body)
+            .subscribe(
+                response => console.log(response));
     }
 
     public getReviewModalSubject() {

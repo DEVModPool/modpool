@@ -1,5 +1,5 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,10 +27,10 @@ import { RegisterComponent } from './auth/register/register.component';
 import { environment } from "../environments/environment";
 import { ToastModule } from "primeng/toast";
 import { ModulesModule } from "./modules/modules.module";
-import {NgxSpinnerModule} from "ngx-spinner";
-import {SpinnerInterceptor} from "./interaction/spinner.interceptor";
-import {ServerErrorComponent} from "./error-pages/server-error/server-error.component";
-import {NotFoundComponent} from "./error-pages/not-found/not-found.component";
+import { NgxSpinnerModule } from "ngx-spinner";
+import { SpinnerInterceptor } from "./interaction/spinner.interceptor";
+import { ServerErrorComponent } from "./error-pages/server-error/server-error.component";
+import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
 
 @NgModule({
     imports: [
@@ -65,10 +65,10 @@ import {NotFoundComponent} from "./error-pages/not-found/not-found.component";
         MenuComponent,
         MenuItemComponent,
         ServerErrorComponent,
-        NotFoundComponent
+        NotFoundComponent,
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+        {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
         ConfigService,
         MenuService,
         ConfirmationService,
