@@ -48,5 +48,19 @@ export class ModuleReviewsService extends ReviewsService {
                 }
             );
     }
+
+    deleteReview(reviewId) {
+        return this.http
+            .request<Response<any>>(
+                'DELETE',
+                environment.baseUrl + environment.profileUrl + environment.reviewsUrl,
+                {body: {reviewId}}
+            )
+            .subscribe(
+                _ => {
+                    this.userService.getReviews();
+                }
+            )
+    }
 }
 

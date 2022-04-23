@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "../../environments/environment";
-import { ActivatedRoute } from "@angular/router";
 import { SubscriptionHandler } from "../interaction/subscription-handler";
 import { UserService } from "./user.service";
 
