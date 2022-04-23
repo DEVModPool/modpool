@@ -44,6 +44,7 @@ export class PlannerPicklistComponent implements OnInit {
      }
 
     ngOnInit(): void {
+        localStorage.setItem('takenPrerequisiteStorage', null);
         this.plans = []
         this.plannerModules = [];
         this.selectedModules = [];
@@ -95,7 +96,9 @@ export class PlannerPicklistComponent implements OnInit {
         let selectedCodes = this.selectedModules.map(a => a.id);
         mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
         mod.prerequisiteModules.forEach(preReq => {
-            if (!this.allPrerequisites.includes(preReq)){this.allPrerequisites.push(preReq)}
+            let preReqCodes = this.allPrerequisites.map(x => x.id)
+            let currentPreReqCode = preReq.id
+            if (!preReqCodes.includes(currentPreReqCode)){this.allPrerequisites.push(preReq)}
         });
     }
     showSemester(module){
@@ -137,6 +140,7 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     addPrequisite(id){
+        console.log(id)
         if (this.takenPrerequisites.includes(id)){
             this.takenPrerequisites = this.takenPrerequisites.filter(x => x!=id);
         } else {
