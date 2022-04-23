@@ -9,10 +9,10 @@ import { nextTick } from 'process';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-planner-picklist',
-  templateUrl: './planner-picklist.component.html',
-  styleUrls: ['./planner-picklist.component.scss'],
-  providers: [ConfirmationService]
+    selector: 'app-planner-picklist',
+    templateUrl: './planner-picklist.component.html',
+    styleUrls: ['./planner-picklist.component.scss'],
+    providers: [ConfirmationService]
 })
 
 export class PlannerPicklistComponent implements OnInit {
@@ -60,11 +60,10 @@ export class PlannerPicklistComponent implements OnInit {
                 this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id==y.id))
                 this.plannerModules.forEach(x=> x['missing'] = [])
 
+
             });
         this.saveText = "";
     }
-
-
 
     filterSemesters(){
         this.selectedSemester1=(this.selectedModules.filter(x => x.semester==1).length>0)
@@ -79,6 +78,7 @@ export class PlannerPicklistComponent implements OnInit {
 
     toTarget(){
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
+
         this.filterSemesters();
         this.plannerModules.forEach(mod => {
             mod.missing = [];
@@ -152,7 +152,7 @@ export class PlannerPicklistComponent implements OnInit {
         this.takenPrerequisites = this.takenPrerequisites.slice();
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
-
+  
     onChange($event){
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
@@ -238,8 +238,6 @@ export class PlannerPicklistComponent implements OnInit {
 
     }
 
-
-
     loadPlan(inputCode) {
         this.plannerModuleService.getPlan(inputCode).subscribe(response => {
             this.plannerModuleService.returnPlan.next(response.result);
@@ -255,6 +253,7 @@ export class PlannerPicklistComponent implements OnInit {
 
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
+
         this.filterSemesters();
     }
 }

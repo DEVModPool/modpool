@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ModulesService } from "../modules.service";
 import { ModuleItem } from "./module-item/module-item.model";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
@@ -27,8 +26,6 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
                     this.storeSubscription(
                         this.moduleService.getAll()
                     );
-                    // console.log(response);
-                    // this.modules = response.moduleData.modules.items;
                 }
             )
         );

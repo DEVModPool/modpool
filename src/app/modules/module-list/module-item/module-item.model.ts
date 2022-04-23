@@ -1,5 +1,6 @@
 export class RequisiteModule {
-    constructor(public id: string, public name: string) {}
+    constructor(public id: string, public name: string) {
+    }
 }
 
 export class ModuleItem {
@@ -8,8 +9,11 @@ export class ModuleItem {
         public name: string,
         public code: string,
         public description: string,
-        public assessment: {coursework: string, exam: string},
-        public prerequisites?: RequisiteModule[],
-        public prerequisiteFor?: RequisiteModule[]
-    ) {}
+        public assessment: { coursework: string, exam: string },
+        public averageRating: number,
+        public reviewsCount: number,
+        public prerequisiteModules?: RequisiteModule[],
+        public prerequisiteForModules?: RequisiteModule[],
+    ) {
+    }
 }

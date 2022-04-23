@@ -11,15 +11,14 @@ export const environment = {
     jwtAllowedDomain: 'dev.modpool.uk',
     baseUrl: 'http://dev.modpool.uk/api/',
 
+
     resolverUrl: 'resolve-route',
     loginUrl: 'login',
 
     coordinatorsUrl: 'coordinators/',
-
     reviewsUrl: 'reviews/',
-
     modulesUrl: 'modules/',
-
+    profileUrl: 'profile/',
     moduleDetails: 'moduleDetails/',
     modulePlanners: 'module-planners/'
 };

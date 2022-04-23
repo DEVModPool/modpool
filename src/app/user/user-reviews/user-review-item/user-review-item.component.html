@@ -1,25 +1,36 @@
 <div class="card grid">
-    <div class="col-6">
+    <div class="col-5">
         <p class="flex text-xl font-medium">
             Quality: &nbsp;
             <p-rating [ngModel]="review.quality" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
-    <div class="col-6">
+    <div class="col-5">
         <p class="flex text-xl font-medium">
             Difficulty: &nbsp;
             <p-rating [ngModel]="review.difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
-    <div class="col-12 text-900">
-        <p>Coordinator:
-            <a [routerLink]="['/coordinators', review.coordinatorId]">
-                <span
-                    class="hover:text-primary hover-underline-animation font-bold">{{ review.coordinatorFullName }}</span>
-            </a>
+
+    <div class="col-2">
+        <p class="flex text-xl font-medium">
+            Status:
+            <span style="margin-left:10px">
+                <p-tag [severity]="getTagStatus(review)" [value]="review.reviewStatus"></p-tag>
+            </span>
         </p>
+    </div>
+
+    <div class="col-12 text-900">
+        <p>Module: <span class="font-bold">{{ review.moduleFullName }}</span></p>
+    </div>
+    <div class="col-12 text-900">
+        <p>Coordinator: <span class="font-bold">{{ review.coordinatorFullName }}</span></p>
+    </div>
+    <div class="col-12 text-900">
         <p>Taken: <span class="font-bold">{{ review.moduleAcademicYear }}</span></p>
     </div>
+
     <div class="col-12">
         <p-divider></p-divider>
     </div>
@@ -38,8 +49,25 @@
         </p-divider>
     </div>
 
-    <div class="col-12 md:col-12 flex flex-row-reverse">
-        <app-module-review-reaction [reactionData]="reactionData"></app-module-review-reaction>
+    <div class="col-12">
+        <button
+            pButton
+            class="p-button-danger"
+            type="button"
+            label="Delete"
+            icon="pi pi-trash"
+            (click)="deleteReview(review.id)"
+        ></button>
+        <span style="margin-left:10px">
+            <button
+                *ngIf="review.reviewStatus == 'Pending'"
+                pButton
+                type="button"
+                label="Edit"
+                icon="pi pi-pencil"
+                (click)="editReview('COMP105')">
+            </button>
+        </span>
     </div>
 </div>
 <br>

@@ -1,7 +1,11 @@
 <div class="grid flex flex-wrap">
-    <div class="md:col-8 col-12 flex-order-1 md:flex-order-0">
+    <div class="md:col-8 col-12 flex-order-1 md:flex-order-0" style="position:relative">
+        <ngx-spinner
+            name="moduleListSpinner" bdColor="rgba(208,225,253,0.25)" size="medium" color="#3b82f6"
+            type="ball-triangle-path" [fullScreen]="false"></ngx-spinner>
         <app-module-list></app-module-list>
     </div>
+
     <div class="md:col-4 col-12 flex-order-0 md:flex-order-1">
         <app-module-filter></app-module-filter>
     </div>

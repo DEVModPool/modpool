@@ -15,24 +15,65 @@
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
                                 <input formControlName="email" type="text" pInputText placeholder="Email">
+                                <span class="p-inputgroup-addon">@liverpool.ac.uk</span>
                             </div>
+
                         </div>
+
                         <div class="col-12">
                             <label class="block text-900 font-medium text-lg mb-2">Password</label>
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                <input formControlName="password" type="text" pInputText placeholder="Password">
+                                <input type="password" formControlName="password" pInputText placeholder="Password">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                <input formControlName="repeatPassword" type="text" pInputText
+                                <input type="password" formControlName="repeatPassword" type="text" pInputText
                                        placeholder="Repeat Password">
                             </div>
                         </div>
+                        <div>
+                            <p-messages severity="info">
+                                <ng-template pTemplate="">
+                                    <div class="flex flex-column">
+                                        <h6 class="flex mb-0 text-blue-800">Password requirements:</h6>
+                                        <p *ngIf="password.errors?.required || password.errors?.['hasNumber']"
+                                           class="ml-2 flex mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>
+                                            Numeric value.</p>
+                                        <p *ngIf="!(password.errors?.required || password.errors?.['hasNumber']) || password.valid"
+                                           class="ml-2 flex text-green-500 mb-0 mt-0">
+                                            <i class="pi pi-angle-right align-self-center"></i>Numeric value.</p>
+
+                                        <p *ngIf="password.errors?.required || password.errors?.['hasCapitalCase']"
+                                           class="ml-2 flex mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Uppercase letter.</p>
+                                        <p *ngIf="!(password.errors?.required || password.errors?.['hasCapitalCase'])"
+                                           class="ml-2 flex text-green-500  mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Uppercase letter.</p>
+
+                                        <p *ngIf="password.errors?.required || password.errors?.['hasSmallCase'] "
+                                           class="ml-2 flex mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Lowercase letter.</p>
+                                        <p *ngIf="!(password.errors?.required || password.errors?.['hasSmallCase'])"
+                                           class="ml-2 flex text-green-500 mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Lowercase letter.</p>
+
+                                        <p *ngIf="password.errors?.minlength || password.errors?.required"
+                                           class="ml-2 flex mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Minimum 8 characters.</p>
+                                        <p *ngIf="!(password.errors?.required || password.errors?.minlength)"
+                                           class="ml-2 flex text-green-500 mb-0 mt-0"><i
+                                            class="pi pi-angle-right align-self-center"></i>Minimum 8 characters.</p>
+                                    </div>
+                                </ng-template>
+                            </p-messages>
+                        </div>
                         <div class="col-12">
                             <button
+                                [disabled]="authForm.invalid"
                                 type="submit"
                                 pButton
                                 pRipple
@@ -41,10 +82,14 @@
                             </button>
                         </div>
                     </form>
-                    <div *ngIf="!passwordMatch">
+                    <div *ngIf="(email.dirty && email.errors?.['required']) || !passwordMatch">
                         <p-messages severity="error">
                             <ng-template pTemplate="">
-                                <div class="ml-2">Passwords do not match!</div>
+                                <div class="flex flex-column">
+                                    <p *ngIf="!passwordMatch" class="ml-2 flex">Passwords do not match!</p>
+                                    <p *ngIf="email.dirty && email.errors?.['required']" class="ml-2 flex">Email is
+                                        required!</p>
+                                </div>
                             </ng-template>
                         </p-messages>
                     </div>
