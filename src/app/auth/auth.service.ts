@@ -80,6 +80,7 @@ export class AuthService {
         if (this.autoLogoutTimer) {
             clearTimeout(this.autoLogoutTimer);
         }
+        this.router.navigate(['/']);
     }
 
     submitToken(token) {

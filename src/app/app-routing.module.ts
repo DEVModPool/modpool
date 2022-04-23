@@ -6,14 +6,13 @@ import { ServerErrorComponent } from "./error-pages/server-error/server-error.co
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
 import { UserComponent } from "./user/user.component";
 import { AuthGuard } from "./auth/auth.guard";
-import { BaseResolver } from "./interaction/base-resolver";
-import { environment } from "../environments/environment";
 
 const routes: Routes = [
     {
         path: '',
         component: AppMainComponent,
         children: [
+            {path: '', redirectTo: '/modules', pathMatch: 'full'},
             {path: 'modules', loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)},
             {path: 'planner', loadChildren: () => import('./planner/planner.module').then(m => m.PlannerModule)},
             {path: 'coordinators', loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule)},
