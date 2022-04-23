@@ -31,6 +31,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SpinnerInterceptor } from "./interaction/spinner.interceptor";
 import { ServerErrorComponent } from "./error-pages/server-error/server-error.component";
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
+import { UserComponent } from './user/user.component';
 
 @NgModule({
     imports: [
@@ -66,6 +67,7 @@ import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
         MenuItemComponent,
         ServerErrorComponent,
         NotFoundComponent,
+        UserComponent,
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},

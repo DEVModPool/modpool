@@ -1,6 +1,6 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
-<!--        <img src="assets/layout/images/{{appMain.config.dark ? 'logo-white' : 'logo-dark'}}.svg" alt="logo">-->
+        <!--        <img src="assets/layout/images/{{appMain.config.dark ? 'logo-white' : 'logo-dark'}}.svg" alt="logo">-->
         <span>ModPool</span>
     </a>
 
@@ -13,15 +13,16 @@
     </a>
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <a href="#" class="p-link layout-topbar-button" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/user" class="p-link layout-topbar-button" *ngIf="this.authService.isLoggedIn()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </a>
         <a href="#" class="p-link layout-topbar-button" routerLink="/login" *ngIf="!this.authService.isLoggedIn()">
-            <i class="pi pi-sign-in" ></i>
+            <i class="pi pi-sign-in"></i>
             <span>Log In</span>
         </a>
-        <p-confirmDialog [style]="{width: '30vw'}" icon="pi pi-question-circle" rejectButtonStyleClass="p-button-outlined" [baseZIndex]="10000">
+        <p-confirmDialog [style]="{width: '30vw'}" icon="pi pi-question-circle"
+                         rejectButtonStyleClass="p-button-outlined" [baseZIndex]="10000">
             <ng-template pTemplate="header">
                 <h3>Sign Out</h3>
             </ng-template>
