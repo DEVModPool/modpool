@@ -12,8 +12,8 @@
             <h6 class="ml-2" style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
         </div>
         <div class="col-6 flex justify-content-end">
-            <p-splitButton label="Add to planner" icon="pi pi-calendar-plus" [model]="items"
-                           styleClass="p-button-sm"></p-splitButton>
+            <p-splitButton [label]="buttontext" [icon]="icon" class="planButton" [model]="items"
+                           styleClass="p-button-sm" (onClick)="addToPlanner(module.id)" id={{module.id}}></p-splitButton>
             <!--            <p-speedDial [model]="items" radius="60" direction="down-left" type="quarter-circle" buttonClassName="p-button-success"></p-speedDial>-->
         </div>
     </div>

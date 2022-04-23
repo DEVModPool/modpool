@@ -50,7 +50,8 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedModules = [];
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
-        this.selectedModules = (JSON.parse(localStorage.getItem('selectedModuleStorage')));
+        let localStorageSelectedCodes = JSON.parse(localStorage.getItem('selectedModuleStorage'))
+        this.selectedModules = localStorageSelectedCodes.forEach(x => this.addModule(x));
         this.selectedModules = (this.selectedModules==null) ? [] : this.selectedModules;
         this.selectedModules.forEach(x => this.checkPrerequisites(x))
         this.filterSemesters()
@@ -71,13 +72,13 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     toSource(){
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
         this.filterSemesters();
         this.toTarget();
     }
 
     toTarget(){
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
         this.filterSemesters();
         this.plannerModules.forEach(mod => {
             mod.missing = [];
@@ -130,7 +131,9 @@ export class PlannerPicklistComponent implements OnInit {
             if(!this.selectedModules.map(x => x.id).includes(result.id)){
             this.selectedModules.push(result);
             }
-            this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.id==y.id));
+            if(this.selectedModules != []){
+                this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.id==y.id));
+            }
             this.toTarget();
         });
     }
@@ -251,7 +254,7 @@ export class PlannerPicklistComponent implements OnInit {
             });
 
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
         this.filterSemesters();
     }
 }
