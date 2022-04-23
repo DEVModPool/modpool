@@ -1,5 +1,5 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,6 @@ import { PlannerModule } from "./planner/planner.module";
 import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
-import { environment } from 'src/environments/environment';
 import { StaffModule } from "./staff/staff.module";
 import { RegisterComponent } from './auth/register/register.component';
 import { environment } from "../environments/environment";
@@ -67,7 +66,7 @@ import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
         NotFoundComponent
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+        {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
         ConfigService,
         MenuService,
         ConfirmationService,
