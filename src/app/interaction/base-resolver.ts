@@ -32,10 +32,12 @@ export class BaseResolver<T> implements Resolve<T> {
             map(response => {
                 return response.result;
             }),
-            catchError(() => {
+            catchError(error => {
+                console.log(error);
                 this.router.navigate(['']);
                 return EMPTY;
             })
         );
     }
 }
+

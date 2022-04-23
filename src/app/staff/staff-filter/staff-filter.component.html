@@ -1,0 +1,29 @@
+<div class="card">
+    <h5 [ngStyle]="{color:'var(--primary-color)'}">Filter Staff</h5>
+    <br>
+    <form [formGroup]="filterForm">
+        <div class="p-fluid grid">
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <input pInputText type="text" id="name" formControlName="name">
+                    <label for="name">Name</label>
+                </span>
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-multiSelect
+                        id="departments"
+                        inputId="departments"
+                        [options]="departments"
+                        optionLabel="name"
+                        optionValue="id"
+                        [filter]="true"
+                        formControlName="departmentId">
+                    </p-multiSelect>
+                    <label for="departments">Departments</label>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

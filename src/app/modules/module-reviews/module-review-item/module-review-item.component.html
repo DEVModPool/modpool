@@ -2,33 +2,34 @@
     <div class="col-6">
         <p class="flex text-xl font-medium">
             Quality: &nbsp;
-            <p-rating [ngModel]="quality" readonly="true" stars="5" [cancel]="false"></p-rating>
+            <p-rating [ngModel]="review.quality" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
     <div class="col-6">
         <p class="flex text-xl font-medium">
             Difficulty: &nbsp;
-            <p-rating [ngModel]="difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
+            <p-rating [ngModel]="review.difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
     <div class="col-12 text-900">
         <p>Coordinator:
-            <a [routerLink]="[]">
-                <span class="hover:text-primary hover-underline-animation font-bold">Rasmus Ibsen Jensen Coope</span>
+            <a [routerLink]="['/coordinators', review.coordinatorId]">
+                <span
+                    class="hover:text-primary hover-underline-animation font-bold">{{ review.coordinatorFullName }}</span>
             </a>
         </p>
-        <p>Taken: <span class="font-bold">21/22</span></p>
+        <p>Taken: <span class="font-bold">{{ review.moduleAcademicYear }}</span></p>
     </div>
     <div class="col-12">
         <p-divider></p-divider>
     </div>
     <div class="col-12 md:col-12">
         <div>
-            <p>{{ details | slice:sliceOptions.start:sliceOptions.end }}</p>
+            <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
         </div>
         <p-divider align="center">
             <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()"
-                      *ngIf="details.length >= sliceOptions.default">
+                      *ngIf="review.content.length >= sliceOptions.default">
                 <ng-template pTemplate="content">
                     <i class="pi pi-chevron-down" *ngIf="!expanded"></i>
                     <i class="pi pi-chevron-up" *ngIf="expanded"></i>
@@ -37,12 +38,14 @@
         </p-divider>
     </div>
 
+    <!--    <app-ratings [downVoteCount]="" ></app-ratings>-->
+
     <div class="col-12 md:col-12 flex flex-row-reverse">
             <span
                 pTooltip="Upvote"
                 class="col-2 text-center hover:text-green-500 hover-underline-animation-green"
                 style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="checkLogin(upvote)">
+                <a style="color: unset; cursor: pointer" (click)="onUpvote()">
                     <i class="pi pi-thumbs-up" style="font-size: 1.5rem"></i> 6
                 </a>
             </span>
@@ -50,7 +53,7 @@
             pTooltip="Downvote"
             class="col-2 text-center hover:text-pink-500 hover-underline-animation-pink"
             style="font-size: 1.5rem;">
-                <a style="color: unset; cursor: pointer" (click)="checkLogin(downvote)">
+                <a style="color: unset; cursor: pointer" (click)="onDownvote()">
                     <i class="pi pi-thumbs-down" style="font-size: 1.5rem"></i> 3
                 </a>
             </span>

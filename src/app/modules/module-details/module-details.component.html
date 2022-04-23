@@ -27,7 +27,7 @@
                     <span class="font-semibold text-lg">
                         <i class="pi pi-angle-double-right"></i>&nbsp;Module Coordinator:
                     </span>
-                    {{ moduleDetails.coordinator.name }}
+                    {{ moduleDetails.coordinator.fullName }}
                 </p>
                 <p>
                     <span class="font-semibold text-lg">
@@ -48,13 +48,42 @@
             </div>
             <div class="col-12">
                 <h4 class="font-bold">Prerequisites:</h4>
-                <p-accordion *ngFor="let prerequisite of moduleDetails.prerequisites">
+                <p-accordion *ngFor="let prerequisite of moduleDetails.prerequisiteModules">
                     <p-accordionTab>
-                        <ng-template pTemplate="header">{{prerequisite.name}}</ng-template>
-                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
+                        <ng-template pTemplate="header">
+                            <div class="col-9"> {{prerequisite.prerequisiteModuleFullName}} </div>
+                            <div *ngIf="prerequisite.prerequisiteModuleReviewCount > 0" class="col-3"
+                                 style="text-align:right">
+                                <span style="margin-right:20px">
+                                    <i class="text-yellow-500 text-base pi pi-star-fill"></i>
+                                    {{ prerequisite.prerequisiteModuleAverageRating }}
+                                    <span class="text-blue-300 text-sm">/5</span>
+                                </span>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <div class="col-12">
+                                {{ prerequisite.prerequisiteModuleDescription }}
+                            </div>
+                            <hr>
+                            <div class="col-12">
+                                <div class="grid">
+                                    <div class="col-10">
+                                        <button
+                                            type="button"
+                                            pButton
+                                            pRipple
+                                            [routerLink]="['/modules', prerequisite.id]">
+                                            Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
                     </p-accordionTab>
                 </p-accordion>
-                <div *ngIf="!moduleDetails.prerequisites.length">
+                <div *ngIf="!moduleDetails.prerequisiteModules.length">
                     <p-messages severity="success">
                         <ng-template pTemplate>
                             <div>This module has no prerequisites.</div>
@@ -65,13 +94,41 @@
 
             <div class="col-12">
                 <h4 class="font-bold">Prerequisite for:</h4>
-                <p-accordion *ngFor="let prerequisiteFor of moduleDetails.prerequisiteFor">
+                <p-accordion *ngFor="let prerequisiteFor of moduleDetails.prerequisiteForModules">
                     <p-accordionTab>
-                        <ng-template pTemplate="header">{{prerequisiteFor.name}}</ng-template>
-                        <ng-template pTemplate="content">TODO-TD: Figure out what data has to be shown...</ng-template>
+                        <ng-template pTemplate="header">
+                            <div class="col-9"> {{prerequisiteFor.prerequisiteForModuleFullName}} </div>
+                            <div class="col-3" style="text-align:right">
+                                <span style="margin-right:20px">
+                                    <i class="text-yellow-500 text-base pi pi-star-fill"></i>
+                                    {{ prerequisiteFor.prerequisiteForModuleAverageRating }}
+                                    <span class="text-blue-300 text-sm">/5</span>
+                                </span>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <div class="col-12">
+                                {{ prerequisiteFor.prerequisiteForModuleDescription }}
+                            </div>
+                            <hr>
+                            <div class="col-12">
+                                <div class="grid">
+                                    <div class="col-10">
+                                        <button
+                                            type="button"
+                                            pButton
+                                            pRipple
+                                            [routerLink]="['/modules', prerequisiteFor.id]">
+                                            Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
                     </p-accordionTab>
                 </p-accordion>
-                <div *ngIf="!moduleDetails.prerequisiteFor.length">
+                <div *ngIf="!moduleDetails.prerequisiteForModules.length">
                     <p-messages severity="success">
                         <ng-template pTemplate>
                             <div>This module is not a prerequisite for any other module.</div>
@@ -107,7 +164,7 @@
             <p-divider></p-divider>
             <div class="col-12">
                 <h4 class="font-bold mt-0">Assessment Methods</h4>
-                <p-table [value]="moduleDetails.assessmentMethods" responsiveLayout="scroll">
+                <p-table [value]="moduleDetails.assessments" responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Type</th>
@@ -116,7 +173,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-assessment>
                         <tr>
-                            <td>{{assessment.type}}</td>
+                            <td>{{assessment.name}}</td>
                             <td>{{assessment.weight}}</td>
                         </tr>
                     </ng-template>
@@ -136,16 +193,30 @@
                 </h4>
                 <div class="col-4" style="text-align: right">
                     <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
-                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span class="text-blue-300 text-base">/5</span>
+                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ moduleDetails.averageRating }} <span
+                        class="text-blue-300 text-base">/5</span>
                     </h2>
-                    <p class="text-blue-300">
-                        Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews
+                    <p *ngIf="moduleDetails.reviewsCount > 1"
+                       class="text-blue-300">
+                        Based on
+                        <span class="text-blue-600 font-bold text-sm">
+                            {{ moduleDetails.reviewsCount }}
+                        </span>
+                        reviews
+                    </p>
+                    <p *ngIf="moduleDetails.reviewsCount == 1"
+                       class="text-blue-300">
+                        Based on
+                        <span class="text-blue-600 font-bold text-sm">
+                            {{ moduleDetails.reviewsCount }}
+                        </span>
+                        review
                     </p>
                 </div>
             </div>
             <div class="col-12">
                 <br>
-                <app-review-list></app-review-list>
+                <app-module-review-list [reviews]="reviews"></app-module-review-list>
             </div>
         </div>
     </div>
@@ -169,20 +240,30 @@
             </div>
             <p-divider></p-divider>
             <div class="card">
-                <div class="flex justify-content-center">
+                <div class="flex justify-content-center ">
                     <button
                         pButton
                         type="button"
                         label="Leave a review"
                         icon="pi pi-pencil"
-                        class="p-button-lg"
-                        (click)="checkLogin(openReview)"
+                        class="p-button-lg p-button-rounded"
+                        (click)="onLeaveReview()"
+                    ></button>
+                </div>
+                <p-divider type="dashed">
+                </p-divider>
+                <div class="flex justify-content-center">
+                    <button
+                        pButton
+                        type="button"
+                        label="Add to planner"
+                        icon="pi pi-calendar-plus"
+                        class="p-button-lg p-button-rounded"
                     ></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<app-login-modal></app-login-modal>
 
 

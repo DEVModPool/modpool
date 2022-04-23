@@ -1,32 +1,41 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
-import {ModuleItemComponent} from "./module-list/module-item/module-item.component";
-import {ModulesComponent} from "./modules.component";
-import {ModuleListComponent} from "./module-list/module-list.component";
-import {ModuleFilterComponent} from "./module-filter/module-filter.component";
-import {InputTextModule} from "primeng/inputtext";
-import {ButtonModule} from "primeng/button";
-import {RippleModule} from "primeng/ripple";
-import {PaginatorModule} from "primeng/paginator";
-import {TabViewModule} from "primeng/tabview";
-import {ProgressBarModule} from "primeng/progressbar";
-import {CheckboxModule} from "primeng/checkbox";
-import {MultiSelectModule} from "primeng/multiselect";
-import {ModulesRoutingModule} from "./modules-routing.module";
-import {QueryParamModule} from "@ngqp/core";
-import {DividerModule} from "primeng/divider";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { ModuleItemComponent } from "./module-list/module-item/module-item.component";
+import { ModulesComponent } from "./modules.component";
+import { ModuleListComponent } from "./module-list/module-list.component";
+import { ModuleFilterComponent } from "./module-filter/module-filter.component";
+import { InputTextModule } from "primeng/inputtext";
+import { ButtonModule } from "primeng/button";
+import { RippleModule } from "primeng/ripple";
+import { PaginatorModule } from "primeng/paginator";
+import { TabViewModule } from "primeng/tabview";
+import { ProgressBarModule } from "primeng/progressbar";
+import { CheckboxModule } from "primeng/checkbox";
+import { MultiSelectModule } from "primeng/multiselect";
+import { ModulesRoutingModule } from "./modules-routing.module";
+import { QueryParamModule } from "@ngqp/core";
+import { DividerModule } from "primeng/divider";
 import { ModuleDetailsComponent } from './module-details/module-details.component';
-import {ChartModule} from "primeng/chart";
-import {AccordionModule} from "primeng/accordion";
-import { ReviewListComponent } from './module-details/review-list/review-list.component';
-import { ReviewItemComponent } from './module-details/review-list/review-item/review-item.component';
-import {RatingModule} from "primeng/rating";
-import {ScrollPanelModule} from "primeng/scrollpanel";
-import {TooltipModule} from "primeng/tooltip";
-import {MessagesModule} from "primeng/messages";
-import {TableModule} from "primeng/table";
-import {AuthModule} from "../auth/auth.module";
+import { ChartModule } from "primeng/chart";
+import { AccordionModule } from "primeng/accordion";
+
+import { RatingModule } from "primeng/rating";
+import { ScrollPanelModule } from "primeng/scrollpanel";
+import { TooltipModule } from "primeng/tooltip";
+import { MessagesModule } from "primeng/messages";
+import { TableModule } from "primeng/table";
+import { AuthModule } from "../auth/auth.module";
+import { DialogModule } from "primeng/dialog";
+import { ReactiveFormsModule } from "@angular/forms";
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { SplitButtonModule } from "primeng/splitbutton";
+import { SpeedDialModule } from "primeng/speeddial";
+import { ModuleReviewNewComponent } from "./module-reviews/module-review-new/module-review-new.component";
+import { ModuleReviewListComponent } from "./module-reviews/module-review-list/module-review-list.component";
+import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/module-review-item.component";
+import { PaginationModule } from "../pagination/pagination.module";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
     declarations: [
@@ -35,8 +44,13 @@ import {AuthModule} from "../auth/auth.module";
         ModuleListComponent,
         ModuleFilterComponent,
         ModuleDetailsComponent,
-        ReviewListComponent,
-        ReviewItemComponent,
+        ModuleReviewNewComponent,
+        ModuleReviewListComponent,
+        ModuleReviewItemComponent
+    ],
+    exports: [
+        ModuleReviewListComponent,
+        ModuleReviewNewComponent
     ],
     imports: [
         RouterModule,
@@ -59,7 +73,14 @@ import {AuthModule} from "../auth/auth.module";
         TooltipModule,
         MessagesModule,
         TableModule,
-        AuthModule
+        AuthModule,
+        DialogModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        SplitButtonModule,
+        SpeedDialModule,
+        PaginationModule,
+        NgxSpinnerModule,
     ]
 })
 export class ModulesModule {

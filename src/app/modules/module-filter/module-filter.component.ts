@@ -1,8 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
-import {Subject, switchMap, takeUntil} from "rxjs";
-import {ModulesService} from "../modules.service";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { debounceTime } from "rxjs";
+import { ModulesService } from "../modules.service";
+import { PaginationModel } from "../../pagination/pagination.model";
+import { FilterInterface } from "../../interaction/filter-interface";
+import { ModuleItem } from "../module-list/module-item/module-item.model";
+import { PaginationService } from "../../pagination/pagination.service";
+import { FormControl, FormGroup } from "@angular/forms";
 
 interface Department {
     id: string,
@@ -14,54 +18,94 @@ interface Department {
     templateUrl: './module-filter.component.html',
     styleUrls: ['./module-filter.component.scss']
 })
-export class ModuleFilterComponent implements OnInit, OnDestroy {
+export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
     departments: Department[];
-    semesters: any[];
-    creditOptions: any[];
+    semesters: any[] = [{name: 'Semester 1', value: 1}, {name: 'Semester 2', value: 2}];
+    creditOptions: any[] = [7.5, 15];
     selectedCreditOptions: any[];
-    moduleLevels: any[];
+    moduleLevels: any[] = [100, 200, 300, 400, 500];
     selectedModuleLevels: any[];
 
-    public paramGroup: QueryParamGroup;
-    private componentDestroyed$ = new Subject<void>();
-
     constructor(
-        private activatedRoute: ActivatedRoute,
-        private qpb: QueryParamBuilder,
-        private moduleService: ModulesService
+        moduleService: ModulesService,
+        private _activatedRoute: ActivatedRoute,
+        router: Router,
+        paginationService: PaginationService,
     ) {
-        this.paramGroup = qpb.group({
-            q: qpb.stringParam('q'),
-            moduleLevel: qpb.stringParam('moduleLevel',{multi:true}),
-            semester: qpb.stringParam('semester', {multi:true}),
-            credits: qpb.stringParam('credits', {multi:true}),
-            department: qpb.stringParam('department', {multi:true})
-        });
+        super(moduleService, _activatedRoute, router, paginationService);
     }
 
     ngOnInit(): void {
-        this.activatedRoute.data.subscribe(
+
+        super.ngOnInit();
+
+        this._activatedRoute.data.subscribe(
             response => {
-                this.departments = response.filterData.viewmodel.departments;
-                this.semesters = response.filterData.viewmodel.semesters;
-                this.departments = response.filterData.viewmodel.departments;
-                this.creditOptions = response.filterData.viewmodel.creditOptions;
-                this.moduleLevels = response.filterData.viewmodel.moduleLevels;
+                this.departments = response.moduleData.viewmodel.departments;
             }
         )
-        this.paramGroup.valueChanges.pipe(
-            switchMap(() => this.moduleService.getModules(this.paramGroup.value)),
-            takeUntil(this.componentDestroyed$),
-        ).subscribe(response => {
-            this.moduleService.modules.next(response.result);
+
+        this.storeSubscription(
+            this.filterForm.valueChanges
+                .pipe(debounceTime(500))
+                .subscribe(() => this.onSearch())
+        );
+    }
+
+    getFilterForm(): FormGroup {
+        return new FormGroup({
+            q: new FormControl(''),
+            levels: new FormControl(''),
+            semesters: new FormControl(''),
+            credits: new FormControl(''),
+            departmentIds: new FormControl('')
         });
     }
-    public ngOnDestroy(): void {
-        this.componentDestroyed$.next();
-        this.componentDestroyed$.complete();
-    }
 
-    getQueryParams() {
+    override patchValueFromParams(params) {
+        let data = {}
 
+        if (params.q) {
+            data['q'] = params.q;
+        }
+
+        if (params.levels) {
+            data['levels'] =
+                typeof params.levels == 'string'
+                    ? [+params.levels]
+                    : params.levels.map(value => +value);
+        }
+
+        if (params.semesters) {
+            data['semesters'] =
+                typeof params.semesters == 'string'
+                    ? [+params.semesters]
+                    : params.semesters.map(value => +value);
+        }
+
+        if (params.credits) {
+            data['credits'] =
+                typeof params.credits == 'string'
+                    ? [+params.credits]
+                    : params.credits.map(value => +value);
+        }
+
+        if (params.departmentIds) {
+            data['departmentIds'] =
+                typeof params.departmentIds == 'string'
+                    ? [params.departmentIds]
+                    : params.departmentIds;
+        }
+
+        console.log(data);
+        this.filterForm.patchValue(data);
     }
+}
+
+interface qp extends PaginationModel {
+    q: string,
+    levels: string[],
+    semesters: string[],
+    credits: string[],
+    departmentIds: string[],
 }

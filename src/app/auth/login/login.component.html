@@ -15,7 +15,7 @@
                         <div class="field p-fluid">
                             <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
                             <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3"
-                                   style="padding:1rem;" formControlName="email">
+                                   style="padding:1rem;" formControlName="emailAddress">
                         </div>
 
                         <div class="field p-fluid">
@@ -32,16 +32,19 @@
 
                         <p-messages [(value)]="invalidMessages" [enableService]="false"></p-messages>
                         <div class="mb-3">
-                            <button type="submit" pButton pRipple label="Sign In" class="w-full p-3 text-xl" [loading] = loading></button>
+                            <button type="submit" pButton pRipple label="Sign In" class="w-full p-3 text-xl"
+                                    [loading]=loading></button>
                         </div>
                         <div>
-                            <button [routerLink]="['../modules']" type="button" pButton pRipple label="Continue without sign in" class="w-full p-3 text-xl p-button-secondary"></button>
+                            <button [routerLink]="['../modules']" type="button" pButton pRipple
+                                    label="Continue without sign in"
+                                    class="w-full p-3 text-xl p-button-secondary"></button>
                         </div>
 
                         <div class="text-center mt-5">
                         <span class="text-600 font-medium">
                             You don't have an account yet?
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                            <a routerLink="/register" class="font-medium no-underline ml-2 text-right cursor-pointer"
                                style="color: var(--primary-color)">Sign up!</a>
                         </span>
                         </div>

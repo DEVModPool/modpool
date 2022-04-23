@@ -1,15 +1,12 @@
-export class RequisiteModule {
-    constructor(id: string, name: string, code: string) {}
+export interface Module {
+    id?: number;
+    code?: string;
+    name?: string;
+    coordinator?: ModuleCoordinator;
+    lastUpdated?: string;
 }
 
-export class Module {
-    constructor(
-        public id: string,
-        public name: string,
-        public code: string,
-        public description: string,
-        public assessment: {coursework: string, exam: string},
-        public prerequisites?: RequisiteModule[],
-        public prerequisiteFor?: RequisiteModule[]
-    ) {}
+export interface ModuleCoordinator {
+    fullName: string,
+    id: string
 }

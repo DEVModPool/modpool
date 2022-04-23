@@ -1,4 +1,4 @@
-import {RequisiteModule} from "../module-list/module-item/module-item.model";
+import { RequisiteModule } from "../module-list/module-item/module-item.model";
 
 export class ModuleDetails {
     constructor(
@@ -12,13 +12,12 @@ export class ModuleDetails {
         public description: string,
         public learningOutcomes: string,
         public studyHours: StudyHours,
-        public assessmentMethods: Assessment[],
+        public assessments: Assessment[],
         public syllabus: string,
-        public totalReviews: number,
-        public averageReviewRating: number,
-        public prerequisites?: RequisiteModule[],
-        public prerequisiteFor?: RequisiteModule[],
-
+        public reviewsCount: number,
+        public averageRating: number,
+        public prerequisiteModules?: RequisiteModule[],
+        public prerequisiteForModules?: RequisiteModule[],
     ) {
     }
 }
@@ -30,7 +29,7 @@ interface ModuleDepartment {
 
 interface ModuleCoordinator {
     id: string;
-    name: string;
+    fullName: string;
 }
 
 export interface StudyHours {

@@ -1,14 +1,21 @@
 <div class="card">
-    <div>
-        <a [routerLink]="[module.id]">
-            <h5
-                class="hover-underline-animation"
-                [ngStyle]="{color:'var(--primary-color)'}"
-                style="font-weight: bold">
-                {{ module.name }}
-            </h5>
-        </a>
-        <h6 style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
+    <div class="grid">
+        <div class="col-6">
+            <a [routerLink]="[module.id]">
+                <h5
+                    class="hover-underline-animation ml-2"
+                    [ngStyle]="{color:'var(--primary-color)'}"
+                    style="font-weight: bold">
+                    {{ module.name }}
+                </h5>
+            </a>
+            <h6 class="ml-2" style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
+        </div>
+        <div class="col-6 flex justify-content-end">
+            <p-splitButton label="Add to planner" icon="pi pi-calendar-plus" [model]="items"
+                           styleClass="p-button-sm"></p-splitButton>
+            <!--            <p-speedDial [model]="items" radius="60" direction="down-left" type="quarter-circle" buttonClassName="p-button-success"></p-speedDial>-->
+        </div>
     </div>
     <div>
         <p-tabView styleClass="tabview-custom">
@@ -19,57 +26,59 @@
                 </ng-template>
                 {{ module.description }}
             </p-tabPanel>
-            <p-tabPanel>
-                <ng-template pTemplate="header">
-                    <i class="pi pi-pencil"></i>
-                    <span style="padding-left: 4px">Assessment</span>
-                </ng-template>
-                <div class="grid">
-                    <div
-                        class="col-6"
-                        style="text-align: left; font-weight: bold; font-size: medium;">
-                        Coursework - {{ module.assessment.coursework }}%
-                    </div>
-                    <div
-                        class="col-6"
-                        style="text-align: right; font-weight: bold; font-size: medium;">
-                        Exam - {{ module.assessment.exam }} %
-                    </div>
-                </div>
-                <p-progressBar [value]="module.assessment.coursework" [showValue]=false></p-progressBar>
-            </p-tabPanel>
-            <p-tabPanel>
-                <ng-template pTemplate="header">
-                    <i class="pi pi-history"></i>
-                    <span style="padding-left: 4px">Requirements</span>
-                </ng-template>
-                <div class="grid flex justify-content-center">
-                    <div class="col-12 md:col-6 justify-content-center align-items-center">
-                        <h5 style="font-weight: bolder">Prerequisites:</h5>
-                        <div class="icon">
-                            <div *ngFor="let prerequisite of module.prerequisites">
-                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
-                                <a [routerLink]="[prerequisite.id]">
-                                    <span class="hover-underline-animation"
-                                          style="font-weight: bold; font-size: small;padding: 0.2rem">{{prerequisite.name}}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 md:col-6 justify-content-center align-items-center">
-                        <h5 style="font-weight: bolder">Prerequisite for:</h5>
-                        <div class="icon">
-                            <div *ngFor="let prerequisiteFor of module.prerequisiteFor">
-                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
-                                <a [routerLink]="[prerequisiteFor.id]">
-                                    <span class="hover-underline-animation"
-                                          style="font-weight: bold; font-size: small;padding: 0.2rem">{{prerequisiteFor.name}}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </p-tabPanel>
+            <!--            <p-tabPanel>-->
+            <!--                <ng-template pTemplate="header">-->
+            <!--                    <i class="pi pi-pencil"></i>-->
+            <!--                    <span style="padding-left: 4px">Assessment</span>-->
+            <!--                </ng-template>-->
+            <!--                <div class="grid">-->
+            <!--                    <div-->
+            <!--                        class="col-6"-->
+            <!--                        style="text-align: left; font-weight: bold; font-size: medium;">-->
+            <!--                        Coursework - {{ module.assessment.coursework }}%-->
+            <!--                    </div>-->
+            <!--                    <div-->
+            <!--                        class="col-6"-->
+            <!--                        style="text-align: right; font-weight: bold; font-size: medium;">-->
+            <!--                        Exam - {{ module.assessment.exam }} %-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <p-progressBar [value]="module.assessment.coursework" [showValue]=false></p-progressBar>-->
+            <!--            </p-tabPanel>-->
+            <!--            <p-tabPanel>-->
+            <!--                <ng-template pTemplate="header">-->
+            <!--                    <i class="pi pi-history"></i>-->
+            <!--                    <span style="padding-left: 4px">Requirements</span>-->
+            <!--                </ng-template>-->
+            <!--                <div class="grid flex justify-content-center">-->
+            <!--                    <div class="col-12 md:col-6 justify-content-center align-items-center">-->
+            <!--                        <h5 class="text-900 font-bold">Prerequisites:</h5>-->
+            <!--                        <div class="icon">-->
+            <!--                            <div *ngFor="let prerequisite of module.prerequisites">-->
+            <!--                                <i class="pi pi-chevron-circle-right"></i>&nbsp;-->
+            <!--                                <a [routerLink]="[prerequisite.id]">-->
+            <!--                                    <span class="text-800 hover-underline-animation font-semibold text-base p-1">-->
+            <!--                                        {{prerequisite.name}}-->
+            <!--                                    </span>-->
+            <!--                                </a>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="col-12 md:col-6 justify-content-center align-items-center">-->
+            <!--                        <h5 class="text-900 font-bold">Prerequisite for:</h5>-->
+            <!--                        <div class="icon">-->
+            <!--                            <div *ngFor="let prerequisiteFor of module.prerequisiteFor">-->
+            <!--                                <i class="pi pi-chevron-circle-right"></i>&nbsp;-->
+            <!--                                <a [routerLink]="[prerequisiteFor.id]">-->
+            <!--                                    <span class="text-800 hover-underline-animation font-semibold text-base p-1">-->
+            <!--                                        {{prerequisiteFor.name}}-->
+            <!--                                    </span>-->
+            <!--                                </a>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </p-tabPanel>-->
         </p-tabView>
     </div>
 </div>

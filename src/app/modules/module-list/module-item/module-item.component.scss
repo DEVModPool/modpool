@@ -28,3 +28,10 @@ ul.icon {
     list-style-type: none;
 }
 
+
+:host ::ng-deep .p-button {
+    background-color: transparent;
+    color: var(--blue-500);
+    height: 35px;
+}
+
