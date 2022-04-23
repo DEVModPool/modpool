@@ -173,8 +173,8 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-assessment>
                         <tr>
-                            <td>{{assessment.name}}</td>
-                            <td>{{assessment.weight}}</td>
+                            <td>{{ assessment.name }}</td>
+                            <td>{{ assessment.weight }}</td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -207,9 +207,7 @@
                     <p *ngIf="moduleDetails.reviewsCount == 1"
                        class="text-blue-300">
                         Based on
-                        <span class="text-blue-600 font-bold text-sm">
-                            {{ moduleDetails.reviewsCount }}
-                        </span>
+                        <span class="text-blue-600 font-bold text-sm">1</span>
                         review
                     </p>
                 </div>

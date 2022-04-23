@@ -29,8 +29,6 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     }
 
     ngOnInit(): void {
-
-
         this.storeSubscription(
             this.activatedRoute.data.subscribe(
                 response => {
@@ -71,7 +69,7 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     }
 
     onLeaveReview() {
-        this.reviewsService.displayReviewModal(this.moduleDetails.code);
+        this.reviewsService.displayNewReviewModal(this.moduleDetails.code);
     }
 
     private processStudyHoursData(studyHours: StudyHours) {

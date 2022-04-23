@@ -1,6 +1,4 @@
 import { NgModule } from "@angular/core";
-import { StaffListComponent } from "./staff-list/staff-list.component";
-import { StaffRoutingModule } from "./staff-routing.module";
 import { TableModule } from "primeng/table";
 import { InputTextModule } from "primeng/inputtext";
 import { MultiSelectModule } from "primeng/multiselect";
@@ -11,9 +9,6 @@ import { ProgressBarModule } from "primeng/progressbar";
 import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
 import { RippleModule } from "primeng/ripple";
-import { StaffFilterComponent } from "./staff-filter/staff-filter.component";
-import { StaffComponent } from "./staff.component";
-import { StaffDetailsComponent } from "./staff-details/staff-details.component";
 import { DividerModule } from "primeng/divider";
 import { ModulesModule } from "../modules/modules.module";
 import { AuthModule } from "../auth/auth.module";
@@ -22,22 +17,19 @@ import { RatingModule } from "primeng/rating";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { MessagesModule } from "primeng/messages";
 import { PaginationModule } from "../pagination/pagination.module";
-import { StaffReviewItemComponent } from "./staff-reviews/staff-review-item/staff-review-item.component";
-import { StaffReviewListComponent } from "./staff-reviews/staff-review-list/staff-review-list.component";
 import { TooltipModule } from "primeng/tooltip";
-import { NgxSpinnerModule } from "ngx-spinner";
+import { UserComponent } from "./user.component";
+import { UserReviewItemComponent } from "./user-reviews/user-review-item/user-review-item.component";
+import { UserReviewListComponent } from "./user-reviews/user-review-list/user-review-list.component";
+import { TagModule } from "primeng/tag";
 
 @NgModule({
     declarations: [
-        StaffListComponent,
-        StaffFilterComponent,
-        StaffComponent,
-        StaffDetailsComponent,
-        StaffReviewItemComponent,
-        StaffReviewListComponent
+        UserComponent,
+        UserReviewItemComponent,
+        UserReviewListComponent
     ],
     imports: [
-        StaffRoutingModule,
         TableModule,
         InputTextModule,
         MultiSelectModule,
@@ -58,8 +50,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
         MessagesModule,
         PaginationModule,
         TooltipModule,
-        NgxSpinnerModule
+        TagModule
     ]
 })
-export class StaffModule {
+export class UserModule {
 }

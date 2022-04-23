@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ReviewItemComponent } from "../../../reviews/review-item.component";
 import { AuthService } from "../../../auth/auth.service";
+import { ReviewsService } from "../../../reviews/reviews.service";
 
 @Component({
     selector: 'app-module-review-item',
@@ -11,11 +12,19 @@ export class ModuleReviewItemComponent extends ReviewItemComponent {
 
     @Input() review;
 
-    constructor(authService: AuthService) {
-        super(authService);
+    constructor(
+        private reviewsService: ReviewsService,) {
+        super();
     }
 
-    ngAfterViewInit() {
-        console.log(this.review);
+    ngOnInit(): void {
+        this.reactionData = this.parseReactionData(this.review);
+        this.reviewsService.reactionsObservable.subscribe(
+            reactionData => {
+                if (this.review.id == reactionData.reviewId) {
+                    this.reactionData = reactionData;
+                }
+            }
+        )
     }
 }

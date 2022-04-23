@@ -15,13 +15,15 @@ export const environment = {
     loginUrl: 'login',
 
     coordinatorsUrl: 'coordinators/',
-
     reviewsUrl: 'reviews/',
-
     modulesUrl: 'modules/',
+
+    profileUrl: 'profile/'
+
 
     moduleDetails: 'moduleDetails/',
     modulePlanners: 'module-planners/'
+
 };
 
 /*

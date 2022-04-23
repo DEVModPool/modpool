@@ -8,6 +8,7 @@ import { environment } from "../../environments/environment";
 import { ServiceInterface } from "../interaction/service-interface";
 import { Router } from "@angular/router";
 import { PaginationService } from "../pagination/pagination.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
     providedIn: 'root'
@@ -17,13 +18,16 @@ export class ModulesService extends ServiceInterface<ModuleItem> {
     constructor(
         http: HttpClient,
         router: Router,
-        paginationService: PaginationService
+        paginationService: PaginationService,
+        spinner: NgxSpinnerService
     ) {
-        super(http, router, paginationService);
+        super(http, router, paginationService, spinner);
     }
 
     initialUrl(): string {
         return environment.modulesUrl;
     }
+
+
 }
 

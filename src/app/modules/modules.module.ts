@@ -35,7 +35,9 @@ import { ModuleReviewNewComponent } from "./module-reviews/module-review-new/mod
 import { ModuleReviewListComponent } from "./module-reviews/module-review-list/module-review-list.component";
 import { ModuleReviewItemComponent } from "./module-reviews/module-review-item/module-review-item.component";
 import { PaginationModule } from "../pagination/pagination.module";
-import {NgxSpinnerModule} from "ngx-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
+import { ModuleReviewReactionsComponent } from "./module-reviews/module-review-reactions.component";
+import { ModuleReviewEditComponent } from "./module-reviews/module-review-new/module-review-edit.component";
 
 @NgModule({
     declarations: [
@@ -46,11 +48,15 @@ import {NgxSpinnerModule} from "ngx-spinner";
         ModuleDetailsComponent,
         ModuleReviewNewComponent,
         ModuleReviewListComponent,
-        ModuleReviewItemComponent
+        ModuleReviewItemComponent,
+        ModuleReviewReactionsComponent,
+        ModuleReviewEditComponent
     ],
     exports: [
         ModuleReviewListComponent,
-        ModuleReviewNewComponent
+        ModuleReviewNewComponent,
+        ModuleReviewReactionsComponent,
+        ModuleReviewEditComponent
     ],
     imports: [
         RouterModule,

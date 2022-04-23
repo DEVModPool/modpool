@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { ModuleReviewsService } from "../../modules/module-reviews/module-reviews.service";
 
 @Component({
     selector: 'app-staff-details',
@@ -13,14 +12,12 @@ export class StaffDetailsComponent implements OnInit {
     reviews: any;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private router: Router,
-                private reviewsService: ModuleReviewsService) {
+                private router: Router) {
     }
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(
             response => {
-                console.log(response);
                 this.lecturer = response.staffData.coordinator;
                 this.modules = response.staffData.modules;
                 this.reviews = response.staffData.reviews;

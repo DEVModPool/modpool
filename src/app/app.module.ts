@@ -21,7 +21,6 @@ import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
 import { StaffModule } from "./staff/staff.module";
-import { RegisterComponent } from './auth/register/register.component';
 import { environment } from "../environments/environment";
 import { ToastModule } from "primeng/toast";
 import { ModulesModule } from "./modules/modules.module";
@@ -29,6 +28,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SpinnerInterceptor } from "./interaction/spinner.interceptor";
 import { ServerErrorComponent } from "./error-pages/server-error/server-error.component";
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
+import { UserModule } from "./user/user.module";
+
 
 @NgModule({
     imports: [
@@ -51,7 +52,8 @@ import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
         }),
         ToastModule,
         ModulesModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        UserModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
@@ -63,7 +65,7 @@ import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
         MenuComponent,
         MenuItemComponent,
         ServerErrorComponent,
-        NotFoundComponent
+        NotFoundComponent,
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},

@@ -2,7 +2,10 @@
     <div class="col-12">
         <app-staff-filter></app-staff-filter>
     </div>
-    <div class="col-12">
+    <div class="col-12" style="position: relative">
+        <ngx-spinner
+            name="moduleListSpinner" bdColor="rgba(208,225,253,0.25)" size="medium" color="#3b82f6"
+            type="ball-triangle-path" [fullScreen]="false"></ngx-spinner>
         <app-staff-list></app-staff-list>
     </div>
 </div>

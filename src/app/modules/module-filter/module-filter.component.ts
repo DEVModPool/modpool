@@ -47,7 +47,7 @@ export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
 
         this.storeSubscription(
             this.filterForm.valueChanges
-                .pipe(debounceTime(500))
+                .pipe(debounceTime(200))
                 .subscribe(() => this.onSearch())
         );
     }
