@@ -5,7 +5,6 @@ import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import { PlanData } from 'src/app/interaction/modules/planData.model';
 import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { AuthService } from 'src/app/auth/auth.service';
-import { LoginModalInterface } from 'src/app/auth/login-modal/login-modal-interface';
 import { nextTick } from 'process';
 import { ConfirmationService } from 'primeng/api';
 
