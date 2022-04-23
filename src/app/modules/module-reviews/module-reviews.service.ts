@@ -14,7 +14,7 @@ import { Response } from "../../interaction/response"
 })
 export class ModuleReviewsService extends ReviewsService {
     constructor(
-        private _http: HttpClient,
+        _http: HttpClient,
         private _router: Router,
         authService: AuthService,
         paginationService: PaginationService) {
@@ -22,7 +22,7 @@ export class ModuleReviewsService extends ReviewsService {
     }
 
     addReview(review) {
-        return this._http
+        return this.http
             .post<Response<any>>(environment.baseUrl + environment.reviewsUrl, review)
             .pipe(
                 catchError(error => {

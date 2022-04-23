@@ -25,15 +25,5 @@ export class ModulesService extends ServiceInterface<ModuleItem> {
     initialUrl(): string {
         return environment.modulesUrl;
     }
-
-    // modules = new Subject<ModuleItem[]>();
-    //
-    // constructor(private http: HttpClient) {
-    // }
-
-    // getModules(moduleFilters?: any) {
-    //     console.log(moduleFilters);
-    //     return this.http.get<Response<ModuleItem[]>>(environment.baseUrl + 'modules', {params: moduleFilters})
-    // }
 }
 

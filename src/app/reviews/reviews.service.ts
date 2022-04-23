@@ -12,6 +12,7 @@ import { PaginationService } from "../pagination/pagination.service";
 })
 export class ReviewsService extends ServiceInterface<any> {
     private reviewModalDisplayed = new Subject<boolean>();
+    public academicYearObservable = new Subject<any>()
 
     protected constructor(
         http: HttpClient,
@@ -21,10 +22,16 @@ export class ReviewsService extends ServiceInterface<any> {
         super(http, router, paginationService);
     }
 
-    public displayReviewModal() {
+    public displayReviewModal(code: string) {
         this.authService.requireLogIn(
             () => {
                 this.reviewModalDisplayed.next(true);
+                this.http.get(environment.baseUrl + 'reviews/' + code + '/academic-years')
+                    .subscribe(
+                        response => {
+                            this.academicYearObservable.next(response);
+                        }
+                    );
             }
         )
     }

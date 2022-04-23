@@ -11,25 +11,27 @@ import { environment } from "../../../../environments/environment";
 })
 export class ModuleReviewNewComponent extends ReviewNewComponent implements OnInit {
 
-    get academicYears() {
-
-        let years = [];
-
-        for (let i = 10; i <= 30; i++) {
-            years.push(`20${i}/20${i + 1}`);
-        }
-
-        return years;
-    }
+    academicYears: any[];
+    moduleCode: string;
 
     constructor(private _reviewsService: ModuleReviewsService) {
         super(_reviewsService);
         this.initFormGroup({
             quality: new FormControl(),
             difficulty: new FormControl(),
-            moduleAcademicYear: new FormControl(this.academicYears[0]),
+            moduleAcademicYear: new FormControl(),
             content: new FormControl()
         });
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this._reviewsService.academicYearObservable.subscribe(
+            response => {
+                this.academicYears = response.result.academicYears;
+                this.moduleCode = response.result.moduleCode;
+            }
+        );
     }
 
     submitReview() {
@@ -37,12 +39,9 @@ export class ModuleReviewNewComponent extends ReviewNewComponent implements OnIn
         const body = {
             ...this.newReviewForm.value,
             reviewerId: localStorage[environment["userId-key"]],
-            moduleCode: 'asdasd'
+            moduleCode: this.moduleCode
         }
 
-        console.log(body);
-
         this._reviewsService.addReview(body);
-
     }
 }

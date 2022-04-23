@@ -8,7 +8,9 @@ import { ModuleReviewsService } from "../../modules/module-reviews/module-review
 })
 export class StaffDetailsComponent implements OnInit {
 
-    public lecturer: any;
+    lecturer: any;
+    modules: any;
+    reviews: any;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
@@ -20,15 +22,13 @@ export class StaffDetailsComponent implements OnInit {
             response => {
                 console.log(response);
                 this.lecturer = response.staffData.coordinator;
+                this.modules = response.staffData.modules;
+                this.reviews = response.staffData.reviews;
             }
         )
     }
 
     reroute(url): void {
         this.router.navigate([url]);
-    }
-
-    onLeaveReview() {
-        this.reviewsService.displayReviewModal();
     }
 }

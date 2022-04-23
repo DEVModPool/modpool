@@ -22,6 +22,9 @@ import { RatingModule } from "primeng/rating";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { MessagesModule } from "primeng/messages";
 import { PaginationModule } from "../pagination/pagination.module";
+import { StaffReviewItemComponent } from "./staff-reviews/staff-review-item/staff-review-item.component";
+import { StaffReviewListComponent } from "./staff-reviews/staff-review-list/staff-review-list.component";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -29,6 +32,8 @@ import { PaginationModule } from "../pagination/pagination.module";
         StaffFilterComponent,
         StaffComponent,
         StaffDetailsComponent,
+        StaffReviewItemComponent,
+        StaffReviewListComponent
     ],
     imports: [
         StaffRoutingModule,
@@ -50,7 +55,8 @@ import { PaginationModule } from "../pagination/pagination.module";
         RatingModule,
         InputTextareaModule,
         MessagesModule,
-        PaginationModule
+        PaginationModule,
+        TooltipModule
     ]
 })
 export class StaffModule {

@@ -3,11 +3,11 @@ import { ReviewItemComponent } from "../../../reviews/review-item.component";
 import { AuthService } from "../../../auth/auth.service";
 
 @Component({
-    selector: 'app-module-review-item',
-    templateUrl: './module-review-item.component.html',
-    styleUrls: ['./module-review-item.component.scss']
+    selector: 'app-staff-review-item',
+    templateUrl: './staff-review-item.component.html',
+    styleUrls: ['./staff-review-item.component.scss']
 })
-export class ModuleReviewItemComponent extends ReviewItemComponent {
+export class StaffReviewItemComponent extends ReviewItemComponent {
 
     @Input() review;
 

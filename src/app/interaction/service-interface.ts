@@ -12,7 +12,7 @@ export abstract class ServiceInterface<T> {
     getObservable = new Subject<T[]>();
 
     protected constructor(
-        private http: HttpClient,
+        protected http: HttpClient,
         private router: Router,
         private paginationService: PaginationService
     ) {

@@ -9,9 +9,15 @@
                     class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ lecturer.averageRating }} <span
                     class="text-blue-300 text-base">/5</span>
                 </h2>
-                <p class="text-blue-300">
+                <p class="text-blue-300" *ngIf="lecturer.numberOfReviews > 1; else singleReview">
                     Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span> reviews
                 </p>
+                <ng-template #singleReview>
+                    <p class="text-blue-300">
+                        Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span>
+                        review
+                    </p>
+                </ng-template>
             </div>
 
         </div>
@@ -24,86 +30,92 @@
 
 </div>
 
-<!--<div *ngIf="lecturer.modules.currentlyTeaching != null || lecturer.modules.previousModules != null">-->
-<!--    <div class="card">-->
-<!--        <div class="col-12">-->
-<!--            <div *ngIf="lecturer.modules.currentlyTeaching != null">-->
-<!--                <div class="col-12 flex flex-row">-->
-<!--                    <h4 class="font-bold mt-0 col-8">Modules</h4>-->
-<!--                    <div class="col-4" style="text-align: right">-->
-<!--                        <p class="text-blue-300">Overall module rating</p>-->
-<!--                        <h2 style="font-weight: bold; margin: 0;" class="text-900">-->
-<!--                            <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
-<!--                            {{ lecturer.modules.rating }}-->
-<!--                            <span class="text-blue-300 text-base">/5</span>-->
-<!--                        </h2>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <p-divider></p-divider>-->
-<!--                <h5 class="font-bold mt-0">Currently Teaching</h5>-->
+<div *ngIf="modules.currentlyTeaching != null || modules.previouslyThaught != null">
+    <div class="card">
+        <div class="col-12">
+            <div *ngIf="modules.currentlyTeaching != null">
+                <div class="col-12 flex flex-row">
+                    <h4 class="font-bold mt-0 col-8">Modules</h4>
+                    <!--                    <div class="col-4" style="text-align: right">-->
+                    <!--                        <p class="text-blue-300">Overall module rating</p>-->
+                    <!--                        <h2 style="font-weight: bold; margin: 0;" class="text-900">-->
+                    <!--                            <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
+                    <!--                            {{ modules.rating }}-->
+                    <!--                            <span class="text-blue-300 text-base">/5</span>-->
+                    <!--                        </h2>-->
+                    <!--                    </div>-->
+                </div>
+                <p-divider></p-divider>
+                <h5 class="font-bold mt-0">Currently Teaching</h5>
 
-<!--                <div class="col-12">-->
-<!--                    <p-table [value]="[lecturer.modules.currentlyTeaching]" responsiveLayout="scroll">-->
-<!--                        <ng-template pTemplate="header">-->
-<!--                            <tr>-->
-<!--                                <th></th>-->
-<!--                                <th>Module</th>-->
-<!--                                <th>Module Rating</th>-->
-<!--                            </tr>-->
-<!--                        </ng-template>-->
-<!--                        <ng-template pTemplate="body" let-module>-->
+                <div class="col-12">
+                    <p-table [value]="modules.currentlyTeaching" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th>Module</th>
+                                <th>Module Rating</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-module>
+                            <tr>
+                                <td class="col-1">
+                                    <button
+                                        pButton
+                                        pRipple
+                                        [routerLink]="['/modules', module.id]">
+                                        Visit
+                                    </button>
+                                </td>
+                                <td class="col-8">{{ module.moduleFullName }}</td>
+                                <td class="col-3">
+                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">
+                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
+                                        {{ module.averageRating }}
+                                        <span class="text-blue-300 text-base">/5</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <br>
+                <br>
+            </div>
+            <div *ngIf="modules.previouslyThaught != null">
+                <h5 class="font-bold mt-0">Previously Led</h5>
+                <div class="col-12">
+                    <p-table [value]="modules.previouslyThaught" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th>Module</th>
+                                <th>Module Rating</th>
+                            </tr>
+                        </ng-template>
 
-<!--                            <tr>-->
-<!--                                <td class="col-1">-->
-<!--                                    <button pButton (click)="reroute(module.url)">Visit</button>-->
-<!--                                </td>-->
-<!--                                <td class="col-8">{{ module.name }}</td>-->
-<!--                                <td class="col-3">-->
-<!--                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">-->
-<!--                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
-<!--                                        {{ module.rating }}-->
-<!--                                        <span class="text-blue-300 text-base">/5</span>-->
-<!--                                    </h3>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </ng-template>-->
-<!--                    </p-table>-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <br>-->
-<!--            </div>-->
-<!--            <div *ngIf="lecturer.modules.previousTaught != null">-->
-<!--                <h5 class="font-bold mt-0">Previously Led</h5>-->
-<!--                <div class="col-12">-->
-<!--                    <p-table [value]="lecturer.modules.previousModules" responsiveLayout="scroll">-->
-<!--                        <ng-template pTemplate="header">-->
-<!--                            <tr>-->
-<!--                                <th></th>-->
-<!--                                <th>Module</th>-->
-<!--                                <th>Module Rating</th>-->
-<!--                            </tr>-->
-<!--                        </ng-template>-->
-<!--                        <ng-template pTemplate="body" let-module>-->
-<!--                            <tr>-->
-<!--                                <td class="col-1">-->
-<!--                                    <button pButton (click)="reroute(module.url)">Visit</button>-->
-<!--                                </td>-->
-<!--                                <td class="col-8">{{ module.name }}</td>-->
-<!--                                <td class="col-3">-->
-<!--                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">-->
-<!--                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
-<!--                                        {{ module.rating }}-->
-<!--                                        <span class="text-blue-300 text-base">/5</span>-->
-<!--                                    </h3>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </ng-template>-->
-<!--                    </p-table>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+
+                        <ng-template pTemplate="body" let-module>
+                            <tr>
+                                <td class="col-1">
+                                    <button pButton (click)="reroute(module.url)">Visit</button>
+                                </td>
+                                <td class="col-8">{{ module.moduleFullName }}</td>
+                                <td class="col-3">
+                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">
+                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
+                                        {{ module.rating }}
+                                        <span class="text-blue-300 text-base">/5</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card" id="reviews">
     <div class="col-12 flex flex-row">
@@ -124,20 +136,8 @@
     </div>
 
     <div class="col-12">
-        <button
-            pButton
-            pRipple
-            style="float:left"
-            (click)="onLeaveReview()">
-            Leave a Review
-        </button>
         <br>
-        <br>
-    </div>
-    <div class="col-12">
-        <br>
-        <!--        <app-module-review-list *ngIf="lecturer.numberOfReviews != 0"></app-module-review-list>-->
-        <app-module-review-list></app-module-review-list>
+        <app-staff-review-list *ngIf="lecturer.numberOfReviews != 0" [reviews]="reviews"></app-staff-review-list>
         <div *ngIf="lecturer.numberOfReviews == 0" class="col-12">
             <p-messages severity="info">
                 <ng-template pTemplate="">

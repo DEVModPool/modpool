@@ -11,15 +11,11 @@
             <p-rating [ngModel]="review.difficulty" readonly="true" stars="5" [cancel]="false"></p-rating>
         </p>
     </div>
+
     <div class="col-12 text-900">
-        <p>Coordinator:
-            <a [routerLink]="['/coordinators', review.coordinatorId]">
-                <span
-                    class="hover:text-primary hover-underline-animation font-bold">{{ review.coordinatorFullName }}</span>
-            </a>
-        </p>
         <p>Taken: <span class="font-bold">{{ review.moduleAcademicYear }}</span></p>
     </div>
+
     <div class="col-12">
         <p-divider></p-divider>
     </div>
@@ -38,15 +34,13 @@
         </p-divider>
     </div>
 
-    <!--    <app-ratings [downVoteCount]="" ></app-ratings>-->
-
     <div class="col-12 md:col-12 flex flex-row-reverse">
             <span
                 pTooltip="Upvote"
                 class="col-2 text-center hover:text-green-500 hover-underline-animation-green"
                 style="font-size: 1.5rem;">
                 <a style="color: unset; cursor: pointer" (click)="onUpvote()">
-                    <i class="pi pi-thumbs-up" style="font-size: 1.5rem"></i> 6
+                    <i class="pi pi-thumbs-up" style="font-size: 1.5rem"></i> {{ review.upvoteCount }}
                 </a>
             </span>
         <span
@@ -54,7 +48,7 @@
             class="col-2 text-center hover:text-pink-500 hover-underline-animation-pink"
             style="font-size: 1.5rem;">
                 <a style="color: unset; cursor: pointer" (click)="onDownvote()">
-                    <i class="pi pi-thumbs-down" style="font-size: 1.5rem"></i> 3
+                    <i class="pi pi-thumbs-down" style="font-size: 1.5rem"></i> {{ review.downvoteCount }}
                 </a>
             </span>
     </div>
