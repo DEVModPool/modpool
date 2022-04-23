@@ -24,6 +24,7 @@ export class StaffDetailsComponent implements OnInit {
                 this.lecturer = response.staffData.coordinator;
                 this.modules = response.staffData.modules;
                 this.reviews = response.staffData.reviews;
+                console.log(this.reviews);
             }
         )
     }

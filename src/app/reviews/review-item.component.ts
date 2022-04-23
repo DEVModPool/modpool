@@ -1,8 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AuthService } from "../auth/auth.service";
+import { ReviewsService } from "./reviews.service";
 
 @Injectable()
-export class ReviewItemComponent implements OnInit {
+export class ReviewItemComponent {
 
     expanded = false;
     sliceOptions = {
@@ -14,6 +15,10 @@ export class ReviewItemComponent implements OnInit {
     quality: number;
     difficulty: number;
     content: number;
+    reactionData: { upvoteCount: number, downvoteCount: number, reactions: any[], reviewId: string };
+
+    constructor() {
+    }
 
     toggleReview() {
         this.expanded = !this.expanded;
@@ -22,18 +27,12 @@ export class ReviewItemComponent implements OnInit {
     }
 
     parseReactionData(reviewObj) {
+        // console.log(reviewObj);
         return {
-            reviewId: 'E1E45644-7734-4623-82FB-EE227C3E8C6E',
+            reviewId: reviewObj.id,
             upvoteCount: reviewObj.upvoteCount,
             downvoteCount: reviewObj.downvoteCount,
             reactions: reviewObj.reactions
         }
-    }
-
-    constructor(private authService: AuthService) {
-    }
-
-
-    ngOnInit(): void {
     }
 }

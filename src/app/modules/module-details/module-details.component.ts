@@ -29,8 +29,6 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     }
 
     ngOnInit(): void {
-
-
         this.storeSubscription(
             this.activatedRoute.data.subscribe(
                 response => {

@@ -67,19 +67,15 @@ export class ReviewsService extends ServiceInterface<any> {
         return this.http.post(environment.baseUrl + environment.reviewsUrl + 'reactions', body)
             .subscribe(
                 _ => {
-                    this.http.get(environment.baseUrl + 'reactions/' + environment.reviewsUrl + body.reviewId)
+                    this.http.get<Response<any>>(environment.baseUrl + 'reactions/' + environment.reviewsUrl + body.reviewId)
                         .subscribe(
                             response => {
-
+                                this.reactionsObservable.next(response.result);
                             }
                         )
                 }
             );
     }
-
-    // public getReviewModalSubject() {
-    //     return this.reviewModalDisplayed;
-    // }
 
     initialUrl(): string {
         return environment.reviewsUrl;

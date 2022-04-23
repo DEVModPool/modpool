@@ -21,7 +21,6 @@ export class ModuleReviewReactionsComponent extends ReactionsInterface {
     }
 
     override upvote() {
-
         const body = {
             reviewId: this.reactionData.reviewId,
             reviewerId: localStorage.getItem(environment['userId-key']),
@@ -31,6 +30,8 @@ export class ModuleReviewReactionsComponent extends ReactionsInterface {
         this.storeSubscription(
             this.reviewsService.sendReaction(body)
         );
+
+        console.log(body);
     }
 
     override downvote() {

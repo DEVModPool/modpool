@@ -18,9 +18,8 @@ export class UserReviewItemComponent extends ReviewItemComponent {
 
     constructor(
         private userService: UserService,
-        private reviewService: ModuleReviewsService,
-        authService: AuthService) {
-        super(authService);
+        private reviewService: ModuleReviewsService) {
+        super();
     }
 
     getTagStatus(review: any) {

@@ -18,11 +18,11 @@ export abstract class ReactionsInterface extends SubscriptionHandler implements 
     }
 
     ngOnInit(): void {
-        this.reviewsService.reactionsObservable.subscribe(
-            response => {
-                this.reactionData = response.result;
-            }
-        )
+        // this.reviewsService.reactionsObservable.subscribe(
+        //     reactionData => {
+        //         this.reactionData = reactionData;
+        //     }
+        // )
     }
 
     protected setReactionData(reactionData) {
