@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
 import { PaginationService } from "../pagination/pagination.service";
 import { Response } from "../interaction/response"
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
     providedIn: 'root'
@@ -21,8 +22,9 @@ export class ReviewsService extends ServiceInterface<any> {
         http: HttpClient,
         router: Router,
         paginationService: PaginationService,
-        private authService: AuthService) {
-        super(http, router, paginationService);
+        private authService: AuthService,
+        spinner: NgxSpinnerService) {
+        super(http, router, paginationService, spinner);
     }
 
     public displayNewReviewModal(code: string) {

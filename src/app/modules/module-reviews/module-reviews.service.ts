@@ -9,6 +9,7 @@ import { tap, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Response } from "../../interaction/response"
 import { UserService } from "../../user/user.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +20,9 @@ export class ModuleReviewsService extends ReviewsService {
         private _router: Router,
         authService: AuthService,
         paginationService: PaginationService,
-        private userService: UserService) {
-        super(_http, _router, paginationService, authService);
+        private userService: UserService,
+        spinner: NgxSpinnerService) {
+        super(_http, _router, paginationService, authService, spinner);
     }
 
     addReview(review) {

@@ -25,6 +25,7 @@ import { PaginationModule } from "../pagination/pagination.module";
 import { StaffReviewItemComponent } from "./staff-reviews/staff-review-item/staff-review-item.component";
 import { StaffReviewListComponent } from "./staff-reviews/staff-review-list/staff-review-list.component";
 import { TooltipModule } from "primeng/tooltip";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { TooltipModule } from "primeng/tooltip";
         InputTextareaModule,
         MessagesModule,
         PaginationModule,
-        TooltipModule
+        TooltipModule,
+        NgxSpinnerModule
     ]
 })
 export class StaffModule {
