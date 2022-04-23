@@ -1,8 +1,11 @@
 export interface Review {
     id?: string;
-    author?: string;
-    moduleName?: string;
+    authorEmail?: string;
     status?: string;
     lastUpdated?: Date;
-    reviewContent?: string;
+    content?: string;
+    quality?: number;
+    difficulty?: number;
+    moduleCode?: string;
+    moduleAcademicYear?: string;
 }

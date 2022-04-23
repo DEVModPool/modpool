@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-user-review-list',
-    templateUrl: './staff-review-list.component.html'
+    templateUrl: './user-review-list.component.html'
 })
-export class StaffReviewListComponent {
+export class UserReviewListComponent {
 
     @Input() reviews;
 

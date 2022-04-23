@@ -13,7 +13,7 @@
     </a>
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <a routerLink="/user" class="p-link layout-topbar-button" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/profile" class="p-link layout-topbar-button" *ngIf="this.authService.isLoggedIn()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </a>

@@ -71,7 +71,7 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     }
 
     onLeaveReview() {
-        this.reviewsService.displayReviewModal(this.moduleDetails.code);
+        this.reviewsService.displayNewReviewModal(this.moduleDetails.code);
     }
 
     private processStudyHoursData(studyHours: StudyHours) {

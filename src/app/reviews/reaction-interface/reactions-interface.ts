@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { AuthService } from "../../auth/auth.service";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
 import { environment } from "../../../environments/environment";
+import { ReviewsService } from "../reviews.service";
 
 @Injectable({
     providedIn: 'root'
@@ -10,11 +11,18 @@ export abstract class ReactionsInterface extends SubscriptionHandler implements 
 
     reactionData: { upvoteCount: number, downvoteCount: number, reactions: any[], reviewId: string };
 
-    protected constructor(private authService: AuthService) {
+    protected constructor(
+        protected reviewsService: ReviewsService,
+        private authService: AuthService) {
         super();
     }
 
     ngOnInit(): void {
+        this.reviewsService.reactionsObservable.subscribe(
+            response => {
+                this.reactionData = response.result;
+            }
+        )
     }
 
     protected setReactionData(reactionData) {

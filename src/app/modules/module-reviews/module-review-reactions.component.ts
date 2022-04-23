@@ -14,8 +14,8 @@ export class ModuleReviewReactionsComponent extends ReactionsInterface {
 
     constructor(
         authService: AuthService,
-        private reviewsService: ReviewsService) {
-        super(authService);
+        reviewsService: ReviewsService) {
+        super(reviewsService, authService);
 
         this.setReactionData(this.reactionData);
     }

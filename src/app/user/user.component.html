@@ -1,1 +1,148 @@
-<p>user works!</p>
+<div class="card">
+    <div class="col-12">
+        <div class="col-12 flex flex-row">
+            <h3 class="font-bold col-8" [ngStyle]="{color:'var(--primary-color)'}">
+                {{ userName }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="col-12 flex flex-row">
+        <h4 class="col-8 align-self-center font-bold mt-0">
+            Your Reviews
+        </h4>
+    </div>
+
+    <div class="col-12">
+        <br>
+        <app-user-review-list *ngIf="reviews && reviews.length != 0" [reviews]="reviews"></app-user-review-list>
+        <div *ngIf="reviews && reviews.length == 0" class="col-12">
+            <p-messages severity="info">
+                <ng-template pTemplate="">
+                    <div class="ml-2">You have no reviews!</div>
+                </ng-template>
+            </p-messages>
+        </div>
+    </div>
+
+</div>
+
+<!--<div *ngIf="modules.currentlyTeaching != null || modules.previouslyThaught != null">-->
+<!--    <div class="card">-->
+<!--        <div class="col-12">-->
+<!--            <div *ngIf="modules.currentlyTeaching != null">-->
+<!--                <div class="col-12 flex flex-row">-->
+<!--                    <h4 class="font-bold mt-0 col-8">Modules</h4>-->
+<!--                    &lt;!&ndash;                    <div class="col-4" style="text-align: right">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <p class="text-blue-300">Overall module rating</p>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <h2 style="font-weight: bold; margin: 0;" class="text-900">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            {{ modules.rating }}&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <span class="text-blue-300 text-base">/5</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </h2>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--                <p-divider></p-divider>-->
+<!--                <h5 class="font-bold mt-0">Currently Teaching</h5>-->
+
+<!--                <div class="col-12">-->
+<!--                    <p-table [value]="modules.currentlyTeaching" responsiveLayout="scroll">-->
+<!--                        <ng-template pTemplate="header">-->
+<!--                            <tr>-->
+<!--                                <th></th>-->
+<!--                                <th>Module</th>-->
+<!--                                <th>Module Rating</th>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                        <ng-template pTemplate="body" let-module>-->
+<!--                            <tr>-->
+<!--                                <td class="col-1">-->
+<!--                                    <button-->
+<!--                                        pButton-->
+<!--                                        pRipple-->
+<!--                                        [routerLink]="['/modules', module.id]">-->
+<!--                                        Visit-->
+<!--                                    </button>-->
+<!--                                </td>-->
+<!--                                <td class="col-8">{{ module.moduleFullName }}</td>-->
+<!--                                <td class="col-3">-->
+<!--                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">-->
+<!--                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
+<!--                                        {{ module.averageRating }}-->
+<!--                                        <span class="text-blue-300 text-base">/5</span>-->
+<!--                                    </h3>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                    </p-table>-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--            </div>-->
+<!--            <div *ngIf="modules.previouslyThaught != null">-->
+<!--                <h5 class="font-bold mt-0">Previously Led</h5>-->
+<!--                <div class="col-12">-->
+<!--                    <p-table [value]="modules.previouslyThaught" responsiveLayout="scroll">-->
+<!--                        <ng-template pTemplate="header">-->
+<!--                            <tr>-->
+<!--                                <th></th>-->
+<!--                                <th>Module</th>-->
+<!--                                <th>Module Rating</th>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+
+
+<!--                        <ng-template pTemplate="body" let-module>-->
+<!--                            <tr>-->
+<!--                                <td class="col-1">-->
+<!--                                    <button pButton (click)="reroute(module.url)">Visit</button>-->
+<!--                                </td>-->
+<!--                                <td class="col-8">{{ module.moduleFullName }}</td>-->
+<!--                                <td class="col-3">-->
+<!--                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">-->
+<!--                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>-->
+<!--                                        {{ module.rating }}-->
+<!--                                        <span class="text-blue-300 text-base">/5</span>-->
+<!--                                    </h3>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                    </p-table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="card" id="reviews">-->
+<!--    <div class="col-12 flex flex-row">-->
+<!--        <h4 class="col-8 align-self-center font-bold mt-0">-->
+<!--            Reviews-->
+<!--        </h4>-->
+<!--        <div *ngIf="lecturer.numberOfReviews != 0" class="col-4" style="text-align: right">-->
+<!--            <h2 style="font-weight: bold; margin: 0;" class="text-900"><i-->
+<!--                class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span-->
+<!--                class="text-blue-300 text-base">/5</span>-->
+<!--            </h2>-->
+<!--            <p class="text-blue-300">-->
+<!--                Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews-->
+<!--            </p>-->
+<!--        </div>-->
+
+
+<!--    </div>-->
+
+<!--    <div class="col-12">-->
+<!--        <br>-->
+<!--        <app-user-review-list *ngIf="lecturer.numberOfReviews != 0" [reviews]="reviews"></app-user-review-list>-->
+<!--        <div *ngIf="lecturer.numberOfReviews == 0" class="col-12">-->
+<!--            <p-messages severity="info">-->
+<!--                <ng-template pTemplate="">-->
+<!--                    <div class="ml-2">Lecturer has no modules that have been rated yet!</div>-->
+<!--                </ng-template>-->
+<!--            </p-messages>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+

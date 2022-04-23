@@ -13,10 +13,9 @@ export const environment = {
     resolverUrl: 'resolve-route/',
 
     coordinatorsUrl: 'coordinators/',
-
     reviewsUrl: 'reviews/',
-
     modulesUrl: 'modules/',
+    profileUrl: 'profile/'
 };
 
 /*

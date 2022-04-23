@@ -6,7 +6,7 @@
     [resizable]="false"
     [closable]="false"
     [closeOnEscape]="true">
-    <form [formGroup]="newReviewForm" (ngSubmit)="submitReview()">
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
         <div class="grid">
             <div class="col-6 text-center font-semibold">
                 <p class="text-2xl mb-3">Quality</p>

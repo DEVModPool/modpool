@@ -6,13 +6,16 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
 import { PaginationService } from "../pagination/pagination.service";
+import { Response } from "../interaction/response"
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReviewsService extends ServiceInterface<any> {
-    private reviewModalDisplayed = new Subject<boolean>();
-    public academicYearObservable = new Subject<any>()
+    public reviewEditModalDisplayed = new Subject<boolean>();
+    public reviewNewModalDisplayed = new Subject<boolean>();
+    public academicYearObservable = new Subject<any>();
+    public reactionsObservable = new Subject<any>();
 
     protected constructor(
         http: HttpClient,
@@ -22,13 +25,14 @@ export class ReviewsService extends ServiceInterface<any> {
         super(http, router, paginationService);
     }
 
-    public displayReviewModal(code: string) {
+    public displayNewReviewModal(code: string) {
         this.authService.requireLogIn(
             () => {
-                this.reviewModalDisplayed.next(true);
-                this.http.get(environment.baseUrl + environment.reviewsUrl + code + '/academic-years')
+                this.reviewNewModalDisplayed.next(true);
+                this.http.get<Response<any>>(environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years')
                     .subscribe(
                         response => {
+                            console.log(response);
                             this.academicYearObservable.next(response);
                         }
                     );
@@ -36,15 +40,46 @@ export class ReviewsService extends ServiceInterface<any> {
         )
     }
 
+    public displayEditReviewModal(code: string, body: any) {
+        this.authService.requireLogIn(
+            () => {
+                console.log("IM sending");
+                this.reviewEditModalDisplayed.next(true);
+                this.http.get<Response<any>>(environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years')
+                    .subscribe(
+                        response => {
+                            response.result['patchData'] = body;
+
+                            console.log(response);
+                            this.academicYearObservable.next(response);
+                        }
+                    );
+            }
+        )
+    }
+
+    closeModal() {
+        this.reviewEditModalDisplayed.next(false);
+        this.reviewNewModalDisplayed.next(false);
+    }
+
     sendReaction(body) {
         return this.http.post(environment.baseUrl + environment.reviewsUrl + 'reactions', body)
             .subscribe(
-                response => console.log(response));
+                _ => {
+                    this.http.get(environment.baseUrl + 'reactions/' + environment.reviewsUrl + body.reviewId)
+                        .subscribe(
+                            response => {
+
+                            }
+                        )
+                }
+            );
     }
 
-    public getReviewModalSubject() {
-        return this.reviewModalDisplayed;
-    }
+    // public getReviewModalSubject() {
+    //     return this.reviewModalDisplayed;
+    // }
 
     initialUrl(): string {
         return environment.reviewsUrl;

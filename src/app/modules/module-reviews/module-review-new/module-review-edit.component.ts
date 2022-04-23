@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from "@angular/forms";
+import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { ModuleReviewsService } from "../module-reviews.service";
 import { environment } from "../../../../environments/environment";
 import { ModuleReviewBaseComponent } from "./module-review-base.component";
 
 @Component({
-    selector: 'app-module-review-new',
+    selector: 'app-module-review-edit',
     templateUrl: './module-review-base.component.html',
     styleUrls: ['./module-review-base.component.scss']
 })
-export class ModuleReviewNewComponent extends ModuleReviewBaseComponent implements OnInit {
+export class ModuleReviewEditComponent extends ModuleReviewBaseComponent implements OnInit {
 
     academicYears: any[];
     moduleCode: string;
     patchData: any;
 
-    constructor(private _reviewsService: ModuleReviewsService) {
+    review;
+
+    constructor(
+        private _reviewsService: ModuleReviewsService) {
         super(_reviewsService);
-        // this.initFormGroup({
-        //     quality: new FormControl(),
-        //     difficulty: new FormControl(),
-        //     moduleAcademicYear: new FormControl(),
-        //     content: new FormControl()
-        // });
     }
+
 
     ngOnInit() {
         super.ngOnInit();
 
         this.storeSubscription(
-            this.reviewsService.reviewNewModalDisplayed.subscribe(value => {
+            this.reviewsService.reviewEditModalDisplayed.subscribe(value => {
                 this.displayModal = value;
             })
         );
@@ -37,18 +37,24 @@ export class ModuleReviewNewComponent extends ModuleReviewBaseComponent implemen
             response => {
                 this.academicYears = response.result.academicYears;
                 this.moduleCode = response.result.moduleCode;
+
+                this.review = response.result.patchData;
+                this.reviewForm.patchValue(response.result.patchData);
             }
         );
     }
 
     override onSubmit() {
+        //
+        console.log(this.reviewForm.value);
+        console.log(this.review);
 
         const body = {
             ...this.reviewForm.value,
+            reviewId: this.review.id,
             reviewerId: localStorage[environment["userId-key"]],
-            moduleCode: this.moduleCode
+            moduleCode: 'COMP105'
         }
-
-        this._reviewsService.addReview(body);
+        this._reviewsService.editReview(body);
     }
 }
