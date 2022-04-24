@@ -32,22 +32,5 @@ export class UserService {
                 }
             )
     }
-
-    deleteReview(reviewId) {
-        const body = {
-            reviewId
-        }
-
-        return this.http
-            .request<Response<any>>(
-                'DELETE',
-                environment.baseUrl + environment.profileUrl,
-                {body})
-            .subscribe(
-                _ => {
-                    this.getReviews();
-                }
-            );
-    }
 }
 
