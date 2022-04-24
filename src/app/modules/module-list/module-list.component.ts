@@ -49,9 +49,11 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
         }
     }
     refresh(event){
-        //TODO: when the user is logged in, call ngOnInit. This will trigger the page reloading and subscribe to
+
+        this.plannerModuleService.getNames().subscribe(response => {
+            this.plannerModuleService.returnNames.next(response.result.modulePlanners);
+        });
         console.log("hello")
-        this.ngOnInit();
     }
 
 }

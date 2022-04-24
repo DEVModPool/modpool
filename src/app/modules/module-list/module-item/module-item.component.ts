@@ -38,16 +38,15 @@ export class ModuleItemComponent implements OnInit {
         }
         this.assignList()
     }
+
     checkList(){
-        let needRefresh=true;
         this.authService.requireLogIn( () => {
-            this.assignList()
-            needRefresh = false;
+            console.log(this.planList)
+            console.log(this.planOutput)
+            if(this.planOutput = []){
+                this.someOutput.emit();
+            }
         })
-        if (needRefresh){
-            this.planOutput=[];
-            this.someOutput.emit()
-        }
     }
 
     assignList() {
