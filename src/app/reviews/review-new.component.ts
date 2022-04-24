@@ -21,5 +21,7 @@ export abstract class ReviewNewComponent extends SubscriptionHandler {
 
     closeModal() {
         this.displayModal = false;
+        this.reviewForm.reset();
+        console.log('resetting');
     }
 }

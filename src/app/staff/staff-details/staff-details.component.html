@@ -4,23 +4,6 @@
             <h3 class="font-bold col-8" [ngStyle]="{color:'var(--primary-color)'}">
                 {{ lecturer.fullName }}
             </h3>
-            <div *ngIf="lecturer.averageRating" class="col-4" style="text-align: right">
-                <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
-                    class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ lecturer.averageRating | number: '1.0-2' }}
-                    <span
-                        class="text-blue-300 text-base">/5</span>
-                </h2>
-                <p class="text-blue-300" *ngIf="lecturer.numberOfReviews > 1; else singleReview">
-                    Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span> reviews
-                </p>
-                <ng-template #singleReview>
-                    <p class="text-blue-300">
-                        Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span>
-                        review
-                    </p>
-                </ng-template>
-            </div>
-
         </div>
         <div class="row col-12" style="padding-left:15px">
             <p>
@@ -92,14 +75,21 @@
         <h4 class="col-8 align-self-center font-bold mt-0">
             Reviews
         </h4>
-        <div *ngIf="lecturer.numberOfReviews != 0" class="col-4" style="text-align: right">
+        <div *ngIf="lecturer.averageRating" class="col-4" style="text-align: right">
             <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
-                class="text-yellow-500 text-2xl pi pi-star-fill"></i> 4.1 <span
-                class="text-blue-300 text-base">/5</span>
+                class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ lecturer.averageRating | number: '1.0-2' }}
+                <span
+                    class="text-blue-300 text-base">/5</span>
             </h2>
-            <p class="text-blue-300">
-                Based on <span class="text-blue-600 font-bold text-sm">54</span> reviews
+            <p class="text-blue-300" *ngIf="lecturer.numberOfReviews > 1; else singleReview">
+                Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span> reviews
             </p>
+            <ng-template #singleReview>
+                <p class="text-blue-300">
+                    Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span>
+                    review
+                </p>
+            </ng-template>
         </div>
 
 

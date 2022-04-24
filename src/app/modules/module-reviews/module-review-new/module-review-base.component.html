@@ -10,21 +10,19 @@
         <div class="grid">
             <div class="col-6 text-center font-semibold">
                 <p class="text-2xl mb-3">Quality</p>
-                <p>
-                    <p-rating
-                        [cancel]="false"
-                        formControlName="quality">
-                    </p-rating>
-                </p>
+                <p-rating
+                    [cancel]="false"
+                    formControlName="quality">
+                </p-rating>
+                <small *ngIf="quality.dirty && quality.errors?.['required']" class="p-error">Quality is
+                    required.</small>
             </div>
             <div class="col-6 text-center font-semibold">
                 <p class="text-2xl mb-3">Difficulty</p>
-                <p>
-                    <p-rating
-                        [cancel]="false"
-                        formControlName="difficulty">
-                    </p-rating>
-                </p>
+                <p-rating
+                    [cancel]="false"
+                    formControlName="difficulty">
+                </p-rating>
             </div>
             <div class="col-12">
                 <p-divider></p-divider>
@@ -37,16 +35,6 @@
                         id="coordinator"
                         [options]="academicYears"
                         formControlName="moduleAcademicYear">
-<!--                        <ng-template pTemplate="selectedItem">-->
-                        <!--                            <div class="country-item country-item-value">-->
-                        <!--                                <div>Year taken</div>-->
-                        <!--                            </div>-->
-                        <!--                        </ng-template>-->
-                        <!--                        <ng-template let-country pTemplate="item">-->
-                        <!--                            <div class="country-item">-->
-                        <!--                                <div>String</div>-->
-                        <!--                            </div>-->
-                        <!--                        </ng-template>-->
                     </p-dropdown>
                     <label for="coordinator">Year taken</label>
                 </span>
@@ -67,10 +55,18 @@
         </div>
 
         <div class="mb-2">
-            <button pButton pRipple type="submit" label="Submit" class="w-full" [loading]=loading></button>
+            <button
+                pButton
+                pRipple
+                type="submit"
+                label="Submit"
+                class="w-full"
+                [loading]=loading
+                [disabled]="reviewForm.invalid">
+            </button>
         </div>
         <div class="mb-2">
-            <button (click)="displayModal = false" pButton pRipple type="submit" label="Cancel"
+            <button (click)="closeModal()" pButton pRipple type="button" label="Cancel"
                     class="w-full p-button-secondary" [loading]=loading></button>
         </div>
     </form>

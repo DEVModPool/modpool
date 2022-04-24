@@ -10,12 +10,20 @@ export abstract class ModuleReviewBaseComponent extends ReviewNewComponent imple
     moduleCode: string;
     patchData: any;
 
+    get quality() {
+        return this.reviewForm.get('quality');
+    }
+
+    get difficulty() {
+        return this.reviewForm.get('difficulty');
+    }
+
     protected constructor(
         reviewsService: ModuleReviewsService) {
         super(reviewsService);
         this.initFormGroup({
-            quality: new FormControl(Validators.required),
-            difficulty: new FormControl(Validators.required),
+            quality: new FormControl(null, Validators.required),
+            difficulty: new FormControl(null, Validators.required),
             moduleAcademicYear: new FormControl(),
             content: new FormControl('')
         });

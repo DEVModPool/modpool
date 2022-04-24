@@ -34,7 +34,7 @@
     <div class="col-12">
         <p-divider></p-divider>
     </div>
-    <div class="col-12 md:col-12">
+    <div *ngIf="review.content" class="col-12 md:col-12">
         <div>
             <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
         </div>
