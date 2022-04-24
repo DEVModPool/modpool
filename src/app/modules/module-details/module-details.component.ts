@@ -21,6 +21,12 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     moduleDetails: ModuleDetails;
     reviews: Review[];
 
+    semesters = {
+        1: 'Semester 1',
+        2: 'Semester 2',
+        3: 'Full year'
+    }
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
@@ -55,11 +61,7 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
                             totalStudy: module.studyHoursTotal,
                         },
                     }
-
-                    module.assessments = [
-                        {name: "Written Exam", weight: 70},
-                        {name: "Final Exam", weight: 30},
-                    ]
+                    module.semester = this.semesters[module.semester];
                     this.moduleDetails = module;
 
                     this.processStudyHoursData(this.moduleDetails.studyHours);
