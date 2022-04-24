@@ -56,7 +56,7 @@
                                  style="text-align:right">
                                 <span style="margin-right:20px">
                                     <i class="text-yellow-500 text-base pi pi-star-fill"></i>
-                                    {{ prerequisite.prerequisiteModuleAverageRating }}
+                                    {{ prerequisite.prerequisiteModuleAverageRating | number: '1.0-2' }}
                                     <span class="text-blue-300 text-sm">/5</span>
                                 </span>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="col-3" style="text-align:right">
                                 <span style="margin-right:20px">
                                     <i class="text-yellow-500 text-base pi pi-star-fill"></i>
-                                    {{ prerequisiteFor.prerequisiteForModuleAverageRating }}
+                                    {{ prerequisiteFor.prerequisiteForModuleAverageRating | number: '1.0-2' }}
                                     <span class="text-blue-300 text-sm">/5</span>
                                 </span>
                             </div>
@@ -193,8 +193,9 @@
                 </h4>
                 <div class="col-4" style="text-align: right">
                     <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
-                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ moduleDetails.averageRating }} <span
-                        class="text-blue-300 text-base">/5</span>
+                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ moduleDetails.averageRating | number: '1.0-2' }}
+                        <span
+                            class="text-blue-300 text-base">/5</span>
                     </h2>
                     <p *ngIf="moduleDetails.reviewsCount > 1"
                        class="text-blue-300">

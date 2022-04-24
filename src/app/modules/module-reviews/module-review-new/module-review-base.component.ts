@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { FormControl } from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
 import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { ModuleReviewsService } from "../module-reviews.service";
 
@@ -14,10 +14,10 @@ export abstract class ModuleReviewBaseComponent extends ReviewNewComponent imple
         reviewsService: ModuleReviewsService) {
         super(reviewsService);
         this.initFormGroup({
-            quality: new FormControl(),
-            difficulty: new FormControl(),
+            quality: new FormControl(Validators.required),
+            difficulty: new FormControl(Validators.required),
             moduleAcademicYear: new FormControl(),
-            content: new FormControl()
+            content: new FormControl('')
         });
     }
 

@@ -35,6 +35,7 @@ export abstract class ServiceInterface<T> {
                 })
             .pipe(
                 tap(response => {
+                    console.log(response);
                     this.paginationService.broadcastNewData(response.result);
                     this.getObservable.next(response.result.items);
                     this.spinner.hide('moduleListSpinner');

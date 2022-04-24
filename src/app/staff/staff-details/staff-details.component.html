@@ -6,8 +6,9 @@
             </h3>
             <div *ngIf="lecturer.averageRating" class="col-4" style="text-align: right">
                 <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
-                    class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ lecturer.averageRating }} <span
-                    class="text-blue-300 text-base">/5</span>
+                    class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ lecturer.averageRating | number: '1.0-2' }}
+                    <span
+                        class="text-blue-300 text-base">/5</span>
                 </h2>
                 <p class="text-blue-300" *ngIf="lecturer.numberOfReviews > 1; else singleReview">
                     Based on <span class="text-blue-600 font-bold text-sm">{{ lecturer.numberOfReviews }}</span> reviews
@@ -71,7 +72,7 @@
                                 <td class="col-3">
                                     <h3 style="font-weight: bold; margin: 0;" class="text-900">
                                         <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
-                                        {{ module.averageRating }}
+                                        {{ module.averageRating | number: '1.0-2' }}
                                         <span class="text-blue-300 text-base">/5</span>
                                     </h3>
                                 </td>
@@ -81,37 +82,6 @@
                 </div>
                 <br>
                 <br>
-            </div>
-            <div *ngIf="modules.previouslyThaught != null">
-                <h5 class="font-bold mt-0">Previously Led</h5>
-                <div class="col-12">
-                    <p-table [value]="modules.previouslyThaught" responsiveLayout="scroll">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th></th>
-                                <th>Module</th>
-                                <th>Module Rating</th>
-                            </tr>
-                        </ng-template>
-
-
-                        <ng-template pTemplate="body" let-module>
-                            <tr>
-                                <td class="col-1">
-                                    <button pButton (click)="reroute(module.url)">Visit</button>
-                                </td>
-                                <td class="col-8">{{ module.moduleFullName }}</td>
-                                <td class="col-3">
-                                    <h3 style="font-weight: bold; margin: 0;" class="text-900">
-                                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
-                                        {{ module.rating }}
-                                        <span class="text-blue-300 text-base">/5</span>
-                                    </h3>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
             </div>
         </div>
     </div>
