@@ -18,7 +18,7 @@ export const environment = {
     reviewsUrl: 'reviews/',
     modulesUrl: 'modules/',
 
-    profileUrl: 'profile/'
+    profileUrl: 'profile/',
 
 
     moduleDetails: 'moduleDetails/',
