@@ -19,6 +19,7 @@ export class PlanReturn{
     constructor(
         public modules: PlanData[],
         public id: string,
+        public name?: string,
     ) {}
 }
 export class  PlanList{

@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { PlannerModuleService } from 'src/app/planner/planner-picklist.service';
 import {ModuleItem} from "./module-item.model";
+import { PlanListItem } from './module-item.model';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -10,32 +13,57 @@ import {ModuleItem} from "./module-item.model";
 })
 export class ModuleItemComponent implements OnInit {
     @Input() module: ModuleItem;
+    @Input()  plans: Subject<PlanNames[]>;
     icon = "pi pi-calendar-plus"
     buttontext = "Add to planner"
-    planList
+    planList: PlanNames[] = [];
+    planOutput: PlanListItem[] = [];
+    output: JSON;
+    obj: any
 
-    //TODO: Remove item list
-    items = [
-        {label: 'Add to plan 1', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
-        {label: 'Add to plan 2', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
-        {label: 'Add to plan 3', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
-    ];
-
-    constructor() {
+    constructor(private plannerModuleService: PlannerModuleService) {
     }
+
 
     ngOnInit(): void {
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
-        console.log(selectedModules)
         if (selectedModules.includes(this.module.id)){
             this.icon='pi pi-check'
             this.buttontext = "Added to planner"
         }
-
+        this.plans.subscribe(result => {
+            this.planList = result;
+            this.planList.forEach(x =>{
+                this.planOutput.push(
+                    {label: x.name, icon: 'pi pi-plus-circle', command: () => {
+                        this.plannerModuleService.getPlan(x.id).subscribe(response => {
+                            this.plannerModuleService.returnPlan.next(response.result);
+                        });
+                        this.plannerModuleService.returnPlan.subscribe(result => {
+                            if (!result.modules.map(x => x.id).includes(this.module.id)){
+                                let modules = result.modules.map(x=>x.id)
+                                modules.push(this.module.id)
+                                this.obj =
+                                    {
+                                        "modulePlannerId": result.id,
+                                        "name": result.name ,
+                                        "moduleIDs": modules,
+                                        "studentID": localStorage.getItem('userId')
+                                    };
+                                this.output = <JSON>this.obj;
+                                this.plannerModuleService.savePlan(this.output).subscribe( x => {
+                                    this.plannerModuleService.saveReturn.next(x.errors)
+                                })
+                            }
+                        })
+                    }}
+                )
+            })
+        })
     }
 
+
     addToPlanner(moduleId){
-        console.log(moduleId)
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
         if (selectedModules == null){
             selectedModules = [moduleId]
@@ -45,14 +73,12 @@ export class ModuleItemComponent implements OnInit {
             selectedModules.push(moduleId)
             this.setStyling(true)
         } else {
-            console.log(selectedModules)
             let n = []
             selectedModules.forEach(x => {
                 if(x!=moduleId){
                     n.push(x)
                 }
             });
-            console.log(n)
             selectedModules = n
             this.setStyling(false)
         }

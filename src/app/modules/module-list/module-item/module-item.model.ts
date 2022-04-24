@@ -17,3 +17,10 @@ export class ModuleItem {
     ) {
     }
 }
+export class PlanListItem {
+    constructor(
+            public label: String,
+            public icon: String,
+            public command: any,
+    ) {}
+}
