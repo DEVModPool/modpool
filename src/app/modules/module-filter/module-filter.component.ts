@@ -91,7 +91,6 @@ export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
                     : params.departmentIds;
         }
 
-        console.log(data);
         this.filterForm.patchValue(data);
     }
 }
