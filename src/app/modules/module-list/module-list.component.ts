@@ -6,6 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { PlannerModuleService } from 'src/app/planner/planner-picklist.service';
 import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
     selector: 'app-module-list',
@@ -13,16 +14,17 @@ import { Subject } from 'rxjs';
 })
 export class ModuleListComponent extends SubscriptionHandler implements OnInit {
     modules: ModuleItem[];
-    planSubject: Subject<PlanNames[]>;
     constructor(
         private activatedRoute: ActivatedRoute,
         private moduleService: ModulesService,
-        private plannerModuleService: PlannerModuleService
+        private plannerModuleService: PlannerModuleService,
+        private authService: AuthService,
     ) {
         super();
     }
 
     ngOnInit(): void {
+        console.log("init")
         this.storeSubscription(
             this.activatedRoute.data.subscribe(
                 _ => {
@@ -40,11 +42,16 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
 
                 })
         );
-
-        this.plannerModuleService.getNames().subscribe(response => {
-            this.plannerModuleService.returnNames.next(response.result.modulePlanners);
-        });
-        this.planSubject = this.plannerModuleService.returnNames;
+        if (this.authService.isLoggedIn()) {
+            this.plannerModuleService.getNames().subscribe(response => {
+                this.plannerModuleService.returnNames.next(response.result.modulePlanners);
+            });
+        }
+    }
+    refresh(event){
+        //TODO: when the user is logged in, call ngOnInit. This will trigger the page reloading and subscribe to
+        console.log("hello")
+        this.ngOnInit();
     }
 
 }

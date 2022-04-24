@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { PlannerModuleService } from 'src/app/planner/planner-picklist.service';
 import {ModuleItem} from "./module-item.model";
 import { PlanListItem } from './module-item.model';
-import { Subject } from 'rxjs';
+import { Subject, subscribeOn } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+
 
 
 @Component({
@@ -11,9 +13,10 @@ import { Subject } from 'rxjs';
     templateUrl: './module-item.component.html',
     styleUrls: ['module-item.component.scss']
 })
+
 export class ModuleItemComponent implements OnInit {
     @Input() module: ModuleItem;
-    @Input()  plans: Subject<PlanNames[]>;
+    @Output() someOutput = new EventEmitter<any>();
     icon = "pi pi-calendar-plus"
     buttontext = "Add to planner"
     planList: PlanNames[] = [];
@@ -21,44 +24,63 @@ export class ModuleItemComponent implements OnInit {
     output: JSON;
     obj: any
 
-    constructor(private plannerModuleService: PlannerModuleService) {
-    }
 
+    constructor(private plannerModuleService: PlannerModuleService, private authService: AuthService) {
+    }
 
     ngOnInit(): void {
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
-        if (selectedModules.includes(this.module.id)){
-            this.icon='pi pi-check'
-            this.buttontext = "Added to planner"
+        if (selectedModules){
+            if (selectedModules.includes(this.module.id)){
+                this.icon='pi pi-check'
+                this.buttontext = "Added to planner"
+            }
         }
-        this.plans.subscribe(result => {
+        this.assignList()
+    }
+    checkList(){
+        let needRefresh=true;
+        this.authService.requireLogIn( () => {
+            this.assignList()
+            needRefresh = false;
+        })
+        if (needRefresh){
+            this.planOutput=[];
+            this.someOutput.emit()
+        }
+    }
+
+    assignList() {
+        this.plannerModuleService.returnNames.subscribe(result => {
             this.planList = result;
-            this.planList.forEach(x =>{
-                this.planOutput.push(
-                    {label: x.name, icon: 'pi pi-plus-circle', command: () => {
-                        this.plannerModuleService.getPlan(x.id).subscribe(response => {
-                            this.plannerModuleService.returnPlan.next(response.result);
-                        });
-                        this.plannerModuleService.returnPlan.subscribe(result => {
-                            if (!result.modules.map(x => x.id).includes(this.module.id)){
-                                let modules = result.modules.map(x=>x.id)
-                                modules.push(this.module.id)
-                                this.obj =
-                                    {
-                                        "modulePlannerId": result.id,
-                                        "name": result.name ,
-                                        "moduleIDs": modules,
-                                        "studentID": localStorage.getItem('userId')
-                                    };
-                                this.output = <JSON>this.obj;
-                                this.plannerModuleService.savePlan(this.output).subscribe( x => {
-                                    this.plannerModuleService.saveReturn.next(x.errors)
-                                })
-                            }
-                        })
-                    }}
-                )
-            })
+            if (result){
+                this.planList.forEach(x =>{
+                    this.planOutput.push(
+                        {label: x.name, icon: 'pi pi-plus-circle', command: () => {
+                            this.plannerModuleService.getPlan(x.id).subscribe(response => {
+                                this.plannerModuleService.returnPlan.next(response.result);
+                            });
+                            this.plannerModuleService.returnPlan.subscribe(result => {
+                                if (!result.modules.map(x => x.id).includes(this.module.id)){
+                                    let modules = result.modules.map(x=>x.id)
+                                    modules.push(this.module.id)
+                                    this.obj =
+                                        {
+                                            "modulePlannerId": result.id,
+                                            "name": result.name ,
+                                            "moduleIDs": modules,
+                                            "studentID": localStorage.getItem('userId')
+                                        };
+                                    this.output = <JSON>this.obj;
+                                    this.plannerModuleService.savePlan(this.output).subscribe( x => {
+                                        this.plannerModuleService.saveReturn.next(x.errors)
+                                    })
+                                }
+                            })
+                        }}
+                    )
+                })
+            }
         })
     }
 
