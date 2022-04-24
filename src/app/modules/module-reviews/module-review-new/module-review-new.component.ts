@@ -16,12 +16,6 @@ export class ModuleReviewNewComponent extends ModuleReviewBaseComponent implemen
 
     constructor(private _reviewsService: ModuleReviewsService) {
         super(_reviewsService);
-        // this.initFormGroup({
-        //     quality: new FormControl(),
-        //     difficulty: new FormControl(),
-        //     moduleAcademicYear: new FormControl(),
-        //     content: new FormControl()
-        // });
     }
 
     ngOnInit() {

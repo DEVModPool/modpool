@@ -87,15 +87,12 @@ export class AuthService {
         return this.http.post<any>(environment.baseUrl + 'activate-user', {token})
             .pipe(
                 catchError(error => {
-                    console.log(error);
                     return throwError(error);
                 })
             )
             .subscribe(
                 response => {
-                    console.log(response);
                     this.authenticateUser(response);
-                    // this.router.navigate(['/']);
                 }
             )
     }

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthService } from "../../auth/auth.service";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
 import { environment } from "../../../environments/environment";
@@ -7,7 +7,7 @@ import { ReviewsService } from "../reviews.service";
 @Injectable({
     providedIn: 'root'
 })
-export abstract class ReactionsInterface extends SubscriptionHandler implements OnInit {
+export abstract class ReactionsInterface extends SubscriptionHandler {
 
     reactionData: { upvoteCount: number, downvoteCount: number, reactions: any[], reviewId: string };
 
@@ -15,14 +15,6 @@ export abstract class ReactionsInterface extends SubscriptionHandler implements 
         protected reviewsService: ReviewsService,
         private authService: AuthService) {
         super();
-    }
-
-    ngOnInit(): void {
-        // this.reviewsService.reactionsObservable.subscribe(
-        //     reactionData => {
-        //         this.reactionData = reactionData;
-        //     }
-        // )
     }
 
     protected setReactionData(reactionData) {

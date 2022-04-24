@@ -17,7 +17,6 @@ export class StaffDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(
             response => {
-                console.log(response.staffData);
                 this.lecturer = response.staffData.coordinator;
                 this.modules = response.staffData.modules;
                 this.reviews = response.staffData.reviews;

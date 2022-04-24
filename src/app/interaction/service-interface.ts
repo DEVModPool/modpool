@@ -4,7 +4,6 @@ import { Response } from "./response"
 import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
 import { catchError } from "rxjs/operators";
-
 import { PaginationService } from "../pagination/pagination.service";
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -35,54 +34,16 @@ export abstract class ServiceInterface<T> {
                 })
             .pipe(
                 tap(response => {
-                    console.log(response);
                     this.paginationService.broadcastNewData(response.result);
                     this.getObservable.next(response.result.items);
                     this.spinner.hide('moduleListSpinner');
                 }),
                 catchError(error => {
-                    console.log(error);
                     return throwError(error);
                 })
             )
             .subscribe();
     }
-
-    //
-    // addNew(object) {
-    //     return this.http
-    //         .post<Response<any>>(environment.baseUrl + this.initialUrl(), object)
-    //         .pipe(
-    //             tap(
-    //                 response => {
-    //                     this.router.navigate([this.initialUrl() + response.result.id])
-    //                 }
-    //             ),
-    //             catchError(error => {
-    //                 console.log(error.errors);
-    //                 return throwError(error);
-    //             })
-    //         ).subscribe();
-    // }
-    //
-    // edit(id, data) {
-    //     return this.http
-    //         .put<Response<any>>(environment.baseUrl + this.initialUrl() + id, data)
-    //         .pipe(
-    //             tap(
-    //                 response => {
-    //                     this.router.navigate([this.initialUrl()])
-    //                         .then(() => {
-    //                             return this.router.navigate([this.initialUrl() + response.result.id]);
-    //                         })
-    //                 },
-    //             ),
-    //             catchError(error => {
-    //                 console.log(error);
-    //                 return throwError(error);
-    //             })
-    //         ).subscribe();
-    // }
 }
 
 

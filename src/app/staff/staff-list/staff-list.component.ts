@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { StaffService } from "../staff.service";
-import { PaginationService } from "../../pagination/pagination.service";
-import { tap } from "rxjs";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
 
 @Component({
@@ -16,8 +14,7 @@ export class StaffListComponent extends SubscriptionHandler implements OnInit {
 
     constructor(
         private staffService: StaffService,
-        private activatedRoute: ActivatedRoute,
-        private paginationService: PaginationService) {
+        private activatedRoute: ActivatedRoute) {
         super();
     }
 
@@ -34,10 +31,7 @@ export class StaffListComponent extends SubscriptionHandler implements OnInit {
             this.activatedRoute.data
                 .subscribe(
                     response => {
-                        console.log(response);
-                        // this.staffList = response.staffData.coordinators.items;
                         this.departments = response.staffData.viewmodel.departments;
-
                         this.storeSubscription(
                             this.staffService.getAll()
                         );

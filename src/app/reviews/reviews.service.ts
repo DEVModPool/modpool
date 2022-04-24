@@ -44,14 +44,11 @@ export class ReviewsService extends ServiceInterface<any> {
     public displayEditReviewModal(code: string, body: any) {
         this.authService.requireLogIn(
             () => {
-                console.log("IM sending");
                 this.reviewEditModalDisplayed.next(true);
                 this.http.get<Response<any>>(environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years')
                     .subscribe(
                         response => {
                             response.result['patchData'] = body;
-
-                            console.log(response);
                             this.academicYearObservable.next(response);
                         }
                     );

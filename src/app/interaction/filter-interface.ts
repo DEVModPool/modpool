@@ -11,7 +11,6 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     extends SubscriptionHandler
     implements OnInit, AfterViewInit {
 
-    isLoading = false;
     searchFilters: QueryParamsT;
     filterForm: FormGroup;
 
@@ -109,11 +108,8 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
         }
 
         if (!this.paginationData) {
-            console.log(qp);
             return qp;
         }
-
-        // console.log(this.paginationData);
 
         for (let key of Object.keys(this.paginationData)) {
             qp[key] = this.paginationData[key];

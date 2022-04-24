@@ -30,8 +30,6 @@ export class ModuleReviewReactionsComponent extends ReactionsInterface {
         this.storeSubscription(
             this.reviewsService.sendReaction(body)
         );
-
-        console.log(body);
     }
 
     override downvote() {

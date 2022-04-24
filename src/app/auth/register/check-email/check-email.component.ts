@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService, LoginRequest } from "../../auth.service";
-import { FormControl, FormGroup } from "@angular/forms";
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-check-email',

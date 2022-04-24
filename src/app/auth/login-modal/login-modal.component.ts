@@ -32,7 +32,6 @@ export class LoginModalComponent implements OnInit {
     login(): any {
         this.loading = true;
         const user = this.authForm.value;
-        console.log(user);
         this.authService.login(user).subscribe({
             next: () => this.closeModal(),
             error: () => {

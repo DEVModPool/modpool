@@ -6,8 +6,6 @@ import { ServerErrorComponent } from "./error-pages/server-error/server-error.co
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
 import { UserComponent } from "./user/user.component";
 import { AuthGuard } from "./auth/auth.guard";
-import { BaseResolver } from "./interaction/base-resolver";
-import { environment } from "../environments/environment";
 
 const routes: Routes = [
     {

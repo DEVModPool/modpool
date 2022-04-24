@@ -30,7 +30,6 @@ export class ModuleReviewsService extends ReviewsService {
             .post<Response<any>>(environment.baseUrl + environment.reviewsUrl, review)
             .pipe(
                 catchError(error => {
-                    console.log(error.errors);
                     return throwError(error);
                 })
             ).subscribe(

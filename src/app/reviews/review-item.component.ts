@@ -27,7 +27,6 @@ export class ReviewItemComponent {
     }
 
     parseReactionData(reviewObj) {
-        // console.log(reviewObj);
         return {
             reviewId: reviewObj.id,
             upvoteCount: reviewObj.upvoteCount,

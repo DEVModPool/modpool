@@ -1,14 +1,17 @@
 export class RequisiteModule {
     code: any;
-    constructor(id: string, name: string, code: string) {}
+
+    constructor() {
+    }
 }
 
-export class  PlannerModule{
+export class PlannerModule {
     constructor(
         public id: string,
         public fullName: string,
         public semester: number,
         public missing: string[],
         public prerequisiteModules: RequisiteModule[],
-    ) {}
+    ) {
+    }
 }

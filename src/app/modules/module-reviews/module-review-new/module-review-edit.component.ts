@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from "@angular/forms";
-import { ReviewNewComponent } from "../../../reviews/review-new.component";
 import { ModuleReviewsService } from "../module-reviews.service";
 import { environment } from "../../../../environments/environment";
 import { ModuleReviewBaseComponent } from "./module-review-base.component";
@@ -45,10 +43,6 @@ export class ModuleReviewEditComponent extends ModuleReviewBaseComponent impleme
     }
 
     override onSubmit() {
-        //
-        console.log(this.reviewForm.value);
-        console.log(this.review);
-
         const body = {
             ...this.reviewForm.value,
             reviewId: this.review.id,

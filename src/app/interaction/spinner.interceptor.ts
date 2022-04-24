@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { catchError, finalize, Observable, of } from "rxjs";
 import { NgxSpinnerService } from "ngx-spinner";
-import { error } from "protractor";
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
@@ -26,7 +25,6 @@ export class SpinnerInterceptor implements HttpInterceptor {
             }))
     }
 
-    //TODO-TD: Think about error handling in different interceptor.
     handleHttpError(error: HttpErrorResponse) {
         if (error.status == 401) {
             this.router.navigate(['/login']);

@@ -1,9 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-
 import { HttpClient } from "@angular/common/http";
 import { ModuleItem } from "./module-list/module-item/module-item.model";
-import { Response } from "../interaction/response";
 import { environment } from "../../environments/environment";
 import { ServiceInterface } from "../interaction/service-interface";
 import { Router } from "@angular/router";
@@ -27,7 +24,5 @@ export class ModulesService extends ServiceInterface<ModuleItem> {
     initialUrl(): string {
         return environment.modulesUrl;
     }
-
-
 }
 

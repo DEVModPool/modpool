@@ -48,7 +48,7 @@ export class RegisterComponent extends SubscriptionHandler implements OnInit {
         }
         else {
             const user = {
-                email: <string>this.authForm.value.email,
+                email: <string>this.authForm.value.email + '@liverpool.ac.uk',
                 password: <string>this.authForm.value.password
             }
 

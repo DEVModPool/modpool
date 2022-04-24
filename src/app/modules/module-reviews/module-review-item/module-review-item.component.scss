@@ -48,12 +48,13 @@
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
+
 .hover-underline-animation-green:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
 
-.hover-underline-animation-pink{
+.hover-underline-animation-pink {
     display: inline-block;
     position: relative;
     color: black;
@@ -71,11 +72,11 @@
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
+
 .hover-underline-animation-pink:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
 
 
 // Scroll of the pannel

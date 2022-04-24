@@ -38,8 +38,6 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
         this.storeSubscription(
             this.activatedRoute.data.subscribe(
                 response => {
-                    console.log(response);
-
                     this.reviews = response.moduleData.reviews;
 
                     let module = response.moduleData.module;

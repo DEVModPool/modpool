@@ -1,12 +1,10 @@
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { EMPTY, map, Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Response } from "./response"
 import { environment } from "../../environments/environment";
-
 
 @Injectable({
     providedIn: "root",
@@ -33,7 +31,6 @@ export class BaseResolver<T> implements Resolve<T> {
                 return response.result;
             }),
             catchError(error => {
-                console.log(error);
                 this.router.navigate(['']);
                 return EMPTY;
             })

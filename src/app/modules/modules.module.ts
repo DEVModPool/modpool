@@ -19,7 +19,6 @@ import { DividerModule } from "primeng/divider";
 import { ModuleDetailsComponent } from './module-details/module-details.component';
 import { ChartModule } from "primeng/chart";
 import { AccordionModule } from "primeng/accordion";
-
 import { RatingModule } from "primeng/rating";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { TooltipModule } from "primeng/tooltip";
