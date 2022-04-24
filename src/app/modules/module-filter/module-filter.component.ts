@@ -44,21 +44,15 @@ export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
                 this.departments = response.moduleData.viewmodel.departments;
             }
         )
-
-        this.storeSubscription(
-            this.filterForm.valueChanges
-                .pipe(debounceTime(200))
-                .subscribe(() => this.onSearch())
-        );
     }
 
     getFilterForm(): FormGroup {
         return new FormGroup({
-            q: new FormControl(''),
-            levels: new FormControl(''),
-            semesters: new FormControl(''),
-            credits: new FormControl(''),
-            departmentIds: new FormControl('')
+            q: new FormControl(null),
+            levels: new FormControl(null),
+            semesters: new FormControl(null),
+            credits: new FormControl(null),
+            departmentIds: new FormControl(null)
         });
     }
 

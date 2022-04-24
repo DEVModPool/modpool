@@ -36,7 +36,9 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     patchValueFromParams(params) {
-        this.filterForm.patchValue(params);
+        this.filterForm.disable();
+        this.filterForm.patchValue(params, {emitEvent: false, onlySelf: true});
+        this.filterForm.enable();
     }
 
     ngOnInit(): void {
@@ -58,7 +60,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
                 (data: PaginationModel) => {
                     this.searchFilters = {...this.searchFilters, ...data}
                     this.paginationData = data;
-                    this.onSearch();
+                    this.fetchData();
                 }
             )
         );
@@ -87,6 +89,11 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
     }
 
     onSearch() {
+        this.paginationData = null
+        this.fetchData();
+    }
+
+    fetchData() {
         this.router.navigate(
             ['./'],
             {

@@ -1,7 +1,7 @@
 <div class="card">
     <h5 [ngStyle]="{color:'var(--primary-color)'}">Filter Staff</h5>
     <br>
-    <form [formGroup]="filterForm">
+    <form [formGroup]="filterForm" (submit)="onSearch()">
         <div class="p-fluid grid">
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
@@ -24,6 +24,10 @@
                     <label for="departments">Departments</label>
                 </span>
             </div>
+        </div>
+
+        <div class="field col-6">
+            <p-button label="Search" type="submit" icon="pi pi-search"></p-button>
         </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
 <div class="sticky-inner-wrapper" style="margin-right:1rem">
     <div class="card col-12">
-        <div class="grid p-fluid" [formGroup]="filterForm">
+        <form class="grid p-fluid" [formGroup]="filterForm" (submit)="onSearch()">
             <div class="col-12">
                 <div class="p-inputgroup">
                     <input type="text" pInputText placeholder="Module name, code, description..." formControlName="q">
@@ -54,7 +54,10 @@
                     [style]="{'width':'100%'}">
                 </p-multiSelect>
             </div>
-        </div>
+            <div class="field col-6">
+                <p-button label="Search" type="submit" icon="pi pi-search"></p-button>
+            </div>
+        </form>
     </div>
 </div>
 

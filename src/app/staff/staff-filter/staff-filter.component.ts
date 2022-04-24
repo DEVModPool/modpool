@@ -39,10 +39,6 @@ export class StaffFilterComponent
                 this.departments = response.staffData.viewmodel.departments;
             }
         )
-
-        this.storeSubscription(this.filterForm.valueChanges
-            .pipe(debounceTime(200))
-            .subscribe(() => this.onSearch()));
     }
 
     getFilterForm(): FormGroup {
