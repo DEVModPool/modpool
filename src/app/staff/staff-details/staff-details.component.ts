@@ -11,21 +11,17 @@ export class StaffDetailsComponent implements OnInit {
     modules: any;
     reviews: any;
 
-    constructor(private activatedRoute: ActivatedRoute,
-                private router: Router) {
+    constructor(private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(
             response => {
+                console.log(response.staffData);
                 this.lecturer = response.staffData.coordinator;
                 this.modules = response.staffData.modules;
                 this.reviews = response.staffData.reviews;
             }
         )
-    }
-
-    reroute(url): void {
-        this.router.navigate([url]);
     }
 }
