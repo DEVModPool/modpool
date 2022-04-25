@@ -34,48 +34,44 @@
     <div class="col-12">
         <p-divider></p-divider>
     </div>
-<<<<<<< HEAD
+    <<<<<<< HEAD
     <div *ngIf="review.content" class="col-12 md:col-12">
-=======
-    <div class="col-12 md:col-12">
->>>>>>> remotes/origin/feature-gb-planner
-        <div>
-            <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
+        =======
+        <div class="col-12 md:col-12">
+            >>>>>>> remotes/origin/feature-gb-planner
+            <div>
+                <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
+            </div>
+            <p-divider align="center">
+                <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()"
+                          *ngIf="review.content.length >= sliceOptions.default">
+                    <ng-template pTemplate="content">
+                        <i class="pi pi-chevron-down" *ngIf="!expanded"></i>
+                        <i class="pi pi-chevron-up" *ngIf="expanded"></i>
+                    </ng-template>
+                </p-button>
+            </p-divider>
         </div>
-        <p-divider align="center">
-            <p-button styleClass="px-3 p-button-rounded" (click)="toggleReview()"
-                      *ngIf="review.content.length >= sliceOptions.default">
-                <ng-template pTemplate="content">
-                    <i class="pi pi-chevron-down" *ngIf="!expanded"></i>
-                    <i class="pi pi-chevron-up" *ngIf="expanded"></i>
-                </ng-template>
-            </p-button>
-        </p-divider>
-    </div>
 
-    <div class="col-12">
-        <button
-            pButton
-            class="p-button-danger"
-            type="button"
-            label="Delete"
-            icon="pi pi-trash"
-            (click)="deleteReview(review.id)"
-        ></button>
-        <span style="margin-left:10px">
+        <div class="col-12">
+            <button
+                pButton
+                class="p-button-danger"
+                type="button"
+                label="Delete"
+                icon="pi pi-trash"
+                (click)="deleteReview(review.id)"
+            ></button>
+            <span style="margin-left:10px">
             <button
                 *ngIf="review.reviewStatus == 'Pending'"
                 pButton
                 type="button"
                 label="Edit"
                 icon="pi pi-pencil"
-<<<<<<< HEAD
                 (click)="editReview(review.moduleCode)">
-=======
-                (click)="editReview('COMP105')">
->>>>>>> remotes/origin/feature-gb-planner
             </button>
         </span>
+        </div>
     </div>
-</div>
-<br>
+    <br>

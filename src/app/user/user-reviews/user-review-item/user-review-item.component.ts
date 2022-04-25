@@ -31,10 +31,6 @@ export class UserReviewItemComponent extends ReviewItemComponent {
     }
 
     editReview(code) {
-<<<<<<< HEAD
-        console.log(this.review);
-=======
->>>>>>> remotes/origin/feature-gb-planner
         this.reviewService.displayEditReviewModal(code, this.review);
     }
 
