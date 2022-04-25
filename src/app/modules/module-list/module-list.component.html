@@ -1,4 +1,4 @@
 <div style="margin-right:1rem">
-    <app-module-item *ngFor="let module of modules;" [module]=module></app-module-item>
+    <app-module-item *ngFor="let module of modules;" [module]=module (someOutput)=refresh($event)></app-module-item>
     <app-pagination></app-pagination>
 </div>

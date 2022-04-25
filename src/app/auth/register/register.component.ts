@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, LoginRequest } from "../auth.service";
-import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
-import {patternValidator} from "./pattern.directive";
+import { patternValidator } from "./pattern.directive";
 
 @Component({
     selector: 'app-register',
@@ -12,8 +12,13 @@ import {patternValidator} from "./pattern.directive";
 })
 export class RegisterComponent extends SubscriptionHandler implements OnInit {
 
-    get email() { return this.authForm.get('email'); }
-    get password() { return this.authForm.get('password'); }
+    get email() {
+        return this.authForm.get('email');
+    }
+
+    get password() {
+        return this.authForm.get('password');
+    }
 
     authForm = new FormGroup({
         email: new FormControl(null, Validators.required),
@@ -45,8 +50,7 @@ export class RegisterComponent extends SubscriptionHandler implements OnInit {
         if (this.authForm.value.password !== this.authForm.value.repeatPassword) {
             this.passwordMatch = false;
             return;
-        }
-        else {
+        } else {
             const user = {
                 email: <string>this.authForm.value.email + '@liverpool.ac.uk',
                 password: <string>this.authForm.value.password

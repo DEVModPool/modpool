@@ -11,6 +11,7 @@ export const environment = {
     jwtAllowedDomain: 'dev.modpool.uk',
     baseUrl: 'http://dev.modpool.uk/api/',
 
+
     resolverUrl: 'resolve-route',
     loginUrl: 'login',
 
@@ -19,7 +20,6 @@ export const environment = {
     modulesUrl: 'modules/',
 
     profileUrl: 'profile/',
-
 
     moduleDetails: 'moduleDetails/',
     modulePlanners: 'module-planners/'

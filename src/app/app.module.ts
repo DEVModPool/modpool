@@ -20,8 +20,8 @@ import { PlannerModule } from "./planner/planner.module";
 import { QueryParamModule } from "@ngqp/core";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUtil } from "./util/auth.util";
+import { environment } from 'src/environments/environment';
 import { StaffModule } from "./staff/staff.module";
-import { environment } from "../environments/environment";
 import { ToastModule } from "primeng/toast";
 import { ModulesModule } from "./modules/modules.module";
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -29,7 +29,6 @@ import { SpinnerInterceptor } from "./interaction/spinner.interceptor";
 import { ServerErrorComponent } from "./error-pages/server-error/server-error.component";
 import { NotFoundComponent } from "./error-pages/not-found/not-found.component";
 import { UserModule } from "./user/user.module";
-
 
 @NgModule({
     imports: [

@@ -12,8 +12,9 @@
             <h6 class="ml-2" style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
         </div>
         <div class="col-6 flex justify-content-end">
-            <p-splitButton label="Add to planner" icon="pi pi-calendar-plus" [model]="items"
-                           styleClass="p-button-sm"></p-splitButton>
+            <p-splitButton [label]="buttontext" [icon]="icon" class="planButton" [model]="planOutput"
+                           styleClass="p-button-sm" (onClick)="addToPlanner(module.id)" (onDropdownClick)="checkList()"
+                           id={{module.id}}></p-splitButton>
         </div>
     </div>
     <div>

@@ -13,7 +13,7 @@ const routes: Routes = [
         component: AppMainComponent,
         children: [
             {path: '', redirectTo: '/modules', pathMatch: 'full'},
-            {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+            {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
             {path: 'modules', loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)},
             {path: 'planner', loadChildren: () => import('./planner/planner.module').then(m => m.PlannerModule)},
             {path: 'coordinators', loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule)},

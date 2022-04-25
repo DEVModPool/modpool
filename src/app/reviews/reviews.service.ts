@@ -34,6 +34,7 @@ export class ReviewsService extends ServiceInterface<any> {
                 this.http.get<Response<any>>(environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years')
                     .subscribe(
                         response => {
+                            console.log(response);
                             this.academicYearObservable.next(response);
                         }
                     );

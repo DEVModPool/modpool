@@ -34,7 +34,11 @@
     <div class="col-12">
         <p-divider></p-divider>
     </div>
+<<<<<<< HEAD
     <div *ngIf="review.content" class="col-12 md:col-12">
+=======
+    <div class="col-12 md:col-12">
+>>>>>>> remotes/origin/feature-gb-planner
         <div>
             <p>{{ review.content | slice:sliceOptions.start:sliceOptions.end }}</p>
         </div>
@@ -65,7 +69,11 @@
                 type="button"
                 label="Edit"
                 icon="pi pi-pencil"
+<<<<<<< HEAD
                 (click)="editReview(review.moduleCode)">
+=======
+                (click)="editReview('COMP105')">
+>>>>>>> remotes/origin/feature-gb-planner
             </button>
         </span>
     </div>

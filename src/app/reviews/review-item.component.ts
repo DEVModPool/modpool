@@ -1,6 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AuthService } from "../auth/auth.service";
-import { ReviewsService } from "./reviews.service";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ReviewItemComponent {

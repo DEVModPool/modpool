@@ -40,6 +40,7 @@ export class MenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-users',
                         routerLink: ['/coordinators'],
                         preventExact: true
+
                     },
                     {
                         label: 'About',

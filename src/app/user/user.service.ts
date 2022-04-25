@@ -4,11 +4,11 @@ import { environment } from "../../environments/environment";
 import { Response } from "../interaction/response"
 import { Subject } from "rxjs";
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-
     reviewsObservable: Subject<any> = new Subject<any>();
 
     protected constructor(private http: HttpClient) {
