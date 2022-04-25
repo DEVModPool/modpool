@@ -20,7 +20,11 @@ interface Department {
 })
 export class ModuleFilterComponent extends FilterInterface<ModuleItem, qp> {
     departments: Department[];
-    semesters: any[] = [{name: 'Semester 1', value: 1}, {name: 'Semester 2', value: 2}];
+    semesters: any[] = [
+        {name: 'Semester 1', value: 1},
+        {name: 'Semester 2', value: 2},
+        {name: 'Full year', value: 3},
+    ];
     creditOptions: any[] = [7.5, 15];
     selectedCreditOptions: any[];
     moduleLevels: any[] = [100, 200, 300, 400, 500];

@@ -45,7 +45,9 @@ export class ReviewsService extends ServiceInterface<any> {
         this.authService.requireLogIn(
             () => {
                 this.reviewEditModalDisplayed.next(true);
-                this.http.get<Response<any>>(environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years')
+                this.http.get<Response<any>>(
+                    environment.baseUrl + environment.reviewsUrl + environment.modulesUrl + code + '/academic-years'
+                )
                     .subscribe(
                         response => {
                             response.result['patchData'] = body;

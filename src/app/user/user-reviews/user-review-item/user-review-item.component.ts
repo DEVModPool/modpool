@@ -31,6 +31,7 @@ export class UserReviewItemComponent extends ReviewItemComponent {
     }
 
     editReview(code) {
+        console.log(this.review);
         this.reviewService.displayEditReviewModal(code, this.review);
     }
 

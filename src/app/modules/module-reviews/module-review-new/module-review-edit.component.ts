@@ -47,7 +47,7 @@ export class ModuleReviewEditComponent extends ModuleReviewBaseComponent impleme
             ...this.reviewForm.value,
             reviewId: this.review.id,
             reviewerId: localStorage[environment["userId-key"]],
-            moduleCode: 'COMP105'
+            moduleCode: this.review.moduleCode
         }
         this._reviewsService.editReview(body);
     }
