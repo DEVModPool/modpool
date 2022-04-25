@@ -90,6 +90,22 @@ import { PlannerModuleService } from '../../planner-picklist.service';
                                 </ng-template>
                             </p-listbox>
                         </ng-template>
+                        <ng-template pTemplate>
+                            <h4 class="h4" *ngIf="semester3Selected">Semester 3</h4>
+                            <p-listbox>
+                                <ng-template ngFor let-item [ngForOf]="target" [ngForTrackBy]="targetTrackBy || trackBy" let-i="index" let-l="last">
+                                    <li [ngClass]="{'p-picklist-item':true,'p-highlight':isSelected(item,selectedItemsTarget), 'p-disabled': disabled}" pRipple
+                                        cdkDrag [cdkDragData]="item" [cdkDragDisabled]="!dragdrop"
+                                        (click)="onItemClick($event,item,selectedItemsTarget,onTargetSelect)" (dblclick)="onTargetItemDblClick()"
+                                        (touchend)="onItemTouchEnd()" (keydown)="onItemKeydown($event,item,selectedItemsTarget,onTargetSelect)"
+                                        *ngIf="isItemVisible(item, TARGET_LIST) && item.semester =='3'" tabindex="0" role="option"
+                                        [attr.aria-selected]="isSelected(item, selectedItemsTarget)">
+                                        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}">
+                                        </ng-container>
+                                    </li>
+                                </ng-template>
+                            </p-listbox>
+                        </ng-template>
                     </p-splitter>
                 </ul>
                 <ng-container *ngTemplateOutlet="currentTemplate" >

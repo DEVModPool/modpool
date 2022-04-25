@@ -1,25 +1,31 @@
-.p-picklist-target{
-        height: 50rem;
+.p-picklist-target {
+    height: 50rem;
 }
-.p-picklist-source{
-    .missingModulesLabel{
+
+.p-picklist-source {
+    .missingModulesLabel {
         display: none !important;
     }
 }
-.p-picklist-source{
-    .missingModulesLabel{
+
+.p-picklist-source {
+    .missingModulesLabel {
         display: flex !important;
     }
 }
+
 .moduleLink {
     color: var(--text-color);
 }
+
 .moduleLink:hover {
     text-decoration: underline;
 }
+
 .moduleLinkMissing {
     color: var(--warnColour);
 }
+
 .module-item {
     align-content: center;
     width: 100%;
@@ -30,35 +36,46 @@
     display: grid;
     color: var(--text-color);
 }
-.semester2{
-    box-shadow: inset 0 0 100px 1000px var( --bluegray-200), 0 0 10000px 10000px var( --bluegray-200);
+
+.semester3 {
+    box-shadow: inset 0 0 100px 1000px var(--bluegray-300), 0 0 10000px 10000px var(--bluegray-300);
 }
-.semester1{
-    box-shadow: inset 0 0 100px 1000px var( --blue-100), 0 0 10000px 10000px var( --blue-100);
+
+.semester2 {
+    box-shadow: inset 0 0 100px 1000px var(--bluegray-200), 0 0 10000px 10000px var(--bluegray-200);
 }
-.prerequisiteRow{
+
+.semester1 {
+    box-shadow: inset 0 0 100px 1000px var(--blue-100), 0 0 10000px 10000px var(--blue-100);
+}
+
+.prerequisiteRow {
     margin: 0 0 0.5rem 0;
 }
+
 h5, h6 {
     margin: 0 0 0.5rem 0;
 }
-.alignWithIcon{
+
+.alignWithIcon {
     position: absolute;
     margin-top: 3px;
 }
-.prereqList{
+
+.prereqList {
     justify-self: left;
     list-style: none;
     padding-inline-start: 10px;
+
     li::before {
         content: "";
         display: inline-block; /* Needed to add space between the bullet and the text */
         width: 1em; /* Also needed for space (tweak if needed) */
         margin-left: -2.5em; /* Also needed for space (tweak if needed) */
-      }
+    }
 }
 
-.p-picklist-source{
+.p-picklist-source {
     .p-button {
         display: none !important;
     }
@@ -67,12 +84,14 @@ h5, h6 {
 :root {
     --warnColour: #c77f13;
 }
-.customAcc{
+
+.customAcc {
     .p-accordion-content {
         background: none !important;
         border: none !important;
         padding: 0px !important;
     }
+
     .p-accordion-header-link {
         background: none !important;
         border: none !important;
@@ -81,65 +100,80 @@ h5, h6 {
         display: grid;
         color: inherit !important;
     }
-    .p-accordion-toggle-icon{
+
+    .p-accordion-toggle-icon {
         grid-column: 2;
         grid-row: 1;
         justify-self: right;
     }
-    .p-accordion-header-text{
+
+    .p-accordion-header-text {
         grid-column: 1;
         grid-row: 1;
     }
+
     .p-toggleable-content {
         align-items: flex-start;
     }
 }
+
 .warn {
-    .p-accordion-toggle-icon{
+    .p-accordion-toggle-icon {
         color: var(--warnColour);
     }
 }
+
 .p-ink {
     pointer-events: none !important;
-  }
+}
+
 .p-splitter-panel-nested {
     display: block !important;
 }
-.customMsg.p-inline-message-warn{
+
+.customMsg.p-inline-message-warn {
     background: none !important;
     color: var(--warnColour) !important;
-    .p-inline-message-icon{
+
+    .p-inline-message-icon {
         color: var(--warnColour) !important;
     }
 }
-.customMsg{
+
+.customMsg {
     padding-left: 0px !important;
 }
-.exclude{
-    .pi-info-circle{
+
+.exclude {
+    .pi-info-circle {
         display: none !important;
     }
 }
-.include{
+
+.include {
     padding: 2px 2px !important;
     margin: none;
 }
+
 .menuStyle {
     top: -100% !important;
     left: -90% !important;
 }
+
 .container {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-auto-flow: row;
     min-height: 4rem;
 }
+
 .containerLarge {
     border: 1px solid #dee2e6;
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
+
 .modulesTitle {
     border: 1px solid #dee2e6;
     height: min-content;
@@ -147,17 +181,19 @@ h5, h6 {
     display: flex;
     align-items: baseline;
 }
+
 .pi-question-circle {
     color: var(--gray-500);
     padding-left: 0.5rem;
     font-size: 0.8rem;
     font-weight: bold;
 }
+
 .pi-question-circle:hover {
     color: var(--gray-900);
 }
 
-.nameList{
+.nameList {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -165,7 +201,8 @@ h5, h6 {
     padding-bottom: 1px;
     padding-top: 1px;
     width: 100%;
-    p-button{
+
+    p-button {
         padding-left: 5px;
     }
 }

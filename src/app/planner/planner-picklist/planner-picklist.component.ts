@@ -20,6 +20,7 @@ export class PlannerPicklistComponent implements OnInit {
     selectedModules: PlannerModule[];
     selectedSemester1: boolean;
     selectedSemester2: boolean;
+    selectedSemester3: boolean;
     takenPrerequisites: string[];
     allPrerequisites: any[];
     plans: PlanNames[];
@@ -34,49 +35,50 @@ export class PlannerPicklistComponent implements OnInit {
         qpbPlans: QueryParamBuilder,
         private authService: AuthService,
         private confirmationService: ConfirmationService
-        ) {
+    ) {
         this.paramPlanCode = qpbPlans.group({
-            plan: qpbPlans.stringParam('plan', {multi:true})
+            plan: qpbPlans.stringParam('plan', {multi: true})
         })
         this.paramModuleID = qpbModules.group({
-            id: qpbModules.stringParam('id', {multi:true})
+            id: qpbModules.stringParam('id', {multi: true})
         })
-     }
+    }
 
     ngOnInit(): void {
         localStorage.setItem('takenPrerequisiteStorage', null);
         this.plans = []
         this.plannerModules = [];
         this.selectedModules = [];
-        this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage'))==null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
+        this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage')) == null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
         let localStorageSelectedCodes = JSON.parse(localStorage.getItem('selectedModuleStorage'))
         this.selectedModules = localStorageSelectedCodes.forEach(x => this.addModule(x));
-        this.selectedModules = (this.selectedModules==null) ? [] : this.selectedModules;
+        this.selectedModules = (this.selectedModules == null) ? [] : this.selectedModules;
         this.selectedModules.forEach(x => this.checkPrerequisites(x))
         this.filterSemesters()
         this.plannerModuleService.plannerModules
             .subscribe(result => {
-                this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id==y.id))
-                this.plannerModules.forEach(x=> x['missing'] = [])
+                this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id == y.id))
+                this.plannerModules.forEach(x => x['missing'] = [])
 
 
             });
         this.saveText = "";
     }
 
-    filterSemesters(){
-        this.selectedSemester1=(this.selectedModules.filter(x => x.semester==1).length>0)
-        this.selectedSemester2=(this.selectedModules.filter(x => x.semester==2).length>0)
+    filterSemesters() {
+        this.selectedSemester1 = (this.selectedModules.filter(x => x.semester == 1).length > 0)
+        this.selectedSemester2 = (this.selectedModules.filter(x => x.semester == 2).length > 0)
+        this.selectedSemester3 = (this.selectedModules.filter(x => x.semester == 3).length > 0)
     }
 
-    toSource(){
+    toSource() {
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
         this.filterSemesters();
         this.toTarget();
     }
 
-    toTarget(){
+    toTarget() {
         localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
 
         this.filterSemesters();
@@ -93,67 +95,73 @@ export class PlannerPicklistComponent implements OnInit {
 
     missingMods: String[];
 
-    checkPrerequisites(mod){
+    checkPrerequisites(mod) {
         let selectedCodes = this.selectedModules.map(a => a.id);
         mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
         mod.prerequisiteModules.forEach(preReq => {
             let preReqCodes = this.allPrerequisites.map(x => x.id)
             let currentPreReqCode = preReq.id
-            if (!preReqCodes.includes(currentPreReqCode)){this.allPrerequisites.push(preReq)}
+            if (!preReqCodes.includes(currentPreReqCode)) {
+                this.allPrerequisites.push(preReq)
+            }
         });
     }
-    showSemester(module){
+
+    showSemester(module) {
         return !(this.selectedModules.map(a => a.id).includes(module))
     }
-    highlightPrerequisite(prereq){
+
+    highlightPrerequisite(prereq) {
         return (this.selectedModules.map(a => a.id).includes(prereq) || this.takenPrerequisites.includes(prereq));
     }
-    showButton(id){
+
+    showButton(id) {
         return this.selectedModules.map(a => a.id).includes(id);
     }
-    highlightAccordionMessage(missingList){
+
+    highlightAccordionMessage(missingList) {
         let selectedCodes = this.selectedModules.map(y => y.id);
         let selectedPrereqs = this.takenPrerequisites;
         missingList = missingList.filter(x => !selectedCodes.includes(x));
         missingList = missingList.filter(x => !selectedPrereqs.includes(x));
-        missingList = missingList.filter(x => x!='');
+        missingList = missingList.filter(x => x != '');
         return (missingList.length);
     }
 
-    addModule(inputCode){
-        this.paramModuleID.setValue({'id':inputCode});
+    addModule(inputCode) {
+        this.paramModuleID.setValue({'id': inputCode});
         this.plannerModuleService.getModule(inputCode)
-        .subscribe(response => {
-            this.plannerModuleService.requestedModule.next(response.result);
-        });
+            .subscribe(response => {
+                this.plannerModuleService.requestedModule.next(response.result);
+            });
         this.plannerModuleService.requestedModule
-        .subscribe(result => {
-            if(!this.selectedModules.map(x => x.id).includes(result.id)){
-            this.selectedModules.push(result);
-            }
-            if(this.selectedModules != []){
-                this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.id==y.id));
-            }
-            this.toTarget();
-        });
+            .subscribe(result => {
+                if (!this.selectedModules.map(x => x.id).includes(result.id)) {
+                    this.selectedModules.push(result);
+                }
+                if (this.selectedModules != []) {
+                    this.plannerModules = this.plannerModules.filter(x => !this.selectedModules.some(y => x.id == y.id));
+                }
+                this.toTarget();
+            });
     }
 
-    disableAddtoPrereq(id){
+    disableAddtoPrereq(id) {
         return this.selectedModules.map(x => x.id).includes(id) || this.selectedModules.includes(id);
     }
 
-    addPrequisite(id){
+    addPrequisite(id) {
         console.log(id)
-        if (this.takenPrerequisites.includes(id)){
-            this.takenPrerequisites = this.takenPrerequisites.filter(x => x!=id);
+        if (this.takenPrerequisites.includes(id)) {
+            this.takenPrerequisites = this.takenPrerequisites.filter(x => x != id);
         } else {
             this.takenPrerequisites.push(id)
         }
         this.takenPrerequisites = this.takenPrerequisites.slice();
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
-  
-    onChange($event){
+
+    onChange($event) {
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
     }
 
@@ -169,8 +177,9 @@ export class PlannerPicklistComponent implements OnInit {
         })
 
     }
+
     openPlanDialog() {
-        this.authService.requireLogIn( () => {
+        this.authService.requireLogIn(() => {
             this.plannerModuleService.getNames().subscribe(response => {
                 this.plannerModuleService.returnNames.next(response.result.modulePlanners);
             });
@@ -189,21 +198,21 @@ export class PlannerPicklistComponent implements OnInit {
     savePlan() {
         this.obj =
             {
-                "name": this.saveText ,
-                "moduleIDs":this.selectedModules.map(x => x['id']),
+                "name": this.saveText,
+                "moduleIDs": this.selectedModules.map(x => x['id']),
                 "studentID": localStorage.getItem('userId')
             };
         this.output = <JSON>this.obj;
-        if (this.saveText.length==0) {
+        if (this.saveText.length == 0) {
             this.saveError = true;
             this.saveErrorMsg = "Enter a Name for your plan"
-        } else{
-            this.plannerModuleService.savePlan(this.output).subscribe( x => {
+        } else {
+            this.plannerModuleService.savePlan(this.output).subscribe(x => {
                 this.plannerModuleService.saveReturn.next(x.errors)
             })
             let errorReturn = []
             this.plannerModuleService.saveReturn.subscribe(x => errorReturn = x)
-            if (errorReturn.length!=0){
+            if (errorReturn.length != 0) {
                 this.serverError = true;
                 this.serverErrorMsg = "Problem saving"
             } else {
@@ -229,12 +238,13 @@ export class PlannerPicklistComponent implements OnInit {
 
     deletePlan(inputCode) {
         this.obj =
-            {   "studentId": localStorage.getItem('userId'),
+            {
+                "studentId": localStorage.getItem('userId'),
                 "modulePlannerId": inputCode
             };
         this.output = <JSON>this.obj;
         console.log(this.output)
-        this.plannerModuleService.deletePlan(this.output).pipe().subscribe(x=>this.openPlanDialog())
+        this.plannerModuleService.deletePlan(this.output).pipe().subscribe(x => this.openPlanDialog())
 
     }
 
@@ -246,9 +256,9 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedModules = [];
         this.plannerModuleService.returnPlan
             .subscribe(result => {
-                 result.modules.forEach(module => {
-                     this.addModule(module.id)
-                 });
+                result.modules.forEach(module => {
+                    this.addModule(module.id)
+                });
             });
 
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
