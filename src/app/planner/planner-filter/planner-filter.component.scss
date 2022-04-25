@@ -20,3 +20,6 @@ p {
 :host ::ng-deep .p-ink {
     display: none !important;
   }
+:host ::ng-deep .p-button-sm{
+    margin: auto;
+}
