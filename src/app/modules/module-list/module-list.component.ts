@@ -19,17 +19,6 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
     }
 
     ngOnInit(): void {
-
-        this.storeSubscription(
-            this.activatedRoute.data.subscribe(
-                _ => {
-                    this.storeSubscription(
-                        this.moduleService.getAll()
-                    );
-                }
-            )
-        );
-
         this.storeSubscription(
             this.moduleService.getObservable.subscribe(
                 modules => {

@@ -32,10 +32,6 @@ export class StaffListComponent extends SubscriptionHandler implements OnInit {
                 .subscribe(
                     response => {
                         this.departments = response.staffData.viewmodel.departments;
-                        this.storeSubscription(
-                            this.staffService.getAll()
-                        );
-
                     }
                 )
         )
