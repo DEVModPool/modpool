@@ -81,6 +81,16 @@
                                 class="w-full p-3 text-xl">
                             </button>
                         </div>
+                        <div class="col-12">
+                            <button
+                                [routerLink]="['/']"
+                                type="button"
+                                pButton
+                                pRipple
+                                label="Continue without sign up"
+                                class="w-full p-3 text-xl p-button-secondary">
+                            </button>
+                        </div>
                     </form>
                     <div *ngIf="(email.dirty && email.errors?.['required']) || !passwordMatch">
                         <p-messages severity="error">

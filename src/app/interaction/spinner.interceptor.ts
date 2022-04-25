@@ -20,10 +20,11 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
         this.spinnerService.show();
         return next.handle(request).pipe(
-            catchError(error => this.handleHttpError(error)),
+            // catchError(error => this.handleHttpError(error)),
             finalize(() => {
                 this.spinnerService.hide()
-            }))
+            })
+        )
     }
 
     //TODO-TD: Think about error handling in different interceptor.

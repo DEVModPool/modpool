@@ -6,8 +6,6 @@ import { PlanListItem } from './module-item.model';
 import { Subject, subscribeOn } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
-
-
 @Component({
     selector: 'app-module-item',
     templateUrl: './module-item.component.html',
@@ -24,9 +22,17 @@ export class ModuleItemComponent implements OnInit {
     output: JSON;
     obj: any
 
+    icon = "pi pi-calendar-plus"
+    buttontext = "Add to planner"
+    planList
 
-    constructor(private plannerModuleService: PlannerModuleService, private authService: AuthService) {
-    }
+    //TODO: Remove item list
+    items = [
+        {label: 'Add to plan 1', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+        {label: 'Add to plan 2', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+        {label: 'Add to plan 3', icon: 'pi pi-plus-circle', command: () => {console.log("") }},
+    ];
+
 
     ngOnInit(): void {
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
@@ -85,6 +91,17 @@ export class ModuleItemComponent implements OnInit {
 
 
     addToPlanner(moduleId){
+
+        console.log(selectedModules)
+        if (selectedModules.includes(this.module.id)){
+            this.icon='pi pi-check'
+            this.buttontext = "Added to planner"
+        }
+
+    }
+
+    addToPlanner(moduleId){
+        console.log(moduleId)
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
         if (selectedModules == null){
             selectedModules = [moduleId]

@@ -22,6 +22,7 @@ import { UserComponent } from "./user.component";
 import { UserReviewItemComponent } from "./user-reviews/user-review-item/user-review-item.component";
 import { UserReviewListComponent } from "./user-reviews/user-review-list/user-review-list.component";
 import { TagModule } from "primeng/tag";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import { TagModule } from "primeng/tag";
         MessagesModule,
         PaginationModule,
         TooltipModule,
-        TagModule
+        TagModule,
+        ConfirmDialogModule
     ]
 })
 export class UserModule {

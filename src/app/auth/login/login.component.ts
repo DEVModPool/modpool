@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '../../config/config.service';
-import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";

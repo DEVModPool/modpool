@@ -36,6 +36,7 @@ export class UserReviewItemComponent extends ReviewItemComponent {
 
     deleteReview(id) {
         this.confirmationService.confirm({
+            key: 'deleteDialog',
             message: 'Are you sure you want to delete this review?',
             header: 'Delete review',
             accept: () => {
