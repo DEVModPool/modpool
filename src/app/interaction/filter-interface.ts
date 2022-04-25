@@ -80,12 +80,7 @@ export abstract class FilterInterface<ResolveT, QueryParamsT extends PaginationM
             pagination = Object.keys(this.paginationData);
         }
 
-        for (let field of [...this.filterFields, ...pagination]) {
-            if (qp[field] != undefined) {
-                this.getItems();
-                return;
-            }
-        }
+        this.getItems();
     }
 
     onSearch() {

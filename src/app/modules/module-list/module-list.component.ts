@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class ModuleListComponent extends SubscriptionHandler implements OnInit {
     modules: ModuleItem[];
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private moduleService: ModulesService,
@@ -22,17 +23,6 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log("init")
-        this.storeSubscription(
-            this.activatedRoute.data.subscribe(
-                _ => {
-                    this.storeSubscription(
-                        this.moduleService.getAll()
-                    );
-                }
-            )
-        );
-
         this.storeSubscription(
             this.moduleService.getObservable.subscribe(
                 modules => {
@@ -46,8 +36,8 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
             });
         }
     }
-    refresh(event){
 
+    refresh(event) {
         this.plannerModuleService.getNames().subscribe(response => {
             this.plannerModuleService.returnNames.next(response.result.modulePlanners);
         });
