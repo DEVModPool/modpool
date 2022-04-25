@@ -9,8 +9,8 @@
     (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"
     [initialTemplate]="save" [selectedPrereqs]="takenPrerequisites" [semester1Selected]="selectedSemester1"
     [semester2Selected]="selectedSemester2">
-    <ng-template let-plannerModule pTemplate="item">
-        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
+    <ng-template let-plannerModule pTemplate="item" >
+        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}" pTooltip="Double click to move" showDelay="1000" tooltipPosition="top">
             <div class="topRow gridRow">
                 <div class="module-code">
                     <h5><a (click)="goToModule(plannerModule.id)"
