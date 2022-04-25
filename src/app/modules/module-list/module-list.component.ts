@@ -52,5 +52,4 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
             this.plannerModuleService.returnNames.next(response.result.modulePlanners);
         });
     }
-
 }
