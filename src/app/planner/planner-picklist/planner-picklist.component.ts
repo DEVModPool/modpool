@@ -7,6 +7,8 @@ import { PlanNames } from 'src/app/interaction/modules/planData.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { nextTick } from 'process';
 import { ConfirmationService } from 'primeng/api';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-planner-picklist',
@@ -34,7 +36,8 @@ export class PlannerPicklistComponent implements OnInit {
         qpbModules: QueryParamBuilder,
         qpbPlans: QueryParamBuilder,
         private authService: AuthService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private router: Router
     ) {
         this.paramPlanCode = qpbPlans.group({
             plan: qpbPlans.stringParam('plan', {multi: true})
@@ -51,8 +54,7 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedModules = [];
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage')) == null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
-        let localStorageSelectedCodes = JSON.parse(localStorage.getItem('selectedModuleStorage'))
-        this.selectedModules = localStorageSelectedCodes.forEach(x => this.addModule(x));
+        this.selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'));
         this.selectedModules = (this.selectedModules == null) ? [] : this.selectedModules;
         this.selectedModules.forEach(x => this.checkPrerequisites(x))
         this.filterSemesters()
@@ -60,8 +62,6 @@ export class PlannerPicklistComponent implements OnInit {
             .subscribe(result => {
                 this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id == y.id))
                 this.plannerModules.forEach(x => x['missing'] = [])
-
-
             });
         this.saveText = "";
     }
@@ -73,13 +73,13 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     toSource() {
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
         this.filterSemesters();
         this.toTarget();
     }
 
     toTarget() {
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
 
         this.filterSemesters();
         this.plannerModules.forEach(mod => {
@@ -129,7 +129,6 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     addModule(inputCode) {
-        this.paramModuleID.setValue({'id': inputCode});
         this.plannerModuleService.getModule(inputCode)
             .subscribe(response => {
                 this.plannerModuleService.requestedModule.next(response.result);
@@ -262,8 +261,11 @@ export class PlannerPicklistComponent implements OnInit {
             });
 
         localStorage.setItem('takenPrerequisiteStorage', JSON.stringify(this.takenPrerequisites));
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules.map(x => x.id)));
+        localStorage.setItem('selectedModuleStorage', JSON.stringify(this.selectedModules));
 
         this.filterSemesters();
     }
+    goToModule(id){
+        this.router.navigate(['modules/', id]);
+      }
 }

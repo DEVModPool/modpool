@@ -16,6 +16,9 @@
     .p-splitter-panel-nested {
         display: block !important;
     }
+    .p-ink {
+        pointer-events: none !important;
+    }
 }
 .customAcc{
     .p-accordion-content {

@@ -9,6 +9,7 @@ import { ReviewsService } from "../../reviews/reviews.service";
 import { ModuleReviewsService } from "../module-reviews/module-reviews.service";
 import { SubscriptionHandler } from "../../interaction/subscription-handler";
 import { Review } from "../../interaction/reviews/review.model";
+import { PlannerModuleService } from 'src/app/planner/planner-picklist.service';
 
 @Component({
     selector: 'app-module-details',
@@ -21,6 +22,9 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     moduleDetails: ModuleDetails;
     reviews: Review[];
 
+    icon = "pi pi-calendar-plus"
+    buttontext = "Add to planner"
+
     semesters = {
         1: 'Semester 1',
         2: 'Semester 2',
@@ -30,7 +34,8 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
     constructor(
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
-        private reviewsService: ModuleReviewsService) {
+        private reviewsService: ModuleReviewsService,
+        private plannerModuleService: PlannerModuleService) {
         super();
     }
 
@@ -39,7 +44,6 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
             this.activatedRoute.data.subscribe(
                 response => {
                     this.reviews = response.moduleData.reviews;
-
                     let module = response.moduleData.module;
                     module.department = {id: module.departmentId, name: module.departmentName};
                     module.coordinator = {id: module.coordinatorId, fullName: module.coordinatorFullName};
@@ -61,11 +65,18 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
                     }
                     module.semester = this.semesters[module.semester];
                     this.moduleDetails = module;
-
                     this.processStudyHoursData(this.moduleDetails.studyHours);
+                    let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
+                    if (selectedModules) {
+                        if (selectedModules.map(x => x.id).includes(this.moduleDetails.id)) {
+                            this.icon = 'pi pi-check'
+                            this.buttontext = "Added to planner"
+                        }
+                    }
                 }
             )
         );
+
     }
 
     onLeaveReview() {
@@ -85,6 +96,48 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
         }
         this.studyHoursPieData = newStudyHoursPieData;
     }
+    addToPlanner(){
+        let moduleId = this.moduleDetails.id
+        console.log(moduleId)
+        let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
+        this.plannerModuleService.getModule(moduleId)
+            .subscribe(response => {
+                this.plannerModuleService.requestedModule.next(response.result);
+            });
+        this.plannerModuleService.requestedModule
+            .subscribe(result => {
+                if (result.id == moduleId){
+                    if (selectedModules == null) {
+                        selectedModules = [moduleId]
+                        this.setStyling(true)
+                    } else if (!selectedModules.map(x => x.id).includes(moduleId)) {
+                        selectedModules.push(result)
+                        this.setStyling(true)
+                    } else {
+                        let n = []
+                        selectedModules.forEach(x => {
+                            if (x.id != moduleId) {
+                                n.push(x)
+                            }
+                        });
+                        selectedModules = n
+                        this.setStyling(false)
+                    }
+                    localStorage.setItem('selectedModuleStorage', JSON.stringify(selectedModules));
+                }
+            })
+
+    }
+
+    setStyling(add) {
+        if (add) {
+            this.icon = 'pi pi-check'
+            this.buttontext = "Added to planner"
+        } else {
+            this.icon = "pi pi-calendar-plus"
+            this.buttontext = "Add to planner"
+        }
+    }
 
     pageSections = [
         "details",
@@ -100,6 +153,7 @@ export class ModuleDetailsComponent extends SubscriptionHandler implements OnIni
         paths: "exact",
         fragment: "exact"
     }
+
 }
 
 export class StudyHoursPieData {

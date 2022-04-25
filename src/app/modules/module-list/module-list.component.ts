@@ -47,7 +47,6 @@ export class ModuleListComponent extends SubscriptionHandler implements OnInit {
         }
     }
     refresh(event){
-
         this.plannerModuleService.getNames().subscribe(response => {
             this.plannerModuleService.returnNames.next(response.result.modulePlanners);
         });

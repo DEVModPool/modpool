@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from "@angular/router";
-import {PlannerPicklistComponent} from "./planner-picklist/planner-picklist.component";
 import { PlannerComponent } from "./planner.component";
 import {NgModule} from "@angular/core";
 import {BaseResolver} from "../interaction/base-resolver";
