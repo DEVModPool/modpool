@@ -55,8 +55,9 @@ export class PlannerPicklistComponent implements OnInit {
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage')) == null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
         this.selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'));
-        this.selectedModules = (this.selectedModules == null) ? [] : this.selectedModules;
-        this.selectedModules.forEach(x => this.checkPrerequisites(x))
+        if (this.selectedModules){
+            this.selectedModules.forEach(x => this.checkPrerequisites(x))
+        }
         this.filterSemesters()
         this.plannerModuleService.plannerModules
             .subscribe(result => {
@@ -96,7 +97,12 @@ export class PlannerPicklistComponent implements OnInit {
     missingMods: String[];
 
     checkPrerequisites(mod) {
-        let selectedCodes = this.selectedModules.map(a => a.id);
+        let selectedCodes
+        if (this.selectedModules){
+            selectedCodes = this.selectedModules.map(a => a.id);
+        } else {
+            selectedCodes = []
+        }
         mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
         mod.prerequisiteModules.forEach(preReq => {
             let preReqCodes = this.allPrerequisites.map(x => x.id)
@@ -120,7 +126,12 @@ export class PlannerPicklistComponent implements OnInit {
     }
 
     highlightAccordionMessage(missingList) {
-        let selectedCodes = this.selectedModules.map(y => y.id);
+        let selectedCodes
+        if (this.selectedModules){
+            selectedCodes = this.selectedModules.map(a => a.id);
+        } else {
+            selectedCodes = []
+        }
         let selectedPrereqs = this.takenPrerequisites;
         missingList = missingList.filter(x => !selectedCodes.includes(x));
         missingList = missingList.filter(x => !selectedPrereqs.includes(x));
