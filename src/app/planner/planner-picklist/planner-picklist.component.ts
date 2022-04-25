@@ -103,14 +103,16 @@ export class PlannerPicklistComponent implements OnInit {
         } else {
             selectedCodes = []
         }
-        mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
-        mod.prerequisiteModules.forEach(preReq => {
-            let preReqCodes = this.allPrerequisites.map(x => x.id)
-            let currentPreReqCode = preReq.id
-            if (!preReqCodes.includes(currentPreReqCode)) {
-                this.allPrerequisites.push(preReq)
-            }
-        });
+        if (mod.prerequisiteModules){
+            mod.missing = mod.prerequisiteModules.map(a => a.id).filter(x => !selectedCodes.includes(x.id));
+            mod.prerequisiteModules.forEach(preReq => {
+                let preReqCodes = this.allPrerequisites.map(x => x.id)
+                let currentPreReqCode = preReq.id
+                if (!preReqCodes.includes(currentPreReqCode)) {
+                    this.allPrerequisites.push(preReq)
+                }
+            });
+        }
     }
 
     showSemester(module) {
