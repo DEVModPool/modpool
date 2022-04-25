@@ -21,25 +21,6 @@ export class ModuleItemComponent implements OnInit {
     output: JSON;
     obj: any;
 
-    //TODO: Remove item list
-    items = [
-        {
-            label: 'Add to plan 1', icon: 'pi pi-plus-circle', command: () => {
-                console.log("")
-            }
-        },
-        {
-            label: 'Add to plan 2', icon: 'pi pi-plus-circle', command: () => {
-                console.log("")
-            }
-        },
-        {
-            label: 'Add to plan 3', icon: 'pi pi-plus-circle', command: () => {
-                console.log("")
-            }
-        },
-    ];
-
     constructor(private authService: AuthService,
                 private plannerModuleService: PlannerModuleService) {
     }
@@ -47,7 +28,7 @@ export class ModuleItemComponent implements OnInit {
     ngOnInit(): void {
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
         if (selectedModules) {
-            if (selectedModules.includes(this.module.id)) {
+            if (selectedModules.map(x => x.id).includes(this.module.id)) {
                 this.icon = 'pi pi-check'
                 this.buttontext = "Added to planner"
             }
@@ -57,8 +38,6 @@ export class ModuleItemComponent implements OnInit {
 
     checkList() {
         this.authService.requireLogIn(() => {
-            console.log(this.planList)
-            console.log(this.planOutput)
             if (this.planOutput = []) {
                 this.someOutput.emit();
             }
@@ -101,37 +80,35 @@ export class ModuleItemComponent implements OnInit {
         })
     }
 
-    //
-    // addToPlanner(moduleId) {
-    //
-    //     console.log(selectedModules)
-    //     if (selectedModules.includes(this.module.id)) {
-    //         this.icon = 'pi pi-check'
-    //         this.buttontext = "Added to planner"
-    //     }
-    //
-    // }
 
     addToPlanner(moduleId) {
-        console.log(moduleId)
         let selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'))
-        if (selectedModules == null) {
-            selectedModules = [moduleId]
-            this.setStyling(true)
-        } else if (!selectedModules.includes(moduleId)) {
-            selectedModules.push(moduleId)
-            this.setStyling(true)
-        } else {
-            let n = []
-            selectedModules.forEach(x => {
-                if (x != moduleId) {
-                    n.push(x)
-                }
+        this.plannerModuleService.getModule(moduleId)
+            .subscribe(response => {
+                this.plannerModuleService.requestedModule.next(response.result);
             });
-            selectedModules = n
-            this.setStyling(false)
-        }
-        localStorage.setItem('selectedModuleStorage', JSON.stringify(selectedModules));
+        this.plannerModuleService.requestedModule
+            .subscribe(result => {
+                if (result.id == moduleId){
+                    if (selectedModules == null) {
+                        selectedModules = [moduleId]
+                        this.setStyling(true)
+                    } else if (!selectedModules.map(x => x.id).includes(moduleId)) {
+                        selectedModules.push(result)
+                        this.setStyling(true)
+                    } else {
+                        let n = []
+                        selectedModules.forEach(x => {
+                            if (x.id != moduleId) {
+                                n.push(x)
+                            }
+                        });
+                        selectedModules = n
+                        this.setStyling(false)
+                    }
+                    localStorage.setItem('selectedModuleStorage', JSON.stringify(selectedModules));
+                }
+            })
     }
 
     setStyling(add) {

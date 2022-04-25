@@ -9,11 +9,11 @@
     (onMoveAllToTarget)="toTarget()" (onMoveToSource)="toSource()" (onMoveAllToSource)="toSource()"
     [initialTemplate]="save" [selectedPrereqs]="takenPrerequisites" [semester1Selected]="selectedSemester1"
     [semester2Selected]="selectedSemester2">
-    <ng-template let-plannerModule pTemplate="item">
-        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}">
+    <ng-template let-plannerModule pTemplate="item" >
+        <div class="module-item semester{{plannerModule.semester}} " id="{{plannerModule.code}}" pTooltip="Double click to move" showDelay="1000" tooltipPosition="top">
             <div class="topRow gridRow">
                 <div class="module-code">
-                    <h5><a href="/modules/{{plannerModule.id}}" target="_blank"
+                    <h5><a (click)="goToModule(plannerModule.id)"
                            class="moduleLink">{{plannerModule.fullName}}</a></h5>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                     style="height: min-content;">
                                         <span
                                             style="display: flex; align-items: center; justify-content:space-between;">
-                                            <a href="/modules/{{prerequisite.id}}" target="_blank" class='moduleLink'
+                                            <a (click)="goToModule(prerequisite.id)" class='moduleLink'
                                                style="grid-column: 1;"
                                                pTooltip='{{highlightPrerequisite(prerequisite.id) ? null : "This module is a prerequisite but is missing from your plan. Add it to to your plan/prerequisite list"}}'
                                                tooltipPosition="top">

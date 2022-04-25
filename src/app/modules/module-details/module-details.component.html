@@ -256,9 +256,9 @@
                     <button
                         pButton
                         type="button"
-                        label="Add to planner"
-                        icon="pi pi-calendar-plus"
+                        [label]="buttontext" [icon]="icon"
                         class="p-button-lg p-button-rounded"
+                        (click)="addToPlanner()"
                     ></button>
                 </div>
             </div>

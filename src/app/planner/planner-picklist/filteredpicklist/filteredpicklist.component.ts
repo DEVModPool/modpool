@@ -38,8 +38,8 @@ import { PlannerModuleService } from '../../planner-picklist.service';
                 </ul>
             </div>
             <div class="p-picklist-buttons p-picklist-transfer-buttons">
-                <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()"></button>
-                <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()"></button>
+                <button type="button" [attr.aria-label]="rightButtonAriaLabel" pButton pRipple icon="pi pi-angle-right" (click)="moveRight()" pTooltip="Add to plan"></button>
+                <button type="button" [attr.aria-label]="leftButtonAriaLabel" pButton pRipple icon="pi pi-angle-left" (click)="moveLeft()" pTooltip="Remove from plan"></button>
                 <ng-content select="[buttons]"></ng-content>
             </div>
             <div class="p-picklist-list-wrapper p-picklist-target-wrapper">
