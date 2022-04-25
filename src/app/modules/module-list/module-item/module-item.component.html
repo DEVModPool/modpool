@@ -11,10 +11,6 @@
             </a>
             <h6 class="ml-2" style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
         </div>
-        <div class="col-6 flex justify-content-end">
-            <p-splitButton label="Add to planner" icon="pi pi-calendar-plus" [model]="items"
-                           styleClass="p-button-sm"></p-splitButton>
-        </div>
     </div>
     <div>
         <p-tabView styleClass="tabview-custom">
@@ -47,14 +43,18 @@
                     </p>
                 </span>
             </p-tabPanel>
-            <p-tabPanel>
+            <p-tabPanel *ngIf="module.prerequisiteModules.length != 0 || module.prerequisiteForModules.length != 0">
                 <ng-template pTemplate="header">
                     <i class="pi pi-history"></i>
                     <span style="padding-left: 4px">Requirements</span>
                 </ng-template>
                 <div class="grid flex justify-content-center">
                     <div class="col-12 md:col-6 justify-content-center align-items-center">
-                        <h5 class="text-900 font-bold">Prerequisites:</h5>
+                        <h5 *ngIf="module.prerequisiteModules.length != 0" class="text-900 font-bold">
+                            Prerequisites:</h5>
+                        <h5 *ngIf="module.prerequisiteModules.length == 0" class="text-900 font-bold">
+                            No prerequisites</h5>
+
                         <div class="icon">
                             <div *ngFor="let prerequisite of module.prerequisiteModules">
                                 <i class="pi pi-chevron-circle-right"></i>&nbsp;
@@ -67,8 +67,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 md:col-6 justify-content-center align-items-center">
-                        <h5 class="text-900 font-bold">Prerequisite for:</h5>
+                    <div
+                        class="col-12 md:col-6 justify-content-center align-items-center">
+                        <h5 *ngIf="module.prerequisiteForModules.length != 0" class="text-900 font-bold">Prerequisite
+                            for:</h5>
+                        <h5 *ngIf="module.prerequisiteForModules.length == 0" class="text-900 font-bold">
+                            Not a prerequisite</h5>
                         <div class="icon">
                             <div *ngFor="let prerequisiteFor of module.prerequisiteForModules">
                                 <i class="pi pi-chevron-circle-right"></i>&nbsp;

@@ -32,5 +32,6 @@ export class ModuleItemComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.module);
     }
 }
