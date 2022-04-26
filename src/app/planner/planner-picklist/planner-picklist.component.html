@@ -88,7 +88,7 @@
         </div>
         <div class="container">
             <p-checkbox *ngFor="let pre of allPrerequisites" name="groupname" value="pre" [value]="pre.id"
-                        label="{{pre.fullName}}" [(ngModel)]="takenPrerequisites" (ngModelChange)="onChange($event)">
+                        label="{{regex(pre.fullName)}}" [(ngModel)]="takenPrerequisites" (ngModelChange)="onChange($event)">
             </p-checkbox>
         </div>
     </div>

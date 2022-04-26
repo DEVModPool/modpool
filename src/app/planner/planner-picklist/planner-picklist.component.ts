@@ -54,23 +54,33 @@ export class PlannerPicklistComponent implements OnInit {
         this.selectedModules = [];
         this.takenPrerequisites = (JSON.parse(localStorage.getItem('takenPrerequisiteStorage')) == null ? [] : JSON.parse(localStorage.getItem('takenPrerequisiteStorage')));
         this.allPrerequisites = [];
-        this.selectedModules = JSON.parse(localStorage.getItem('selectedModuleStorage'));
+        this.selectedModules = (JSON.parse(localStorage.getItem('selectedModuleStorage'))) ?JSON.parse(localStorage.getItem('selectedModuleStorage')) : [] ;
         if (this.selectedModules){
             this.selectedModules.forEach(x => this.checkPrerequisites(x))
         }
         this.filterSemesters()
         this.plannerModuleService.plannerModules
             .subscribe(result => {
-                this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id == y.id))
+                if (this.selectedModules) {
+                    this.plannerModules = result.filter(x => !this.selectedModules.some(y => x.id == y.id))
+                } else {
+                    this.plannerModules = result
+                }
                 this.plannerModules.forEach(x => x['missing'] = [])
             });
         this.saveText = "";
     }
 
     filterSemesters() {
-        this.selectedSemester1 = (this.selectedModules.filter(x => x.semester == 1).length > 0)
-        this.selectedSemester2 = (this.selectedModules.filter(x => x.semester == 2).length > 0)
-        this.selectedSemester3 = (this.selectedModules.filter(x => x.semester == 3).length > 0)
+        if (this.selectedModules){
+            this.selectedSemester1 = (this.selectedModules.filter(x => x.semester == 1).length > 0)
+            this.selectedSemester2 = (this.selectedModules.filter(x => x.semester == 2).length > 0)
+            this.selectedSemester3 = (this.selectedModules.filter(x => x.semester == 3).length > 0)
+        } else {
+            this.selectedSemester1 = false
+            this.selectedSemester2 = false
+            this.selectedSemester3 = false
+        }
     }
 
     toSource() {
@@ -114,9 +124,16 @@ export class PlannerPicklistComponent implements OnInit {
             });
         }
     }
+    regex(x){
+        return /.+?(?=-)/.exec(x)[0]
+    }
 
     showSemester(module) {
-        return !(this.selectedModules.map(a => a.id).includes(module))
+        if (this.selectedModules){
+            return !(this.selectedModules.map(a => a.id).includes(module))
+        } else {
+            return true
+        }
     }
 
     highlightPrerequisite(prereq) {
