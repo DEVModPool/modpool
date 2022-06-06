@@ -18,7 +18,8 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
 
-    constructor(public app: AppComponent, public appMain: AppMainComponent, public configService: ConfigService, public primengConfig: PrimeNGConfig) { }
+    constructor(public app: AppComponent, public appMain: AppMainComponent, public configService: ConfigService, public primengConfig: PrimeNGConfig) {
+    }
 
     ngOnInit() {
         this.config = this.configService.config;
@@ -40,7 +41,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
         document.documentElement.style.fontSize = this.scale + 'px';
     }
 
-    changeTheme(theme:string, dark:boolean){
+    changeTheme(theme: string, dark: boolean) {
         let themeElement = document.getElementById('theme-css');
         themeElement.setAttribute('href', 'assets/theme/' + theme + '/theme.css');
         this.configService.updateConfig({...this.config, ...{theme, dark}});

@@ -1,59 +1,97 @@
 <div class="card">
-    <a><h5 [ngStyle]="{color:'var(--primary-color)'}" style="font-weight: bold">{{ module.name}}</h5></a>
-    <h6 style="font-weight: bolder">{{ module.code }}</h6>
-    <p-tabView styleClass="tabview-custom">
-        <p-tabPanel>
-            <ng-template pTemplate="header">
-                <i class="pi pi-info-circle"></i>
-                <span>Description</span>
-            </ng-template>
-            {{ module.description }}
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-            <ng-template pTemplate="header">
-                <i class="pi pi-pencil"></i>
-                <span>Assessment</span>
-            </ng-template>
-            <div class="grid">
-                <div
-                    class="col-6"
-                    style="text-align: left; font-weight: bold; font-size: medium;">
-                    Coursework - {{ module.assessment.coursework }}%
-                </div>
-                <div
-                    class="col-6"
-                    style="text-align: right; font-weight: bold; font-size: medium;">
-                    Exam - {{ module.assessment.exam }} %
-                </div>
-            </div>
-            <p-progressBar [value]="module.assessment.coursework" [showValue] = false></p-progressBar>
-        </p-tabPanel>
-        <p-tabPanel header="Header III">
-            <ng-template pTemplate="header">
-                <i class="pi pi-history"></i>
-                <span>Requirements</span>
-            </ng-template>
-            <div class ="card">
-                <div class="flex flex-column md:flex-row card-container indigo-container">
-                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
-                        <dl>
-                            <dt><h5>Prerequisites:</h5></dt>
-                            <dd *ngFor="let prerequisite of module.prerequisites">
-                                {{ prerequisite }}
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="flex-1 flex align-items-left justify-content-left bg-primary font-bold text-white m-2 px-5 py-3 border-round">
+    <div class="grid">
+        <div class="col-6">
+            <a [routerLink]="[module.id]">
+                <h5
+                    class="hover-underline-animation ml-2"
+                    [ngStyle]="{color:'var(--primary-color)'}"
+                    style="font-weight: bold">
+                    {{ module.name }}
+                </h5>
+            </a>
+            <h6 class="ml-2" style="font-weight: bolder; margin-top: 0">{{ module.code }}</h6>
+        </div>
+        <div class="col-6 flex justify-content-end">
+            <p-splitButton [label]="buttontext" [icon]="icon" class="planButton" [model]="planOutput"
+                           styleClass="p-button-sm" (onClick)="addToPlanner(module.id)" (onDropdownClick)="checkList()"
+                           id={{module.id}}></p-splitButton>
+        </div>
+    </div>
+    <div>
+        <p-tabView styleClass="tabview-custom">
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <i class="pi pi-info-circle"></i>
+                    <span style="padding-left: 4px">Description</span>
+                </ng-template>
+                {{ module.description }}
+            </p-tabPanel>
+            <p-tabPanel *ngIf="module.reviewsCount>0">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-star"></i>
+                    <span style="padding-left: 4px">Ratings</span>
+                </ng-template>
 
-                        <dl>
-                            <dt><h5>Required for: </h5></dt>
-                            <dd *ngFor="let prerequisiteFor of module.prerequisiteFor">
-                                {{ prerequisiteFor }}
-                            </dd>
-                        </dl>
+                <span>
+                    <h2 style="font-weight: bold; margin: 0;" class="text-900"><i
+                        class="text-yellow-500 text-2xl pi pi-star-fill"></i> {{ module.averageRating | number: '1.0-2' }}
+                        <span
+                            class="text-blue-300 text-base">/5</span>
+                    </h2>
+                    <p *ngIf="module.reviewCount > 1"
+                       class="text-blue-300">
+                        Based on
+                        <span class="text-blue-600 font-bold text-sm">
+                                {{ module.reviewCount }}
+                            </span>
+                        reviews
+                    </p>
+                </span>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="module.prerequisiteModules.length != 0 || module.prerequisiteForModules.length != 0">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-history"></i>
+                    <span style="padding-left: 4px">Requirements</span>
+                </ng-template>
+                <div class="grid flex justify-content-center">
+                    <div class="col-12 md:col-6 justify-content-center align-items-center">
+                        <h5 *ngIf="module.prerequisiteModules.length != 0" class="text-900 font-bold">
+                            Prerequisites:</h5>
+                        <h5 *ngIf="module.prerequisiteModules.length == 0" class="text-900 font-bold">
+                            No prerequisites</h5>
+
+                        <div class="icon">
+                            <div *ngFor="let prerequisite of module.prerequisiteModules">
+                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
+                                <a [routerLink]="[prerequisite.id]">
+                                    <span
+                                        class="text-800 hover-underline-animation font-semibold text-base p-1">
+                                        {{prerequisite.prerequisiteModuleFullName}}
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12 md:col-6 justify-content-center align-items-center">
+                        <h5 *ngIf="module.prerequisiteForModules.length != 0" class="text-900 font-bold">Prerequisite
+                            for:</h5>
+                        <h5 *ngIf="module.prerequisiteForModules.length == 0" class="text-900 font-bold">
+                            Not a prerequisite</h5>
+                        <div class="icon">
+                            <div *ngFor="let prerequisiteFor of module.prerequisiteForModules">
+                                <i class="pi pi-chevron-circle-right"></i>&nbsp;
+                                <a [routerLink]="[prerequisiteFor.id]">
+                                    <span
+                                        class="text-800 hover-underline-animation font-semibold text-base p-1">
+                                        {{prerequisiteFor.prerequisiteForModuleFullName}}
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </p-tabPanel>
-    </p-tabView>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
 </div>

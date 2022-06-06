@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="col-12">
+        <div class="col-12 flex flex-row">
+            <h3 class="font-bold col-8" [ngStyle]="{color:'var(--primary-color)'}">
+                {{ userName }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="col-12 flex flex-row">
+        <h4 class="col-8 align-self-center font-bold mt-0">
+            Your Reviews
+        </h4>
+    </div>
+
+    <div class="col-12">
+        <br>
+        <app-user-review-list *ngIf="reviews && reviews.length != 0" [reviews]="reviews"></app-user-review-list>
+        <div *ngIf="reviews && reviews.length == 0" class="col-12">
+            <p-messages severity="info">
+                <ng-template pTemplate="">
+                    <div class="ml-2">You have no reviews!</div>
+                </ng-template>
+            </p-messages>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog
+    [style]="{width: '30vw'}"
+    icon="pi pi-question-circle"
+    rejectButtonStyleClass="p-button-outlined"
+    [baseZIndex]="10000"
+    key="deleteDialog">
+    <ng-template pTemplate="header">
+        <h3>Delete review</h3>
+    </ng-template>
+</p-confirmDialog>

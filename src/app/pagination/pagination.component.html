@@ -1,0 +1,10 @@
+<script src="pagination.model.ts"></script>
+<p-paginator
+    [rows]="pageSize"
+    [totalRecords]="totalCount"
+    [first]="first"
+    [rowsPerPageOptions]="[10,20,30]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPageChange)="onPaginatorChanged($event)">
+</p-paginator>

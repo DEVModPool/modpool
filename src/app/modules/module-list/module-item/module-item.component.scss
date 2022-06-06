@@ -1,0 +1,37 @@
+/** Hover-related CSS **/
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: black;
+}
+
+.hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+ul.icon {
+    list-style-type: none;
+}
+
+
+:host ::ng-deep .p-button {
+    background-color: transparent;
+    color: var(--blue-500);
+    height: 35px;
+}
+

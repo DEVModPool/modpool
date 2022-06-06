@@ -1,0 +1,66 @@
+<div class="card">
+    <p-table #dt [value]="staffList" dataKey="id" styleClass="p-datatable-customers"
+             [rowHover]="true"
+             responsiveLayout="scroll">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="col-3">
+                    <div
+                        class="flex justify-content-between align-items-center"
+                        style="max-width: 100px;">
+                        Name
+                    </div>
+                </th>
+                <th class="col-3">
+                    <div class="flex justify-content-between align-items-center">
+                        Department
+                    </div>
+                </th>
+                <th class="col-2">
+                    <div class="flex justify-content-between align-items-center">
+                        Rating
+                    </div>
+                </th>
+                <th class="col-2"></th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-staff>
+            <tr class="p-selectable-row">
+
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{staff.fullName}}
+                </td>
+                <td>
+                    <span class="p-column-title">Department</span>
+                    {{staff.departmentFullName}}
+                </td>
+                <td *ngIf="staff.averageRating">
+                    <span class="p-column-title">Rating</span>
+                    <span style="font-weight: bold; margin: 0; text-align: center" class="text-900">
+                        <i class="text-yellow-500 text-2xl pi pi-star-fill"></i>
+                        {{staff.averageRating | number: '1.0-2' }}
+                        <span
+                            class="text-blue-300 text-base">
+                        /5
+                    </span>
+                    </span>
+                </td>
+                <td *ngIf="!staff.averageRating">
+                    <span class="p-column-title">Rating</span>
+                    <p class="text-900">
+                        No rating
+                    </p>
+                </td>
+
+                <td style=" text-align:center; width: 20%; min-width: 10rem;">
+                    <button [routerLink]="staff.id" pButton pRipple label="Details"
+                            class="p-button-primary mr-2"></button>
+                </td>
+
+        </ng-template>
+    </p-table>
+    <app-pagination></app-pagination>
+</div>

@@ -1,0 +1,73 @@
+<p-dialog
+    [(visible)]="displayModal"
+    [modal]="true"
+    [style]="{width: '50vw'}"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+    [closeOnEscape]="true">
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        <div class="grid">
+            <div class="col-6 text-center font-semibold">
+                <p class="text-2xl mb-3">Quality</p>
+                <p-rating
+                    [cancel]="false"
+                    formControlName="quality">
+                </p-rating>
+                <small *ngIf="quality.dirty && quality.errors?.['required']" class="p-error">Quality is
+                    required.</small>
+            </div>
+            <div class="col-6 text-center font-semibold">
+                <p class="text-2xl mb-3">Difficulty</p>
+                <p-rating
+                    [cancel]="false"
+                    formControlName="difficulty">
+                </p-rating>
+            </div>
+            <div class="col-12">
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="p-fluid grid">
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <p-dropdown
+                        id="coordinator"
+                        [options]="academicYears"
+                        formControlName="moduleAcademicYear">
+                    </p-dropdown>
+                    <label for="coordinator">Year taken</label>
+                </span>
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <textarea
+                        id="float-input"
+                        rows="5"
+                        cols="30"
+                        pInputTextarea
+                        formControlName="content"></textarea>
+                    <label for="float-input">Review</label>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="mb-2">
+            <button
+                pButton
+                pRipple
+                type="submit"
+                label="Submit"
+                class="w-full"
+                [loading]=loading
+                [disabled]="reviewForm.invalid">
+            </button>
+        </div>
+        <div class="mb-2">
+            <button (click)="closeModal()" pButton pRipple type="button" label="Cancel"
+                    class="w-full p-button-secondary" [loading]=loading></button>
+        </div>
+    </form>
+</p-dialog>

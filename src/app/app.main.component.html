@@ -6,16 +6,26 @@
                                 'layout-static-sidebar-inactive': staticMenuInactive,
                                 'layout-mobile-sidebar-active':menuActiveMobile,
                                 'p-ripple-disabled': !config.ripple, 'p-input-filled': config.inputStyle === 'filled'}">
+
+    <ngx-spinner bdColor="rgba(208,225,253,0.25)" size="medium" color="#3b82f6" type="ball-triangle-path"
+                 [fullScreen]="true"></ngx-spinner>
     <app-topbar></app-topbar>
     <div class="layout-sidebar">
         <app-menu></app-menu>
     </div>
+
     <div class="layout-main-container">
+
         <div class="layout-main">
             <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>
     </div>
-        <app-config></app-config>
-        <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
+    <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
+
+
 </div>
+<p-toast></p-toast>
+<app-login-modal></app-login-modal>
+<app-module-review-new></app-module-review-new>
+<app-module-review-edit></app-module-review-edit>

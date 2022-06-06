@@ -1,56 +1,64 @@
-<div class="card col-12">
-    <div class="grid p-fluid">
-        <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-            <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
-        </div>
-        <div *ngFor="let moduleLevel of moduleLevels" class="field-checkbox col-3">
-            <p-checkbox
-                name="group2"
-                value="category"
-                [value]="moduleLevel"
-                [(ngModel)]="selectedModuleLevels"
-                [inputId]="moduleLevel.key"
-            ></p-checkbox>
-            <label [for]="moduleLevel.key">{{moduleLevel.name}}</label>
-        </div>
+<div class="sticky-inner-wrapper" style="margin-right:1rem">
+    <div class="card col-12">
+        <form class="grid p-fluid" [formGroup]="filterForm" (submit)="onSearch()">
+            <div class="col-12">
+                <div class="p-inputgroup">
+                    <input type="text" pInputText placeholder="Enter module name..." formControlName="q">
+                </div>
+                <hr>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Module Level:</h5>
+            </div>
+            <div class="col-12">
+                <p-multiSelect
+                    formControlName="levels"
+                    [options]="moduleLevels"
+                    defaultLabel="Filter by level...">
+                </p-multiSelect>
+            </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
+            </div>
+            <div class="col-12">
+                <p-multiSelect
+                    formControlName="semesters"
+                    optionLabel="name"
+                    optionValue="value"
+                    [options]="semesters"
+                    defaultLabel="Filter by semesters..."
+                ></p-multiSelect>
+            </div>
 
-        <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-            <h5 [ngStyle]="{color:'var(--primary-color)'}">Semester:</h5>
-        </div>
-        <div *ngFor="let semester of semesters" class="field-checkbox col-6">
-            <p-checkbox
-                name="group2"
-                value="category"
-                [value]="semester"
-                [(ngModel)]="selectedCreditOptions"
-                [inputId]="semester.key"
-            ></p-checkbox>
-            <label [for]="semester.key">{{semester.name}}</label>
-        </div>
+            <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
+            </div>
 
-        <div class="col-12" style="margin-bottom: 0; padding-bottom: 0">
-            <h5 [ngStyle]="{color:'var(--primary-color)'}">Credits:</h5>
-        </div>
-        <div *ngFor="let creditOption of creditOptions" class="field-checkbox col-3">
-            <p-checkbox
-                name="group2"
-                value="category"
-                [value]="creditOption"
-                [(ngModel)]="selectedCreditOptions"
-                [inputId]="creditOption.key"
-            ></p-checkbox>
-            <label [for]="creditOption.key">{{creditOption.name}}</label>
-        </div>
-        <div class="col-12">
-            <h5 [ngStyle]="{color:'var(--primary-color)'}">Department:</h5>
-            <p-multiSelect
-                [options]="departments"
-                defaultLabel="Add department filter..."
-                optionLabel="name"
-                selectedItemsLabel="{0} items selected"
-                [style]="{'width':'100%'}">
-            </p-multiSelect>
-        </div>
+            <div class="col-12">
+                <p-multiSelect
+                    formControlName="credits"
+                    [options]="creditOptions"
+                    id="credits"
+                    defaultLabel="Filter by credits..."
+                ></p-multiSelect>
+            </div>
+            <div class="col-12">
+                <h5 [ngStyle]="{color:'var(--primary-color)'}">Departments:</h5>
+                <p-multiSelect
+                    formControlName="departmentIds"
+                    [options]="departments"
+                    defaultLabel="Filter by department..."
+                    optionLabel="name"
+                    selectedItemsLabel="{0} items selected"
+                    optionValue="id"
+                    [style]="{'width':'100%'}">
+                </p-multiSelect>
+            </div>
+            <div class="field col-12">
+                <p-divider></p-divider>
+                <p-button label="Search" type="submit" icon="pi pi-search"></p-button>
+            </div>
+        </form>
     </div>
 </div>
 

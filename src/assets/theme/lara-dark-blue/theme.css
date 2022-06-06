@@ -42,7 +42,7 @@
   --surface-hover:rgba(255,255,255,.03);
   --focus-ring: 0 0 0 0.2rem rgba(147, 197, 253, 0.5);
   --maskbg: rgba(0, 0, 0, 0.4);
-  --picklist-primary: #3b5785cb;
+  --picklist-primary: var(--blue-50);
   --picklist-secondary: #85593bcb;
 }
 

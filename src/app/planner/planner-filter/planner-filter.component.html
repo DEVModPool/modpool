@@ -1,0 +1,8 @@
+<div [queryParamGroup]="paramGroup">
+    <div class="grid p-fluid">
+        <div class="p-inputgroup col 12">
+            <input type="text" pInputText placeholder="Module name, code, description..." queryParamName="q" id="inputBox" (keydown.enter)="search()">
+        </div>
+        <p-button  (click)="search()" label="Search" class="p-button-sm" icon ="pi pi-search"  ></p-button>
+    </div>
+</div>

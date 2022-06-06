@@ -27,11 +27,12 @@
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
+                            "src/favicon.png",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/ngx-spinner/animations/ball-triangle-path.css"
                         ],
                         "scripts": [
                             "node_modules/prismjs/prism.js",
@@ -99,11 +100,12 @@
                         "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
+                            "src/favicon.png",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/ngx-spinner/animations/ball-triangle-path.css"
                         ],
                         "scripts": []
                     }

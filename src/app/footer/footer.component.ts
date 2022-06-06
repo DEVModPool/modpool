@@ -6,5 +6,6 @@ import { AppMainComponent } from '../app.main.component';
     templateUrl: './footer.component.html'
 })
 export class FooterComponent {
-    constructor(public appMain: AppMainComponent) {}
+    constructor(public appMain: AppMainComponent) {
+    }
 }

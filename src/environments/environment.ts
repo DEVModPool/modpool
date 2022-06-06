@@ -3,7 +3,27 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    'jwt-key': 'jwt',
+    'user-key': 'user',
+    'userId-key': 'userId',
+
+    jwtAllowedDomain: 'dev.modpool.uk',
+    baseUrl: 'http://dev.modpool.uk/api/',
+
+
+    resolverUrl: 'resolve-route',
+    loginUrl: 'login',
+
+    coordinatorsUrl: 'coordinators/',
+    reviewsUrl: 'reviews/',
+    modulesUrl: 'modules/',
+
+    profileUrl: 'profile/',
+
+    moduleDetails: 'moduleDetails/',
+    modulePlanners: 'module-planners/'
+
 };
 
 /*

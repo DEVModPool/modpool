@@ -1,34 +1,45 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '../../config/config.service';
-import { Config } from '../../config/config';
-import { Subscription } from 'rxjs';
+import { FormControl, FormGroup } from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+import { Message } from "primeng/api";
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: [`./login.component.scss`]
 })
 export class LoginComponent {
+    invalidMessages: Message[];
+    loading = false;
+    authForm = new FormGroup({
+        emailAddress: new FormControl(''),
+        password: new FormControl('')
+    });
 
-    valCheck: string[] = ['remember'];
-
-    password: string;
-
-    config: Config;
-
-    subscription: Subscription;
-
-    constructor(public configService: ConfigService){ }
-
-    ngOnInit(): void {
-        this.config = this.configService.config;
-        this.subscription = this.configService.configUpdate$.subscribe(config => {
-            this.config = config;
-        });
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ) {
     }
 
-    ngOnDestroy(): void {
-        if(this.subscription){
-            this.subscription.unsubscribe();
-        }
+    ngOnInit(): void {
+        this.invalidMessages = this.authService.autoLogoutMessage;
+    }
+
+    login(): any {
+        this.loading = true;
+        const user = this.authForm.value;
+
+        this.authService.login(user).subscribe({
+            next: () => this.router.navigate(["/"]),
+            error: () => {
+                this.invalidMessages = [{
+                    severity: 'error',
+                    summary: 'Login failed!',
+                    detail: 'Wrong username or password.'
+                }]
+            }
+        }).add(() => this.loading = false);
     }
 }
