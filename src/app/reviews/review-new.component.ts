@@ -9,6 +9,7 @@ export abstract class ReviewNewComponent extends SubscriptionHandler {
     loading = false;
     reviewForm;
 
+
     protected constructor(protected reviewsService: ReviewsService) {
         super()
     }
@@ -18,6 +19,10 @@ export abstract class ReviewNewComponent extends SubscriptionHandler {
     }
 
     abstract onSubmit();
+
+    setModalDisplayed(value) {
+        value ? this.displayModal = true : this.closeModal();
+    }
 
     closeModal() {
         this.displayModal = false;
