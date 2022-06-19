@@ -27,7 +27,7 @@ export class ModuleReviewEditComponent extends ModuleReviewBaseComponent impleme
 
         this.storeSubscription(
             this.reviewsService.reviewEditModalDisplayed.subscribe(value => {
-                this.displayModal = value;
+                this.setModalDisplayed(value);
             })
         );
 
