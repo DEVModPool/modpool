@@ -19,6 +19,10 @@ export abstract class ReviewNewComponent extends SubscriptionHandler {
 
     abstract onSubmit();
 
+    setModalDisplayed(value) {
+        value ? this.displayModal = true : this.closeModal();
+    }
+
     closeModal() {
         this.displayModal = false;
         this.reviewForm.reset();
